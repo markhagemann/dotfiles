@@ -48,6 +48,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
+  call dein#add('elzr/vim-json')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('ianks/vim-tsx')
     " js
@@ -339,12 +340,6 @@ let g:EditorConfig_max_line_indicator = "none"
 let g:EditorConfig_preserve_formatoptions = 1
 
 " ------------------------------------------------------------------
-" Indent settings
-" ------------------------------------------------------------------
-let g:indentLine_char_list = ['▏']
-let g:indentLine_color_gui = '#293242'
-
-" ------------------------------------------------------------------
 " Yggdroot/LeaderF
 " ------------------------------------------------------------------
 " let g:Lf_HideHelp = 1
@@ -378,6 +373,7 @@ let g:fastfold_fold_command_suffixes=[]
 " ------------------------------------------------------------------
 " neoclide/coc.nvim
 " ------------------------------------------------------------------
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -532,3 +528,9 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
 " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
 let g:closetag_emptyTags_caseSensitive = 1
 
+" ------------------------------------------------------------------
+" Indent settings
+" ------------------------------------------------------------------
+let g:indentLine_char_list = ['▏']
+let g:indentLine_color_gui = '#293242'
+let g:vim_json_syntax_conceal = 0
