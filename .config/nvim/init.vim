@@ -22,9 +22,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mhinz/vim-grepper')
   call dein#add('haya14busa/is.vim')
   " CodeLens
-  " - TODO: Not working for me atm
-  " call dein#add('markwoodhall/vim-codelens')
+  call dein#add('markwoodhall/vim-codelens')
   " Colorscheme
+  call dein#add('saltdotac/citylights.vim')
   call dein#add('tyrannicaltoucan/vim-deep-space')
   " Colorizer
   call dein#add('chrisbra/Colorizer')
@@ -51,7 +51,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('elzr/vim-json')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('ianks/vim-tsx')
-    " js
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
   " Move lines around easy
@@ -208,8 +207,8 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 set termguicolors
-colorscheme deep-space
-let g:deepspace_italics=1
+colorscheme citylights
+"  let g:deepspace_italics=1
 
 " Don't automatically add comments to next line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
