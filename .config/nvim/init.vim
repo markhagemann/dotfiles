@@ -49,10 +49,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('ianks/vim-tsx')
   call dein#add('pangloss/vim-javascript')
-  call dein#add('mxw/vim-jsx')
+  call dein#add('sheerun/vim-polyglot')
   " Move lines around easy
   call dein#add('matze/vim-move')
   " Undotree
