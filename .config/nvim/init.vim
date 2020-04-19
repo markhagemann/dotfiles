@@ -15,9 +15,12 @@ if dein#load_state('~/.cache/dein')
 
   " Autocompletion
   call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('alvan/vim-closetag')
   " Buffer / File searching and replacing
   call dein#add('Yggdroot/LeaderF')
   call dein#add('mhinz/vim-grepper')
+  call dein#add('haya14busa/is.vim')
   " CodeLens
   " - TODO: Not working for me atm
   " call dein#add('markwoodhall/vim-codelens')
@@ -159,6 +162,35 @@ function! TrailingSpaceHighlights() abort
   highlight Trail ctermbg=red guibg=red
   call matchadd('Trail', '\s\+$', 100)
 endfunction
+
+" Seamlessly treat visual lines as actual lines when moving around.
+noremap j gj
+noremap k gk
+noremap <Down> gj
+noremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+
+" Navigate around splits with a single key combo.
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-j> <C-w><C-j>
+
+" Cycle through splits.
+nnoremap <S-Tab> <C-w>w
+
+" Press * to search for the term under the cursor or a visual selection and
+" then press a key below to replace all instances of it in the current file.
+nnoremap <leader>r :%s///g<Left><Left>
+nnoremap <leader>rc :%s///gc<Left><Left><Left>
+
+" The same as above but instead of acting on the whole file it will be
+" restricted to the previously visually selected range. You can do that by
+" pressing *, visually selecting the range you want it to apply to and then
+" press a key below to replace all instances of it in the current selection.
+xnoremap <leader>r :s///g<Left><Left>
+xnoremap <leader>rc :s///gc<Left><Left><Left>
 
 " Split
 noremap <silent><leader>x :split<cr>
@@ -489,12 +521,14 @@ xmap <Leader>R
 let g:strip_whitespace_confirm=0
 let g:strip_whitespace_on_save=1
 
-" Reloads vimrc after saving but keep cursor position
-if !exists('*ReloadVimrc')
-   fun! ReloadVimrc()
-       let save_cursor = getcurpos()
-       source $MYVIMRC
-       call setpos('.', save_cursor)
-   endfun
-endif
-autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
+" ------------------------------------------------------------------
+" alvan/vim-closetag
+" ------------------------------------------------------------------
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_emptyTags_caseSensitive = 1
+
