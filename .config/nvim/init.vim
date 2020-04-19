@@ -24,7 +24,7 @@ if dein#load_state('~/.cache/dein')
   " CodeLens
   call dein#add('markwoodhall/vim-codelens')
   " Colorscheme
-  call dein#add('saltdotac/citylights.vim')
+  call dein#add('arcticicestudio/nord-vim')
   call dein#add('tyrannicaltoucan/vim-deep-space')
   " Colorizer
   call dein#add('chrisbra/Colorizer')
@@ -207,7 +207,7 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 set termguicolors
-colorscheme citylights
+colorscheme nord
 "  let g:deepspace_italics=1
 
 " Don't automatically add comments to next line
@@ -311,7 +311,7 @@ endfunction
 " ------------------------------------------------------------------
 " vim-airline/vim-airline
 " ------------------------------------------------------------------
-let g:airline_theme = 'deep_space'
+let g:airline_theme = 'nord'
 let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tmuxline#enabled = 0
