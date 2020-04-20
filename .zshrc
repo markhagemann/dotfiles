@@ -1,8 +1,9 @@
-# Fix to ignore warning about 'Insecure completion-dependent directories detected'
-ZSH_DISABLE_COMPFIX=true
+# For brew, at least
+export PATH=/usr/local/bin:$PATH
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# NVM Stuff
+export NVM_DIR="$HOME/.nvm"
+source $HOME/.nvm/nvm.sh
 
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -33,7 +34,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node tmux ssh-agent zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node brew tmux)
 
 # User configuration
 # Hide user@hostname if it's expected default user
@@ -47,7 +48,7 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Set location of z installation
-. /home/drache/z.sh
+. `brew --prefix`/etc/profile.d/z.sh
 
 ## FZF FUNCTIONS ##
 
@@ -109,23 +110,24 @@ fgr() {
   fi
 }
 
+# Enabled zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Enabled zsh-syntax-highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Set default editor to nvim
 export EDITOR='nvim'
 
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-# nnn
-# https://github.com/jarun/nnn
-
-export NNN_USE_EDITOR=1
-export NNN_SHOW_HIDDEN=1
-export LC_COLLATE="C"
-
 # Aliases
 alias vim="nvim"
 alias top="vtop --theme=wizard"
 # alias ls="colorls -lA --sd"
+alias kc-use-staging-green="export KUBE_CONFIG=~/.kube/bcaas-staging-green"
+alias kc-use-prod-green="export KUBE_CONFIG=~/.kube/bcaas-prod-green"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -139,11 +141,9 @@ SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED='' alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-
-export YVM_DIR=/home/drache/.yvm
+export YVM_DIR=/usr/local/opt/yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
-alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
