@@ -207,6 +207,8 @@ vnoremap > >gv
 set termguicolors
 colorscheme nord
 "  let g:deepspace_italics=1
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 
 " Don't automatically add comments to next line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
