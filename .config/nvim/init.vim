@@ -21,8 +21,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Yggdroot/LeaderF')
   call dein#add('mhinz/vim-grepper')
   call dein#add('haya14busa/is.vim')
-  " CodeLens
-  call dein#add('markwoodhall/vim-codelens')
   " Colorscheme
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('tyrannicaltoucan/vim-deep-space')
