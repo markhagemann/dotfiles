@@ -26,8 +26,6 @@ if dein#load_state('~/.cache/dein')
   " Colorscheme
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('tyrannicaltoucan/vim-deep-space')
-  " Colorizer
-  call dein#add('chrisbra/Colorizer')
   " Comment out blocks of code
   call dein#add('tomtom/tcomment_vim')
   " Docker
@@ -373,7 +371,7 @@ let g:fastfold_fold_command_suffixes=[]
 " ------------------------------------------------------------------
 " neoclide/coc.nvim
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
