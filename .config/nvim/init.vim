@@ -42,6 +42,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('christoomey/vim-conflicted')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
+  call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
   call dein#add('pangloss/vim-javascript')
@@ -94,7 +95,7 @@ set shortmess+=c
 set signcolumn=yes
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Don't show last command
 set noshowcmd
@@ -176,15 +177,15 @@ nnoremap <S-Tab> <C-w>w
 
 " Press * to search for the term under the cursor or a visual selection and
 " then press a key below to replace all instances of it in the current file.
-nnoremap <leader>r :%s///g<Left><Left>
-nnoremap <leader>rc :%s///gc<Left><Left><Left>
+nnoremap <leader>r :%s///g<Left><Left><Left>
+nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
 
 " The same as above but instead of acting on the whole file it will be
 " restricted to the previously visually selected range. You can do that by
 " pressing *, visually selecting the range you want it to apply to and then
 " press a key below to replace all instances of it in the current selection.
-xnoremap <leader>r :s///g<Left><Left>
-xnoremap <leader>rc :s///gc<Left><Left><Left>
+xnoremap <leader>r :s///g<Left><Left><Left>
+xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 
 " Split
 noremap <silent><leader>x :split<cr>
@@ -528,5 +529,5 @@ let g:closetag_emptyTags_caseSensitive = 1
 " Indent settings
 " ------------------------------------------------------------------
 let g:indentLine_char_list = ['▏']
-let g:indentLine_color_gui = '#353c47'
+let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
