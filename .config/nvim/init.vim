@@ -40,6 +40,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mhinz/vim-signify')
   call dein#add('tpope/vim-fugitive')
   call dein#add('christoomey/vim-conflicted')
+  call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
   call dein#add('lukas-reineke/indent-blankline.nvim')
@@ -344,7 +345,7 @@ let g:Lf_UseCache = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
 
-let g:Lf_ShortcutF = "<leader>ff"
+let g:Lf_ShortcutF = "<C-P>"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
@@ -531,3 +532,9 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
+
+" ------------------------------------------------------------------
+" APZelos/blamer.nvim
+" ------------------------------------------------------------------
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
