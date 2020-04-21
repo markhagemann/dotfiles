@@ -1,3 +1,5 @@
+eval "$(dircolors ~/.dir_colors)"
+
 # Fix to ignore warning about 'Insecure completion-dependent directories detected'
 ZSH_DISABLE_COMPFIX=true
 
@@ -110,7 +112,7 @@ fgr() {
 }
 
 # Set default editor to nvim
-export EDITOR='nvim'
+export EDITOR='/home/drache/local/bin/nvim'
 
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -123,6 +125,7 @@ export NNN_SHOW_HIDDEN=1
 export LC_COLLATE="C"
 
 # Aliases
+alias nvim='/home/drache/local/bin/nvim'
 alias vim="nvim"
 alias top="vtop --theme=wizard"
 # alias ls="colorls -lA --sd"
@@ -147,3 +150,5 @@ export YVM_DIR=/home/drache/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+
+PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%L:%M:%S}] '$PROMPT
