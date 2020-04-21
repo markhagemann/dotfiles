@@ -46,11 +46,11 @@ if dein#load_state('~/.cache/dein')
   call dein#add('christoomey/vim-conflicted')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
-  call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
   call dein#add('pangloss/vim-javascript')
   call dein#add('sheerun/vim-polyglot')
+  call dein#add('kristijanhusak/vim-js-file-import')
   " Move lines around easy
   call dein#add('matze/vim-move')
   " Undotree
@@ -298,8 +298,8 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> k
   \ line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l defx#do_action('drop')
-  nnoremap <silent><buffer><expr> <C-l>
-  \ defx#do_action('redraw')
+  " nnoremap <silent><buffer><expr> <C-l>
+  " \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
   \ defx#do_action('print')
   nnoremap <silent><buffer><expr> cd
@@ -340,6 +340,7 @@ let g:EditorConfig_preserve_formatoptions = 1
 " Yggdroot/LeaderF
 " ------------------------------------------------------------------
 " let g:Lf_HideHelp = 1
+let g:Lf_WindowPosition = 'popup'
 let g:Lf_UseCache = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
@@ -529,5 +530,5 @@ let g:closetag_emptyTags_caseSensitive = 1
 " Indent settings
 " ------------------------------------------------------------------
 let g:indentLine_char_list = ['▏']
-let g:indentLine_color_gui = '#293242'
+let g:indentLine_color_gui = '#353c47'
 let g:vim_json_syntax_conceal = 0
