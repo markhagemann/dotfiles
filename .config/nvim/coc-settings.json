@@ -1,22 +1,19 @@
 
 {
-  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "html",
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "javascriptreact",
-    "vue"
-  ],
-
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
-  "prettier.eslintIntegration": true,
-  "prettier.onlyUseLocalVersion": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "html.filetypes": [
+        "html",
+        "handlebars",
+        "hbs"
+    ],
+    "suggest.triggerAfterInsertEnter": true,
+      "suggest.echodocSupport": true,
+      "suggest.maxCompleteItemCount": 20,
+      "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
+      "diagnostic.errorSign": "•",
+      "diagnostic.warningSign": "•",
+      "diagnostic.infoSign": "•"
 }
