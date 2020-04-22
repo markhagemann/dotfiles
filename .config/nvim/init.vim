@@ -87,6 +87,7 @@ set splitbelow
 set autoindent
 set wildmenu
 set wildmode=full
+set mouse=a
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -414,7 +415,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -538,3 +539,4 @@ let g:vim_json_syntax_conceal = 0
 " ------------------------------------------------------------------
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
+let g:blamer_show_in_visual_modes = 0
