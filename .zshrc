@@ -144,11 +144,15 @@ SPACESHIP_GIT_STATUS_STASHED='' alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
 
+precmd_functions+=(_fix_cursor)
 
 export YVM_DIR=/home/drache/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 
-PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%L:%M:%S}] '$PROMPT
+PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
