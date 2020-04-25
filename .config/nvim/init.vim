@@ -217,6 +217,9 @@ hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8
 hi LineNr guibg=bg
 hi foldcolumn guibg=bg
 hi VertSplit guibg=NONE guifg=#151b23
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+\,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
+\,sm:block-blinkwait175-blinkoff150-blinkon175
 
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
