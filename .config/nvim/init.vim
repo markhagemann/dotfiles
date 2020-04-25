@@ -190,7 +190,7 @@ xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 
 " Split
-noremap <silent><leader>x :split<cr>
+noremap <silent><leader>h :split<cr>
 noremap <silent><leader>v :vsplit<cr>
 
 " Switch buffers
@@ -204,16 +204,20 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 set termguicolors
-set numberwidth=1
+set numberwidth=2
+set foldcolumn=2
 colorscheme nord
-"  let g:deepspace_italics=1
+let g:nord_cursor_line_number_background = 1
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi! SignColumn ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi! LineNr cterm=NONE ctermfg=grey ctermbg=NONE gui=NONE guifg=#7a5a5a guibg=NONE
 hi! Cursor cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
-hi! CursorColumn cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
 hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8c
+hi LineNr guibg=bg
+hi foldcolumn guibg=bg
+hi VertSplit guibg=NONE guifg=#151b23
+
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
 " Enable spellcheck for markdown files
@@ -317,7 +321,7 @@ endfunction
 let g:airline_theme = 'nord'
 let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#fnamemod = ':t' " Show the filename
@@ -326,10 +330,10 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#coc#enabled = 0
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 let g:airline#extensions#default#layout = [
   \ [ 'a', 'c' ],
   \ [ 'x', 'error', 'warning' ]
