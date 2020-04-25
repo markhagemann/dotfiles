@@ -43,7 +43,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
-  call dein#add('lukas-reineke/indent-blankline.nvim')
+  " call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
   call dein#add('pangloss/vim-javascript')
@@ -131,7 +131,7 @@ set clipboard=unnamedplus
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=400
+set updatetime=100
 
 let mapleader = " "
 nnoremap <leader>u :UndotreeShow<CR>
@@ -204,12 +204,16 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 set termguicolors
+set numberwidth=1
 colorscheme nord
 "  let g:deepspace_italics=1
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-
-" Don't automatically add comments to next line
+hi! SignColumn ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+hi! LineNr cterm=NONE ctermfg=grey ctermbg=NONE gui=NONE guifg=#7a5a5a guibg=NONE
+hi! Cursor cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
+hi! CursorColumn cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
+hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8c
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
 " Enable spellcheck for markdown files
