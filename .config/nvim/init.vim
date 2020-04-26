@@ -43,7 +43,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
-  " call dein#add('lukas-reineke/indent-blankline.nvim')
+  call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
   call dein#add('pangloss/vim-javascript')
