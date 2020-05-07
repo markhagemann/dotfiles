@@ -43,7 +43,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
-  " call dein#add('lukas-reineke/indent-blankline.nvim')
+  call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('elzr/vim-json')
   call dein#add('pangloss/vim-javascript')
@@ -544,6 +544,8 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '·'
 
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim
