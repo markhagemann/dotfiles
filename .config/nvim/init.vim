@@ -18,28 +18,22 @@ if dein#load_state('~/.cache/dein')
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
   " Buffer / File searching and replacing
-  call dein#add('Yggdroot/LeaderF')
-  call dein#add('mhinz/vim-grepper')
-  call dein#add('haya14busa/is.vim')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
   " Colorscheme
-  call dein#add('arcticicestudio/nord-vim')
-  call dein#add('tyrannicaltoucan/vim-deep-space')
+  " call dein#add('arcticicestudio/nord-vim')
+  call dein#add('christianchiarulli/onedark.vim')
+  " Colorizer
+  call dein#add('norcalli/nvim-colorizer.lua')
+  call dein#add('junegunn/rainbow_parentheses.vim')
   " Comment out blocks of code
-  call dein#add('tomtom/tcomment_vim')
-  " Docker
-  call dein#add('ekalinin/Dockerfile.vim')
-  " Editorconfig per project basis
-  call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('tpope/vim-commentary')
   " File manager
-  call dein#add('shougo/defx.nvim')
-  call dein#add('kristijanhusak/defx-icons')
-  call dein#add('kristijanhusak/defx-git')
-  " Folds.
-  call dein#add('Konfekt/Fastfold')
+  call dein#add('airblade/vim-rooter')
+  call dein#add('ryanoasis/vim-devicons')
   " Git
-  call dein#add('mhinz/vim-signify')
+  call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('christoomey/vim-conflicted')
   call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
@@ -49,16 +43,16 @@ if dein#load_state('~/.cache/dein')
   call dein#add('pangloss/vim-javascript')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('kristijanhusak/vim-js-file-import')
-  " Move lines around easy
-  call dein#add('matze/vim-move')
-  " Undotree
-  call dein#add('mbbill/undotree')
-  " Whitespace removal
-  call dein#add('ntpeters/vim-better-whitespace')
-  " Smooth scroll
-  call dein#add('psliwka/vim-smoothie')
+  call dein#add('tpope/vim-sleuth')
   " Status bar
   call dein#add('vim-airline/vim-airline')
+  " Terminal
+  call dein#add('voldikss/vim-floaterm')
+  " Text Navigation
+  call dein#add('justinmk/vim-sneak')
+  call dein#add('unblevable/quick-scope')
+  " Whitespace removal
+  call dein#add('ntpeters/vim-better-whitespace')
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
@@ -72,76 +66,56 @@ endif
 " ------------------------------------------------------------------
 " General
 " ------------------------------------------------------------------
-
-syntax on
-filetype plugin indent on
-set nowrap
-set noswapfile
-set nobackup
-set undodir=~/.config/nvim/undodir
-set undofile
+filetype plugin on
+let g:mapleader=" "
+syntax enable                           " Enables syntax highlighing
+set iskeyword+=-                        " treat dash separated words as a word text object"
+set formatoptions-=cro                  " Stop newline continution of comments"
+set hidden                              " Required to keep multiple buffers open multiple buffers
+set nowrap                              " Display long lines as just one line
+set encoding=utf-8                      " The encoding displayed
+set pumheight=10                        " Makes popup menu smaller
+set fileencoding=utf-8                  " The encoding written to file
+set ruler                               " Show the cursor position all the time
+set cmdheight=2                         " More space for displaying messages
+set noshowcmd                           " Don't show entered command
+set mouse=a                             " Enable your mouse
+set splitbelow                          " Horizontal splits will automatically be below
+set splitright                          " Vertical splits will automatically be to the right
+set t_Co=256                            " Support 256 colors
+set conceallevel=0                      " So that I can see `` in markdown files
+set tabstop=2                           " Insert 2 spaces for a tab
+set shiftwidth=2                        " Change the number of space characters inserted for indentation
+set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
+set expandtab                           " Converts tabs to spaces
+set smartindent                         " Makes indenting smart
+set autoindent                          " Good auto indent
+set laststatus=2                        " Always display the status line
+set number                              " Line numbers
+set cursorline                          " Enable highlighting of the current line
+set background=dark                     " tell vim what the background color looks like
+set showtabline=2                       " Always show tabs
+set nobackup                            " This is recommended by coc
+set nowritebackup                       " This is recommended by coc
+set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
+set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
+set updatetime=300                      " Faster completion
+set timeoutlen=500                      " By default timeoutlen is 1000 ms
+set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch
-set smartindent
-set splitright
-set splitbelow
-set autoindent
-set wildmenu
-set wildmode=full
-set mouse=a
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+" Enable spellcheck for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
+" You can't stop me
+cmap w!! w !sudo tee %
 
-" Give more space for displaying messages.
-set cmdheight=1
-
-" Don't show last command
-set noshowcmd
-
-" Automatically re-read file if a change was detected outside of vim
-set autoread
-
-" If the search string has an upper case letter in it, the search will be case sensitive
-set smartcase
-
-" Show existing tab with 2 spaces width
-set tabstop=2 softtabstop=2
-
-" When indenting with '>', use 2 spaces width
-set shiftwidth=2
-
-" On pressing tab, insert 2 spaces
-set expandtab
-
-" Hide buffer instead of closing it
-set hidden
-
-" Disable annoying beeping
-set noerrorbells
-
-" Use hybrid numbers
-set nu rnu
-
-" Yank and paste with the system clipboard
-set clipboard=unnamedplus
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=100
-
-let mapleader = " "
 nnoremap <leader>u :UndotreeShow<CR>
 
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
-
-" Clear highlighting on escape in normal mode - TODO: Validate this is still working
-nnoremap <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
 
 " Delete current visual selection and dump in black hole buffer before pasting
 " Used when you want to paste over something without it getting copied to
@@ -152,30 +126,24 @@ vnoremap <leader>p "_dP
 set list!
 set listchars=nbsp:·,trail:~
 
-" Add custom highlights in method that is executed every time a colorscheme is sourced
-" See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for details
-function! TrailingSpaceHighlights() abort
-  " Hightlight trailing whitespace
-  highlight Trail ctermbg=red guibg=red
-  call matchadd('Trail', '\s\+$', 100)
-endfunction
-
-" Seamlessly treat visual lines as actual lines when moving around.
-noremap j gj
-noremap k gk
-noremap <Down> gj
-noremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-
 " Navigate around splits with a single key combo.
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
 
+ " Use alt + hjkl to resize windows
+nnoremap <silent> <M-j>    :resize -2<CR>
+nnoremap <silent> <M-k>    :resize +2<CR>
+nnoremap <silent> <M-h>    :vertical resize -2<CR>
+nnoremap <silent> <M-l>    :vertical resize +2<CR>
+
 " Cycle through splits.
 nnoremap <S-Tab> <C-w>w
+
+" Quicker escape binding
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " Press * to search for the term under the cursor or a visual selection and
 " then press a key below to replace all instances of it in the current file.
@@ -203,187 +171,76 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Set colorscheme and related settings
-set termguicolors
+hi Comment cterm=italic
+let g:onedark_hide_endofbuffer=1
+let g:onedark_terminal_italics=1
+let g:onedark_termcolors=256
+syntax on
+colorscheme onedark
+" checks if your terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+    hi LineNr ctermbg=NONE guibg=NONE
+endif
 set numberwidth=2
 set foldcolumn=2
-colorscheme nord
-let g:nord_cursor_line_number_background = 1
+" let g:nord_cursor_line_number_background = 1
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi! SignColumn ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-hi! LineNr cterm=NONE ctermfg=grey ctermbg=NONE gui=NONE guifg=#7a5a5a guibg=NONE
-hi! Cursor cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
-hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8c
-hi LineNr guibg=bg
-hi foldcolumn guibg=bg
+" hi! LineNr cterm=NONE ctermfg=grey ctermbg=NONE gui=NONE guifg=#7a5a5a guibg=NONE
+" hi! Cursor cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
+" hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8c
+" hi LineNr guibg=bg
+" hi foldcolumn guibg=bg
 hi VertSplit guibg=NONE guifg=#151b23
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-
-" Enable spellcheck for markdown files
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-" ------------------------------------------------------------------
-" File manager settings
-" ------------------------------------------------------------------
-nnoremap <C-n> :Defx -show-ignored-files<CR>
-nnoremap <C-d> :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
-call defx#custom#option('_', {
-      \ 'winwidth': 30,
-      \ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
-      \ 'buffer_name': 'defxplorer',
-      \ 'toggle': 1,
-      \ 'columns': 'icon:indent:icons:filename',
-      \ 'resume': 1,
-      \ })
-call defx#custom#column('git', 'show_ignored', 1)
-call defx#custom#column('icon', {
-    \ 'directory_icon': '▸',
-    \ 'opened_icon': '▾',
-    \ })
-
-augroup defx-extensions
-  autocmd!
-  " Close defx if it's the only buffer left in the window
-  " autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
-  " Move focus to the next window if current buffer is defx
-  autocmd TabLeave * if &ft == 'defx' | wincmd w | endif
-  autocmd FileType defx do WinEnter | call s:defx_my_settings()
-augroup END
-
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-  setlocal conceallevel=3
-  setlocal concealcursor=inc
-  " Define mappings
-  nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-  nnoremap <silent><buffer><expr> c
-  \ defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m
-  \ defx#do_action('move')
-  nnoremap <silent><buffer><expr> p
-  \ defx#do_action('paste')
-  nnoremap <silent><buffer><expr> V
-  \ defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> H
-  \ defx#do_action('drop', 'pedit')
-  nnoremap <silent><buffer><expr> o
-  \ defx#do_action('open_or_close_tree')
-  nnoremap <silent><buffer><expr> K
-  \ defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N
-  \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M
-  \ defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> d
-  \ defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r
-  \ defx#do_action('rename')
-  nnoremap <silent><buffer><expr> !
-  \ defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> x
-  \ defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy
-  \ defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> .
-  \ defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;
-  \ defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> ~
-  \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q
-  \ defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Space>
-  \ defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> *
-  \ defx#do_action('toggle_select_all')
-  " Allow vim movement keys for navigation
-  nnoremap <silent><buffer><expr> h
-  \ defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> j
-  \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-  \ line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> l defx#do_action('drop')
-  " nnoremap <silent><buffer><expr> <C-l>
-  " \ defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>
-  \ defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd
-  \ defx#do_action('change_vim_cwd')
-endfunction
-
 " ------------------------------------------------------------------
 " vim-airline/vim-airline
 " ------------------------------------------------------------------
-let g:airline_theme = 'nord'
-let g:airline#extensions#branch#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-let g:airline#extensions#tabline#buffers_label = ''
-let g:airline#extensions#tabline#fnamemod = ':t' " Show the filename
-let g:airline#extensions#tabline#fnamecollapse = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#buffer_nr_show = 0
+" enable tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let airline#extensions#tabline#show_splits = 0
+let airline#extensions#tabline#tabs_label = ''
+le
+
+" Disable tabline close button
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#coc#enabled = 0
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-let g:airline#extensions#default#layout = [
-  \ [ 'a', 'c' ],
-  \ [ 'x', 'error', 'warning' ]
-  \ ]
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#fnamecollapse = 1
 
-" ------------------------------------------------------------------
-" editorconfig/editorconfig
-" ------------------------------------------------------------------
-let g:EditorConfig_max_line_indicator = "none"
-let g:EditorConfig_preserve_formatoptions = 1
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#buffers_label = ''
+let g:airline#extensions#tabline#tabs_label = ''
 
-" ------------------------------------------------------------------
-" Yggdroot/LeaderF
-" ------------------------------------------------------------------
-" let g:Lf_HideHelp = 1
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_UseCache = 0
-let g:Lf_UseVersionControlTool = 0
-let g:Lf_IgnoreCurrentBufferName = 1
+" Just show the file name
+let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:Lf_ShortcutF = "<C-P>"
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+" enable powerline fonts
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
-noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-" search visually selected text literally
-xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-noremap go :<C-U>Leaderf! rg --recall<CR>
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" Always show tabs
+set showtabline=2
 
-" ------------------------------------------------------------------
-" pangloss/vim-javascript settings
-" ------------------------------------------------------------------
-let g:javascript_plugin_jsdoc = 1
-
-" ------------------------------------------------------------------
-" Konfekt/FastFold
-" ------------------------------------------------------------------
-
-let g:fastfold_savehook=0
-let g:fastfold_fold_command_suffixes=[]
+let g:airline_section_y = ''
+let g:webdevicons_enable_airline_tabline = 1
 
 " ------------------------------------------------------------------
 " neoclide/coc.nvim
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
+let g:coc_global_extensions = ['coc-explorer', 'coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -495,30 +352,27 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" ------------------------------------------------------------------
-" mhinz/vim-grepper
-" ------------------------------------------------------------------
-
-let g:grepper={}
-let g:grepper.tools=["rg"]
-
-xmap gr <plug>(GrepperOperator)
-
-" After searching for text, press this mapping to do a project wide find and
-" replace. It's similar to <leader>r except this one applies to all matches
-" across all files instead of just the current file.
-nnoremap <leader>R
-  \ :let @s='\<'.expand('<cword>').'\>'<CR>
-  \ :Grepper -cword -noprompt<CR>
-  \ :cfdo %s/<C-r>s//g \| update
-  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-" The same as above except it works with a visual selection.
-xmap <leader>R
-    \ "sy
-    \ gvgr
-    \ :cfdo %s/<C-r>s//g \| update
-     \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" Explorer
+let g:coc_explorer_global_presets = {
+\   'floating': {
+\      'position': 'floating',
+\   },
+\   'floatingLeftside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 30,
+\   },
+\   'floatingRightside': {
+\      'position': 'floating',
+\      'floating-position': 'right-center',
+\      'floating-width': 30,
+\   },
+\   'simplify': {
+\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+nmap <C-b> :CocCommand explorer --preset floatingRightside<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace
@@ -530,12 +384,9 @@ let g:strip_whitespace_on_save=1
 " ------------------------------------------------------------------
 " alvan/vim-closetag
 " ------------------------------------------------------------------
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx,*.ts'
+let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
 let g:closetag_emptyTags_caseSensitive = 1
 
 " ------------------------------------------------------------------
@@ -545,7 +396,7 @@ let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '·'
+let g:indentLine_leadingSpaceChar = ' '
 
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim
@@ -553,3 +404,170 @@ let g:indentLine_leadingSpaceChar = '·'
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
 let g:blamer_show_in_visual_modes = 0
+
+" ------------------------------------------------------------------
+" airblade/vim-rooter
+" ------------------------------------------------------------------
+let g:rooter_silent_chdir = 1
+
+" ------------------------------------------------------------------
+" justinmk/vim-sneak
+" ------------------------------------------------------------------
+let g:sneak#label = 1
+
+" case insensitive sneak
+let g:sneak#use_ic_scs = 1
+
+" imediately move tot the next instance of search, if you move the cursor sneak is back to default behavior
+let g:sneak#s_next = 1
+
+" remap so I can use , and ; with f and t
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+
+" Change the colors
+highlight Sneak guifg=black guibg=#00C7DF ctermfg=black ctermbg=cyan
+highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
+
+" Cool prompt
+let g:sneak#prompt = '🔎 '
+
+" I like quickscope better for this since it keeps me in the scope of a single line
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
+
+" Useful info
+
+" s<Enter>                 | Repeat the last Sneak.
+" S<Enter>                 | Repeat the last Sneak, in reverse direction.
+
+" silent! call repeat#set("\<Plug>Sneak_s", v:count)
+" silent! call repeat#set("\<Plug>Sneak_S", v:count)
+
+" ------------------------------------------------------------------
+" unblevable/quick-scope
+" ------------------------------------------------------------------
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#eF5F70' gui=underline ctermfg=81 cterm=underline
+let g:qs_max_chars=150
+
+" ------------------------------------------------------------------
+" voldikss/vim-floaterm
+" ------------------------------------------------------------------
+
+" let g:floaterm_wintype='normal'
+" let g:floaterm_height=6
+
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+
+" Floaterm
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
+
+" ------------------------------------------------------------------
+" tpope/vim-commentary
+" ------------------------------------------------------------------
+nnoremap <space>/ :Commentary<CR>
+vnoremap <space>/ :Commentary<CR>
+
+" ------------------------------------------------------------------
+" junegunn/fzf.vim
+" ------------------------------------------------------------------
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_buffers_jump = 1
+
+map <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>m :Marks<CR>
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+"-g '!{node_modules,.git}'
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" Get text in files with Rg
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
+
+ " Make Ripgrep ONLY search file contents and not filenames
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
+  \   <bang>0)
+
+" Ripgrep advanced
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" Git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+" ------------------------------------------------------------------
+" junegunn/rainbow_parentheses.vim
+" ------------------------------------------------------------------
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+autocmd FileType * RainbowParentheses
