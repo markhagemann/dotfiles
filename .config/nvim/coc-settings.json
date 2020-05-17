@@ -1,19 +1,59 @@
-
 {
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "html.filetypes": [
-        "html",
-        "handlebars",
-        "hbs"
-    ],
-    "suggest.triggerAfterInsertEnter": true,
-      "suggest.echodocSupport": true,
-      "suggest.maxCompleteItemCount": 20,
-      "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-      "diagnostic.errorSign": "•",
-      "diagnostic.warningSign": "•",
-      "diagnostic.infoSign": "•"
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "eslint.autoFixOnSave": true,
+  "html.filetypes": ["html", "handlebars", "hbs"],
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": "f"
+  },
+
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": " ",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python"
+  ],
+  "coc.preferences.hoverTarget": "float",
+
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.enableVimDevicons": false,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  },
+
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  }
 }

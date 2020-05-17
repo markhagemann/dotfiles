@@ -240,7 +240,7 @@ let g:webdevicons_enable_airline_tabline = 1
 " ------------------------------------------------------------------
 " neoclide/coc.nvim
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-explorer', 'coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -351,28 +351,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" Explorer
-let g:coc_explorer_global_presets = {
-\   'floating': {
-\      'position': 'floating',
-\   },
-\   'floatingLeftside': {
-\      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 30,
-\   },
-\   'floatingRightside': {
-\      'position': 'floating',
-\      'floating-position': 'right-center',
-\      'floating-width': 30,
-\   },
-\   'simplify': {
-\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-\   }
-\ }
-nmap <C-b> :CocCommand explorer --preset floatingRightside<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace
