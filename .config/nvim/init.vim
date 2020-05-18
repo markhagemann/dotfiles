@@ -479,6 +479,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 
 map <C-p> :Files<CR>
+nnoremap <leader>p :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :Rg<CR>
 nnoremap <leader>t :Tags<CR>
