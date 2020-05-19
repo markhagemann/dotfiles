@@ -10,7 +10,8 @@
     "javascript",
     "typescript",
     "typescriptreact",
-    "javascriptreact"
+    "javascriptreact",
+    "vue"
   ],
   "eslint.autoFixOnSave": true,
   "html.filetypes": ["html", "handlebars", "hbs"],
