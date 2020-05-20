@@ -1,19 +1,50 @@
-
 {
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "html.filetypes": [
-        "html",
-        "handlebars",
-        "hbs"
-    ],
-    "suggest.triggerAfterInsertEnter": true,
-      "suggest.echodocSupport": true,
-      "suggest.maxCompleteItemCount": 20,
-      "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-      "diagnostic.errorSign": "•",
-      "diagnostic.warningSign": "•",
-      "diagnostic.infoSign": "•"
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "vue"
+  ],
+  "eslint.autoFixOnSave": true,
+  "html.filetypes": ["html", "handlebars", "hbs"],
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": "f"
+  },
+
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": " ",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python"
+  ],
+  "coc.preferences.hoverTarget": "float",
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  }
 }
