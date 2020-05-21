@@ -149,3 +149,5 @@ fi
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 
 PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%L:%M:%S}] '$PROMPT
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

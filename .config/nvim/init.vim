@@ -44,6 +44,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('kristijanhusak/vim-js-file-import')
   call dein#add('tpope/vim-sleuth')
+  call dein#add('posa/vim-vue')
   " Status bar
   call dein#add('vim-airline/vim-airline')
   " Terminal
@@ -443,9 +444,9 @@ let g:qs_max_chars=150
 " let g:floaterm_height=6
 
 let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next   = '<F2>'
-let g:floaterm_keymap_prev   = '<F3>'
-let g:floaterm_keymap_new    = '<F4>'
+" let g:floaterm_keymap_next   = '<F2>'
+" let g:floaterm_keymap_prev   = '<F3>'
+" let g:floaterm_keymap_new    = '<F4>'
 
 " Floaterm
 let g:floaterm_gitcommit='floaterm'

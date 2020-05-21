@@ -25,19 +25,6 @@
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python"
-  ],
   "coc.preferences.hoverTarget": "float",
   "languageserver": {
     "bash": {
@@ -46,5 +33,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
-  }
+  },
+  "prettier.disableLanguages": []
 }
