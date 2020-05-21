@@ -17,9 +17,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
-  " Buffer / File searching and replacing
+  " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
+  call dein#add('mhinz/vim-grepper')
   " Colorscheme
   " call dein#add('arcticicestudio/nord-vim')
   call dein#add('christianchiarulli/onedark.vim')
@@ -48,15 +49,22 @@ if dein#load_state('~/.cache/dein')
   call dein#add('vim-airline/vim-airline')
   " Terminal
   call dein#add('voldikss/vim-floaterm')
-  " Text Navigation
-  call dein#add('justinmk/vim-sneak')
-  call dein#add('unblevable/quick-scope')
+  " Text navigation / manipulation
+  call dein#add('tpope/vim-abolish')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-surround')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('chaoren/vim-wordmotion')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  if has("nvim")
+    set inccommand=nosplit
   endif
 
   call dein#end()
@@ -92,6 +100,7 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set number                              " Line numbers
+set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
@@ -144,18 +153,6 @@ nnoremap <S-Tab> <C-w>w
 " Quicker escape binding
 inoremap jk <Esc>
 inoremap kj <Esc>
-
-" Press * to search for the term under the cursor or a visual selection and
-" then press a key below to replace all instances of it in the current file.
-nnoremap <leader>r :%s///g<Left><Left><Left>
-nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
-
-" The same as above but instead of acting on the whole file it will be
-" restricted to the previously visually selected range. You can do that by
-" pressing *, visually selecting the range you want it to apply to and then
-" press a key below to replace all instances of it in the current selection.
-xnoremap <leader>r :s///g<Left><Left><Left>
-xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 
 " Split
 noremap <silent><leader>h :split<cr>
@@ -389,53 +386,6 @@ let g:blamer_show_in_visual_modes = 0
 let g:rooter_silent_chdir = 1
 
 " ------------------------------------------------------------------
-" justinmk/vim-sneak
-" ------------------------------------------------------------------
-let g:sneak#label = 1
-
-" case insensitive sneak
-let g:sneak#use_ic_scs = 1
-
-" imediately move tot the next instance of search, if you move the cursor sneak is back to default behavior
-let g:sneak#s_next = 1
-
-" remap so I can use , and ; with f and t
-map gS <Plug>Sneak_,
-map gs <Plug>Sneak_;
-
-" Change the colors
-highlight Sneak guifg=black guibg=#00C7DF ctermfg=black ctermbg=cyan
-highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
-
-" Cool prompt
-let g:sneak#prompt = '🔎 '
-
-" I like quickscope better for this since it keeps me in the scope of a single line
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
-
-" Useful info
-
-" s<Enter>                 | Repeat the last Sneak.
-" S<Enter>                 | Repeat the last Sneak, in reverse direction.
-
-" silent! call repeat#set("\<Plug>Sneak_s", v:count)
-" silent! call repeat#set("\<Plug>Sneak_S", v:count)
-
-" ------------------------------------------------------------------
-" unblevable/quick-scope
-" ------------------------------------------------------------------
-
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#eF5F70' gui=underline ctermfg=81 cterm=underline
-let g:qs_max_chars=150
-
-" ------------------------------------------------------------------
 " voldikss/vim-floaterm
 " ------------------------------------------------------------------
 
@@ -550,3 +500,34 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 autocmd FileType * RainbowParentheses
+
+" ------------------------------------------------------------------
+" Search & Replace
+" https://bluz71.github.io/2019/03/11/find-replace-helpers-for-vim.html
+" ------------------------------------------------------------------
+let g:grepper = {}
+let g:grepper.tools = ["rg"]
+
+nnoremap <Leader>S
+  \ :let @s='\<'.expand('<cword>').'\>'<CR>
+  \ :Grepper -cword -noprompt<CR>
+  \ :cfdo %s/<C-r>s// \| update
+  \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+xmap <Leader>S
+  \ "sy \|
+  \ :GrepperRg <C-r>s<CR>
+  \ :cfdo %s/<C-r>s// \| update
+  \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" Press * to search for the term under the cursor or a visual selection and
+" then press a key below to replace all instances of it in the current file.
+nnoremap <leader>r :%s///g<Left><Left><Left>
+nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
+
+" The same as above but instead of acting on the whole file it will be
+" restricted to the previously visually selected range. You can do that by
+" pressing *, visually selecting the range you want it to apply to and then
+" press a key below to replace all instances of it in the current selection.
+xnoremap <leader>r :s///g<Left><Left><Left>
+xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
+
