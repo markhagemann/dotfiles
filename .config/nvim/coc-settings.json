@@ -13,7 +13,7 @@
     "javascriptreact",
     "vue"
   ],
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "html.filetypes": ["html", "handlebars", "hbs"],
   "suggest.completionItemKindLabels": {
     "text": "t",
