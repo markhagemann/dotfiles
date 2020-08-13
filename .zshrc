@@ -111,9 +111,6 @@ fgr() {
   fi
 }
 
-# Set default editor to nvim
-export EDITOR='/home/drache/local/bin/nvim'
-
 # Enabled true color support for terminals
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -125,7 +122,6 @@ export NNN_SHOW_HIDDEN=1
 export LC_COLLATE="C"
 
 # Aliases
-alias nvim='/home/drache/local/bin/nvim'
 alias vim="nvim"
 alias top="vtop --theme=wizard"
 # alias ls="colorls -lA --sd"
