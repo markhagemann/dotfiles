@@ -43,10 +43,12 @@ DEFAULT_USER="mhagemann"
 prompt_context(){}
 
 # Setting rg as the default source for fzf
-export FZF_DEFAULT_COMMAND='rg --files'
-
-# Apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+  # Apply the command to CTRL-T as well
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 
 # Set location of z installation
 . /home/drache/z.sh
