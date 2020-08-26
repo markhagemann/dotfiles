@@ -14,6 +14,7 @@
     "vue"
   ],
   "eslint.autoFixOnSave": false,
+  "html.enable": true,
   "html.filetypes": ["html", "handlebars", "hbs"],
   "suggest.completionItemKindLabels": {
     "text": "t",
@@ -34,5 +35,6 @@
       "ignoredRootPaths": ["~"]
     }
   },
-  "prettier.disableLanguages": []
+  "prettier.disableLanguages": [],
+  "tailwindCSS.headwind.runOnSave": false
 }
