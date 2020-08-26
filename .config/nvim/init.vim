@@ -21,6 +21,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
   call dein#add('mhinz/vim-grepper')
+  call dein#add('brooth/far.vim')
   " Colorscheme
   " call dein#add('arcticicestudio/nord-vim')
   call dein#add('christianchiarulli/onedark.vim')
@@ -115,6 +116,8 @@ set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch
+set lazyredraw                          " improve scrolling performance when navigating through large results
+set regexpengine=1                      " use old regexp engine
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
@@ -603,7 +606,12 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd FileType * RainbowParentheses
 
 " ------------------------------------------------------------------
-" Search & Replace
+" brooth/far.vim
+" ------------------------------------------------------------------
+let g:far#source = 'agnvim'
+
+" ------------------------------------------------------------------
+" Search & Replace General
 " https://bluz71.github.io/2019/03/11/find-replace-helpers-for-vim.html
 " ------------------------------------------------------------------
 let g:grepper = {}
