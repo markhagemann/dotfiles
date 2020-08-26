@@ -116,7 +116,6 @@ set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set incsearch
-set lazyredraw                          " improve scrolling performance when navigating through large results
 set regexpengine=1                      " use old regexp engine
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
