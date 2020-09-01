@@ -125,7 +125,6 @@ export LC_COLLATE="C"
 
 # Aliases
 alias vim="nvim"
-alias top="vtop --theme=wizard"
 # alias ls="colorls -lA --sd"
 
 source $ZSH/oh-my-zsh.sh
@@ -154,3 +153,9 @@ alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 
 PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
+
+# WSL 2 specific settings.
+if grep -q "microsoft" /proc/version &>/dev/null; then
+    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+fi
