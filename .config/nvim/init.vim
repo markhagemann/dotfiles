@@ -89,7 +89,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
-set cmdheight=2                         " More space for displaying messages
+set cmdheight=1                        " More space for displaying messages
 set noshowcmd                           " Don't show entered command
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -302,7 +302,7 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let airline#extensions#tabline#show_splits = 0
 let airline#extensions#tabline#tabs_label = ''
-le
+let g:airline_powerline_fonts = 1 " Power lines font
 
 " Disable tabline close button
 let g:airline#extensions#tabline#show_close_button = 0
