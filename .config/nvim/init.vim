@@ -2,7 +2,7 @@ if &compatible
   set nocompatible
 endif
 " ------------------------------------------------------------------
-" Plugins
+" Plugins {{{
 " ------------------------------------------------------------------
 
 " Add the dein installation directory into runtimepath
@@ -51,8 +51,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-sleuth')
   " Status bar
   call dein#add('vim-airline/vim-airline')
-  " Terminal
-  call dein#add('voldikss/vim-floaterm')
   " Text navigation / manipulation
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-repeat')
@@ -74,9 +72,9 @@ if dein#load_state('~/.cache/dein')
   call dein#end()
   call dein#save_state()
 endif
-
+" }}}
 " ------------------------------------------------------------------
-" General
+" General {{{
 " ------------------------------------------------------------------
 filetype plugin on
 let g:mapleader=" "
@@ -115,6 +113,7 @@ set signcolumn=yes                      " Always show the signcolumn, otherwise 
 set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
+set foldmethod=marker                   " Fold code between {{{ and }}}
 set incsearch
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -199,32 +198,49 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
 
+"}}}
 " ------------------------------------------------------------------
-" File manager settings
+" Defx / File manager settings {{{
 " ------------------------------------------------------------------
-nnoremap <C-n> :Defx -show-ignored-files<CR>
-nnoremap <C-d> :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
+nnoremap <silent>- :Defx -show-ignored-files<CR>
+nnoremap <silent>= :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
 call defx#custom#option('_', {
-      \ 'winwidth': 30,
-      \ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
-      \ 'buffer_name': 'defxplorer',
-      \ 'toggle': 1,
-      \ 'columns': 'icon:indent:icons:filename',
-      \ 'resume': 1,
-      \ })
+  \ 'winwidth': 30,
+  \ 'split': 'vertical',
+  \ 'direction': 'topleft',
+  \ 'show_ignored_files': 0,
+  \ 'buffer_name': 'defxplorer',
+  \ 'toggle': 1,
+  \ 'columns': 'icon:indent:icons:filename',
+  \ 'resume': 1,
+  \ })
 call defx#custom#column('git', 'show_ignored', 1)
+let g:defx_git#indicators = {
+  \ 'Modified'  : '!',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '?',
+  \ 'Renamed'   : '»',
+  \ 'Unmerged'  : '≠',
+  \ 'Ignored'   : 'ⁱ',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '*'
+  \ }
 call defx#custom#column('icon', {
-    \ 'directory_icon': '▸',
-    \ 'opened_icon': '▾',
-    \ })
-
+  \ 'directory_icon': '▸',
+  \ 'opened_icon': '▾',
+  \ })
+augroup defx_colors
+  autocmd!
+  autocmd ColorScheme * highlight DefxIconsOpenedTreeIcon guifg=#FFCB6B
+  autocmd ColorScheme * highlight DefxIconsNestedTreeIcon guifg=#FFCB6B
+  autocmd ColorScheme * highlight DefxIconsClosedTreeIcon guifg=#FFCB6B
+augroup END
 augroup defx-extensions
   autocmd!
   " Close defx if it's the only buffer left in the window
-  " autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
+  autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
   " Move focus to the next window if current buffer is defx
+  autocmd BufWritePost * call defx#redraw() " Redraw on file change
   autocmd TabLeave * if &ft == 'defx' | wincmd w | endif
   autocmd FileType defx do WinEnter | call s:defx_my_settings()
 augroup END
@@ -234,7 +250,10 @@ function! s:defx_my_settings() abort
   setlocal conceallevel=3
   setlocal concealcursor=inc
   " Define mappings
-  nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <esc>
+  \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <CR>
+  \ defx#do_action('multi', ['drop', 'quit'])
   nnoremap <silent><buffer><expr> c
   \ defx#do_action('copy')
   nnoremap <silent><buffer><expr> m
@@ -283,16 +302,20 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> k
   \ line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l defx#do_action('drop')
-  " nnoremap <silent><buffer><expr> <C-l>
-  " \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-l>
+  \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
   \ defx#do_action('print')
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
+  nnoremap <silent><buffer><expr> >
+  \ defx#do_action('resize', defx#get_context().winwidth + 10)
+  nnoremap <silent><buffer><expr> <
+  \ defx#do_action('resize', defx#get_context().winwidth - 10)
 endfunction
-
+" }}}
 " ------------------------------------------------------------------
-" vim-airline/vim-airline
+" vim-airline/vim-airline {{{
 " ------------------------------------------------------------------
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
@@ -330,8 +353,9 @@ set showtabline=2
 let g:airline_section_y = ''
 let g:webdevicons_enable_airline_tabline = 1
 
+" }}}
 " ------------------------------------------------------------------
-" neoclide/coc.nvim
+" neoclide/coc.nvim {{{
 " ------------------------------------------------------------------
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
 " Use tab for trigger completion with characters ahead and navigate.
@@ -444,24 +468,26 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
+" }}}
 " ------------------------------------------------------------------
-" ntpeters/vim-better-whitespace
+" ntpeters/vim-better-whitespace {{{
 " ------------------------------------------------------------------
 
 let g:strip_whitespace_confirm=0
 let g:strip_whitespace_on_save=1
 
+" }}}
 " ------------------------------------------------------------------
-" alvan/vim-closetag
+" alvan/vim-closetag {{{
 " ------------------------------------------------------------------
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx,*.ts'
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
 let g:closetag_emptyTags_caseSensitive = 1
 
+" }}}
 " ------------------------------------------------------------------
-" Indent settings
+" Indent settings {{{
 " ------------------------------------------------------------------
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
@@ -469,46 +495,30 @@ let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
 
+" }}}
 " ------------------------------------------------------------------
-" APZelos/blamer.nvim
+" APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
 let g:blamer_show_in_visual_modes = 0
 
+" }}}
 " ------------------------------------------------------------------
-" airblade/vim-rooter
+" airblade/vim-rooter {{{
 " ------------------------------------------------------------------
 let g:rooter_silent_chdir = 1
 
+" }}}
 " ------------------------------------------------------------------
-" voldikss/vim-floaterm
-" ------------------------------------------------------------------
-
-" let g:floaterm_wintype='normal'
-" let g:floaterm_height=6
-
-let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next   = '<F2>'
-let g:floaterm_keymap_prev   = '<F3>'
-let g:floaterm_keymap_new    = '<F4>'
-
-" Floaterm
-let g:floaterm_gitcommit='floaterm'
-let g:floaterm_autoinsert=1
-let g:floaterm_width=0.8
-let g:floaterm_height=0.8
-let g:floaterm_wintitle=0
-let g:floaterm_autoclose=1
-
-" ------------------------------------------------------------------
-" tpope/vim-commentary
+" tpope/vim-commentary {{{
 " ------------------------------------------------------------------
 nnoremap <space>/ :Commentary<CR>
 vnoremap <space>/ :Commentary<CR>
 
+" }}}
 " ------------------------------------------------------------------
-" junegunn/fzf.vim
+" junegunn/fzf.vim {{{
 " ------------------------------------------------------------------
 
 " This is the default extra key bindings
@@ -595,21 +605,24 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
+" }}}
 " ------------------------------------------------------------------
-" junegunn/rainbow_parentheses.vim
+" junegunn/rainbow_parentheses.vim {{{
 " ------------------------------------------------------------------
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 autocmd FileType * RainbowParentheses
 
+" }}}
 " ------------------------------------------------------------------
-" brooth/far.vim
+" brooth/far.vim {{{
 " ------------------------------------------------------------------
 let g:far#source = 'agnvim'
 
+" }}}
 " ------------------------------------------------------------------
-" Search & Replace General
+" Search & Replace General {{{
 " https://bluz71.github.io/2019/03/11/find-replace-helpers-for-vim.html
 " ------------------------------------------------------------------
 let g:grepper = {}
