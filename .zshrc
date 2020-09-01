@@ -11,7 +11,7 @@ export ZSH=~/.oh-my-zsh
 
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="agnoster"
+ZSH_THEME="spaceship"
 
 # TMUX
 # Automatically start tmux
@@ -39,8 +39,18 @@ plugins=(git node tmux ssh-agent zsh-nvm zsh-autosuggestions zsh-syntax-highligh
 
 # User configuration
 # Hide user@hostname if it's expected default user
-DEFAULT_USER="mhagemann"
-prompt_context(){}
+DEFAULT_USER="drache"
+# For agnoster theme only
+# prompt_context() {
+#   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+#     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+#   fi
+# }
+# PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
+
+# Aliases
+alias vim="nvim"
+# alias ls="colorls -lA --sd"
 
 # Setting rg as the default source for fzf
 if type rg &> /dev/null; then
@@ -113,19 +123,6 @@ fgr() {
   fi
 }
 
-# Enabled true color support for terminals
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-# nnn
-# https://github.com/jarun/nnn
-
-export NNN_USE_EDITOR=1
-export NNN_SHOW_HIDDEN=1
-export LC_COLLATE="C"
-
-# Aliases
-alias vim="nvim"
-# alias ls="colorls -lA --sd"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,6 +132,9 @@ unsetopt correct_all
 # Set Spaceship as prompt
 autoload -U promptinit; promptinit
 prompt spaceship
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_DOCKER_SHOW=false
+SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED='' alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -151,8 +151,6 @@ export YVM_DIR=/home/drache/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-
-PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
