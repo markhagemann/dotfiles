@@ -49,8 +49,11 @@ DEFAULT_USER="drache"
 # PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # Aliases
-alias vim="nvim"
+alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # alias ls="colorls -lA --sd"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
 
 # Setting rg as the default source for fzf
 if type rg &> /dev/null; then
@@ -133,11 +136,15 @@ unsetopt correct_all
 autoload -U promptinit; promptinit
 prompt spaceship
 SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_COLOR=#00afff
+SPACESHIP_TIME_12HR=true
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
-SPACESHIP_GIT_STATUS_STASHED='' alias ohmyzsh="mate ~/.oh-my-zsh"
+SPACESHIP_GIT_STATUS_STASHED=''
+SPACESHIP_GIT_BRANCH_COLOR=#8787ff
+SPACESHIP_DIR_COLOR=#00af87
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -149,8 +156,6 @@ precmd_functions+=(_fix_cursor)
 
 export YVM_DIR=/home/drache/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
-alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
