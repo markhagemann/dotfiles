@@ -133,6 +133,9 @@ source $ZSH/oh-my-zsh.sh
 
 setopt CSH_NULL_GLOB
 unsetopt correct_all
+# Spell checks
+setopt correct
+export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
 # Set Spaceship as prompt
 autoload -U promptinit; promptinit
@@ -164,3 +167,4 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 fi
+
