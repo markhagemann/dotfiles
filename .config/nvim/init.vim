@@ -1,4 +1,5 @@
 if &compatible
+  call dein#add('voldikss/vim-floaterm')
   set nocompatible
 endif
 " ------------------------------------------------------------------
@@ -36,6 +37,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
   call dein#add('ryanoasis/vim-devicons')
+  " Floating Terminal / Window
+  call dein#add('voldikss/vim-floaterm')
   " Git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
@@ -101,6 +104,7 @@ set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
+set scrolloff=6                         " Keep 6 lines above/below cursor
 set number                              " Line numbers
 set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
@@ -178,9 +182,12 @@ let g:onedark_termcolors=256
 syntax on
 colorscheme onedark
 " checks if your terminal has 24-bit color support
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 if (has("termguicolors"))
-    set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
+  set termguicolors
+  hi LineNr ctermbg=NONE guibg=NONE
 endif
 set numberwidth=2
 set foldcolumn=2
@@ -614,6 +621,13 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 autocmd FileType * RainbowParentheses
 
+" }}}
+
+" ------------------------------------------------------------------
+" voldikss/vim-floaterm {{{
+" ------------------------------------------------------------------
+hi FloatermBorder guifg=cyan
+nnoremap <silent> <F1> :FloatermNew --height=0.85 --width=0.85 --wintype=floating --name=lazygit-float --title=lazygit --autoclose=2  lazygit<CR>
 " }}}
 " ------------------------------------------------------------------
 " brooth/far.vim {{{
