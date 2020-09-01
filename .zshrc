@@ -54,6 +54,8 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # alias ls="colorls -lA --sd"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
+alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
 
 # Setting rg as the default source for fzf
 if type rg &> /dev/null; then
