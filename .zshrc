@@ -52,7 +52,9 @@ DEFAULT_USER="drache"
 alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-alias editvimrc="nvim ~/.config/nvim/init.vim"
+alias envim="nvim ~/.config/nvim/init.vim"
+alias ezsh="nvim ~/.zshrc"
+alias etmux="nvim ~/.tmux.conf"
 # alias ls="colorls -lA --sd"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
@@ -162,7 +164,7 @@ SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED=''
 SPACESHIP_GIT_BRANCH_COLOR=#8787ff
-SPACESHIP_DIR_COLOR=#00af87
+SPACESHIP_DIR_COLOR=#00d7d7
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -181,3 +183,4 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 fi
 
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
