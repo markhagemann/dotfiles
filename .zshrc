@@ -52,6 +52,7 @@ DEFAULT_USER="drache"
 alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias editvimrc="nvim ~/.config/nvim/init.vim"
 # alias ls="colorls -lA --sd"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
