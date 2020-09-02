@@ -51,15 +51,18 @@ DEFAULT_USER="drache"
 # Aliases
 alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-alias envim="nvim ~/.config/nvim/init.vim"
-alias ezsh="nvim ~/.zshrc"
-alias etmux="nvim ~/.tmux.conf"
-# alias ls="colorls -lA --sd"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+# This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
+# up memory, this command will free your memory after about 20-30 seconds.
+#   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
+alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+alias envim="nvim ~/.config/nvim/init.vim"
+alias etmux="nvim ~/.tmux.conf"
+alias ezsh="nvim ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
 
 function zshalias()
 {
