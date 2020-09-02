@@ -49,6 +49,7 @@ DEFAULT_USER="drache"
 # PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # Aliases
+alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # alias ls="colorls -lA --sd"

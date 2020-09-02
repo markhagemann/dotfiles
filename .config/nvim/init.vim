@@ -21,10 +21,10 @@ if dein#load_state('~/.cache/dein')
   " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
+  call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'release' })
   call dein#add('mhinz/vim-grepper')
   call dein#add('brooth/far.vim')
   " Colorscheme
-  " call dein#add('arcticicestudio/nord-vim')
   call dein#add('christianchiarulli/onedark.vim')
   " Colorizer
   call dein#add('norcalli/nvim-colorizer.lua')
@@ -191,7 +191,6 @@ if (has("termguicolors"))
 endif
 set numberwidth=2
 set foldcolumn=2
-" let g:nord_cursor_line_number_background = 1
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi! SignColumn ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
@@ -364,7 +363,7 @@ let g:webdevicons_enable_airline_tabline = 1
 " ------------------------------------------------------------------
 " neoclide/coc.nvim {{{
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -410,8 +409,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <F2> <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>p  <Plug>(coc-format-selected)
+nmap <leader>p  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -525,14 +524,19 @@ vnoremap <space>/ :Commentary<CR>
 
 " }}}
 " ------------------------------------------------------------------
+" tpope/vim-fugitive {{{
+" ------------------------------------------------------------------
+nnoremap <leader>gc :GCheckout<CR>
+
+" }}}
+" ------------------------------------------------------------------
 " junegunn/fzf.vim {{{
 " ------------------------------------------------------------------
-
 " This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+" let g:fzf_action = {
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-x': 'split',
+"   \ 'ctrl-v': 'vsplit' }
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -541,24 +545,21 @@ let g:fzf_action = {
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 
-map <C-p> :Files<CR>
-nnoremap <leader>p :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
-nnoremap <leader>t :Tags<CR>
-nnoremap <leader>m :Marks<CR>
-
-" Ignore filename when grepping
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" map <C-p> :Files<CR>
+" nnoremap <leader>p :Files<CR>
+" nnoremap <leader>b :Buffers<CR>
+" nnoremap <leader>g :Rg<CR>
 
 " Use ripgrep instead of grep
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 let g:fzf_tags_command = 'ctags -R'
-" Border color
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.85, 'height': 0.85,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+" let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 "-g '!{node_modules,.git}'
 
@@ -582,17 +583,12 @@ let g:fzf_colors =
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" Get text in files with Rg
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
-
- " Make Ripgrep ONLY search file contents and not filenames
+" Make Ripgrep ONLY search file contents and not filenames
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:30%', '?'),
   \   <bang>0)
 
 " Ripgrep advanced
@@ -612,6 +608,55 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
+" }}}
+" ------------------------------------------------------------------
+" yuki-ycino/fzf-preview.vim {{{
+" ------------------------------------------------------------------
+" The theme used in the bat preview
+let $BAT_THEME = 'base16'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'base16'
+
+augroup fzf_preview
+  autocmd!
+  autocmd User fzf_preview#initialized call s:fzf_preview_settings()
+augroup END
+
+function! s:fzf_preview_settings() abort
+  let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
+  let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
+endfunction
+
+" Commands used for fzf preview.
+" The file name selected by fzf becomes {}
+" let g:fzf_preview_command = 'cat'                              " Not installed bat
+let g:fzf_preview_command = 'batcat --color=always --plain {-1}' " Installed bat
+
+" Use vim-devicons
+let g:fzf_preview_use_dev_icons = 1
+" devicons character width
+let g:fzf_preview_dev_icon_prefix_string_length = 3
+" Devicons can make fzf-preview slow when the number of results is high
+" By default icons are disable when number of results is higher that 5000
+let g:fzf_preview_dev_icons_limit = 5000
+
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+" nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 " }}}
 " ------------------------------------------------------------------
 " junegunn/rainbow_parentheses.vim {{{
