@@ -246,7 +246,7 @@ augroup END
 augroup defx-extensions
   autocmd!
   " Close defx if it's the only buffer left in the window
-  autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
+  " autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
   " Move focus to the next window if current buffer is defx
   autocmd BufWritePost * call defx#redraw() " Redraw on file change
   autocmd TabLeave * if &ft == 'defx' | wincmd w | endif
@@ -310,7 +310,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> k
   \ line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l defx#do_action('drop')
-  nnoremap <silent><buffer><expr> <C-l>
+  nnoremap <silent><buffer><expr> <C-r>
   \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
   \ defx#do_action('print')
