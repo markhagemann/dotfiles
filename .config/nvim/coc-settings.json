@@ -13,7 +13,7 @@
     "javascriptreact",
     "vue"
   ],
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "html.filetypes": ["html", "handlebars", "hbs"],
   "suggest.completionItemKindLabels": {
     "text": "t",
@@ -25,30 +25,7 @@
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python"
-  ],
   "coc.preferences.hoverTarget": "float",
-
-  "explorer.width": 30,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit"
-  },
-
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
@@ -56,5 +33,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
-  }
+  },
+  "prettier.disableLanguages": []
 }
