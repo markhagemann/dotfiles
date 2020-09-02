@@ -16,6 +16,7 @@ if dein#load_state('~/.cache/dein')
 
   " Autocompletion
   call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  call dein#add('antoinemadec/coc-fzf', {'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
   " Buffer / file searching and replacing
@@ -82,6 +83,7 @@ endif
 filetype plugin on
 let g:mapleader=" "
 syntax enable                           " Enables syntax highlighing
+set shell=zsh                           " Set shell to zsh
 set iskeyword+=-                        " treat dash separated words as a word text object"
 set formatoptions-=cro                  " Stop newline continution of comments"
 set hidden                              " Required to keep multiple buffers open multiple buffers
@@ -361,7 +363,7 @@ let g:webdevicons_enable_airline_tabline = 1
 
 " }}}
 " ------------------------------------------------------------------
-" neoclide/coc.nvim {{{
+" neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview']
 " Use tab for trigger completion with characters ahead and navigate.
@@ -459,21 +461,22 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>a  :<C-u>CocFzfList diagnostics<cr>
+nnoremap <silent> <space>b  :<C-u>CocFzfList diagnostics --current-buf<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocFzfList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>j  :<C-u>CocFzfNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>k  :<C-u>CocFzfPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
 " }}}
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace {{{
@@ -629,7 +632,7 @@ endfunction
 " Commands used for fzf preview.
 " The file name selected by fzf becomes {}
 " let g:fzf_preview_command = 'cat'                              " Not installed bat
-let g:fzf_preview_command = 'batcat --color=always --plain {-1}' " Installed bat
+let g:fzf_preview_command = 'bat --color=always --plain {-1}'    " Installed bat
 
 " Use vim-devicons
 let g:fzf_preview_use_dev_icons = 1
