@@ -333,7 +333,6 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let airline#extensions#tabline#show_splits = 0
 let airline#extensions#tabline#tabs_label = ''
-let g:airline_powerline_fonts = 1 " Power lines font
 
 " Disable tabline close button
 let g:airline#extensions#tabline#show_close_button = 0
@@ -348,11 +347,12 @@ let g:airline#extensions#tabline#tabs_label = ''
 " Just show the file name
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" DISABLED - this is due to issues in alacritty with tmux
 " enable powerline fonts
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_powerline_fonts = 1
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Always show tabs

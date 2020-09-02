@@ -15,7 +15,7 @@ ZSH_THEME="spaceship"
 
 # TMUX
 # Automatically start tmux
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
