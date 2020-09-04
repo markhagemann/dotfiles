@@ -186,4 +186,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 fi
 
+# Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+sudo /etc/init.d/dbus start &> /dev/null
+
 [[ $TMUX = "" ]] && export TERM="xterm-256color"

@@ -503,6 +503,7 @@ let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
+let g:indentLine_fileTypeExclude = ['md']
 
 " }}}
 " ------------------------------------------------------------------
