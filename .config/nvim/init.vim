@@ -5,7 +5,6 @@ endif
 " ------------------------------------------------------------------
 " Plugins {{{
 " ------------------------------------------------------------------
-
 " Add the dein installation directory into runtimepath
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
@@ -22,7 +21,7 @@ if dein#load_state('~/.cache/dein')
   " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'release' })
+  call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'master' })
   call dein#add('mhinz/vim-grepper')
   call dein#add('brooth/far.vim')
   " Colorscheme
@@ -84,8 +83,8 @@ filetype plugin on
 let g:mapleader=" "
 syntax enable                           " Enables syntax highlighing
 set shell=zsh                           " Set shell to zsh
-set iskeyword+=-                        " treat dash separated words as a word text object"
-set formatoptions-=cro                  " Stop newline continution of comments"
+set iskeyword+=-                        " treat dash separated words as a word text object
+set formatoptions-=cro                  " Stop newline continution of comments
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
@@ -130,26 +129,21 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " You can't stop me
 cmap w!! w !sudo tee %
 
-nnoremap <leader>u :UndotreeShow<CR>
-
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
-
-" Delete current visual selection and dump in black hole buffer before pasting
-" Used when you want to paste over something without it getting copied to
-" Vim's default buffer
-vnoremap <leader>p "_dP
 
 " Show whitespace as characters
 set list!
 set listchars=nbsp:·,trail:~
+
+"This unsets the last search pattern register by hitting return
+nnoremap <CR> :noh<CR><CR>
 
 " Navigate around splits with a single key combo.
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
-
  " Use alt + hjkl to resize windows
 nnoremap <silent> <M-j>    :resize -2<CR>
 nnoremap <silent> <M-k>    :resize +2<CR>
@@ -205,7 +199,6 @@ hi VertSplit guibg=NONE guifg=#151b23
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
-
 "}}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
@@ -360,7 +353,6 @@ set showtabline=2
 
 let g:airline_section_y = ''
 let g:webdevicons_enable_airline_tabline = 1
-
 " }}}
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
@@ -481,10 +473,8 @@ nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace {{{
 " ------------------------------------------------------------------
-
 let g:strip_whitespace_confirm=0
 let g:strip_whitespace_on_save=1
-
 " }}}
 " ------------------------------------------------------------------
 " alvan/vim-closetag {{{
@@ -493,7 +483,6 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx,*.ts'
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
 let g:closetag_emptyTags_caseSensitive = 1
-
 " }}}
 " ------------------------------------------------------------------
 " Indent settings {{{
@@ -504,7 +493,6 @@ let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
 let g:indentLine_fileTypeExclude = ['md']
-
 " }}}
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim {{{
@@ -512,26 +500,17 @@ let g:indentLine_fileTypeExclude = ['md']
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
 let g:blamer_show_in_visual_modes = 0
-
 " }}}
 " ------------------------------------------------------------------
 " airblade/vim-rooter {{{
 " ------------------------------------------------------------------
 let g:rooter_silent_chdir = 1
-
 " }}}
 " ------------------------------------------------------------------
 " tpope/vim-commentary {{{
 " ------------------------------------------------------------------
 nnoremap <space>/ :Commentary<CR>
 vnoremap <space>/ :Commentary<CR>
-
-" }}}
-" ------------------------------------------------------------------
-" tpope/vim-fugitive {{{
-" ------------------------------------------------------------------
-nnoremap <leader>gc :GCheckout<CR>
-
 " }}}
 " ------------------------------------------------------------------
 " junegunn/fzf.vim {{{
@@ -549,10 +528,10 @@ nnoremap <leader>gc :GCheckout<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 
-" map <C-p> :Files<CR>
-" nnoremap <leader>p :Files<CR>
-" nnoremap <leader>b :Buffers<CR>
-" nnoremap <leader>g :Rg<CR>
+map <C-p> :Files<CR>
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
 
 " Use ripgrep instead of grep
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -645,10 +624,7 @@ let g:fzf_preview_dev_icons_limit = 5000
 
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
-
 nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
-nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
 nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
 nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
@@ -669,9 +645,7 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 autocmd FileType * RainbowParentheses
-
 " }}}
-
 " ------------------------------------------------------------------
 " voldikss/vim-floaterm {{{
 " ------------------------------------------------------------------
@@ -681,8 +655,7 @@ nnoremap <silent> <F1> :FloatermNew --height=0.85 --width=0.85 --wintype=floatin
 " ------------------------------------------------------------------
 " brooth/far.vim {{{
 " ------------------------------------------------------------------
-let g:far#source = 'agnvim'
-
+" let g:far#source = 'rg'
 " }}}
 " ------------------------------------------------------------------
 " easymotion/vim-easymotion{{{
