@@ -655,7 +655,7 @@ nnoremap <silent> <F1> :FloatermNew --height=0.85 --width=0.85 --wintype=floatin
 " ------------------------------------------------------------------
 " brooth/far.vim {{{
 " ------------------------------------------------------------------
-" let g:far#source = 'rg'
+let g:far#source = 'rgnvim'
 " }}}
 " ------------------------------------------------------------------
 " easymotion/vim-easymotion{{{
