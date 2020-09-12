@@ -14,8 +14,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
-  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
-  call dein#add('antoinemadec/coc-fzf', {'branch': 'release'})
+  call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+  call dein#add('antoinemadec/coc-fzf', {'depends': 'coc', 'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
   " Buffer / file searching and replacing
@@ -23,9 +23,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
   call dein#add('yuki-ycino/fzf-preview.vim', { 'rev': 'master' })
   call dein#add('mhinz/vim-grepper')
-  call dein#add('brooth/far.vim')
+  call dein#add('christianchiarulli/far.vim')
   " Colorscheme
-  call dein#add('christianchiarulli/onedark.vim')
+  call dein#add('arcticicestudio/nord-vim')
   " Colorizer
   call dein#add('norcalli/nvim-colorizer.lua')
   call dein#add('junegunn/rainbow_parentheses.vim')
@@ -118,7 +118,6 @@ set signcolumn=yes                      " Always show the signcolumn, otherwise 
 set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-set foldmethod=marker                   " Fold code between {{{ and }}}
 set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
 set incsearch
 
@@ -172,12 +171,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Set colorscheme and related settings
+syntax enable
 hi Comment cterm=italic
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-let g:onedark_termcolors=256
-syntax on
-colorscheme onedark
+let g:nord_italic = 1
+let g:nord_bold = 0
 " checks if your terminal has 24-bit color support
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -187,20 +184,41 @@ if (has("termguicolors"))
   hi LineNr ctermbg=NONE guibg=NONE
 endif
 set numberwidth=2
-set foldcolumn=2
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-hi! SignColumn ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-" hi! LineNr cterm=NONE ctermfg=grey ctermbg=NONE gui=NONE guifg=#7a5a5a guibg=NONE
-" hi! Cursor cterm=NONE ctermbg=darkblue ctermfg=cyan guibg=NONE guifg=#2a4e84
-" hi! CursorLineNR cterm=NONE ctermbg=NONE ctermfg=darkred guibg=NONE guifg=#f28c8c
-" hi LineNr guibg=bg
-" hi foldcolumn guibg=bg
-hi VertSplit guibg=NONE guifg=#151b23
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+" hi VertSplit guibg=NONE guifg=#151b23
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+colorscheme nord
 "}}}
+" ------------------------------------------------------------------
+" Folding {{{
+" ------------------------------------------------------------------
+set foldmethod=indent
+set foldcolumn=2
+hi foldcolumn guibg=bg
+hi Folded guifg=#8294ad guibg=bg
+hi FoldColumn guifg=#233144
+hi clear SignColumn
+autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType javascript setlocal foldmethod=expr
+" Sourced from https://www.vimfromscratch.com/articles/vim-folding/
+" autocmd FileType javascript setlocal foldexpr=JSFolds()
+" function! JSFolds()
+"   let thisline = getline(v:lnum)
+"   if thisline =~? '\v^\s*$'
+"     return '-1'
+"   endif
+
+"   if thisline =~ '^import.*$'
+"     return 1
+"   else
+"     return indent(v:lnum) / &shiftwidth
+"   endif
+" endfunction
+" }}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
 " ------------------------------------------------------------------
@@ -263,9 +281,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> p
   \ defx#do_action('paste')
   nnoremap <silent><buffer><expr> V
-  \ defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> H
-  \ defx#do_action('drop', 'pedit')
+  \ defx#do_action('drop', 'vsplit')
   nnoremap <silent><buffer><expr> o
   \ defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> K
@@ -319,27 +335,25 @@ endfunction
 " ------------------------------------------------------------------
 " vim-airline/vim-airline {{{
 " ------------------------------------------------------------------
+let g:airline_theme='nord'
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-let airline#extensions#tabline#show_splits = 0
-let airline#extensions#tabline#tabs_label = ''
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = ''
+" let g:airline#extensions#tabline#right_sep = ''
+" let g:airline#extensions#tabline#right_alt_sep = ''
+" let airline#extensions#tabline#show_splits = 0
+" let airline#extensions#tabline#tabs_label = ''
 
 " Disable tabline close button
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#fnamecollapse = 1
+" let g:airline#extensions#tabline#show_close_button = 0
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#show_tab_nr = 0
+" let g:airline#extensions#tabline#fnamecollapse = 1
 
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#buffers_label = ''
-let g:airline#extensions#tabline#tabs_label = ''
-
-" Just show the file name
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#buffers_label = ''
+" let g:airline#extensions#tabline#tabs_label = ''
 
 " DISABLED - this is due to issues in alacritty with tmux
 " enable powerline fonts
@@ -348,17 +362,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:airline_right_sep = ''
 " let g:airline_right_alt_sep = ''
 
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" Always show tabs
-set showtabline=2
-
-let g:airline_section_y = ''
-let g:webdevicons_enable_airline_tabline = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline_section_y = ''
+" let g:webdevicons_enable_airline_tabline = 1
 " }}}
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview', 'coc-stylelint']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -398,7 +409,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <F2> <Plug>(coc-rename)
