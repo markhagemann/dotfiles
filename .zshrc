@@ -1,5 +1,9 @@
 eval "$(dircolors ~/.dir_colors)"
 
+# Import private exports that shouldn't be committed
+PRIVEXPORTFILE=~/.zshrcpriv
+source $PRIVEXPORTFILE
+
 # Fix to ignore warning about 'Insecure completion-dependent directories detected'
 ZSH_DISABLE_COMPFIX=true
 
