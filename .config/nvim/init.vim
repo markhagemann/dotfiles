@@ -51,6 +51,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('kristijanhusak/vim-js-file-import')
   call dein#add('tpope/vim-sleuth')
+  " Scratchpad
+  call dein#add('Konfekt/vim-scratchpad')
   " Status bar
   call dein#add('vim-airline/vim-airline')
   " Text navigation / manipulation
