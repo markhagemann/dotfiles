@@ -1,5 +1,9 @@
 eval "$(dircolors ~/.dir_colors)"
 
+# Import private exports that shouldn't be committed
+PRIVEXPORTFILE=~/.zshrcpriv
+source $PRIVEXPORTFILE
+
 # Fix to ignore warning about 'Insecure completion-dependent directories detected'
 ZSH_DISABLE_COMPFIX=true
 
@@ -15,7 +19,7 @@ ZSH_THEME="spaceship"
 
 # TMUX
 # Automatically start tmux
-ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOSTART=true
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
@@ -35,7 +39,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node tmux ssh-agent zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 # Hide user@hostname if it's expected default user
@@ -49,7 +53,6 @@ DEFAULT_USER="drache"
 # PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # Aliases
-alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
@@ -60,8 +63,10 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 alias envim="nvim ~/.config/nvim/init.vim"
 alias etmux="nvim ~/.tmux.conf"
+alias evim="nvim ~/.config/nvim/init.vim"
 alias ezsh="nvim ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
+alias synctime="sudo hwclock -s"
 alias vim="nvim"
 
 function zshalias()
@@ -72,21 +77,24 @@ function zshalias()
 # Setting rg as the default source for fzf
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    -m --height 50% --border
+    --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+    --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+  '
   # Apply the command to CTRL-T as well
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# Set location of z installation
-. /home/drache/z.sh
+## FZF FUNCTIONS ##
 
+# Set FZF for z jump around
 unalias z 2> /dev/null
 z() {
     [ $# -gt 0 ] && _z "$*" && return
     cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
-
-## FZF FUNCTIONS ##
 
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
@@ -146,7 +154,6 @@ fgr() {
   fi
 }
 
-
 source $ZSH/oh-my-zsh.sh
 
 setopt CSH_NULL_GLOB
@@ -185,5 +192,8 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 fi
+
+# Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+sudo /etc/init.d/dbus start &> /dev/null
 
 [[ $TMUX = "" ]] && export TERM="xterm-256color"

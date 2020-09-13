@@ -6,6 +6,14 @@
   "suggest.triggerAfterInsertEnter": true,
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
+  "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": "f"
+  },
   "eslint.filetypes": [
     "javascript",
     "typescript",
@@ -13,19 +21,21 @@
     "javascriptreact",
     "vue"
   ],
-  "eslint.autoFixOnSave": false,
+  "eslint.autoFixOnSave": true,
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.packageManager": "yarn",
   "html.filetypes": ["html", "handlebars", "hbs"],
-  "suggest.completionItemKindLabels": {
-    "text": "t",
-    "method": "m",
-    "function": "f"
-  },
 
   "diagnostic.errorSign": "✗",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
+  "coc.preferences.colorSupport": true,
+  "coc.preferences.rootPatterns": [".git", ".vscode"],
   "coc.preferences.hoverTarget": "float",
+  "tsserver.log": "normal",
+  "tsserver.maxTsServerMemory": 2000,
+  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
