@@ -24,7 +24,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mhinz/vim-grepper')
   call dein#add('christianchiarulli/far.vim')
   " Colorscheme
-  call dein#add('arcticicestudio/nord-vim')
+  call dein#add('ayu-theme/ayu-vim')
   " Colorizer
   call dein#add('norcalli/nvim-colorizer.lua')
   call dein#add('junegunn/rainbow_parentheses.vim')
@@ -171,8 +171,6 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 syntax enable
-let g:nord_italic = 1
-let g:nord_bold = 0
 " checks if your terminal has 24-bit color support
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -188,7 +186,8 @@ set numberwidth=2
 " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 " \,sm:block-blinkwait175-blinkoff150-blinkon175
-colorscheme nord
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
 "}}}
 " ------------------------------------------------------------------
 " Folding {{{
@@ -332,7 +331,7 @@ endfunction
 " ------------------------------------------------------------------
 " vim-airline/vim-airline {{{
 " ------------------------------------------------------------------
-let g:airline_theme='nord'
+let g:airline_theme='ayu'
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ''
@@ -556,31 +555,15 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.85, 'height': 0.85,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
 " Customize fzf colors to match your color scheme
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
-" Nord variant
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorColumn'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Statement'],
   \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Comment'],
+  \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
   \ 'marker':  ['fg', 'Keyword'],
