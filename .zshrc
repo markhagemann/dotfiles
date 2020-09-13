@@ -39,7 +39,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node tmux ssh-agent zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 # Hide user@hostname if it's expected default user
@@ -87,16 +87,14 @@ if type rg &> /dev/null; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# Set location of z installation
-. /home/drache/z.sh
+## FZF FUNCTIONS ##
 
+# Set FZF for z jump around
 unalias z 2> /dev/null
 z() {
     [ $# -gt 0 ] && _z "$*" && return
     cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
-
-## FZF FUNCTIONS ##
 
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
@@ -155,7 +153,6 @@ fgr() {
      vim $file +$line
   fi
 }
-
 
 source $ZSH/oh-my-zsh.sh
 
