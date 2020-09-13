@@ -53,7 +53,6 @@ DEFAULT_USER="drache"
 # PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # Aliases
-alias bat="batcat"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
@@ -67,6 +66,7 @@ alias etmux="nvim ~/.tmux.conf"
 alias evim="nvim ~/.config/nvim/init.vim"
 alias ezsh="nvim ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
+alias synctime="sudo hwclock -s"
 alias vim="nvim"
 
 function zshalias()
@@ -77,7 +77,12 @@ function zshalias()
 # Setting rg as the default source for fzf
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    -m --height 50% --border
+    --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+    --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+  '
   # Apply the command to CTRL-T as well
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
