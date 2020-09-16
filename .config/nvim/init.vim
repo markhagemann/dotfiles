@@ -25,6 +25,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('christianchiarulli/far.vim')
   " Colorscheme
   call dein#add('ayu-theme/ayu-vim')
+  call dein#add('TaDaa/vimade')
   " Colorizer
   call dein#add('norcalli/nvim-colorizer.lua')
   call dein#add('junegunn/rainbow_parentheses.vim')
@@ -89,7 +90,7 @@ set formatoptions-=cro                  " Stop newline continution of comments
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
-set pumheight=10                        " Makes popup menu smaller
+set pumheight=20                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
 set cmdheight=1                         " More space for displaying messages
@@ -182,19 +183,35 @@ if (has("termguicolors"))
   hi LineNr ctermbg=NONE guibg=NONE
 endif
 set numberwidth=2
-" hi! Normal ctermbg=NONE guibg=NONE
-" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-" hi VertSplit guibg=NONE guifg=#151b23
-" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-" \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
-" \,sm:block-blinkwait175-blinkoff150-blinkon175
 let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+hi VertSplit guibg=NONE guifg=#151b23
+" hi VertSplit guibg=cyan guifg=cyan
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+\,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
+\,sm:block-blinkwait175-blinkoff150-blinkon175
+
+"}}}
+" ------------------------------------------------------------------
+" TaDaa/vimade {{{
+" ------------------------------------------------------------------
+let g:vimade = {
+            \'fadelevel': 0.3,
+            \'checkinterval': 100,
+            \'enablefocusfading': 1
+            \}
+autocmd BufNew * ++once if !exists('g:vimade_loaded') |
+            \execute 'VimadeEnable' | endif
+autocmd FocusLost * ++once if !exists('g:vimade_loaded') |
+            \execute 'VimadeEnable' |
+            \call vimade#FocusLost() | endif
 "}}}
 " ------------------------------------------------------------------
 " Folding {{{
 " ------------------------------------------------------------------
-set foldmethod=indent
+" set foldmethod=indent
 set foldcolumn=2
 hi foldcolumn guibg=bg
 hi Folded guifg=#8294ad guibg=bg
@@ -203,19 +220,19 @@ hi clear SignColumn
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType javascript setlocal foldmethod=expr
 " Sourced from https://www.vimfromscratch.com/articles/vim-folding/
-" autocmd FileType javascript setlocal foldexpr=JSFolds()
-" function! JSFolds()
-"   let thisline = getline(v:lnum)
-"   if thisline =~? '\v^\s*$'
-"     return '-1'
-"   endif
+autocmd FileType javascript setlocal foldexpr=JSFolds()
+function! JSFolds()
+  let thisline = getline(v:lnum)
+  if thisline =~? '\v^\s*$'
+    return '-1'
+  endif
 
-"   if thisline =~ '^import.*$'
-"     return 1
-"   else
-"     return indent(v:lnum) / &shiftwidth
-"   endif
-" endfunction
+  if thisline =~ '^import.*$'
+    return 1
+  else
+    return indent(v:lnum) / &shiftwidth
+  endif
+endfunction
 " }}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
@@ -355,7 +372,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " DISABLED - this is due to issues in alacritty with tmux
 " enable powerline fonts
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 " let g:airline_right_alt_sep = ''
