@@ -211,15 +211,15 @@ autocmd FocusLost * ++once if !exists('g:vimade_loaded') |
 " ------------------------------------------------------------------
 " Folding {{{
 " ------------------------------------------------------------------
-" set foldmethod=indent
+set foldmethod=indent
 set foldcolumn=2
 hi foldcolumn guibg=bg
 hi Folded guifg=#8294ad guibg=bg
 hi FoldColumn guifg=#233144
 hi clear SignColumn
 autocmd FileType vim setlocal foldmethod=marker
-autocmd FileType javascript setlocal foldmethod=expr
 " Sourced from https://www.vimfromscratch.com/articles/vim-folding/
+autocmd FileType javascript setlocal foldmethod=expr
 autocmd FileType javascript setlocal foldexpr=JSFolds()
 function! JSFolds()
   let thisline = getline(v:lnum)
