@@ -334,11 +334,14 @@ function! s:defx_my_settings() abort
   " Allow vim movement keys for navigation
   nnoremap <silent><buffer><expr> h
   \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> H
+  \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
   nnoremap <silent><buffer><expr> k
   \ line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l defx#do_action('drop')
+  nnoremap <silent><buffer><expr> L defx#do_action('drop')
   nnoremap <silent><buffer><expr> <C-r>
   \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
