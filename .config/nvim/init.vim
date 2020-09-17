@@ -21,9 +21,9 @@ if dein#load_state('~/.cache/dein')
   " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('mhinz/vim-grepper')
   call dein#add('christianchiarulli/far.vim')
   " Colorscheme
+  call dein#add('flrnd/candid.vim')
   call dein#add('ayu-theme/ayu-vim')
   call dein#add('TaDaa/vimade')
   " Colorizer
@@ -55,12 +55,10 @@ if dein#load_state('~/.cache/dein')
   " Scratchpad
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
-  call dein#add('vim-airline/vim-airline')
+  call dein#add('itchyny/lightline.vim')
   " Text navigation / manipulation
-  call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-surround')
-  call dein#add('easymotion/vim-easymotion')
   call dein#add('chaoren/vim-wordmotion')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
@@ -112,7 +110,7 @@ set number                              " Line numbers
 set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
-set showtabline=2                       " Always show tabs
+" set showtabline=2                       " Always show tabs
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
@@ -185,6 +183,11 @@ endif
 set numberwidth=2
 let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
+" colorscheme candid
+" let g:candid_color_store = {
+"     \ "black": {"gui": "#121212", "cterm256": "0"},
+"     \ "white": {"gui": "#f4f4f4", "cterm256": "255"},
+"     \}
 " hi! Normal ctermbg=NONE guibg=NONE
 " hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi VertSplit guibg=NONE guifg=#151b23
@@ -349,39 +352,9 @@ function! s:defx_my_settings() abort
 endfunction
 " }}}
 " ------------------------------------------------------------------
-" vim-airline/vim-airline {{{
+" itchyny/lightline {{{
 " ------------------------------------------------------------------
-let g:airline_theme='ayu'
-" enable tabline
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#right_sep = ''
-" let g:airline#extensions#tabline#right_alt_sep = ''
-" let airline#extensions#tabline#show_splits = 0
-" let airline#extensions#tabline#tabs_label = ''
-
-" Disable tabline close button
-" let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#show_tab_nr = 0
-" let g:airline#extensions#tabline#fnamecollapse = 1
-
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#buffers_label = ''
-" let g:airline#extensions#tabline#tabs_label = ''
-
-" DISABLED - this is due to issues in alacritty with tmux
-" enable powerline fonts
-" let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_section_y = ''
-" let g:webdevicons_enable_airline_tabline = 1
-" }}}
+let g:lightline = { 'colorscheme': 'ayu' }
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
