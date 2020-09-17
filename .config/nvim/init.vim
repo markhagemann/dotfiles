@@ -211,6 +211,7 @@ autocmd FocusLost * ++once if !exists('g:vimade_loaded') |
 " ------------------------------------------------------------------
 " Folding {{{
 " ------------------------------------------------------------------
+set nofoldenable
 set foldmethod=indent
 set foldcolumn=2
 hi foldcolumn guibg=bg
