@@ -80,9 +80,14 @@ if type rg &> /dev/null; then
 
   export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     -m --height 50% --border
-    --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
-    --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
   '
+
+  # This is for Nord theme
+  # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  #   -m --height 50% --border
+  #   --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+  #   --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+  # '
   # Apply the command to CTRL-T as well
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi

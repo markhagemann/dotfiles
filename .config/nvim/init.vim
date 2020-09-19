@@ -21,7 +21,7 @@ if dein#load_state('~/.cache/dein')
   " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('christianchiarulli/far.vim')
+  call dein#add('brooth/far.vim')
   " Colorscheme
   call dein#add('flrnd/candid.vim')
   call dein#add('ayu-theme/ayu-vim')
@@ -56,6 +56,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
   call dein#add('itchyny/lightline.vim')
+  call dein#add('josa42/vim-lightline-coc')
+  call dein#add('sinetoami/lightline-hunks')
   " Text navigation / manipulation
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-surround')
@@ -93,6 +95,7 @@ set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
 set cmdheight=1                         " More space for displaying messages
 set noshowcmd                           " Don't show entered command
+set noshowmode                          " Don't show mode - handled by lightline
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
@@ -110,7 +113,6 @@ set number                              " Line numbers
 set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
-" set showtabline=2                       " Always show tabs
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
@@ -357,7 +359,31 @@ endfunction
 " ------------------------------------------------------------------
 " itchyny/lightline {{{
 " ------------------------------------------------------------------
-let g:lightline = { 'colorscheme': 'ayu' }
+let g:lightline = {
+  \ 'component_function': {
+  \   'filename': 'LightlineFilename',
+  \ },
+  \ 'colorscheme': 'ayu',
+  \   'active': {
+  \     'left': [[ 'mode', 'paste'], ['lightline_hunks' ], ['readonly', 'filename']],
+  \     'right': [[ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype'], [ 'coc_status']]
+  \   }
+  \ }
+
+let g:lightline.component_function = {
+  \  'lightline_hunks': 'lightline#hunks#composer',
+  \ }
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+" register components:
+call lightline#coc#register()
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
