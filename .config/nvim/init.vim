@@ -21,10 +21,11 @@ if dein#load_state('~/.cache/dein')
   " Buffer / file searching and replacing
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('mhinz/vim-grepper')
-  call dein#add('christianchiarulli/far.vim')
+  call dein#add('brooth/far.vim')
   " Colorscheme
-  call dein#add('arcticicestudio/nord-vim')
+  call dein#add('flrnd/candid.vim')
+  call dein#add('ayu-theme/ayu-vim')
+  call dein#add('TaDaa/vimade')
   " Colorizer
   call dein#add('norcalli/nvim-colorizer.lua')
   call dein#add('junegunn/rainbow_parentheses.vim')
@@ -51,13 +52,15 @@ if dein#load_state('~/.cache/dein')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('kristijanhusak/vim-js-file-import')
   call dein#add('tpope/vim-sleuth')
+  " Scratchpad
+  call dein#add('Konfekt/vim-scratchpad')
   " Status bar
-  call dein#add('vim-airline/vim-airline')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('josa42/vim-lightline-coc')
+  call dein#add('sinetoami/lightline-hunks')
   " Text navigation / manipulation
-  call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-surround')
-  call dein#add('easymotion/vim-easymotion')
   call dein#add('chaoren/vim-wordmotion')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
@@ -87,11 +90,12 @@ set formatoptions-=cro                  " Stop newline continution of comments
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
-set pumheight=10                        " Makes popup menu smaller
+set pumheight=20                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
 set cmdheight=1                         " More space for displaying messages
 set noshowcmd                           " Don't show entered command
+set noshowmode                          " Don't show mode - handled by lightline
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
@@ -109,7 +113,6 @@ set number                              " Line numbers
 set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
-set showtabline=2                       " Always show tabs
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
@@ -171,8 +174,6 @@ vnoremap > >gv
 
 " Set colorscheme and related settings
 syntax enable
-let g:nord_italic = 1
-let g:nord_bold = 0
 " checks if your terminal has 24-bit color support
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -182,17 +183,40 @@ if (has("termguicolors"))
   hi LineNr ctermbg=NONE guibg=NONE
 endif
 set numberwidth=2
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
+" colorscheme candid
+" let g:candid_color_store = {
+"     \ "black": {"gui": "#121212", "cterm256": "0"},
+"     \ "white": {"gui": "#f4f4f4", "cterm256": "255"},
+"     \}
 " hi! Normal ctermbg=NONE guibg=NONE
 " hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-" hi VertSplit guibg=NONE guifg=#151b23
-" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-" \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
-" \,sm:block-blinkwait175-blinkoff150-blinkon175
-colorscheme nord
+hi VertSplit guibg=NONE guifg=#151b23
+" hi VertSplit guibg=cyan guifg=cyan
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+\,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
+\,sm:block-blinkwait175-blinkoff150-blinkon175
+
+"}}}
+" ------------------------------------------------------------------
+" TaDaa/vimade {{{
+" ------------------------------------------------------------------
+let g:vimade = {
+            \'fadelevel': 0.3,
+            \'checkinterval': 100,
+            \'enablefocusfading': 1
+            \}
+autocmd BufNew * ++once if !exists('g:vimade_loaded') |
+            \execute 'VimadeEnable' | endif
+autocmd FocusLost * ++once if !exists('g:vimade_loaded') |
+            \execute 'VimadeEnable' |
+            \call vimade#FocusLost() | endif
 "}}}
 " ------------------------------------------------------------------
 " Folding {{{
 " ------------------------------------------------------------------
+set nofoldenable
 set foldmethod=indent
 set foldcolumn=2
 hi foldcolumn guibg=bg
@@ -200,21 +224,21 @@ hi Folded guifg=#8294ad guibg=bg
 hi FoldColumn guifg=#233144
 hi clear SignColumn
 autocmd FileType vim setlocal foldmethod=marker
-autocmd FileType javascript setlocal foldmethod=expr
 " Sourced from https://www.vimfromscratch.com/articles/vim-folding/
-" autocmd FileType javascript setlocal foldexpr=JSFolds()
-" function! JSFolds()
-"   let thisline = getline(v:lnum)
-"   if thisline =~? '\v^\s*$'
-"     return '-1'
-"   endif
+autocmd FileType javascript setlocal foldmethod=expr
+autocmd FileType javascript setlocal foldexpr=JSFolds()
+function! JSFolds()
+  let thisline = getline(v:lnum)
+  if thisline =~? '\v^\s*$'
+    return '-1'
+  endif
 
-"   if thisline =~ '^import.*$'
-"     return 1
-"   else
-"     return indent(v:lnum) / &shiftwidth
-"   endif
-" endfunction
+  if thisline =~ '^import.*$'
+    return 1
+  else
+    return indent(v:lnum) / &shiftwidth
+  endif
+endfunction
 " }}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
@@ -312,11 +336,14 @@ function! s:defx_my_settings() abort
   " Allow vim movement keys for navigation
   nnoremap <silent><buffer><expr> h
   \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> H
+  \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> j
   \ line('.') == line('$') ? 'gg' : 'j'
   nnoremap <silent><buffer><expr> k
   \ line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l defx#do_action('drop')
+  nnoremap <silent><buffer><expr> L defx#do_action('drop')
   nnoremap <silent><buffer><expr> <C-r>
   \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
@@ -330,43 +357,37 @@ function! s:defx_my_settings() abort
 endfunction
 " }}}
 " ------------------------------------------------------------------
-" vim-airline/vim-airline {{{
+" itchyny/lightline {{{
 " ------------------------------------------------------------------
-let g:airline_theme='nord'
-" enable tabline
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#right_sep = ''
-" let g:airline#extensions#tabline#right_alt_sep = ''
-" let airline#extensions#tabline#show_splits = 0
-" let airline#extensions#tabline#tabs_label = ''
+let g:lightline = {
+  \ 'component_function': {
+  \   'filename': 'LightlineFilename',
+  \ },
+  \ 'colorscheme': 'ayu',
+  \   'active': {
+  \     'left': [[ 'mode', 'paste'], ['lightline_hunks' ], ['readonly', 'filename']],
+  \     'right': [[ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype'], [ 'coc_status']]
+  \   }
+  \ }
 
-" Disable tabline close button
-" let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#show_tab_nr = 0
-" let g:airline#extensions#tabline#fnamecollapse = 1
+let g:lightline.component_function = {
+  \  'lightline_hunks': 'lightline#hunks#composer',
+  \ }
 
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#buffers_label = ''
-" let g:airline#extensions#tabline#tabs_label = ''
-
-" DISABLED - this is due to issues in alacritty with tmux
-" enable powerline fonts
-let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_section_y = ''
-" let g:webdevicons_enable_airline_tabline = 1
-" }}}
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+" register components:
+call lightline#coc#register()
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview', 'coc-stylelintplus']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -556,31 +577,15 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.85, 'height': 0.85,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
 " Customize fzf colors to match your color scheme
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
-" Nord variant
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorColumn'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Statement'],
   \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Comment'],
+  \ 'border':  ['fg', 'Ignore'],
   \ 'prompt':  ['fg', 'Conditional'],
   \ 'pointer': ['fg', 'Exception'],
   \ 'marker':  ['fg', 'Keyword'],

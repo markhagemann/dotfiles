@@ -1,4 +1,9 @@
 {
+  "css.validate": false,
+  "stylelintplus.cssInJs": false,
+  "stylelintplus.enable": true,
+  "stylelintplus.autoFixOnSave": true,
+  "prettier.stylelintIntegration": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
@@ -22,6 +27,7 @@
     "vue"
   ],
   "eslint.autoFixOnSave": true,
+  "eslint.enable":  true,
   "eslint.nodePath": ".yarn/sdks",
   "eslint.packageManager": "yarn",
   "html.filetypes": ["html", "handlebars", "hbs"],

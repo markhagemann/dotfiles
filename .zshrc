@@ -80,9 +80,14 @@ if type rg &> /dev/null; then
 
   export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     -m --height 50% --border
-    --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
-    --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
   '
+
+  # This is for Nord theme
+  # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  #   -m --height 50% --border
+  #   --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+  #   --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+  # '
   # Apply the command to CTRL-T as well
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
@@ -192,6 +197,9 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 fi
+
+export GDK_SCALE=0.5
+export GDK_DPI_SCALE=1.25
 
 # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
 sudo /etc/init.d/dbus start &> /dev/null
