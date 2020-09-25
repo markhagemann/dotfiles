@@ -387,7 +387,7 @@ call lightline#coc#register()
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-vetur', 'coc-html', 'coc-css', 'coc-highlight', 'coc-fzf-preview', 'coc-stylelintplus']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-html', 'coc-css', 'coc-fzf-preview', 'coc-stylelintplus']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.

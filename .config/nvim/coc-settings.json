@@ -39,9 +39,7 @@
   "coc.preferences.colorSupport": true,
   "coc.preferences.rootPatterns": [".git", ".vscode"],
   "coc.preferences.hoverTarget": "float",
-  "tsserver.log": "normal",
   "tsserver.maxTsServerMemory": 2000,
-  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
