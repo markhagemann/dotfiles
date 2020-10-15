@@ -123,6 +123,8 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
 set incsearch
 
+autocmd VimLeavePre * :call coc#rpc#kill()
+autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 " Enable spellcheck for markdown files

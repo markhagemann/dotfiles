@@ -1,13 +1,38 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": ["json"],
+  "coc.preferences.colorSupport": true,
+  "coc.preferences.rootPatterns": [".git", ".vscode"],
+  "coc.preferences.hoverTarget": "float",
   "css.validate": false,
-  "stylelintplus.cssInJs": false,
-  "stylelintplus.enable": true,
-  "stylelintplus.autoFixOnSave": true,
-  "prettier.stylelintIntegration": true,
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": " ",
+  "eslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "vue"
+  ],
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.packageManager": "yarn",
+  "html.filetypes": ["html", "handlebars", "hbs"],
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "json.format.enable": true,
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  },
+  "prettier.disableLanguages": [],
+  "prettier.stylelintIntegration": true,
   "suggest.triggerAfterInsertEnter": true,
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
@@ -19,34 +44,11 @@
     "method": "m",
     "function": "f"
   },
-  "eslint.filetypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "javascriptreact",
-    "vue"
-  ],
-  "eslint.autoFixOnSave": true,
-  "eslint.enable":  true,
-  "eslint.nodePath": ".yarn/sdks",
-  "eslint.packageManager": "yarn",
-  "html.filetypes": ["html", "handlebars", "hbs"],
-
-  "diagnostic.errorSign": "✗",
-  "diagnostic.warningSign": "⚠",
-  "diagnostic.infoSign": "",
-  "diagnostic.hintSign": " ",
-  "coc.preferences.colorSupport": true,
-  "coc.preferences.rootPatterns": [".git", ".vscode"],
-  "coc.preferences.hoverTarget": "float",
+  "stylelintplus.cssInJs": false,
+  "stylelintplus.enable": true,
+  "stylelintplus.autoFixOnSave": true,
+  "tailwindCSS.headwind.runOnSave": false,
   "tsserver.maxTsServerMemory": 2000,
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    }
-  },
-  "prettier.disableLanguages": []
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }
