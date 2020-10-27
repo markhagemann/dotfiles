@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
 eval "$(dircolors ~/.dir_colors)"
 
 # Import private exports that shouldn't be committed
@@ -13,15 +20,20 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 # If you come from bash you might have to change your $PATH.
-export PATH="$(yarn global bin):$PATH"
+# export PATH="$(yarn global bin):$PATH"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# Used for linux when `host.docker.internal` doesn't work in docker-compose
+export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
 # Automatically start tmux
@@ -174,18 +186,18 @@ setopt correct
 export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
 # Set Spaceship as prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR=#00afff
-SPACESHIP_TIME_12HR=true
-SPACESHIP_DOCKER_SHOW=false
-SPACESHIP_BATTERY_SHOW=false
-SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_NODE_SHOW=false
-SPACESHIP_GIT_STATUS_STASHED=''
-SPACESHIP_GIT_BRANCH_COLOR=#8787ff
-SPACESHIP_DIR_COLOR=#00d7d7
+# autoload -U promptinit; promptinit
+# prompt spaceship
+# SPACESHIP_TIME_SHOW=true
+# SPACESHIP_TIME_COLOR=#00afff
+# SPACESHIP_TIME_12HR=true
+# SPACESHIP_DOCKER_SHOW=false
+# SPACESHIP_BATTERY_SHOW=false
+# SPACESHIP_PACKAGE_SHOW=false
+# SPACESHIP_NODE_SHOW=false
+# SPACESHIP_GIT_STATUS_STASHED=''
+# SPACESHIP_GIT_BRANCH_COLOR=#8787ff
+# SPACESHIP_DIR_COLOR=#00d7d7
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -211,3 +223,6 @@ export GDK_DPI_SCALE=1.25
 sudo /etc/init.d/dbus start &> /dev/null
 
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
