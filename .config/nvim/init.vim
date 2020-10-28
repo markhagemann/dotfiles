@@ -14,7 +14,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
-  call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+  call dein#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
   call dein#add('antoinemadec/coc-fzf', {'depends': 'coc', 'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
@@ -423,8 +423,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
