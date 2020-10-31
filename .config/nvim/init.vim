@@ -23,7 +23,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
   call dein#add('brooth/far.vim')
   " Colorscheme
-  call dein#add('flrnd/candid.vim')
   call dein#add('ayu-theme/ayu-vim')
   call dein#add('TaDaa/vimade')
   " Colorizer
@@ -33,10 +32,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-commentary')
   " File manager
   call dein#add('shougo/defx.nvim')
-  call dein#add('kristijanhusak/defx-icons')
+  " call dein#add('kristijanhusak/defx-icons')
   call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
-  call dein#add('ryanoasis/vim-devicons')
+  " call dein#add('ryanoasis/vim-devicons')
   " Floating Terminal / Window
   call dein#add('voldikss/vim-floaterm')
   " Git
@@ -59,8 +58,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('josa42/vim-lightline-coc')
   call dein#add('sinetoami/lightline-hunks')
   " Text navigation / manipulation
-  call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-surround')
+  call dein#add('unblevable/quick-scope')
   call dein#add('chaoren/vim-wordmotion')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
@@ -646,9 +644,11 @@ nnoremap <silent> <F1> :FloatermNew --height=0.85 --width=0.85 --wintype=floatin
 let g:far#source = 'agnvim'
 " }}}
 " ------------------------------------------------------------------
-" easymotion/vim-easymotion{{{
+" unblevable/quick-scope
 " ------------------------------------------------------------------
-nmap f <Plug>(easymotion-s)
+" Trigger a highlight in the appropriate direction when pressing these keys:
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_ignorecase = 1
 " }}}
 " ------------------------------------------------------------------
 " Search & Replace General {{{
