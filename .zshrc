@@ -14,15 +14,17 @@ source $PRIVEXPORTFILE
 # Fix to ignore warning about 'Insecure completion-dependent directories detected'
 ZSH_DISABLE_COMPFIX=true
 
+# If you come from bash you might have to change your $PATH.
+# export PATH="$(yarn global bin):$PATH"
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
+export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-# If you come from bash you might have to change your $PATH.
-# export PATH="$(yarn global bin):$PATH"
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -71,6 +73,7 @@ DEFAULT_USER="drache"
 # PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
 
 # Aliases
+alias code="code.exe"
 alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
@@ -84,6 +87,7 @@ alias etmux="nvim ~/.tmux.conf"
 alias evim="nvim ~/.config/nvim/init.vim"
 alias ezsh="nvim ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
+alias oni="oni2.exe"
 alias synctime="sudo hwclock -s"
 alias vim="nvim"
 
