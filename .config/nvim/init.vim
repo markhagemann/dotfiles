@@ -14,7 +14,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
-  call dein#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
+  call dein#add('neoclide/coc.nvim', { 'merged': 0 })
   call dein#add('antoinemadec/coc-fzf', {'depends': 'coc', 'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
@@ -348,10 +348,6 @@ function! s:defx_my_settings() abort
   \ defx#do_action('print')
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
-  nnoremap <silent><buffer><expr> >
-  \ defx#do_action('resize', defx#get_context().winwidth + 10)
-  nnoremap <silent><buffer><expr> <
-  \ defx#do_action('resize', defx#get_context().winwidth - 10)
 endfunction
 " }}}
 " ------------------------------------------------------------------
