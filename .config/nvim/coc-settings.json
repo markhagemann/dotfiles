@@ -15,7 +15,6 @@
   "suggest.removeDuplicateItems": true,
   "stylelintplus.cssInJs": false,
   "stylelintplus.enable": true,
-  "stylelintplus.autoFixOnSave": true,
   "tailwindCSS.headwind.runOnSave": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
