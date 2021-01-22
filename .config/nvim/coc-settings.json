@@ -1,54 +1,30 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [],
   "coc.preferences.colorSupport": true,
-  "coc.preferences.rootPatterns": [".git", ".vscode"],
-  "coc.preferences.hoverTarget": "float",
   "css.validate": false,
   "diagnostic.errorSign": "✗",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
   "eslint.autoFixOnSave": true,
-  "eslint.enable": true,
-  "eslint.filetypes": [
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "prettier.disableLanguages": [],
+  "prettier.stylelintIntegration": true,
+  "suggest.maxCompleteItemCount": 20,
+  "suggest.enablePreview": true,
+  "suggest.removeDuplicateItems": true,
+  "stylelintplus.cssInJs": false,
+  "stylelintplus.enable": true,
+  "stylelintplus.autoFixOnSave": true,
+  "tailwindCSS.headwind.runOnSave": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "workspace.bottomUpFiletypes": [
     "javascript",
     "typescript",
     "typescriptreact",
     "javascriptreact",
     "vue"
   ],
-  "eslint.nodePath": ".yarn/sdks",
-  "eslint.packageManager": "yarn",
-  "html.filetypes": ["html", "handlebars", "hbs"],
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "json.format.enable": false,
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    }
-  },
-  "prettier.disableLanguages": [],
-  "prettier.stylelintIntegration": true,
-  "suggest.triggerAfterInsertEnter": true,
-  "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
-  "suggest.noselect": false,
-  "suggest.enablePreview": true,
-  "suggest.removeDuplicateItems": true,
-  "suggest.completionItemKindLabels": {
-    "text": "t",
-    "method": "m",
-    "function": "f"
-  },
-  "stylelintplus.cssInJs": false,
-  "stylelintplus.enable": true,
-  "stylelintplus.autoFixOnSave": true,
-  "tailwindCSS.headwind.runOnSave": false,
-  "tsserver.maxTsServerMemory": 2000,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
+  "workspace.workspaceFolderCheckCwd": true
 }
