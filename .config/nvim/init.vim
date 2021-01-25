@@ -14,7 +14,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
-  call dein#add('neoclide/coc.nvim', { 'merged': 0 })
+  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'master', 'build': 'yarn install --frozen-lockfile' })
   call dein#add('antoinemadec/coc-fzf', {'depends': 'coc', 'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
@@ -98,7 +98,6 @@ set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
-set conceallevel=0                      " So that I can see `` in markdown files
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
@@ -381,7 +380,7 @@ call lightline#coc#register()
 " ------------------------------------------------------------------
 " neoclide/coc.nvim && antoinemadec/coc-fzf {{{
 " ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-html', 'coc-css', 'coc-fzf-preview', 'coc-stylelintplus']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-html', 'coc-css', 'coc-fzf-preview', 'coc-stylelintplus', 'coc-vetur']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -518,8 +517,8 @@ let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
-let g:indentLine_fileTypeExclude = ['md']
-" }}}
+autocmd FileType markdown setl conceallevel=0
+autocmd FileType json setl conceallevel=0
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
