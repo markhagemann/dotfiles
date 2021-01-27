@@ -517,8 +517,10 @@ let g:indentLine_color_gui = '#453c47'
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
-autocmd FileType markdown setl conceallevel=0
-autocmd FileType json setl conceallevel=0
+function SetZeroConcealLevel()
+    setlocal conceallevel=0
+endfunction
+autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
