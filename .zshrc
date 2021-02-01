@@ -15,8 +15,6 @@ source $PRIVEXPORTFILE
 ZSH_DISABLE_COMPFIX=true
 
 # If you come from bash you might have to change your $PATH.
-# export PATH="$(yarn global bin):$PATH"
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
@@ -61,20 +59,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
-# User configuration
-# Hide user@hostname if it's expected default user
-DEFAULT_USER="drache"
-# For agnoster theme only
-# prompt_context() {
-#   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-#     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-#   fi
-# }
-# PROMPT='%{$fg[cyan]%}[%D{%f/%m/%y} %D{%T}] '$PROMPT
-
 # Aliases
 alias code="code.exe"
-alias config='/usr/bin/git --git-dir=/home/drache/.cfg/ --work-tree=/home/drache'
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
@@ -211,7 +198,7 @@ _fix_cursor() {
 
 precmd_functions+=(_fix_cursor)
 
-export YVM_DIR=/home/drache/.yvm
+export YVM_DIR=$HOME/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 
 # WSL 2 specific settings.
