@@ -1,11 +1,18 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-eval "$(dircolors ~/.dir_colors)"
+eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
 
 # Import private exports that shouldn't be committed
 PRIVEXPORTFILE=~/.zshrcpriv
@@ -27,8 +34,15 @@ fi
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-# Used for linux when `host.docker.internal` doesn't work in docker-compose
-export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+case "$(uname -s)" in
+
+  Linux)
+
+  # Used for linux when `host.docker.internal` doesn't work in docker-compose
+  export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+  ;;
+
+esac
 
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
