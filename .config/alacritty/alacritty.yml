@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: CaskaydiaCove NF
+    family: CaskaydiaCove Nerd Font
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -138,7 +138,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  #size: 11.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -766,11 +766,11 @@ winpty_backend: false
   #- { key: F,      mods: Command,            action: SearchForward    }
   #- { key: B,      mods: Command,            action: SearchBackward   }
 
-debug:
+# debug:
   # Display the time it takes to redraw each frame.
   # render_timer: true
   # Keep the log file after quitting Alacritty.
-  persistent_logging: true
+  # persistent_logging: true
 
   # Log level
   #
@@ -781,7 +781,7 @@ debug:
   #   - Info
   #   - Debug
   #   - Trace
-  log_level: Warn
+  # log_level: Warn
 
   # Print all received window events.
-  print_events: true
+  # print_events: true
