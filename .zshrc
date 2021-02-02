@@ -73,7 +73,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node tmux z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 # Aliases
 alias code="code.exe"
