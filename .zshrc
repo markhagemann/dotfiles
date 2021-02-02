@@ -71,7 +71,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+# zstyle :omz:plugins:ssh-agent agent-forwarding on
+plugins=(git node tmux zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 # Aliases
 alias code="code.exe"
