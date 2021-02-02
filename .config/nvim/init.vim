@@ -36,8 +36,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
   " call dein#add('ryanoasis/vim-devicons')
-  " Floating Terminal / Window
+  " Floating Terminal / Window Management
   call dein#add('voldikss/vim-floaterm')
+  call dein#add('chrisbra/NrrwRgn')
   " Git
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
@@ -126,6 +127,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 " Enable spellcheck for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
+" Try fix syntax highlighting issues on large files
+autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
 
 " You can't stop me
 cmap w!! w !sudo tee %
