@@ -219,15 +219,16 @@ export YVM_DIR=$HOME/.yvm
 
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
-    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+
+  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+  sudo /etc/init.d/dbus start &> /dev/null
 fi
 
 export GDK_SCALE=0.5
 export GDK_DPI_SCALE=1.25
 
-# Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-sudo /etc/init.d/dbus start &> /dev/null
 
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
