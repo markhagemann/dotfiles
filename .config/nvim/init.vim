@@ -14,8 +14,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
-  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'master', 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('antoinemadec/coc-fzf', {'depends': 'coc', 'branch': 'release'})
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
   " Buffer / file searching and replacing
@@ -47,6 +45,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
+  call dein#add('neovim/nvim-lspconfig')
+  call dein#add('nvim-lua/completion-nvim')
+  call dein#add('tjdevries/nlua.nvim')
+  call dein#add('tjdevries/lsp_extensions.nvim')
   call dein#add('elzr/vim-json')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('neoclide/vim-jsx-improve')
@@ -58,8 +60,11 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
   call dein#add('itchyny/lightline.vim')
-  call dein#add('josa42/vim-lightline-coc')
   call dein#add('sinetoami/lightline-hunks')
+  " Telescope
+  call dein#add('nvim-lua/popup.nvim')
+  call dein#add('nvim-lua/plenary.nvim')
+  call dein#add('nvim-telescope/telescope.nvim')
   " Text navigation / manipulation
   call dein#add('unblevable/quick-scope')
   call dein#add('chaoren/vim-wordmotion')
@@ -121,14 +126,13 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
 set incsearch
 
-autocmd VimLeavePre * :call coc#rpc#kill()
-autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 " Enable spellcheck for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
 " Try fix syntax highlighting issues on large files
 autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
+" autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 
 " You can't stop me
 cmap w!! w !sudo tee %
@@ -364,7 +368,7 @@ let g:lightline = {
   \ 'colorscheme': 'ayu',
   \   'active': {
   \     'left': [[ 'mode', 'paste'], ['lightline_hunks' ], ['readonly', 'filename']],
-  \     'right': [[ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype'], [ 'coc_status']]
+  \     'right': [[ 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype']]
   \   }
   \ }
 
@@ -380,126 +384,6 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
-" register components:
-call lightline#coc#register()
-" ------------------------------------------------------------------
-" neoclide/coc.nvim && antoinemadec/coc-fzf {{{
-" ------------------------------------------------------------------
-let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-html', 'coc-css', 'coc-fzf-preview', 'coc-stylelintplus', 'coc-vetur']
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <cr> to confirm completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> td <Plug>(coc-definition)
-nmap <silent> ty <Plug>(coc-type-definition)
-nmap <silent> ti <Plug>(coc-implementation)
-nmap <silent> tr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <F2> <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocFzfList diagnostics<cr>
-nnoremap <silent> <space>b  :<C-u>CocFzfList diagnostics --current-buf<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocFzfList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocFzfNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocFzfPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocFzfListResume<CR>
-" }}}
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace {{{
 " ------------------------------------------------------------------
@@ -560,10 +444,10 @@ vnoremap <space>/ :Commentary<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 
-map <C-p> :Files<CR>
-nnoremap <leader>p :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
+" map <C-p> :Files<CR>
+" nnoremap <leader>p :Files<CR>
+" nnoremap <leader>b :Buffers<CR>
+" nnoremap <leader>g :Rg<CR>
 
 " Use ripgrep instead of grep
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -679,4 +563,57 @@ nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
 " press a key below to replace all instances of it in the current selection.
 xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
+
+" ------------------------------------------------------------------
+" Telescope
+" ------------------------------------------------------------------
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
+    prompt_prefix = ' >',
+    color_devicons = true,
+
+    mappings = {
+      i = {
+        ["<C-x>"] = false,
+        ["<C-s>"] = actions.goto_file_selection_split,
+        ["<C-q>"] = actions.send_to_qflist,
+      },
+    }
+  }
+}
+EOF
+
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+
+nnoremap <leader>g :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>gr :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <leader>b :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
+
+" ------------------------------------------------------------------
+" LSP
+" ------------------------------------------------------------------
+set completeopt=menuone,noinsert,noselect
+
+nnoremap td :lua vim.lsp.buf.definition()<CR>
+nnoremap ti :lua vim.lsp.buf.implementation()<CR>
+nnoremap tsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap trr :lua vim.lsp.buf.references()<CR>
+nnoremap trn :lua vim.lsp.buf.rename()<CR>
+nnoremap h :lua vim.lsp.buf.hover()<CR>
+nnoremap tca :lua vim.lsp.buf.code_action()<CR>
+nnoremap tsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+" lua require'lspconfig'.docker.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+" lua require'nvim_lsp'.sumneko_lua.setup{ on_attach=require'completion'.on_attach }
 
