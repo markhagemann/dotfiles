@@ -23,6 +23,7 @@ ZSH_DISABLE_COMPFIX=true
 
 # If you come from bash you might have to change your $PATH.
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
 export PYENV_ROOT="$HOME/.pyenv"
