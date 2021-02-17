@@ -46,22 +46,18 @@ if dein#load_state('~/.cache/dein')
   call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('neovim/nvim-lspconfig')
-  " call dein#add('nvim-lua/completion-nvim')
+  call dein#add('glepnir/lspsaga.nvim')
   call dein#add('hrsh7th/nvim-compe')
   call dein#add('tjdevries/nlua.nvim')
   call dein#add('tjdevries/lsp_extensions.nvim')
-  call dein#add('RishabhRD/popfix')
-  call dein#add('RishabhRD/nvim-lsputils')
   call dein#add('onsails/lspkind-nvim')
-  call dein#add('glepnir/lspsaga.nvim')
   call dein#add('lukas-reineke/format.nvim')
-  " call dein#add('elzr/vim-json')
-  " call dein#add('leafgarland/typescript-vim')
-  " call dein#add('neoclide/vim-jsx-improve')
-  " call dein#add('peitalin/vim-jsx-typescript')
-  " call dein#add('sheerun/vim-polyglot')
-  " call dein#add('kristijanhusak/vim-js-file-import')
+  call dein#add('elzr/vim-json')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('peitalin/vim-jsx-typescript')
+  call dein#add('posva/vim-vue')
   call dein#add('tpope/vim-sleuth')
+  call dein#add('mustache/vim-mustache-handlebars')
   " Scratchpad
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
@@ -570,8 +566,9 @@ nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
 xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 
+" }}}
 " ------------------------------------------------------------------
-" Telescope
+" Telescope {{{
 " ------------------------------------------------------------------
 lua<< EOF
 local actions = require('telescope.actions')
@@ -600,137 +597,18 @@ nnoremap <leader>g :lua require('telescope.builtin').grep_string({ search = vim.
 nnoremap <leader>b :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
+" }}}
 " ------------------------------------------------------------------
-" LSP
+" LSP {{{
 " ------------------------------------------------------------------
 
 lua<< EOF
-
-require'compe'.setup {
-  enabled = true;
-
-  source = {
-    path = true;
-    buffer = true;
-    vsnip = true;
-    nvim_lsp = true;
-  }
-}
-
-local lspconfig = require"lspconfig"
------------------------------------------------------------------------------------------
--- Taken from https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/lsp-config.lua
------------------------------------------------------------------------------------------
-
--- Use enhanced LSP stuff
-vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-  }
-)
-
-vim.cmd [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
-
--- Prepare completion
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', 'tD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'td', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<S-k>', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'ti', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<S-h>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'tr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>td', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-
-  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  end
-end
-
-local util = require 'lspconfig/util'
-lspconfig.sumneko_lua.setup {
-  cmd = {"/usr/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua"},
-  on_attach = on_attach,
-  root_dir = function(fname)
-    return util.find_git_ancestor(fname) or
-      util.path.dirname(fname)
-  end,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-    },
-  },
-}
-
--- Vim lsp
-lspconfig.vimls.setup{
-  on_attach = on_attach,
-}
-
--- JSON lsp
-
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-}
 
 -----------------------------------------------------------------------------------------
 -- Taken from https://phelipetls.github.io/posts/configuring-eslint-to-work-with-neovim-lsp/
 -----------------------------------------------------------------------------------------
 
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true
-}
-
-lspconfig.tsserver.setup {
-  on_attach = function(client)
-    if client.config.flags then
-      client.config.flags.allow_incremental_sync = true
-    end
-    client.resolved_capabilities.document_formatting = false
-    set_lsp_config(client)
-  end
-}
+local lspconfig = require "lspconfig"
 
 local function eslint_config_exists()
   local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
@@ -748,11 +626,21 @@ local function eslint_config_exists()
   return false
 end
 
+local eslint = {
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %m"},
+  lintIgnoreExitCode = true,
+  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true
+}
+
+lspconfig.tsserver.setup{}
+
 lspconfig.efm.setup {
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = true
     client.resolved_capabilities.goto_definition = false
-    set_lsp_config(client)
   end,
   root_dir = function()
     if not eslint_config_exists() then
@@ -765,15 +653,18 @@ lspconfig.efm.setup {
       javascript = {eslint},
       javascriptreact = {eslint},
       ["javascript.jsx"] = {eslint},
+      vue = {eslint},
       typescript = {eslint},
       ["typescript.tsx"] = {eslint},
       typescriptreact = {eslint}
     }
   },
   filetypes = {
+    "hbs",
     "javascript",
     "javascriptreact",
     "javascript.jsx",
+    "vue",
     "typescript",
     "typescript.tsx",
     "typescriptreact"
@@ -781,20 +672,208 @@ lspconfig.efm.setup {
 }
 
 EOF
+" }}}
+" -----------------------------------------------------------------------------------------
+" onsails/lspkind-nvim {{{
+" -----------------------------------------------------------------------------------------
+
+lua<< EOF
+
+-- commented options are defaults
+require('lspkind').init({
+    -- with_text = true,
+    -- symbol_map = {
+    --   Text = '',
+    --   Method = '',
+    --   Function = '',
+    --   Constructor = '汹',
+    --   Variable = '衮',
+    --   Class = '㕡',
+    --   Interface = 'ﰮ',
+    --   Module = '',
+    --   Property = '',
+    --   Unit = '撴',
+    --   Value = '',
+    --   Enum = '了',
+    --   Keyword = '',
+    --   Snippet = '﬌',
+    --   Color = '凇',
+    --   File = '',
+    --   Folder = '',
+    --   EnumMember = '',
+    --   Constant = '沜',
+    --   Struct = ''
+    -- },
+})
+
+EOF
+" }}}
+" -----------------------------------------------------------------------------------------
+" glepnir/lspsaga.nvim {{{
+" -----------------------------------------------------------------------------------------
+
+" lsp provider to find the cursor word definition and reference
+nnoremap <silent> tr <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+" or use command LspSagaFinder
+" nnoremap <silent> tr :Lspsaga lsp_finder<CR>
+
+" preview definition
+nnoremap <silent> td <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+" or use command
+" nnoremap <silent> td :Lspsaga preview_definition<CR>
+
+" show signature help
+nnoremap <silent> th <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+" or command
+" nnoremap <silent> gs :Lspsaga signature_help<CR>
+
+" code action
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+" or use command
+" nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+" vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+
+" show hover doc
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+" or use command
+" nnoremap <silent>K :Lspsaga hover_doc<CR>
+
+" scroll down hover doc or scroll in definition preview
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+" rename
+nnoremap <silent> <F2> <cmd>lua require('lspsaga.rename').rename()<CR>
+" or command
+" nnoremap <silent>gr :Lspsaga rename<CR>
+" close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
+
+" show diagnostics
+nnoremap <silent><leader>tld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+" or use command
+nnoremap <silent> <leader>tld :Lspsaga show_line_diagnostics<CR>
+
+" jump diagnostic
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+" or use command
+" nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+" nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+
+lua<< EOF
+
+local saga = require 'lspsaga'
+
+saga.init_lsp_saga ({
+  use_saga_diagnostic_sign = true,
+  error_sign = '✘',
+  warn_sign = '',
+  infor_sign = '',
+-- dianostic_header_icon = '   ',
+-- code_action_icon = '⻊ ',
+-- code_action_keys = { quit = 'q',exec = '<CR>' }
+-- finder_definition_icon = '  ',
+-- finder_reference_icon = '  ',
+-- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+-- finder_action_keys = {
+--   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+-- },
+-- code_action_keys = {
+--   quit = 'q',exec = '<CR>'
+-- },
+-- rename_action_keys = {
+--   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+-- },
+-- definition_preview_icon = '丨  '
+-- 1: thin border | 2: rounded border | 3: thick border | 4: ascii border
+-- border_style = 1
+-- rename_prompt_prefix = '➤',
+-- if you don't use nvim-lspconfig you must pass your server name and
+-- the related filetypes into this table
+-- like server_filetype_map = {metals = {'sbt', 'scala'}}
+-- server_filetype_map = {}
+})
+
+EOF
+
+" ------------------------------------------------------------------
+" hrsh7th/nvim-compe {{{
+" ------------------------------------------------------------------
+
+lua<< EOF
+
+require'compe'.setup {
+  enabled = true;
+  autocomplete = false;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    vsnip = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    spell = true;
+    tags = true;
+    snippets_nvim = true;
+    treesitter = true;
+  };
+}
+EOF
 
 set completeopt=menuone,noinsert,noselect
 
-" nnoremap td :lua vim.lsp.buf.definition()<CR>
-" nnoremap ti :lua vim.lsp.buf.implementation()<CR>
-" nnoremap th :lua vim.lsp.buf.signature_help()<CR>
-" nnoremap tr :lua vim.lsp.buf.references()<CR>
-" nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
-" nnoremap <S-k> :lua vim.lsp.buf.hover()<CR>
-" nnoremap <leader>a :lua vim.lsp.buf.code_action()<CR>
-" nnoremap <leader>td :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+let g:compe = {
+      \ 'enabled': 1,
+      \ 'min_length': 3,
+      \ 'preselect': 'enable',
+      \ 'allow_prefix_unmatch': 0,
+      \ 'source_timeout': 300,
+      \ 'throttle_time': 100,
+      \ 'incomplete_delay': 400,
+      \ 'source': {
+      \   'path': 1,
+      \   'buffer': 1,
+      \   'calc': 1,
+      \   'spell': {
+      \     'filetypes': [
+      \        'markdown',
+      \        'html'
+      \     ]},
+      \   'nvim_lsp': {
+      \     'filetypes': [
+      \       'hbs',
+      \       'javascript',
+      \       'javascriptreact',
+      \       'javascript.jsx',
+      \       'vue',
+      \       'typescript',
+      \       'typescript.tsx',
+      \       'typescriptreact'
+      \     ]}
+      \   }
+      \ }
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " ------------------------------------------------------------------
-" Format.vim
+" Format.nvim {{{
 " ------------------------------------------------------------------
 lua<< EOF
 require "format".setup {
@@ -833,6 +912,12 @@ require "format".setup {
     javascript = {
         {cmd = {"prettier -w", "eslint_d --fix"}}
     },
+    vue = {
+        {cmd = {"prettier -w", "eslint_d --fix"}}
+    },
+    typescript = {
+        {cmd = {"prettier -w", "eslint_d --fix"}}
+    },
     markdown = {
         {cmd = {"prettier -w"}},
         {
@@ -844,3 +929,5 @@ require "format".setup {
     }
 }
 EOF
+
+" }}}
