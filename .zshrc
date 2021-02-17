@@ -27,6 +27,8 @@ export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
 export PYENV_ROOT="$HOME/.pyenv"
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
