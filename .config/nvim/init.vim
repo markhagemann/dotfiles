@@ -583,7 +583,33 @@ let g:vimwiki_list = [wiki]
 " lua require('init')
 lua require'lspconfig'.tsserver.setup{}
 lua require'lspconfig'.vuels.setup{}
-lua require'lspconfig'.efm.setup{}
+
+lua << EOF
+
+local eslint = {
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+    lintStdin = true,
+    lintFormats = {"%f:%l:%c: %m"},
+    lintIgnoreExitCode = true,
+    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+    formatStdin = true
+}
+
+require'lspconfig'.efm.setup{
+    on_attach = on_attach,
+    init_options = {documentFormatting = true},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            vue = {eslint},
+            typescript = {eslint},
+            javascript = {eslint},
+            typescriptreact = {eslint},
+            javascriptreact = {eslint}
+        }
+    }
+}
+EOF
 
 " lua require'lspconfig'.vuels.setup {
 "     on_attach = on_attach
