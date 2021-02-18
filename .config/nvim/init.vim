@@ -137,7 +137,6 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 autocmd BufRead,BufNewFile *.md setlocal spell
 " Try fix syntax highlighting issues on large files
 autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
-" autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 
 " You can't stop me
 cmap w!! w !sudo tee %
@@ -590,12 +589,13 @@ set completeopt=menuone,noinsert,noselect
 "       \     ]}
 "       \   }
 "       \ }
-
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 " }}}
 " -----------------------------------------------------------------------------------------
@@ -656,7 +656,17 @@ require "format".setup {
     }
 }
 EOF
+
 " }}}
+" -----------------------------------------------------------------------------------------
+" kosayoda/nvim-lightbulb {{{
+" -----------------------------------------------------------------------------------------
+autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+" }}}
+" -----------------------------------------------------------------------------------------
+" tjdevries/lsp_extensions.nvim {{{
+" -----------------------------------------------------------------------------------------
+autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 " -----------------------------------------------------------------------------------------
 " glepnir/lspsaga.nvim {{{
 " -----------------------------------------------------------------------------------------

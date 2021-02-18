@@ -1,20 +1,5 @@
 local lspconfig = require "lspconfig"
 
-vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-        return
-    end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        if bufnr == vim.api.nvim_get_current_buf() then
-            vim.cmd [[noautocmd :update]]
-            vim.cmd [[GitGutter]]
-        end
-    end
-end
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
     vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
@@ -55,80 +40,38 @@ vim.lsp.protocol.CompletionItemKind = {
     "♛ [type]"
 }
 
-vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
-vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
-vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
-vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
 
-require "compe".setup {
-    enabled = true,
-    debug = false,
-    autocomplete = false,
-    min_length = 1,
-    preselect = "disable",
-    allow_prefix_unmatch = false,
-    source = {
-        path = true,
-        buffer = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        ultisnips = true
-    }
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    vsnip = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    spell = true;
+    tags = true;
+    snippets_nvim = true;
+    treesitter = true;
+  };
 }
 
-local on_attach = function(client)
-    if client.resolved_capabilities.code_action then
-        vim.cmd [[augroup CodeAction]]
-        vim.cmd [[autocmd! * <buffer>]]
-        vim.cmd [[autocmd CursorHold * lua require'nvim-lightbulb'.update_lightbulb()]]
-        vim.cmd [[augroup END]]
-    end
-    -- if client.resolved_capabilities.document_formatting then
-    --     vim.cmd [[augroup Format]]
-    --     vim.cmd [[autocmd! * <buffer>]]
-    --     vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
-    --     vim.cmd [[augroup END]]
-    -- end
-    if client.resolved_capabilities.goto_definition then
-        map("n", "td", "<cmd>lua vim.lsp.buf.definition()<CR>")
-    end
-    if client.resolved_capabilities.completion then
-        map("i", "<C-Space>", "compe#complete()", true, true)
-        map("i", "<CR>", "compe#confirm(lexima#expand('<LT>CR>', 'i'))", true, true)
-        map("i", "<C-e>", "compe#close('<C-e>')", true, true)
-    end
-    if client.resolved_capabilities.hover then
-        map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-    end
-    if client.resolved_capabilities.find_references then
-        map("n", "tr", ":call lists#ChangeActiveList('Quickfix')<CR>:lua vim.lsp.buf.references()<CR>")
-    end
-    if client.resolved_capabilities.rename then
-        map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>")
-    end
-end
-
-function _G.activeLSP()
-    local servers = {}
-    for _, lsp in pairs(vim.lsp.get_active_clients()) do
-        table.insert(servers, {name = lsp.name, id = lsp.id})
-    end
-    _G.dump(servers)
-end
-function _G.bufferActiveLSP()
-    local servers = {}
-    for _, lsp in pairs(vim.lsp.buf_get_clients()) do
-        table.insert(servers, {name = lsp.name, id = lsp.id})
-    end
-    _G.dump(servers)
-end
 
 -- https://github.com/theia-ide/typescript-language-server
 lspconfig.tsserver.setup {
-    on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        on_attach(client)
-    end
+    on_attach = on_attach
 }
 
 local function get_lua_runtime()
@@ -144,6 +87,7 @@ local function get_lua_runtime()
 
     return result
 end
+
 lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
     cmd = {"lua-language-server"},
