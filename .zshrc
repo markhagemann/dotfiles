@@ -12,7 +12,8 @@ fi
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
+# eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
+eval "$(dircolors ~/.dir_colors)" || "$(gdircolors ~/.dir_colors)"
 
 # Import private exports that shouldn't be committed
 PRIVEXPORTFILE=~/.zshrcpriv
