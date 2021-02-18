@@ -1,3 +1,7 @@
+if &compatible
+  call dein#add('voldikss/vim-floaterm')
+  set nocompatible
+endif
 " ------------------------------------------------------------------
 " Plugins {{{
 " ------------------------------------------------------------------
@@ -20,56 +24,42 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/rainbow_parentheses.vim')
   " Comment out blocks of code
   call dein#add('tpope/vim-commentary')
+  " Debugging
+  call dein#add('mfussenegger/nvim-dap')
   " File manager
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
   call dein#add('shougo/defx.nvim')
-  call dein#add('kyazdani42/nvim-web-devicons')
   call dein#add('kristijanhusak/defx-icons')
   call dein#add('airblade/vim-rooter')
-  " call dein#add('ryanoasis/vim-devicons')
   " File searching and replacing
   call dein#add('brooth/far.vim')
   " Floating Terminal / Window Management
   call dein#add('voldikss/vim-floaterm')
-  call dein#add('chrisbra/NrrwRgn')
+  call dein#add('szw/vim-maximizer')
   " Git
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('tpope/vim-fugitive')
+  call dein#add('itchyny/vim-gitbranch')
   call dein#add('APZelos/blamer.nvim')
   " IndentLine
   call dein#add('Yggdroot/indentLine')
-  call dein#add('lukas-reineke/indent-blankline.nvim')
+  call dein#add('lukas-reineke/indent-blankline.nvim', { 'rev': 'master' })
   " Language support
   call dein#add('neovim/nvim-lspconfig')
-  " call dein#add('glepnir/lspsaga.nvim')
+  call dein#add('hrsh7th/nvim-compe')
   call dein#add('RishabhRD/popfix')
   call dein#add('RishabhRD/nvim-lsputils')
-  call dein#add('hrsh7th/nvim-compe')
-  call dein#add('kosayoda/nvim-lightbulb')
-  call dein#add('tjdevries/nlua.nvim')
-  call dein#add('tjdevries/lsp_extensions.nvim')
-  call dein#add('lukas-reineke/format.nvim')
-  call dein#add('elzr/vim-json')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('peitalin/vim-jsx-typescript')
-  call dein#add('posva/vim-vue')
   call dein#add('tpope/vim-sleuth')
-  call dein#add('mustache/vim-mustache-handlebars')
+  call dein#add('sbdchd/neoformat')
   " Scratchpad
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
   call dein#add('itchyny/lightline.vim')
   call dein#add('sinetoami/lightline-hunks')
-  call dein#add('halkn/lightline-lsp')
-  "Telescope
-  call dein#add('nvim-lua/popup.nvim')
-  call dein#add('nvim-lua/plenary.nvim')
-  call dein#add('nvim-telescope/telescope.nvim')
-  " Text navigation / manipulation
-  call dein#add('unblevable/quick-scope')
-  call dein#add('chaoren/vim-wordmotion')
-  " Treesitter
-  call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
-  call dein#add('nvim-treesitter/playground')
+  " Testing
+  call dein#add('janko/vim-test')
+  " Wiki
+  call dein#add('vimwiki/vimwiki')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
 
@@ -92,53 +82,55 @@ endif
 filetype plugin on
 let g:mapleader=" "
 syntax enable                           " Enables syntax highlighing
-set shell=zsh                           " Set shell to zsh
-set iskeyword+=-                        " treat dash separated words as a word text object
-set formatoptions-=cro                  " Stop newline continution of comments
-set hidden                              " Required to keep multiple buffers open multiple buffers
-set nowrap                              " Display long lines as just one line
-set encoding=utf-8                      " The encoding displayed
-set pumheight=20                        " Makes popup menu smaller
-set fileencoding=utf-8                  " The encoding written to file
-set ruler                               " Show the cursor position all the time
-set cmdheight=1                         " More space for displaying messages
-set noshowcmd                           " Don't show entered command
-set noshowmode                          " Don't show mode - handled by lightline
+set completeopt=menu,menuone,noselect   " Better autocomplete options
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
+set expandtab                           " Converts tabs to spaces
+set number                              " Line numbers
+set rnu                                 " Relative line numbers
+set ignorecase smartcase                " Ignore case only when the pattern contains no capital letters
+set incsearch                           " Search incremental
+set hidden                              " Required to keep multiple buffers open multiple buffers
+set shell=zsh                           " Set shell to zsh
+set iskeyword+=-                        " Treat dash separated words as a word text object
+set formatoptions-=cro                  " Stop newline continution of comments
+set nowrap                              " Display long lines as just one line
+set encoding=utf-8                      " The encoding displayed
+set fileencoding=utf-8                  " The encoding written to file
+set nobackup                            " Don't create backup files
+set nowritebackup                       " Don't create backup files
+set undofile                            " Persistent Undo
+set pumheight=20                        " Makes popup menu smaller
+set ruler                               " Show the cursor position all the time
+set cmdheight=1                         " More space for displaying messages
+set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
+set noshowcmd                           " Don't show entered command
+set noshowmode                          " Don't show mode - handled by lightline
 set t_Co=256                            " Support 256 colors
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
-set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
 set scrolloff=6                         " Keep 6 lines above/below cursor
-set number                              " Line numbers
-set rnu                                 " Relative line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
-set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
 set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
-set incsearch
-set undolevels=10000
-set undofile                            " Persistent Undo
 
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-" Enable spellcheck for markdown files
-autocmd BufRead,BufNewFile *.md setlocal spell
 " Try fix syntax highlighting issues on large files
-autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
+" autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
 
 " You can't stop me
 cmap w!! w !sudo tee %
+
+" ------------------------------------------------------------------
+" Mappings {{{
+" ------------------------------------------------------------------
 
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
@@ -155,6 +147,7 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
+
  " Use alt + hjkl to resize windows
 nnoremap <silent> <M-j>    :resize -2<CR>
 nnoremap <silent> <M-k>    :resize +2<CR>
@@ -181,6 +174,15 @@ nnoremap <silent>L :silent bn<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" ------------------------------------------------------------------
+" Syntax Highlight {{{
+" ------------------------------------------------------------------
+" let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript'] " syntax highlighting in markdown
+" }}}
+" ------------------------------------------------------------------
+" Colorscheme {{{
+" ------------------------------------------------------------------
+
 " Set colorscheme and related settings
 syntax enable
 " checks if your terminal has 24-bit color support
@@ -194,15 +196,7 @@ endif
 set numberwidth=2
 let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
-" colorscheme candid
-" let g:candid_color_store = {
-"     \ "black": {"gui": "#121212", "cterm256": "0"},
-"     \ "white": {"gui": "#f4f4f4", "cterm256": "255"},
-"     \}
-" hi! Normal ctermbg=NONE guibg=NONE
-" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 hi VertSplit guibg=NONE guifg=#151b23
-" hi VertSplit guibg=cyan guifg=cyan
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
@@ -354,30 +348,18 @@ endfunction
 " ------------------------------------------------------------------
 " itchyny/lightline {{{
 " ------------------------------------------------------------------
+" itchyny/lightline.vim and itchyny/vim-gitbranch
 let g:lightline = {
-  \ 'component_function': {
-  \   'filename': 'LightlineFilename',
-  \ },
-  \ 'component_expand': {
-  \   'lsp_warnings': 'lightline_lsp#warnings',
-  \   'lsp_errors':   'lightline_lsp#errors',
-  \   'lsp_ok':       'lightline_lsp#ok',
-  \ },
-  \ 'component_type': {
-  \   'lsp_warnings': 'warning',
-  \   'lsp_errors':   'error',
-  \   'lsp_ok':       'middle',
-  \ },
-  \ 'colorscheme': 'ayu',
-  \   'active': {
-  \     'left': [[ 'mode', 'paste'], ['lightline_hunks' ], ['readonly', 'filename']],
-  \     'right': [[ 'lsp_errors', 'lsp_warnings', 'lsp_ok', 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype']]
-  \   }
-  \ }
-
-let g:lightline.component_function = {
-  \  'lightline_hunks': 'lightline#hunks#composer',
-  \ }
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ 'colorscheme': 'ayu',
+      \ }
 
 function! LightlineFilename()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
@@ -387,6 +369,81 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
+" }}}
+" ------------------------------------------------------------------
+" szw/vim-maximizer {{{
+" ------------------------------------------------------------------
+nnoremap <silent> <leader>m :MaximizerToggle!<CR>
+" }}}
+" ------------------------------------------------------------------
+" sbdchd/neoformat {{{
+" ------------------------------------------------------------------
+let g:neoformat_vue_eslint_d = {
+        \ 'exe': 'eslint_d',
+        \ 'args': ['--stdin', '--stdin-filename', '"%:p"', '--fix-to-stdout'],
+        \ 'stdin': 1,
+        \ }
+
+let g:neoformat_enabled_javascript = ['prettier', 'eslint_d']
+let g:neoformat_enabled_typescript = ['prettier', 'eslint_d']
+let g:neoformat_enabled_vue = ['prettier', 'eslint_d']
+nnoremap <leader>f :Neoformat eslint_d<CR>
+vnoremap <Leader>f :Neoformat eslint_d<CR>
+"}}}
+" ------------------------------------------------------------------
+" junegunn/fzf.vim
+" ------------------------------------------------------------------
+map <C-p> :Files<CR>
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>hh :History:<CR>
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
+    \ fzf#wrap({'dir': expand('%:p:h')}))
+if has('nvim')
+  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au! FileType fzf tunmap <buffer> <Esc>
+endif
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" Use ripgrep instead of grep
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.85, 'height': 0.85,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Make Ripgrep ONLY search file contents and not filenames
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:40%', '?'),
+  \   <bang>0)
+
+" }}}
 " ------------------------------------------------------------------
 " ntpeters/vim-better-whitespace {{{
 " ------------------------------------------------------------------
@@ -404,6 +461,19 @@ let g:closetag_emptyTags_caseSensitive = 1
 " ------------------------------------------------------------------
 " Indent settings {{{
 " ------------------------------------------------------------------
+let g:indentLine_char_list = ['▏']
+let g:indentLine_color_gui = '#453c47'
+let g:vim_json_syntax_conceal = 0
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = ' '
+function SetZeroConcealLevel()
+    setlocal conceallevel=0
+endfunction
+autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
+
+" Json
+let g:vim_json_syntax_conceal = 0
+let g:vim_json_conceal = 0
 
 " Show whitespace as characters
 set list!
@@ -413,28 +483,14 @@ set listchars+=trail:~
 set listchars+=extends:❯
 set listchars+=precedes:❮
 set listchars+=nbsp:_
-set listchars+=space:⋅
+" set listchars+=space:⋅
 
-let g:indent_blankline_space_char = ' '
-let g:indentLine_char_list = ['▏']
-let g:indentLine_color_gui = '#453c47'
-let g:indentLine_setConceal = 0
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = ' '
-let g:indentLine_fileTypeExclude = ['help', 'defx', 'vimwiki', 'prcomment', 'md', 'json']
-" Json
-let g:vim_json_syntax_conceal = 0
-let g:vim_json_conceal = 0
-
-" function SetZeroConcealLevel()
-"     setlocal conceallevel=0
-" endfunction
-" autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
+" }}}
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
 let g:blamer_enabled = 1
-let g:blamer_delay = 500
+let g:blamer_delay = 1000
 let g:blamer_show_in_visual_modes = 0
 " }}}
 " ------------------------------------------------------------------
@@ -451,7 +507,7 @@ vnoremap <space>/ :Commentary<CR>
 " ------------------------------------------------------------------
 " junegunn/rainbow_parentheses.vim {{{
 " ------------------------------------------------------------------
-let g:rainbow#max_level = 16
+let g:rainbow#max_level = 4
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 autocmd FileType * RainbowParentheses
@@ -466,13 +522,6 @@ nnoremap <silent> <F1> :FloatermNew --height=0.85 --width=0.85 --wintype=floatin
 " brooth/far.vim {{{
 " ------------------------------------------------------------------
 let g:far#source = 'agnvim'
-" }}}
-" ------------------------------------------------------------------
-" unblevable/quick-scope
-" ------------------------------------------------------------------
-" Trigger a highlight in the appropriate direction when pressing these keys:
-" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_ignorecase = 1
 " }}}
 " ------------------------------------------------------------------
 " Search & Replace General {{{
@@ -504,35 +553,70 @@ nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
 xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 
+" ------------------------------------------------------------------
+" janko/vim-test
+" ------------------------------------------------------------------
+nnoremap <silent> tt :TestNearest<CR>
+nnoremap <silent> tf :TestFile<CR>
+nnoremap <silent> ts :TestSuite<CR>
+nnoremap <silent> t_ :TestLast<CR>
+
+let test#strategy = "neovim"
+let test#neovim#term_position = "vertical"
+
 " }}}
 " ------------------------------------------------------------------
-" Telescope {{{
+" vimwiki/vimwiki
 " ------------------------------------------------------------------
-lua<< EOF
-require('telescope').setup {}
-EOF
-
-nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
-nnoremap <Leader>gf :lua require('telescope.builtin').git_files()<CR>
-
-nnoremap <leader>gr :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-nnoremap <leader>g :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-nnoremap <leader>b :lua require('telescope.builtin').buffers()<CR>
-nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <Leader>tl <Plug>VimwikiToggleListItem
+vnoremap <Leader>tl <Plug>VimwikiToggleListItem
+nnoremap <Leader>wn <Plug>VimwikiNextLink
+let g:vimwiki_global_ext = 0
+let wiki = {}
+let wiki.nested_syntaxes = { 'js': 'javascript' }
+let g:vimwiki_list = [wiki]
 
 " }}}
 " ------------------------------------------------------------------
 " LSP {{{
 " ------------------------------------------------------------------
-lua require('init')
+" lua require('init')
+lua require'lspconfig'.tsserver.setup{}
+lua require'lspconfig'.vuels.setup{}
+lua require'lspconfig'.efm.setup{}
 
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" lua require'lspconfig'.vuels.setup {
+"     on_attach = on_attach
+" }
 
+nnoremap <silent> td                    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K                     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>ca            <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> ti                    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> th                    <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> tr                    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <F2>                  <cmd>lua vim.lsp.buf.rename()<CR>
 " }}}
 " ------------------------------------------------------------------
-" RishabhRD/nvim-lsputils') {{{
+" 'hrsh7th/nvim-compe'
 " ------------------------------------------------------------------
-
+lua << EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  source = {
+    path = true;
+    buffer = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    -- treesitter = true;
+  };
+}
+EOF
+" }}}
+" ------------------------------------------------------------------
+" RishabhRD/nvim-lsputils
+" ------------------------------------------------------------------
 lua <<EOF
 vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
 vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
@@ -544,218 +628,48 @@ vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.docum
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF
 
-nnoremap td :lua vim.lsp.buf.definition()<CR>
-nnoremap ti :lua vim.lsp.buf.implementation()<CR>
-nnoremap tsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap tr :lua vim.lsp.buf.references()<CR>
-nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
-nnoremap K :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
-" nnoremap <ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap lb :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap ln :lua vim.lsp.diagnostic.goto_next()<CR>
-
-" }}}
-" ------------------------------------------------------------------
-" hrsh7th/nvim-compe {{{
-" ------------------------------------------------------------------
-set completeopt=menuone,noinsert,noselect
-
-" let g:compe = {
-"       \ 'enabled': 1,
-"       \ 'min_length': 3,
-"       \ 'preselect': 'enable',
-"       \ 'allow_prefix_unmatch': 0,
-"       \ 'source_timeout': 300,
-"       \ 'throttle_time': 100,
-"       \ 'incomplete_delay': 400,
-"       \ 'source': {
-"       \   'path': 1,
-"       \   'buffer': 1,
-"       \   'calc': 1,
-"       \   'spell': {
-"       \     'filetypes': [
-"       \        'markdown',
-"       \        'html'
-"       \     ]},
-"       \   'nvim_lsp': {
-"       \     'filetypes': [
-"       \       'hbs',
-"       \       'javascript',
-"       \       'javascriptreact',
-"       \       'javascript.jsx',
-"       \       'vue',
-"       \       'typescript',
-"       \       'typescript.tsx',
-"       \       'typescriptreact'
-"       \     ]}
-"       \   }
-"       \ }
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB>     pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>            pumvisible() ? "\<C-p>" : "\<C-h>"
 " }}}
-" -----------------------------------------------------------------------------------------
-" lukas-reineke/format.nvim {{{
-" -----------------------------------------------------------------------------------------
-
-lua <<EOF
-require "format".setup {
-    ["*"] = {
-        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
-    },
-    vim = {
-        {
-            cmd = {"luafmt -w replace"},
-            start_pattern = "^lua << EOF$",
-            end_pattern = "^EOF$"
-        }
-    },
-    vimwiki = {
-        {
-            cmd = {"prettier -w --parser babel"},
-            start_pattern = "^{{{javascript$",
-            end_pattern = "^}}}$"
-        }
-    },
-    lua = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("luafmt -l %s -w replace %s", vim.bo.textwidth, file)
-                end
-            }
-        }
-    },
-    go = {
-        {
-            cmd = {"gofmt -w", "goimports -w"},
-            tempfile_postfix = ".tmp"
-        }
-    },
-    javascript = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    vue = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    typescript = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    markdown = {
-        {cmd = {"prettier -w"}},
-        {
-            cmd = {"black"},
-            start_pattern = "^```python$",
-            end_pattern = "^```$",
-            target = "current"
-        }
-    }
+" ------------------------------------------------------------------
+" mfussenegger/nvim-dap
+" ------------------------------------------------------------------
+lua << EOF
+local dap = require('dap')
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = {os.getenv('HOME') .. '/apps/vscode-node-debug2/out/src/nodeDebug.js'},
 }
+vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='🟢', texthl='', linehl='', numhl=''})
 EOF
-
+nnoremap <leader>dh :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <S-k> :lua require'dap'.step_out()<CR>
+nnoremap <S-l> :lua require'dap'.step_into()<CR>
+nnoremap <S-j> :lua require'dap'.step_over()<CR>
+nnoremap <leader>dn :lua require'dap'.continue()<CR>
+nnoremap <leader>d_ :lua require'dap'.run_last()<CR>
+nnoremap <leader>dr :lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l
+nnoremap <leader>di :lua require'dap.ui.variables'.hover(function () return vim.fn.expand("<cexpr>") end)<CR>
+vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
+nnoremap <leader>d? :lua require'dap.ui.variables'.scopes()<CR>
+nnoremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"})<CR>
+nnoremap <leader>da :lua require'debugHelper'.attach()<CR>
 " }}}
-" -----------------------------------------------------------------------------------------
-" kosayoda/nvim-lightbulb {{{
-" -----------------------------------------------------------------------------------------
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+" ------------------------------------------------------------------
+" jank/vim-test and mfussenegger/nvim-dap
+" ------------------------------------------------------------------
+nnoremap <leader>dd :TestNearest -strategy=jest<CR>
+function! JestStrategy(cmd)
+  let testName = matchlist(a:cmd, '\v -t ''(.*)''')[1]
+  let fileName = matchlist(a:cmd, '\v'' -- (.*)$')[1]
+  call luaeval("require'debugHelper'.debugJest([[" . testName . "]], [[" . fileName . "]])")
+endfunction
+let g:test#custom_strategies = {'jest': function('JestStrategy')}
 " }}}
-" -----------------------------------------------------------------------------------------
-" tjdevries/lsp_extensions.nvim {{{
-" -----------------------------------------------------------------------------------------
-autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
-" -----------------------------------------------------------------------------------------
-" glepnir/lspsaga.nvim {{{
-" -----------------------------------------------------------------------------------------
-
-" TODO: Come back to it when it isn't giving me so many errors
-" " lsp provider to find the cursor word definition and reference
-" nnoremap <silent> tr <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-" " or use command LspSagaFinder
-" " nnoremap <silent> tr :Lspsaga lsp_finder<CR>
-
-" " preview definition
-" nnoremap <silent> td <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
-" " or use command
-" " nnoremap <silent> td :Lspsaga preview_definition<CR>
-
-" " show signature help
-" nnoremap <silent> th <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
-" " or command
-" " nnoremap <silent> gs :Lspsaga signature_help<CR>
-
-" " code action
-" nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-" vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
-" " or use command
-" " nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-" " vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
-
-" " show hover doc
-" nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-" " or use command
-" " nnoremap <silent>K :Lspsaga hover_doc<CR>
-
-" " scroll down hover doc or scroll in definition preview
-" nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-" " scroll up hover doc
-" nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
-" " rename
-" nnoremap <silent> <F2> <cmd>lua require('lspsaga.rename').rename()<CR>
-" " or command
-" " nnoremap <silent>gr :Lspsaga rename<CR>
-" " close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
-
-" " show diagnostics
-" nnoremap <silent> ld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-" " or use command
-" nnoremap <silent> ld :Lspsaga show_line_diagnostics<CR>
-
-" " jump diagnostic
-" nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-" nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-" " or use command
-" " nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-" " nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
-
-" lua<< EOF
-
-" local saga = require 'lspsaga'
-
-" saga.init_lsp_saga ({
-"   use_saga_diagnostic_sign = true,
-"   error_sign = '✘',
-"   warn_sign = '',
-"   infor_sign = '',
-" -- dianostic_header_icon = '   ',
-" -- code_action_icon = '⻊ ',
-" -- code_action_keys = { quit = 'q',exec = '<CR>' }
-" -- finder_definition_icon = '  ',
-" -- finder_reference_icon = '  ',
-" -- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-" -- finder_action_keys = {
-" --   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
-" -- },
-" -- code_action_keys = {
-" --   quit = 'q',exec = '<CR>'
-" -- },
-" -- rename_action_keys = {
-" --   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
-" -- },
-" -- definition_preview_icon = '丨  '
-" -- 1: thin border | 2: rounded border | 3: thick border | 4: ascii border
-" -- border_style = 1
-" -- rename_prompt_prefix = '➤',
-" -- if you don't use nvim-lspconfig you must pass your server name and
-" -- the related filetypes into this table
-" -- like server_filetype_map = {metals = {'sbt', 'scala'}}
-" -- server_filetype_map = {}
-" })
-
-" EOF
