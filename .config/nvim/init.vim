@@ -1,7 +1,3 @@
-if &compatible
-  call dein#add('voldikss/vim-floaterm')
-  set nocompatible
-endif
 " ------------------------------------------------------------------
 " Plugins {{{
 " ------------------------------------------------------------------
@@ -26,7 +22,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-commentary')
   " File manager
   call dein#add('shougo/defx.nvim')
-  call dein#add('yazdani42/nvim-web-devicons')
+  call dein#add('kyazdani42/nvim-web-devicons')
   call dein#add('kristijanhusak/defx-icons')
   call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
