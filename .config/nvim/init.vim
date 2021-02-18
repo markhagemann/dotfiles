@@ -101,7 +101,6 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=20                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
-set lazyredraw                          " When this option is set, the screen will not be redrawn while executing macros
 set cmdheight=1                         " More space for displaying messages
 set noshowcmd                           " Don't show entered command
 set noshowmode                          " Don't show mode - handled by lightline
