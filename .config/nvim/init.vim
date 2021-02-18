@@ -16,10 +16,6 @@ if dein#load_state('~/.cache/dein')
   " Autocompletion
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('alvan/vim-closetag')
-  " Buffer / file searching and replacing
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('brooth/far.vim')
   " Colorscheme
   call dein#add('ayu-theme/ayu-vim')
   call dein#add('TaDaa/vimade')
@@ -30,10 +26,13 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-commentary')
   " File manager
   call dein#add('shougo/defx.nvim')
-  " call dein#add('kristijanhusak/defx-icons')
+  call dein#add('yazdani42/nvim-web-devicons')
+  call dein#add('kristijanhusak/defx-icons')
   call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
   " call dein#add('ryanoasis/vim-devicons')
+  " File searching and replacing
+  call dein#add('brooth/far.vim')
   " Floating Terminal / Window Management
   call dein#add('voldikss/vim-floaterm')
   call dein#add('chrisbra/NrrwRgn')
@@ -46,7 +45,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('lukas-reineke/indent-blankline.nvim')
   " Language support
   call dein#add('neovim/nvim-lspconfig')
-  call dein#add('glepnir/lspsaga.nvim')
+  " call dein#add('glepnir/lspsaga.nvim')
+  call dein#add('RishabhRD/popfix')
+  call dein#add('RishabhRD/nvim-lsputils')
   call dein#add('hrsh7th/nvim-compe')
   call dein#add('tjdevries/nlua.nvim')
   call dein#add('tjdevries/lsp_extensions.nvim')
@@ -63,13 +64,17 @@ if dein#load_state('~/.cache/dein')
   " Status bar
   call dein#add('itchyny/lightline.vim')
   call dein#add('sinetoami/lightline-hunks')
-  " Telescope
+  call dein#add('halkn/lightline-lsp')
+  "Telescope
   call dein#add('nvim-lua/popup.nvim')
   call dein#add('nvim-lua/plenary.nvim')
   call dein#add('nvim-telescope/telescope.nvim')
   " Text navigation / manipulation
   call dein#add('unblevable/quick-scope')
   call dein#add('chaoren/vim-wordmotion')
+  " Treesitter
+  call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
+  call dein#add('nvim-treesitter/playground')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
 
@@ -101,6 +106,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=20                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler                               " Show the cursor position all the time
+set lazyredraw                          " When this option is set, the screen will not be redrawn while executing macros
 set cmdheight=1                         " More space for displaying messages
 set noshowcmd                           " Don't show entered command
 set noshowmode                          " Don't show mode - handled by lightline
@@ -122,11 +128,13 @@ set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
-set updatetime=300                      " Faster completion
+set updatetime=0                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
 set incsearch
+set noswapfile
+set undolevels=10000
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
@@ -141,10 +149,6 @@ cmap w!! w !sudo tee %
 
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
-
-" Show whitespace as characters
-set list!
-set listchars=nbsp:·,trail:~
 
 "This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR>
@@ -253,6 +257,13 @@ endfunction
 " ------------------------------------------------------------------
 nnoremap <silent>- :Defx -show-ignored-files<CR>
 nnoremap <silent>= :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
+call defx#custom#column('mark', {
+  \   'readonly_icon': '◆',
+  \   'selected_icon': '■',
+  \ })
+call defx#custom#column('indent', {
+  \   'indent': '    ',
+  \ })
 call defx#custom#option('_', {
   \ 'winwidth': 30,
   \ 'split': 'vertical',
@@ -260,19 +271,19 @@ call defx#custom#option('_', {
   \ 'show_ignored_files': 0,
   \ 'buffer_name': 'defxplorer',
   \ 'toggle': 1,
-  \ 'columns': 'icon:indent:icons:filename',
+  \ 'columns': 'indent:mark:icons:git:filename',
   \ 'resume': 1,
   \ })
 call defx#custom#column('git', 'show_ignored', 1)
 let g:defx_git#indicators = {
-  \ 'Modified'  : '!',
-  \ 'Staged'    : '✚',
-  \ 'Untracked' : '?',
-  \ 'Renamed'   : '»',
-  \ 'Unmerged'  : '≠',
-  \ 'Ignored'   : 'ⁱ',
-  \ 'Deleted'   : '✖',
-  \ 'Unknown'   : '*'
+  \   'Modified' : '◉',
+  \   'Staged'   : '✚',
+  \   'Untracked': '◈',
+  \   'Renamed'  : '➜',
+  \   'Unmerged' : '',
+  \   'Ignored'  : '▨',
+  \   'Deleted'  : '✖',
+  \   'Unknown'  : '?'
   \ }
 call defx#custom#column('icon', {
   \ 'directory_icon': '▸',
@@ -359,6 +370,12 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
 endfunction
+
+let g:defx_icons_root_opened_tree_icon = '├'
+let g:defx_icons_nested_opened_tree_icon = '├'
+let g:defx_icons_nested_closed_tree_icon = '│'
+let g:defx_icons_directory_icon = '│'
+let g:defx_icons_parent_icon = '├'
 " }}}
 " ------------------------------------------------------------------
 " itchyny/lightline {{{
@@ -367,10 +384,20 @@ let g:lightline = {
   \ 'component_function': {
   \   'filename': 'LightlineFilename',
   \ },
+  \ 'component_expand': {
+  \   'lsp_warnings': 'lightline_lsp#warnings',
+  \   'lsp_errors':   'lightline_lsp#errors',
+  \   'lsp_ok':       'lightline_lsp#ok',
+  \ },
+  \ 'component_type': {
+  \   'lsp_warnings': 'warning',
+  \   'lsp_errors':   'error',
+  \   'lsp_ok':       'middle',
+  \ },
   \ 'colorscheme': 'ayu',
   \   'active': {
   \     'left': [[ 'mode', 'paste'], ['lightline_hunks' ], ['readonly', 'filename']],
-  \     'right': [[ 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype']]
+  \     'right': [[ 'lsp_errors', 'lsp_warnings', 'lsp_ok', 'lineinfo' ], [ 'percent' ], ['fileencoding', 'filetype']]
   \   }
   \ }
 
@@ -403,15 +430,33 @@ let g:closetag_emptyTags_caseSensitive = 1
 " ------------------------------------------------------------------
 " Indent settings {{{
 " ------------------------------------------------------------------
+
+" Show whitespace as characters
+set list!
+set listchars=eol:↴
+set listchars+=tab:│⋅
+set listchars+=trail:~
+set listchars+=extends:❯
+set listchars+=precedes:❮
+set listchars+=nbsp:_
+set listchars+=space:⋅
+
+let g:indent_blankline_space_char = ' '
+let g:indent_blankline_debug = v:true
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
-let g:vim_json_syntax_conceal = 0
+let g:indentLine_setConceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
-function SetZeroConcealLevel()
-    setlocal conceallevel=0
-endfunction
-autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
+let g:indentLine_fileTypeExclude = ['help', 'defx', 'vimwiki', 'prcomment', 'md', 'json']
+" Json
+let g:vim_json_syntax_conceal = 0
+let g:vim_json_conceal = 0
+
+" function SetZeroConcealLevel()
+"     setlocal conceallevel=0
+" endfunction
+" autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
 " ------------------------------------------------------------------
 " APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
@@ -429,86 +474,6 @@ let g:rooter_silent_chdir = 1
 " ------------------------------------------------------------------
 nnoremap <space>/ :Commentary<CR>
 vnoremap <space>/ :Commentary<CR>
-" }}}
-" ------------------------------------------------------------------
-" junegunn/fzf.vim {{{
-" ------------------------------------------------------------------
-" This is the default extra key bindings
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split',
-"   \ 'ctrl-x': 'split',
-"   \ 'ctrl-v': 'vsplit' }
-
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up. If you don't like the change,
-" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_buffers_jump = 1
-
-" map <C-p> :Files<CR>
-" nnoremap <leader>p :Files<CR>
-" nnoremap <leader>b :Buffers<CR>
-" nnoremap <leader>g :Rg<CR>
-
-" Use ripgrep instead of grep
-set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-
-let g:fzf_tags_command = 'ctags -R'
-
-" let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --color fg:#D8DEE9,bg:#1e232e,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
-" let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**' -g '!{node_modules,.git}'"
-
-" Border color
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.85, 'height': 0.85,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-"Get Files
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-
-" Make Ripgrep ONLY search file contents and not filenames
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:40%', '?'),
-  \   <bang>0)
-
-" Ripgrep advanced
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" Git grep
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-
 " }}}
 " ------------------------------------------------------------------
 " junegunn/rainbow_parentheses.vim {{{
@@ -571,26 +536,11 @@ xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 " Telescope {{{
 " ------------------------------------------------------------------
 lua<< EOF
-local actions = require('telescope.actions')
-require('telescope').setup {
-  defaults = {
-    file_sorter = require('telescope.sorters').get_fzy_sorter,
-    prompt_prefix = ' >',
-    color_devicons = true,
-
-    mappings = {
-      i = {
-        ["<C-x>"] = false,
-        ["<C-s>"] = actions.goto_file_selection_split,
-        ["<C-q>"] = actions.send_to_qflist,
-      },
-    }
-  }
-}
+require('telescope').setup {}
 EOF
 
-nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
-nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
+nnoremap <Leader>gf :lua require('telescope.builtin').git_files()<CR>
 
 nnoremap <leader>gr :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>g :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
@@ -601,8 +551,27 @@ nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 " ------------------------------------------------------------------
 " LSP {{{
 " ------------------------------------------------------------------
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 lua<< EOF
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
 
 -----------------------------------------------------------------------------------------
 -- Taken from https://phelipetls.github.io/posts/configuring-eslint-to-work-with-neovim-lsp/
@@ -672,6 +641,23 @@ lspconfig.efm.setup {
 }
 
 EOF
+
+" }}}
+" -----------------------------------------------------------------------------------------
+" nvim-treesitter/nvim-treesitter {{{
+" -----------------------------------------------------------------------------------------
+
+lua <<EOF
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "typescript",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+  },
+}
+EOF
+
 " }}}
 " -----------------------------------------------------------------------------------------
 " onsails/lspkind-nvim {{{
@@ -712,127 +698,121 @@ EOF
 " glepnir/lspsaga.nvim {{{
 " -----------------------------------------------------------------------------------------
 
-" lsp provider to find the cursor word definition and reference
-nnoremap <silent> tr <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-" or use command LspSagaFinder
-" nnoremap <silent> tr :Lspsaga lsp_finder<CR>
+" TODO: Come back to it when it isn't giving me so many errors
+" " lsp provider to find the cursor word definition and reference
+" nnoremap <silent> tr <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+" " or use command LspSagaFinder
+" " nnoremap <silent> tr :Lspsaga lsp_finder<CR>
 
-" preview definition
-nnoremap <silent> td <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
-" or use command
-" nnoremap <silent> td :Lspsaga preview_definition<CR>
+" " preview definition
+" nnoremap <silent> td <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+" " or use command
+" " nnoremap <silent> td :Lspsaga preview_definition<CR>
 
-" show signature help
-nnoremap <silent> th <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
-" or command
-" nnoremap <silent> gs :Lspsaga signature_help<CR>
+" " show signature help
+" nnoremap <silent> th <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+" " or command
+" " nnoremap <silent> gs :Lspsaga signature_help<CR>
 
-" code action
-nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
-" or use command
-" nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-" vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+" " code action
+" nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+" vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+" " or use command
+" " nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+" " vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
 
-" show hover doc
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-" or use command
-" nnoremap <silent>K :Lspsaga hover_doc<CR>
+" " show hover doc
+" nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+" " or use command
+" " nnoremap <silent>K :Lspsaga hover_doc<CR>
 
-" scroll down hover doc or scroll in definition preview
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-" scroll up hover doc
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" " scroll down hover doc or scroll in definition preview
+" nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" " scroll up hover doc
+" nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 
-" rename
-nnoremap <silent> <F2> <cmd>lua require('lspsaga.rename').rename()<CR>
-" or command
-" nnoremap <silent>gr :Lspsaga rename<CR>
-" close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
+" " rename
+" nnoremap <silent> <F2> <cmd>lua require('lspsaga.rename').rename()<CR>
+" " or command
+" " nnoremap <silent>gr :Lspsaga rename<CR>
+" " close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
 
-" show diagnostics
-nnoremap <silent><leader>tld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-" or use command
-nnoremap <silent> <leader>tld :Lspsaga show_line_diagnostics<CR>
+" " show diagnostics
+" nnoremap <silent> ld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+" " or use command
+" nnoremap <silent> ld :Lspsaga show_line_diagnostics<CR>
 
-" jump diagnostic
-nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-" or use command
-" nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-" nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+" " jump diagnostic
+" nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+" nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+" " or use command
+" " nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+" " nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
 
-lua<< EOF
+" lua<< EOF
 
-local saga = require 'lspsaga'
+" local saga = require 'lspsaga'
 
-saga.init_lsp_saga ({
-  use_saga_diagnostic_sign = true,
-  error_sign = '✘',
-  warn_sign = '',
-  infor_sign = '',
--- dianostic_header_icon = '   ',
--- code_action_icon = '⻊ ',
--- code_action_keys = { quit = 'q',exec = '<CR>' }
--- finder_definition_icon = '  ',
--- finder_reference_icon = '  ',
--- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
--- finder_action_keys = {
---   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
--- },
--- code_action_keys = {
---   quit = 'q',exec = '<CR>'
--- },
--- rename_action_keys = {
---   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
--- },
--- definition_preview_icon = '丨  '
--- 1: thin border | 2: rounded border | 3: thick border | 4: ascii border
--- border_style = 1
--- rename_prompt_prefix = '➤',
--- if you don't use nvim-lspconfig you must pass your server name and
--- the related filetypes into this table
--- like server_filetype_map = {metals = {'sbt', 'scala'}}
--- server_filetype_map = {}
-})
+" saga.init_lsp_saga ({
+"   use_saga_diagnostic_sign = true,
+"   error_sign = '✘',
+"   warn_sign = '',
+"   infor_sign = '',
+" -- dianostic_header_icon = '   ',
+" -- code_action_icon = '⻊ ',
+" -- code_action_keys = { quit = 'q',exec = '<CR>' }
+" -- finder_definition_icon = '  ',
+" -- finder_reference_icon = '  ',
+" -- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+" -- finder_action_keys = {
+" --   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+" -- },
+" -- code_action_keys = {
+" --   quit = 'q',exec = '<CR>'
+" -- },
+" -- rename_action_keys = {
+" --   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+" -- },
+" -- definition_preview_icon = '丨  '
+" -- 1: thin border | 2: rounded border | 3: thick border | 4: ascii border
+" -- border_style = 1
+" -- rename_prompt_prefix = '➤',
+" -- if you don't use nvim-lspconfig you must pass your server name and
+" -- the related filetypes into this table
+" -- like server_filetype_map = {metals = {'sbt', 'scala'}}
+" -- server_filetype_map = {}
+" })
 
+" EOF
+
+" ------------------------------------------------------------------
+" RishabhRD/nvim-lsputils') {{{
+" ------------------------------------------------------------------
+
+lua <<EOF
+vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF
+
+nnoremap td :lua vim.lsp.buf.definition()<CR>
+nnoremap ti :lua vim.lsp.buf.implementation()<CR>
+nnoremap tsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap tr :lua vim.lsp.buf.references()<CR>
+nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
+nnoremap K :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <leader>ln :lua vim.lsp.diagnostic.goto_next()<CR>
 
 " ------------------------------------------------------------------
 " hrsh7th/nvim-compe {{{
 " ------------------------------------------------------------------
-
-lua<< EOF
-
-require'compe'.setup {
-  enabled = true;
-  autocomplete = false;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    vsnip = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = true;
-    snippets_nvim = true;
-    treesitter = true;
-  };
-}
-EOF
-
 set completeopt=menuone,noinsert,noselect
 
 let g:compe = {
@@ -871,6 +851,9 @@ inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 " ------------------------------------------------------------------
 " Format.nvim {{{
