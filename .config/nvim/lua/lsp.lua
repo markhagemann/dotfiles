@@ -4,7 +4,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
     vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
         {
-            underline = true,
+            underline = false,
             update_in_insert = false,
             virtual_text = false
         }
@@ -149,6 +149,11 @@ lspconfig.bashls.setup {on_attach = on_attach}
 -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
 lspconfig.dockerls.setup {on_attach = on_attach}
 
+-- https://github.com/iamcco/vim-language-server
+lspconfig.vuels.setup {
+    on_attach = on_attach
+}
+
 local vint = require "efm/vint"
 local luafmt = require "efm/luafmt"
 local golint = require "efm/golint"
@@ -175,11 +180,11 @@ lspconfig.efm.setup {
             lua = {luafmt},
             go = {golint, goimports},
             python = {black, isort, flake8, mypy},
-            vue = {prettier, eslint},
-            typescript = {prettier, eslint},
-            javascript = {prettier, eslint},
-            typescriptreact = {prettier, eslint},
-            javascriptreact = {prettier, eslint},
+            vue = {eslint},
+            typescript = {eslint},
+            javascript = {eslint},
+            typescriptreact = {eslint},
+            javascriptreact = {eslint},
             yaml = {prettier},
             json = {prettier},
             html = {prettier},
