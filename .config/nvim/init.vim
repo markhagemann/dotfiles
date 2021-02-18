@@ -123,13 +123,22 @@ set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set shortmess+=c                        " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes                      " Always show the signcolumn, otherwise it would shift the text each time
-set updatetime=0                      " Faster completion
+set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set ignorecase smartcase                " ignore case only when the pattern contains no capital letters
 set incsearch
-set noswapfile
 set undolevels=10000
+set undofile                            " Persistent Undo
+if has("win32")
+    set directory=$HOME\vimfiles\swap,$TEMP
+    set backupdir=$HOME\vimfiles\backup,$TEMP
+    set undodir=$HOME\vimfiles\undo,$TEMP
+else
+    set directory=~/.vim/swap,/tmp
+    set backupdir=~/.vim/backup,/tmp
+    set undodir=~/.vim/undo,/tmp
+endif
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
@@ -143,6 +152,10 @@ cmap w!! w !sudo tee %
 
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
+
+" Remap macro record key
+nnoremap Q q
+nnoremap q <Nop>
 
 "This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR>
