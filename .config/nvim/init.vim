@@ -24,7 +24,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('shougo/defx.nvim')
   call dein#add('kyazdani42/nvim-web-devicons')
   call dein#add('kristijanhusak/defx-icons')
-  call dein#add('kristijanhusak/defx-git')
   call dein#add('airblade/vim-rooter')
   " call dein#add('ryanoasis/vim-devicons')
   " File searching and replacing
@@ -264,17 +263,6 @@ call defx#custom#option('_', {
   \ 'columns': 'icon:indent:icons:filename',
   \ 'resume': 1,
   \ })
-call defx#custom#column('git', 'show_ignored', 1)
-let g:defx_git#indicators = {
-  \ 'Modified'  : '!',
-  \ 'Staged'    : '✚',
-  \ 'Untracked' : '?',
-  \ 'Renamed'   : '»',
-  \ 'Unmerged'  : '≠',
-  \ 'Ignored'   : 'ⁱ',
-  \ 'Deleted'   : '✖',
-  \ 'Unknown'   : '*'
-  \ }
 call defx#custom#column('icon', {
   \ 'directory_icon': '▸',
   \ 'opened_icon': '▾',
