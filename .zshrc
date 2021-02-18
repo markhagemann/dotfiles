@@ -27,6 +27,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
+export PATH="$PATH:$(yarn global bin)"
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
@@ -89,6 +90,9 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # up memory, this command will free your memory after about 20-30 seconds.
 #   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
 alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
+alias listlogfilesize="du -h /home/drache/.cache/nvim | sort -rh | head -5"
+alias removenvimlog="rm /home/drache/.cache/nvim/log"
 alias envim="nvim ~/.config/nvim/init.vim"
 alias etmux="nvim ~/.tmux.conf"
 alias evim="nvim ~/.config/nvim/init.vim"

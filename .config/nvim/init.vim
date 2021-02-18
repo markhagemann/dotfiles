@@ -551,9 +551,9 @@ nnoremap tr :lua vim.lsp.buf.references()<CR>
 nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
 nnoremap K :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <leader>lb :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <leader>ln :lua vim.lsp.diagnostic.goto_next()<CR>
+" nnoremap <ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap lb :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ln :lua vim.lsp.diagnostic.goto_next()<CR>
 
 " }}}
 " ------------------------------------------------------------------
