@@ -130,15 +130,6 @@ set ignorecase smartcase                " ignore case only when the pattern cont
 set incsearch
 set undolevels=10000
 set undofile                            " Persistent Undo
-if has("win32")
-    set directory=$HOME\vimfiles\swap,$TEMP
-    set backupdir=$HOME\vimfiles\backup,$TEMP
-    set undodir=$HOME\vimfiles\undo,$TEMP
-else
-    set directory=~/.vim/swap,/tmp
-    set backupdir=~/.vim/backup,/tmp
-    set undodir=~/.vim/undo,/tmp
-endif
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
@@ -426,7 +417,6 @@ set listchars+=nbsp:_
 set listchars+=space:⋅
 
 let g:indent_blankline_space_char = ' '
-let g:indent_blankline_debug = v:true
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
 let g:indentLine_setConceal = 0
