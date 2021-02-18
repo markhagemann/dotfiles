@@ -49,9 +49,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('RishabhRD/popfix')
   call dein#add('RishabhRD/nvim-lsputils')
   call dein#add('hrsh7th/nvim-compe')
+  call dein#add('kosayoda/nvim-lightbulb')
   call dein#add('tjdevries/nlua.nvim')
   call dein#add('tjdevries/lsp_extensions.nvim')
-  call dein#add('onsails/lspkind-nvim')
   call dein#add('lukas-reineke/format.nvim')
   call dein#add('elzr/vim-json')
   call dein#add('leafgarland/typescript-vim')
@@ -251,19 +251,13 @@ function! JSFolds()
     return indent(v:lnum) / &shiftwidth
   endif
 endfunction
+
 " }}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
 " ------------------------------------------------------------------
 nnoremap <silent>- :Defx -show-ignored-files<CR>
 nnoremap <silent>= :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
-call defx#custom#column('mark', {
-  \   'readonly_icon': '◆',
-  \   'selected_icon': '■',
-  \ })
-call defx#custom#column('indent', {
-  \   'indent': '    ',
-  \ })
 call defx#custom#option('_', {
   \ 'winwidth': 30,
   \ 'split': 'vertical',
@@ -271,19 +265,19 @@ call defx#custom#option('_', {
   \ 'show_ignored_files': 0,
   \ 'buffer_name': 'defxplorer',
   \ 'toggle': 1,
-  \ 'columns': 'indent:mark:icons:git:filename',
+  \ 'columns': 'icon:indent:icons:filename',
   \ 'resume': 1,
   \ })
 call defx#custom#column('git', 'show_ignored', 1)
 let g:defx_git#indicators = {
-  \   'Modified' : '◉',
-  \   'Staged'   : '✚',
-  \   'Untracked': '◈',
-  \   'Renamed'  : '➜',
-  \   'Unmerged' : '',
-  \   'Ignored'  : '▨',
-  \   'Deleted'  : '✖',
-  \   'Unknown'  : '?'
+  \ 'Modified'  : '!',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '?',
+  \ 'Renamed'   : '»',
+  \ 'Unmerged'  : '≠',
+  \ 'Ignored'   : 'ⁱ',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '*'
   \ }
 call defx#custom#column('icon', {
   \ 'directory_icon': '▸',
@@ -370,12 +364,6 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
 endfunction
-
-let g:defx_icons_root_opened_tree_icon = '├'
-let g:defx_icons_nested_opened_tree_icon = '├'
-let g:defx_icons_nested_closed_tree_icon = '│'
-let g:defx_icons_directory_icon = '│'
-let g:defx_icons_parent_icon = '├'
 " }}}
 " ------------------------------------------------------------------
 " itchyny/lightline {{{
@@ -551,147 +539,138 @@ nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 " ------------------------------------------------------------------
 " LSP {{{
 " ------------------------------------------------------------------
+lua require('init')
+
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
-lua<< EOF
+" }}}
+" ------------------------------------------------------------------
+" RishabhRD/nvim-lsputils') {{{
+" ------------------------------------------------------------------
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
-
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
-    signs = true,
-
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
-    update_in_insert = false,
-  }
-)
-
------------------------------------------------------------------------------------------
--- Taken from https://phelipetls.github.io/posts/configuring-eslint-to-work-with-neovim-lsp/
------------------------------------------------------------------------------------------
-
-local lspconfig = require "lspconfig"
-
-local function eslint_config_exists()
-  local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
-
-  if not vim.tbl_isempty(eslintrc) then
-    return true
-  end
-
-  if vim.fn.filereadable("package.json") then
-    if vim.fn.json_decode(vim.fn.readfile("package.json"))["eslintConfig"] then
-      return true
-    end
-  end
-
-  return false
-end
-
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true
-}
-
-lspconfig.tsserver.setup{}
-
-lspconfig.efm.setup {
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.goto_definition = false
-  end,
-  root_dir = function()
-    if not eslint_config_exists() then
-      return nil
-    end
-    return vim.fn.getcwd()
-  end,
-  settings = {
-    languages = {
-      javascript = {eslint},
-      javascriptreact = {eslint},
-      ["javascript.jsx"] = {eslint},
-      vue = {eslint},
-      typescript = {eslint},
-      ["typescript.tsx"] = {eslint},
-      typescriptreact = {eslint}
-    }
-  },
-  filetypes = {
-    "hbs",
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "vue",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact"
-  },
-}
-
+lua <<EOF
+vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF
+
+nnoremap td :lua vim.lsp.buf.definition()<CR>
+nnoremap ti :lua vim.lsp.buf.implementation()<CR>
+nnoremap tsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap tr :lua vim.lsp.buf.references()<CR>
+nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
+nnoremap K :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <leader>lb :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>ln :lua vim.lsp.diagnostic.goto_next()<CR>
+
+" }}}
+" ------------------------------------------------------------------
+" hrsh7th/nvim-compe {{{
+" ------------------------------------------------------------------
+set completeopt=menuone,noinsert,noselect
+
+" let g:compe = {
+"       \ 'enabled': 1,
+"       \ 'min_length': 3,
+"       \ 'preselect': 'enable',
+"       \ 'allow_prefix_unmatch': 0,
+"       \ 'source_timeout': 300,
+"       \ 'throttle_time': 100,
+"       \ 'incomplete_delay': 400,
+"       \ 'source': {
+"       \   'path': 1,
+"       \   'buffer': 1,
+"       \   'calc': 1,
+"       \   'spell': {
+"       \     'filetypes': [
+"       \        'markdown',
+"       \        'html'
+"       \     ]},
+"       \   'nvim_lsp': {
+"       \     'filetypes': [
+"       \       'hbs',
+"       \       'javascript',
+"       \       'javascriptreact',
+"       \       'javascript.jsx',
+"       \       'vue',
+"       \       'typescript',
+"       \       'typescript.tsx',
+"       \       'typescriptreact'
+"       \     ]}
+"       \   }
+"       \ }
+
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 " }}}
 " -----------------------------------------------------------------------------------------
-" nvim-treesitter/nvim-treesitter {{{
+" lukas-reineke/format.nvim {{{
 " -----------------------------------------------------------------------------------------
 
 lua <<EOF
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "typescript",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { },  -- list of language that will be disabled
-  },
+require "format".setup {
+    ["*"] = {
+        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
+    },
+    vim = {
+        {
+            cmd = {"luafmt -w replace"},
+            start_pattern = "^lua << EOF$",
+            end_pattern = "^EOF$"
+        }
+    },
+    vimwiki = {
+        {
+            cmd = {"prettier -w --parser babel"},
+            start_pattern = "^{{{javascript$",
+            end_pattern = "^}}}$"
+        }
+    },
+    lua = {
+        {
+            cmd = {
+                function(file)
+                    return string.format("luafmt -l %s -w replace %s", vim.bo.textwidth, file)
+                end
+            }
+        }
+    },
+    go = {
+        {
+            cmd = {"gofmt -w", "goimports -w"},
+            tempfile_postfix = ".tmp"
+        }
+    },
+    javascript = {
+        {cmd = {"prettier -w", "eslint_d --fix"}}
+    },
+    vue = {
+        {cmd = {"prettier -w", "eslint_d --fix"}}
+    },
+    typescript = {
+        {cmd = {"prettier -w", "eslint_d --fix"}}
+    },
+    markdown = {
+        {cmd = {"prettier -w"}},
+        {
+            cmd = {"black"},
+            start_pattern = "^```python$",
+            end_pattern = "^```$",
+            target = "current"
+        }
+    }
 }
-EOF
-
-" }}}
-" -----------------------------------------------------------------------------------------
-" onsails/lspkind-nvim {{{
-" -----------------------------------------------------------------------------------------
-
-lua<< EOF
-
--- commented options are defaults
-require('lspkind').init({
-    -- with_text = true,
-    -- symbol_map = {
-    --   Text = '',
-    --   Method = '',
-    --   Function = '',
-    --   Constructor = '汹',
-    --   Variable = '衮',
-    --   Class = '㕡',
-    --   Interface = 'ﰮ',
-    --   Module = '',
-    --   Property = '',
-    --   Unit = '撴',
-    --   Value = '',
-    --   Enum = '了',
-    --   Keyword = '',
-    --   Snippet = '﬌',
-    --   Color = '凇',
-    --   File = '',
-    --   Folder = '',
-    --   EnumMember = '',
-    --   Constant = '沜',
-    --   Struct = ''
-    -- },
-})
-
 EOF
 " }}}
 " -----------------------------------------------------------------------------------------
@@ -784,133 +763,3 @@ EOF
 " })
 
 " EOF
-
-" ------------------------------------------------------------------
-" RishabhRD/nvim-lsputils') {{{
-" ------------------------------------------------------------------
-
-lua <<EOF
-vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-EOF
-
-nnoremap td :lua vim.lsp.buf.definition()<CR>
-nnoremap ti :lua vim.lsp.buf.implementation()<CR>
-nnoremap tsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap tr :lua vim.lsp.buf.references()<CR>
-nnoremap <F2> :lua vim.lsp.buf.rename()<CR>
-nnoremap K :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>ld :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <leader>ln :lua vim.lsp.diagnostic.goto_next()<CR>
-
-" ------------------------------------------------------------------
-" hrsh7th/nvim-compe {{{
-" ------------------------------------------------------------------
-set completeopt=menuone,noinsert,noselect
-
-let g:compe = {
-      \ 'enabled': 1,
-      \ 'min_length': 3,
-      \ 'preselect': 'enable',
-      \ 'allow_prefix_unmatch': 0,
-      \ 'source_timeout': 300,
-      \ 'throttle_time': 100,
-      \ 'incomplete_delay': 400,
-      \ 'source': {
-      \   'path': 1,
-      \   'buffer': 1,
-      \   'calc': 1,
-      \   'spell': {
-      \     'filetypes': [
-      \        'markdown',
-      \        'html'
-      \     ]},
-      \   'nvim_lsp': {
-      \     'filetypes': [
-      \       'hbs',
-      \       'javascript',
-      \       'javascriptreact',
-      \       'javascript.jsx',
-      \       'vue',
-      \       'typescript',
-      \       'typescript.tsx',
-      \       'typescriptreact'
-      \     ]}
-      \   }
-      \ }
-
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-
-" ------------------------------------------------------------------
-" Format.nvim {{{
-" ------------------------------------------------------------------
-lua<< EOF
-require "format".setup {
-    ["*"] = {
-        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
-    },
-    vim = {
-        {
-            cmd = {"luafmt -w replace"},
-            start_pattern = "^lua << EOF$",
-            end_pattern = "^EOF$"
-        }
-    },
-    vimwiki = {
-        {
-            cmd = {"prettier -w --parser babel"},
-            start_pattern = "^{{{javascript$",
-            end_pattern = "^}}}$"
-        }
-    },
-    lua = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("luafmt -l %s -w replace %s", vim.bo.textwidth, file)
-                end
-            }
-        }
-    },
-    go = {
-        {
-            cmd = {"gofmt -w", "goimports -w"},
-            tempfile_postfix = ".tmp"
-        }
-    },
-    javascript = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    vue = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    typescript = {
-        {cmd = {"prettier -w", "eslint_d --fix"}}
-    },
-    markdown = {
-        {cmd = {"prettier -w"}},
-        {
-            cmd = {"black"},
-            start_pattern = "^```python$",
-            end_pattern = "^```$",
-            target = "current"
-        }
-    }
-}
-EOF
-
-" }}}
