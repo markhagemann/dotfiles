@@ -27,7 +27,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
-export PATH="$PATH:$(yarn global bin)"
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
@@ -222,8 +221,10 @@ _fix_cursor() {
 
 precmd_functions+=(_fix_cursor)
 
+# YVM Stuff
 export YVM_DIR=$HOME/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+export PATH=~/.yarn/bin:$PATH
 
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
