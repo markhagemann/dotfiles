@@ -56,8 +56,6 @@ if dein#load_state('~/.cache/dein')
   " Status bar
   call dein#add('itchyny/lightline.vim')
   call dein#add('sinetoami/lightline-hunks')
-  " Testing
-  call dein#add('janko/vim-test')
   " Wiki
   call dein#add('vimwiki/vimwiki')
   " Whitespace removal
@@ -552,18 +550,6 @@ nnoremap <leader>rc :%s///gc<Left><Left><Left><Left>
 " press a key below to replace all instances of it in the current selection.
 xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
-
-" ------------------------------------------------------------------
-" janko/vim-test
-" ------------------------------------------------------------------
-nnoremap <silent> tt :TestNearest<CR>
-nnoremap <silent> tf :TestFile<CR>
-nnoremap <silent> ts :TestSuite<CR>
-nnoremap <silent> t_ :TestLast<CR>
-
-let test#strategy = "neovim"
-let test#neovim#term_position = "vertical"
-
 " }}}
 " ------------------------------------------------------------------
 " vimwiki/vimwiki
@@ -670,7 +656,7 @@ local dap = require('dap')
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
-  args = {os.getenv('HOME') .. '/apps/vscode-node-debug2/out/src/nodeDebug.js'},
+  args = {os.getenv('HOME') .. '/vscode-node-debug2/out/src/nodeDebug.js'},
 }
 vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='🟢', texthl='', linehl='', numhl=''})
@@ -687,15 +673,4 @@ vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
 nnoremap <leader>d? :lua require'dap.ui.variables'.scopes()<CR>
 nnoremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"})<CR>
 nnoremap <leader>da :lua require'debugHelper'.attach()<CR>
-" }}}
-" ------------------------------------------------------------------
-" jank/vim-test and mfussenegger/nvim-dap
-" ------------------------------------------------------------------
-nnoremap <leader>dd :TestNearest -strategy=jest<CR>
-function! JestStrategy(cmd)
-  let testName = matchlist(a:cmd, '\v -t ''(.*)''')[1]
-  let fileName = matchlist(a:cmd, '\v'' -- (.*)$')[1]
-  call luaeval("require'debugHelper'.debugJest([[" . testName . "]], [[" . fileName . "]])")
-endfunction
-let g:test#custom_strategies = {'jest': function('JestStrategy')}
 " }}}
