@@ -56,8 +56,8 @@ if dein#load_state('~/.cache/dein')
   " Status bar
   call dein#add('itchyny/lightline.vim')
   call dein#add('sinetoami/lightline-hunks')
-  " Wiki
-  call dein#add('vimwiki/vimwiki')
+  " Treesitter
+  call dein#add('nvim-treesitter/nvim-treesitter')
   " Whitespace removal
   call dein#add('ntpeters/vim-better-whitespace')
 
@@ -92,7 +92,7 @@ set incsearch                           " Search incremental
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set shell=zsh                           " Set shell to zsh
 set iskeyword+=-                        " Treat dash separated words as a word text object
-set formatoptions-=cro                  " Stop newline continution of comments
+setlocal formatoptions-=cro             " Stop newline continution of comments
 set nowrap                              " Display long lines as just one line
 set encoding=utf-8                      " The encoding displayed
 set fileencoding=utf-8                  " The encoding written to file
@@ -120,6 +120,10 @@ set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+" Enable spellcheck for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
 " Try fix syntax highlighting issues on large files
 " autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
 
@@ -488,7 +492,7 @@ set listchars+=nbsp:_
 " APZelos/blamer.nvim {{{
 " ------------------------------------------------------------------
 let g:blamer_enabled = 1
-let g:blamer_delay = 1000
+let g:blamer_delay = 500
 let g:blamer_show_in_visual_modes = 0
 " }}}
 " ------------------------------------------------------------------
@@ -552,18 +556,6 @@ xnoremap <leader>r :s///g<Left><Left><Left>
 xnoremap <leader>rc :s///gc<Left><Left><Left><Left>
 " }}}
 " ------------------------------------------------------------------
-" vimwiki/vimwiki
-" ------------------------------------------------------------------
-nnoremap <Leader>tl <Plug>VimwikiToggleListItem
-vnoremap <Leader>tl <Plug>VimwikiToggleListItem
-nnoremap <Leader>wn <Plug>VimwikiNextLink
-let g:vimwiki_global_ext = 0
-let wiki = {}
-let wiki.nested_syntaxes = { 'js': 'javascript' }
-let g:vimwiki_list = [wiki]
-
-" }}}
-" ------------------------------------------------------------------
 " LSP {{{
 " ------------------------------------------------------------------
 " lua require('init')
@@ -571,6 +563,24 @@ lua require'lspconfig'.tsserver.setup{}
 lua require'lspconfig'.vuels.setup{}
 
 lua << EOF
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
 
 local eslint = {
     lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
@@ -601,6 +611,7 @@ EOF
 "     on_attach = on_attach
 " }
 
+nnoremap <silent> ld                    <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <silent> td                    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K                     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>ca            <cmd>lua vim.lsp.buf.code_action()<CR>
@@ -674,3 +685,15 @@ nnoremap <leader>d? :lua require'dap.ui.variables'.scopes()<CR>
 nnoremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"})<CR>
 nnoremap <leader>da :lua require'debugHelper'.attach()<CR>
 " }}}
+" ------------------------------------------------------------------
+" nvim-treesitter/nvim-treesitter
+" ------------------------------------------------------------------
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true
+  },
+}
+EOF
