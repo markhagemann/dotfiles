@@ -1,79 +1,3 @@
-if &compatible
-  call dein#add('voldikss/vim-floaterm')
-  set nocompatible
-endif
-" ------------------------------------------------------------------
-" Plugins {{{
-" ------------------------------------------------------------------
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Define plugins for dein to install
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  " Autocompletion
-  call dein#add('jiangmiao/auto-pairs')
-  call dein#add('alvan/vim-closetag')
-  " Colorscheme
-  call dein#add('ayu-theme/ayu-vim')
-  call dein#add('TaDaa/vimade')
-  " Colorizer
-  call dein#add('norcalli/nvim-colorizer.lua')
-  call dein#add('junegunn/rainbow_parentheses.vim')
-  " Comment out blocks of code
-  call dein#add('tpope/vim-commentary')
-  " Debugging
-  call dein#add('mfussenegger/nvim-dap')
-  " File manager
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
-  call dein#add('shougo/defx.nvim')
-  call dein#add('kristijanhusak/defx-icons')
-  call dein#add('airblade/vim-rooter')
-  " File searching and replacing
-  call dein#add('brooth/far.vim')
-  " Floating Terminal / Window Management
-  call dein#add('voldikss/vim-floaterm')
-  call dein#add('szw/vim-maximizer')
-  " Git
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('itchyny/vim-gitbranch')
-  call dein#add('APZelos/blamer.nvim')
-  " IndentLine
-  call dein#add('Yggdroot/indentLine')
-  call dein#add('lukas-reineke/indent-blankline.nvim', { 'rev': 'master' })
-  " Language support
-  call dein#add('neovim/nvim-lspconfig')
-  call dein#add('hrsh7th/nvim-compe')
-  call dein#add('RishabhRD/popfix')
-  call dein#add('RishabhRD/nvim-lsputils')
-  call dein#add('tpope/vim-sleuth')
-  call dein#add('sbdchd/neoformat')
-  " Scratchpad
-  call dein#add('Konfekt/vim-scratchpad')
-  " Status bar
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('sinetoami/lightline-hunks')
-  " Treesitter
-  call dein#add('nvim-treesitter/nvim-treesitter')
-  " Whitespace removal
-  call dein#add('ntpeters/vim-better-whitespace')
-
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
-  if has("nvim")
-    set inccommand=nosplit
-  endif
-
-  call dein#end()
-  call dein#save_state()
-endif
-" }}}
 " ------------------------------------------------------------------
 " General {{{
 " ------------------------------------------------------------------
@@ -120,19 +44,12 @@ set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-" Enable spellcheck for markdown files
-autocmd BufRead,BufNewFile *.md setlocal spell
-" Try fix syntax highlighting issues on large files
-" autocmd BufEnter *.{js,ts,jsx,tsx} :syntax sync fromstart
-
-" You can't stop me
-cmap w!! w !sudo tee %
-
 " ------------------------------------------------------------------
 " Mappings {{{
 " ------------------------------------------------------------------
+
+" You can't stop me
+cmap w!! w !sudo tee %
 
 " Edit Vim config file in a new tab.
 map <leader>ev :tabnew $MYVIMRC<CR>
@@ -177,9 +94,105 @@ vnoremap < <gv
 vnoremap > >gv
 
 " ------------------------------------------------------------------
+" Plugins {{{
+" ------------------------------------------------------------------
+if &compatible
+  call dein#add('voldikss/vim-floaterm')
+  set nocompatible
+endif
+
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Define plugins for dein to install
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Autocompletion
+  call dein#add('Raimondi/delimitMate')
+  " Colorscheme
+  call dein#add('ayu-theme/ayu-vim')
+  call dein#add('TaDaa/vimade')
+  " Colorizer
+  " call dein#add('norcalli/nvim-colorizer.lua')
+  " call dein#add('junegunn/rainbow_parentheses.vim')
+  " Comment out blocks of code
+  call dein#add('tpope/vim-commentary')
+  " Debugging
+  call dein#add('mfussenegger/nvim-dap')
+  " File manager
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0  })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf'  })
+  call dein#add('shougo/defx.nvim')
+  call dein#add('kristijanhusak/defx-icons')
+  call dein#add('airblade/vim-rooter')
+  " File searching and replacing
+  call dein#add('brooth/far.vim')
+  " Floating Terminal / Window Management
+  call dein#add('voldikss/vim-floaterm')
+  call dein#add('szw/vim-maximizer')
+  " Git
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('itchyny/vim-gitbranch')
+  call dein#add('APZelos/blamer.nvim')
+  " IndentLine
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('lukas-reineke/indent-blankline.nvim', { 'rev': 'master' })
+  " Language support
+  call dein#add('yuezk/vim-js')
+  call dein#add('maxmellon/vim-jsx-pretty')
+  call dein#add('peitalin/vim-jsx-typescript')
+  call dein#add('neovim/nvim-lspconfig')
+  call dein#add('hrsh7th/nvim-compe')
+  call dein#add('RishabhRD/popfix')
+  call dein#add('RishabhRD/nvim-lsputils')
+  call dein#add('tpope/vim-sleuth')
+  call dein#add('sbdchd/neoformat')
+  " Scratchpad
+  call dein#add('Konfekt/vim-scratchpad')
+  " Status bar
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('sinetoami/lightline-hunks')
+  " Text navigation / manipulation
+  call dein#add('chaoren/vim-wordmotion')
+  call dein#add('machakann/vim-sandwich')
+  " Vim monitoring
+  call dein#add('dstein64/vim-startuptime')
+  " Whitespace removal
+  call dein#add('ntpeters/vim-better-whitespace')
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  if has("nvim")
+    set inccommand=nosplit
+  endif
+
+  call dein#end()
+  call dein#save_state()
+endif
+" }}}
+
+" ------------------------------------------------------------------
+" Autocmd {{{
+" ------------------------------------------------------------------
+
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+" Enable spellcheck for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
+" Try fix syntax highlighting issues on large files
+autocmd BufEnter *.{js,ts,jsx,tsx,vue} :syntax sync fromstart
+
+
+" ------------------------------------------------------------------
 " Syntax Highlight {{{
 " ------------------------------------------------------------------
-" let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript'] " syntax highlighting in markdown
+let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript'] " syntax highlighting in markdown
 " }}}
 " ------------------------------------------------------------------
 " Colorscheme {{{
@@ -479,7 +492,7 @@ let g:vim_json_conceal = 0
 
 " Show whitespace as characters
 set list!
-set listchars=eol:↴
+" set listchars=eol:↴
 set listchars+=tab:│⋅
 set listchars+=trail:~
 set listchars+=extends:❯
@@ -509,10 +522,10 @@ vnoremap <space>/ :Commentary<CR>
 " ------------------------------------------------------------------
 " junegunn/rainbow_parentheses.vim {{{
 " ------------------------------------------------------------------
-let g:rainbow#max_level = 4
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" let g:rainbow#max_level = 4
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
-autocmd FileType * RainbowParentheses
+" autocmd FileType * RainbowParentheses
 " }}}
 " ------------------------------------------------------------------
 " voldikss/vim-floaterm {{{
@@ -685,15 +698,3 @@ nnoremap <leader>d? :lua require'dap.ui.variables'.scopes()<CR>
 nnoremap <leader>de :lua require'dap'.set_exception_breakpoints({"all"})<CR>
 nnoremap <leader>da :lua require'debugHelper'.attach()<CR>
 " }}}
-" ------------------------------------------------------------------
-" nvim-treesitter/nvim-treesitter
-" ------------------------------------------------------------------
-
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true
-  },
-}
-EOF
