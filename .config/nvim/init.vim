@@ -76,10 +76,6 @@ nnoremap <silent> <M-l>    :vertical resize +2<CR>
 " Cycle through splits.
 nnoremap <S-Tab> <C-w>w
 
-" Quicker escape binding
-inoremap jk <Esc>
-inoremap kj <Esc>
-
 " Split
 noremap <silent><leader>h :split<cr>
 noremap <silent><leader>v :vsplit<cr>
@@ -115,8 +111,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('ayu-theme/ayu-vim')
   call dein#add('TaDaa/vimade')
   " Colorizer
-  " call dein#add('norcalli/nvim-colorizer.lua')
-  " call dein#add('junegunn/rainbow_parentheses.vim')
+  call dein#add('norcalli/nvim-colorizer.lua')
+  call dein#add('junegunn/rainbow_parentheses.vim')
   " Comment out blocks of code
   call dein#add('tpope/vim-commentary')
   " Debugging
@@ -131,7 +127,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('brooth/far.vim')
   " Floating Terminal / Window Management
   call dein#add('voldikss/vim-floaterm')
-  call dein#add('szw/vim-maximizer')
   " Git
   call dein#add('tpope/vim-fugitive')
   call dein#add('airblade/vim-gitgutter')
@@ -141,15 +136,14 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Yggdroot/indentLine')
   call dein#add('lukas-reineke/indent-blankline.nvim', { 'rev': 'master' })
   " Language support
-  call dein#add('yuezk/vim-js')
-  call dein#add('maxmellon/vim-jsx-pretty')
-  call dein#add('peitalin/vim-jsx-typescript')
   call dein#add('neovim/nvim-lspconfig')
   call dein#add('hrsh7th/nvim-compe')
   call dein#add('RishabhRD/popfix')
   call dein#add('RishabhRD/nvim-lsputils')
   call dein#add('tpope/vim-sleuth')
   call dein#add('sbdchd/neoformat')
+  call dein#add('elzr/vim-json')
+  call dein#add('plasticboy/vim-markdown')
   " Scratchpad
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
@@ -176,19 +170,16 @@ if dein#load_state('~/.cache/dein')
   call dein#save_state()
 endif
 " }}}
-
 " ------------------------------------------------------------------
 " Autocmd {{{
 " ------------------------------------------------------------------
-
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 " Enable spellcheck for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell
 " Try fix syntax highlighting issues on large files
 autocmd BufEnter *.{js,ts,jsx,tsx,vue} :syntax sync fromstart
-
-
+" }}}
 " ------------------------------------------------------------------
 " Syntax Highlight {{{
 " ------------------------------------------------------------------
@@ -197,7 +188,6 @@ let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascri
 " ------------------------------------------------------------------
 " Colorscheme {{{
 " ------------------------------------------------------------------
-
 " Set colorscheme and related settings
 syntax enable
 " checks if your terminal has 24-bit color support
@@ -215,7 +205,6 @@ hi VertSplit guibg=NONE guifg=#151b23
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 \,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor
 \,sm:block-blinkwait175-blinkoff150-blinkon175
-
 "}}}
 " ------------------------------------------------------------------
 " TaDaa/vimade {{{
@@ -257,7 +246,6 @@ function! JSFolds()
     return indent(v:lnum) / &shiftwidth
   endif
 endfunction
-
 " }}}
 " ------------------------------------------------------------------
 " Defx / File manager settings {{{
@@ -386,11 +374,6 @@ function! LightlineFilename()
 endfunction
 " }}}
 " ------------------------------------------------------------------
-" szw/vim-maximizer {{{
-" ------------------------------------------------------------------
-nnoremap <silent> <leader>m :MaximizerToggle!<CR>
-" }}}
-" ------------------------------------------------------------------
 " sbdchd/neoformat {{{
 " ------------------------------------------------------------------
 let g:neoformat_vue_eslint_d = {
@@ -478,13 +461,13 @@ let g:closetag_emptyTags_caseSensitive = 1
 " ------------------------------------------------------------------
 let g:indentLine_char_list = ['▏']
 let g:indentLine_color_gui = '#453c47'
-let g:vim_json_syntax_conceal = 0
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = ' '
-function SetZeroConcealLevel()
-    setlocal conceallevel=0
-endfunction
-autocmd BufNewFile,Bufread *.md, *.json call SetZeroConcealLevel()
+let g:indentLine_fileTypeExclude = ['json', 'md']
+
+" Markdown
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " Json
 let g:vim_json_syntax_conceal = 0
@@ -522,10 +505,10 @@ vnoremap <space>/ :Commentary<CR>
 " ------------------------------------------------------------------
 " junegunn/rainbow_parentheses.vim {{{
 " ------------------------------------------------------------------
-" let g:rainbow#max_level = 4
-" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#max_level = 4
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
-" autocmd FileType * RainbowParentheses
+autocmd FileType * RainbowParentheses
 " }}}
 " ------------------------------------------------------------------
 " voldikss/vim-floaterm {{{
