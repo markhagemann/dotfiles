@@ -144,6 +144,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('sbdchd/neoformat')
   call dein#add('elzr/vim-json')
   call dein#add('plasticboy/vim-markdown')
+  call dein#add('joukevandermaas/vim-ember-hbs')
   " Scratchpad
   call dein#add('Konfekt/vim-scratchpad')
   " Status bar
