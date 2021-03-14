@@ -19,6 +19,8 @@ local cmd = vim.cmd
 local g = vim.g
 local indent = 2
 
+cmd("colorscheme ayu")
+cmd('let ayucolor="mirage"')
 cmd "syntax enable"
 cmd "syntax on"
 vim.api.nvim_command('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
@@ -34,11 +36,9 @@ require("treesitter.lua")
 require("mappings.lua")
 
 -- highlights
-cmd("colorscheme ayu")
-cmd('let ayucolor="mirage"')
 cmd("highlight Normal ctermbg=NONE guibg=NONE")
 cmd("highlight NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE")
--- cmd("highlight VertSplit guibg=NONE guifg=#151b23")
+cmd("highlight VertSplit guibg=NONE guifg=#151b23")
 cmd("highlight LineNr guibg=NONE")
 cmd("highlight CursorLineNr guifg=#4dbcd6 guibg=NONE")
 cmd("highlight SignColumn guibg=NONE")
