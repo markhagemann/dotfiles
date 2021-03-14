@@ -4,6 +4,7 @@ vim.o.termguicolors = true
 
 vim.g.nvim_tree_side = "left"
 vim.g.nvim_tree_width = 30
+vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 vim.g.nvim_tree_auto_open = 0
 vim.g.nvim_tree_auto_close = 0
 vim.g.nvim_tree_quit_on_open = 0
@@ -67,9 +68,9 @@ vim.g.nvim_tree_bindings = {
     ["<S-CR>"] = get_lua_cb("close_node"),
     ["<Tab>"] = get_lua_cb("preview"),
     ["I"] = get_lua_cb("toggle_ignored"),
-    ["H"] = get_lua_cb("toggle_dotfiles"),
+    ["V"] = get_lua_cb("toggle_dotfiles"),
     ["<F5>"] = get_lua_cb("refresh"),
-    ["a"] = get_lua_cb("create"),
+    ["n"] = get_lua_cb("create"),
     ["d"] = get_lua_cb("remove"),
     ["r"] = get_lua_cb("rename"),
     ["<F2>"] = get_lua_cb("full_rename"),
@@ -78,6 +79,6 @@ vim.g.nvim_tree_bindings = {
     ["p"] = get_lua_cb("paste"),
     ["[c"] = get_lua_cb("prev_git_item"),
     ["]c"] = get_lua_cb("next_git_item"),
-    ["-"] = get_lua_cb("dir_up"),
+    ["h"] = get_lua_cb("dir_up"),
     ["q"] = get_lua_cb("close")
 }

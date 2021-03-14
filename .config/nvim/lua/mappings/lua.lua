@@ -7,7 +7,11 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local silent_opts = {noremap = true, silent = true}
+vim.g.mapleader = " "
 
+--------------------------------------------------------------------
+-- General
+--------------------------------------------------------------------
 -- Edit Vim config file in a new tab.
 map("n", "<leader>ev", ":tabnew $MYVIMRC<CR>")
 
@@ -46,3 +50,44 @@ map("n", "L", ":bn<CR>", silent_opts)
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+-- Press * to search for the term under the cursor or a visual selection and
+-- then press a key below to replace all instances of it in the current file.
+map("n", "<leader>r", ":%s///g<Left><Left><Left>", opts)
+map("n", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+
+-- The same as above but instead of acting on the whole file it will be
+-- restricted to the previously visually selected range. You can do that by
+-- pressing *, visually selecting the range you want it to apply to and then
+-- press a key below to replace all instances of it in the current selection.
+map("x", "<leader>r", ":%s///g<Left><Left><Left>", opts)
+map("x", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+
+--------------------------------------------------------------------
+-- voldikss/vim-floaterm
+--------------------------------------------------------------------
+map("n", "<F1>", ":FloatermNew --height=0.85 --width=0.85 --wintype=floating --name=lazygit-float --title=lazygit --autoclose=2  lazygit<CR>", silent_opts)
+
+--------------------------------------------------------------------
+-- tpope/vim-commentary
+--------------------------------------------------------------------
+map("n", "<C-k>", ":Commentary<CR>", opts)
+map("v", "<C-k>", ":Commentary<CR>", opts)
+
+--------------------------------------------------------------------
+-- LSP
+--------------------------------------------------------------------
+map("n", "td", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+map("n", "tD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+map("n", "tr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+map("n", "ti", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+map("n", "th", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)

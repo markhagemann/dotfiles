@@ -7,6 +7,11 @@ local function opt(scope, key, value)
     end
 end
 
+vim.cmd("set nowrap")
+
+vim.cmd("set cursorline")
+vim.cmd("set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175")
+
 opt("o", "hidden", true)
 opt("o", "ignorecase", true)
 opt("o", "splitbelow", true)
@@ -21,10 +26,11 @@ opt("o", "mouse", "a")
 opt("w", "signcolumn", "yes")
 opt("o", "cmdheight", 1)
 
-opt("o", "updatetime", 250) -- update interval for gitsigns 
+-- update interval for gitsigns
+opt("o", "updatetime", 250)  
 opt("o", "clipboard", "unnamedplus")
 
--- for indenline
+-- for indentLine
 opt("b", "expandtab", true )
 opt("b", "shiftwidth", 2 )
 
