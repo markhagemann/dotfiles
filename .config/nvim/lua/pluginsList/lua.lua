@@ -3,21 +3,32 @@ local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
 return require("packer").startup(
     function()
+        -- Package Manager
         use {"wbthomason/packer.nvim", opt = true}
-        use {"kyazdani42/nvim-web-devicons"}
-        use {"kyazdani42/nvim-tree.lua"}
-        use {"nvim-lua/plenary.nvim"}
-        use {"lewis6991/gitsigns.nvim"}
-        use {"glepnir/galaxyline.nvim"}
-        use {"sinetoami/lightline-hunks"}
-        use {"akinsho/nvim-bufferline.lua"}
+        -- Autosave
         use {"907th/vim-auto-save"}
-        use {"nvim-treesitter/nvim-treesitter"}
+        -- Colorscheme
         use {"ayu-theme/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
+        -- Debugging
+        use {"mfussenegger/nvim-dap"}
+        -- File manager
+        use {"kyazdani42/nvim-web-devicons"}
+        use {"kyazdani42/nvim-tree.lua"}
+        -- File searching and replacing
+        use {"brooth/far.vim"}
+        -- Fuzzy finder
+        use {"nvim-telescope/telescope.nvim"}
+        use {"nvim-telescope/telescope-media-files.nvim"}
+        -- Git
+        use {"APZelos/blamer.nvim"}
+        use {"nvim-lua/plenary.nvim"}
+        use {"lewis6991/gitsigns.nvim"}
+        -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
         use { 'Yggdroot/indentLine'}
-        use {"APZelos/blamer.nvim"}
+        -- LSP 
+        use {"tpope/vim-sleuth"}
         use {"sbdchd/neoformat"}
         use {"neovim/nvim-lspconfig"}
         use {"hrsh7th/nvim-compe"}
@@ -25,13 +36,21 @@ return require("packer").startup(
         use {"alvan/vim-closetag"}
         use {"tweekmonster/startuptime.vim"}
         use {"onsails/lspkind-nvim"}
-        use {"nvim-telescope/telescope.nvim"}
-        use {"nvim-telescope/telescope-media-files.nvim"}
+        use {"nvim-treesitter/nvim-treesitter"}
+        use {"elzr/vim-json"}
+        use {"plasticboy/vim-markdown"}
+        use {"joukevandermaas/vim-ember-hbs"}
+        -- Popup
         use {"nvim-lua/popup.nvim"}
         use {"voldikss/vim-floaterm"}
+        -- Scratchpad
+        use {"Konfekt/vim-scratchpad"}
+        -- Statusline
+        use {"glepnir/galaxyline.nvim"}
+        -- Whitespace trim
+        use {"ntpeters/vim-better-whitespace"}
+        -- Word manipulation
         use {"tpope/vim-commentary"}
         use {"chaoren/vim-wordmotion"}
-        use {"Konfekt/vim-scratchpad"}
-        use {"ntpeters/vim-better-whitespace"}
     end
 )

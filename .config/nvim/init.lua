@@ -6,6 +6,7 @@ require("utils.lua")
 require("nvimTree.lua")
 require("statusline.lua")
 require("telescope-nvim.lua")
+require("blamer-nvim.lua")
 
 -- lsp
 require("nvim-lspconfig.lua")
