@@ -4,7 +4,7 @@ local fn = vim.fn
 gl.short_line_list = {'LuaTree','vista','dbui'}
 
 local checkwidth = function()
-  local squeeze_width  = vim.fn.winwidth(0) / 2
+  local squeeze_width  = fn.winwidth(0) / 2
   if squeeze_width > 40 then
     return true
   end
@@ -12,7 +12,8 @@ local checkwidth = function()
 end
 
 local colors = {
-  bg = '#282c34',
+--  bg = '#202734',
+  bg = '#262f40',
   yellow = '#fabd2f',
   cyan = '#008080',
   darkblue = '#081633',
@@ -26,7 +27,7 @@ local colors = {
 }
 
 local buffer_not_empty = function()
-  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+  if fn.empty(fn.expand('%:t')) ~= 1 then
     return true
   end
   return false
@@ -75,16 +76,18 @@ gls.left[2] = {
                           ['r?'] = colors.cyan,
                           ['!']  = colors.red,
                           t = colors.red}
-      vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
+      vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[fn.mode()])
       return ' NVCode '
     end,
-    separator = ' ',
-    separator_highlight = {colors.yellow,function()
-      if not buffer_not_empty() then
-        return colors.bg
-      end
-      return colors.bg
-    end},
+    separator = ' | ',
+    separator_highlight = {colors.darkblue,colors.bg},
+    -- separator = ' ',
+    -- separator_highlight = {colors.yellow,function()
+      -- if not buffer_not_empty() then
+      --   return colors.bg
+      -- end
+      -- return colors.bg
+    -- end},
     highlight = {colors.grey,colors.bg,'bold'},
   },
 }
@@ -102,29 +105,23 @@ gls.left[3] = {
       return fn.expand("%:F")
     end,
     condition = buffer_not_empty,
-    separator = " ",
-    separator_highlight = {colors.grey, colors.bg},
+    separator = ' | ',
+    separator_highlight = {colors.darkblue,colors.bg},
     highlight = {colors.grey, colors.bg, "bold"}
   }
 }
 gls.left[4] = {
-  Space = {
-    provider = function () return '' end,
-    condition = buffer_not_empty,
-  }
-}
-gls.left[5] = {
   GitIcon = {
     provider = function() return '  ' end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {colors.orange,colors.line_bg},
+    highlight = {colors.orange,colors.bg},
   }
 }
-gls.left[6] = {
+gls.left[5] = {
   GitBranch = {
     provider = 'GitBranch',
     -- separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
+    -- separator_highlight = {colors.purple,colors.bg},
     condition = buffer_not_empty,
     highlight = {colors.grey,colors.bg},
   }
@@ -133,8 +130,8 @@ gls.left[7] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
-    -- separator = ' ',
-    -- separator_highlight = {colors.purple,colors.bg},
+    -- separator = ' | ',
+    -- separator_highlight = {colors.darkblue,colors.bg},
     icon = '  ',
     highlight = {colors.green,colors.bg},
   }
@@ -143,8 +140,8 @@ gls.left[8] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
-    -- separator = ' ',
-    -- separator_highlight = {colors.purple,colors.bg},
+    -- separator = ' | ',
+    -- separator_highlight = {colors.darkblue,colors.bg},
     icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
@@ -153,8 +150,8 @@ gls.left[9] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
-    -- separator = ' ',
-    -- separator_highlight = {colors.purple,colors.bg},
+    -- separator = ' | ',
+    -- separator_highlight = {colors.darkblue,colors.bg},
     icon = '  ',
     highlight = {colors.red,colors.bg},
   }
