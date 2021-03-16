@@ -193,14 +193,30 @@ gls.right[4] = {
   }
 }
 gls.right[5] = {
-  FileFormat = {
-    provider = 'FileFormat',
-    separator = ' ',
-    separator_highlight = {colors.bg,colors.bg},
-    highlight = {colors.grey,colors.bg},
+  ShowLspClient = {
+    provider = 'GetLspClient',
+    condition = function ()
+      local tbl = {['dashboard'] = true,['']=true}
+      if tbl[vim.bo.filetype] then
+        return false
+      end
+      return true
+    end,
+    icon = ' LSP:',
+    separator = ' | ',
+    separator_highlight = {colors.darkblue,colors.bg},
+    highlight = {colors.grey,colors.bg}
   }
 }
 gls.right[6] = {
+  FileFormat = {
+    provider = 'FileFormat',
+    separator = ' | ',
+    separator_highlight = {colors.darkblue,colors.bg},
+    highlight = {colors.grey,colors.bg},
+  }
+}
+gls.right[7] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' | ',
@@ -208,7 +224,7 @@ gls.right[6] = {
     highlight = {colors.grey,colors.bg},
   },
 }
-gls.right[7] = {
+gls.right[8] = {
   PerCent = {
     provider = 'LinePercent',
     separator = ' |',
@@ -216,7 +232,7 @@ gls.right[7] = {
     highlight = {colors.grey,colors.bg},
   }
 }
-gls.right[8] = {
+gls.right[9] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow,colors.purple},

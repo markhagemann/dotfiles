@@ -3,7 +3,7 @@ local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
 return require("packer").startup(
     function()
-        -- Package Manager
+        -- Package manager
         use {"wbthomason/packer.nvim", opt = true}
         -- Colorscheme
         use {"ayu-theme/ayu-vim"}
