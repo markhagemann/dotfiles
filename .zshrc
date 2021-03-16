@@ -81,7 +81,7 @@ plugins=(git node tmux z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 # Aliases
 alias code="code.exe"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias df="dotfiles -f"
+alias df="dotfiles"
 alias dfstatus="dotfiles status -uno"
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
