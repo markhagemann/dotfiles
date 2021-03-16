@@ -15,7 +15,7 @@ local colors = {
 --  bg = '#202734',
   bg = '#262f40',
   yellow = '#fabd2f',
-  cyan = '#008080',
+  cyan = '#4dbcd6',
   darkblue = '#081633',
   green = '#608B4E',
   orange = '#FF8800',
@@ -107,7 +107,7 @@ gls.left[3] = {
     condition = buffer_not_empty,
     separator = ' | ',
     separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.grey, colors.bg, "bold"}
+    highlight = {colors.cyan, colors.bg, "bold"}
   }
 }
 gls.left[4] = {
@@ -205,7 +205,7 @@ gls.right[5] = {
     icon = ' LSP:',
     separator = ' | ',
     separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.grey,colors.bg}
+    highlight = {colors.cyan,colors.bg}
   }
 }
 gls.right[6] = {
