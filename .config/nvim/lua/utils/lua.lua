@@ -10,7 +10,7 @@ end
 vim.cmd("set nowrap")
 
 vim.cmd("set cursorline")
-vim.cmd("set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175")
+-- vim.cmd("set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait400-blinkoff800-blinkon100-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175")
 
 opt("o", "hidden", true)
 opt("o", "ignorecase", true)

@@ -6,11 +6,13 @@ return require("packer").startup(
         -- Package manager
         use {"wbthomason/packer.nvim", opt = true}
         -- Colorscheme
-        use {"ayu-theme/ayu-vim"}
+        use {"kuntau/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
         -- Debugging
+        use {"mfussenegger/nvim-lua-debugger"}
         use {"mfussenegger/nvim-dap"}
         -- File manager
+        use {"airblade/vim-rooter"}
         use {"kyazdani42/nvim-web-devicons"}
         use {"kyazdani42/nvim-tree.lua"}
         -- File searching and replacing
