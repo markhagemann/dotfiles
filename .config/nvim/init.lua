@@ -1,19 +1,24 @@
 -- load plugins
-require("pluginsList.lua")
-require("web-devicons.lua")
-
-require("utils.lua")
+require("blamer-nvim.lua")
+require("gitsigns.lua")
+require("lspkind").init(
+    {
+        File = " "
+    }
+)
+require("lspsaga-nvim.lua")
+require("mappings.lua")
+require("nvim-autopairs").setup()
+require("nvim-compe.lua")
+require("nvim-lspconfig.lua")
 require("nvimTree.lua")
+require("pluginsList.lua")
 require("statusline.lua")
 require("telescope-nvim.lua")
-require("blamer-nvim.lua")
-
--- lsp
-require("nvim-lspconfig.lua")
-require("nvim-compe.lua")
-
-require("gitsigns.lua")
-
+require("treesitter.lua")
+require("utils.lua")
+require("vim-better-whitespace.lua")
+require("web-devicons.lua")
 require "colorizer".setup()
 
 local cmd = vim.cmd
@@ -22,19 +27,15 @@ local indent = 2
 
 cmd("colorscheme ayu")
 cmd('let ayucolor="mirage"')
-cmd "syntax enable"
-cmd "syntax on"
+cmd("syntax enable")
+cmd("syntax on")
 vim.api.nvim_command('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
 
-g.auto_save = 1
 g.indentLine_enabled = 1
 g.indentLine_char_list = {'▏'}
 
 g.mapleader = " "
-
-require("treesitter.lua")
-require("mappings.lua")
 
 -- highlights
 cmd("highlight Normal ctermbg=NONE guibg=NONE")
@@ -61,10 +62,3 @@ cmd("highlight FloatermBorder guifg=#3e4451")
 cmd("highlight NvimTreeFolderIcon guifg = #61afef")
 cmd("highlight NvimTreeFolderName guifg = #61afef")
 
-require("nvim-autopairs").setup()
-
-require("lspkind").init(
-    {
-        File = " "
-    }
-)

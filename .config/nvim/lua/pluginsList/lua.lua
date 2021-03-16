@@ -5,8 +5,6 @@ return require("packer").startup(
     function()
         -- Package Manager
         use {"wbthomason/packer.nvim", opt = true}
-        -- Autosave
-        use {"907th/vim-auto-save"}
         -- Colorscheme
         use {"ayu-theme/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
@@ -27,10 +25,11 @@ return require("packer").startup(
         -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
         use { 'Yggdroot/indentLine'}
-        -- LSP 
+        -- LSP
         use {"tpope/vim-sleuth"}
         use {"sbdchd/neoformat"}
         use {"neovim/nvim-lspconfig"}
+        use {"glepnir/lspsaga.nvim"}
         use {"hrsh7th/nvim-compe"}
         use {"windwp/nvim-autopairs"}
         use {"alvan/vim-closetag"}

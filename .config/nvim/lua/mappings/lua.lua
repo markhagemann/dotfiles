@@ -16,8 +16,8 @@ vim.g.mapleader = " "
 map("n", "<leader>ev", ":tabnew $MYVIMRC<CR>")
 
 -- Remap macro record key
--- nnoremap Q q
--- nnoremap q <Nop>
+map("n", "Q", "q")
+map("n", "q", "<Nop>")
 
 -- This unsets the last search pattern register by hitting return
 map("n", "<CR>", ":noh<CR><CR>")
@@ -76,18 +76,30 @@ map("v", "<C-k>", ":Commentary<CR>", opts)
 --------------------------------------------------------------------
 -- LSP
 --------------------------------------------------------------------
+map("n", "<leader>ca", ":Lspsaga code_action<CR>", silent_opts)
+map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>", silent_opts)
+map("n", "K", ":Lspsaga hover_doc<CR>", silent_opts)
+map("n", "<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", silent_opts)
+map("n", "<C-b>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", silent_opts)
+map("n", "th", ":Lspsaga signature_help<CR>", silent_opts)
+map("n", "<F2>", ":Lspsaga rename<CR>", silent_opts)
 map("n", "td", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-map("n", "tD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-map("n", "tr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- map("n", "tD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+-- map("n", "td", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", silent_opts)
+map("n", "tr", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", silent_opts)
+map("n", "ld", ":Lspsaga show_line_diagnostics<CR>", silent_opts)
+map("n", "[e", ":Lspsaga diagnostic_jump_next<CR>", silent_opts)
+map("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", silent_opts)
+-- map("n", "tr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+-- map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+-- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 map("n", "ti", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-map("n", "th", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+-- map("n", "th", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+-- map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+-- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+-- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+-- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)

@@ -24,10 +24,10 @@ opt("o", "numberwidth", 2)
 opt("o", "mouse", "a")
 
 opt("w", "signcolumn", "yes")
-opt("o", "cmdheight", 1)
+opt("o", "cmdheight", 2)
 
 -- update interval for gitsigns
-opt("o", "updatetime", 250)  
+opt("o", "updatetime", 250)
 opt("o", "clipboard", "unnamedplus")
 
 -- for indentLine
