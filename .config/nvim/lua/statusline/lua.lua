@@ -1,8 +1,15 @@
--- require'nvim-web-devicons'.setup()
 local gl = require('galaxyline')
 local gls = gl.section
 local fn = vim.fn
 gl.short_line_list = {'LuaTree','vista','dbui'}
+
+local checkwidth = function()
+  local squeeze_width  = vim.fn.winwidth(0) / 2
+  if squeeze_width > 40 then
+    return true
+  end
+  return false
+end
 
 local colors = {
   bg = '#282c34',
@@ -81,31 +88,15 @@ gls.left[2] = {
     highlight = {colors.grey,colors.bg,'bold'},
   },
 }
-gls.left[3] = {
-  GitIcon = {
-    provider = function() return '' end,
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {colors.orange,colors.line_bg},
-  }
-}
-gls.left[4] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
-    condition = buffer_not_empty,
-    highlight = {colors.grey,colors.bg},
-  }
-}
-gls.left[5] ={
+gls.left[2] ={
   FileIcon = {
-    separator = ' ',
+    -- separator = '',
     provider = 'FileIcon',
     condition = buffer_not_empty,
     highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg},
   },
 }
-gls.left[6] = {
+gls.left[3] = {
  FileName = {
     provider = function()
       return fn.expand("%:F")
@@ -116,15 +107,28 @@ gls.left[6] = {
     highlight = {colors.grey, colors.bg, "bold"}
   }
 }
-
-local checkwidth = function()
-  local squeeze_width  = vim.fn.winwidth(0) / 2
-  if squeeze_width > 40 then
-    return true
-  end
-  return false
-end
-
+gls.left[4] = {
+  Space = {
+    provider = function () return '' end,
+    condition = buffer_not_empty,
+  }
+}
+gls.left[5] = {
+  GitIcon = {
+    provider = function() return '  ' end,
+    condition = require('galaxyline.provider_vcs').check_git_workspace,
+    highlight = {colors.orange,colors.line_bg},
+  }
+}
+gls.left[6] = {
+  GitBranch = {
+    provider = 'GitBranch',
+    -- separator = ' ',
+    separator_highlight = {colors.purple,colors.bg},
+    condition = buffer_not_empty,
+    highlight = {colors.grey,colors.bg},
+  }
+}
 gls.left[7] = {
   DiffAdd = {
     provider = 'DiffAdd',
@@ -141,7 +145,7 @@ gls.left[8] = {
     condition = checkwidth,
     -- separator = ' ',
     -- separator_highlight = {colors.purple,colors.bg},
-    icon = ' 蹾 ',
+    icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
 }
@@ -151,7 +155,7 @@ gls.left[9] = {
     condition = checkwidth,
     -- separator = ' ',
     -- separator_highlight = {colors.purple,colors.bg},
-    icon = ' 撍 ',
+    icon = '  ',
     highlight = {colors.red,colors.bg},
   }
 }
@@ -163,40 +167,35 @@ gls.left[10] = {
     highlight = {colors.purple,colors.bg}
   }
 }
-gls.left[11] = {
+gls.right[1] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
-gls.left[12] = {
-  Space = {
-    provider = function () return '' end
-  }
-}
-gls.right[13] = {
+gls.right[2] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
     highlight = {colors.yellow,colors.bg},
   }
 }
-gls.right[2] = {
+gls.right[3] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '   ',
     highlight = {colors.blue,colors.bg},
   }
 }
-gls.right[3] = {
+gls.right[4] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '   ',
     highlight = {colors.orange,colors.bg},
   }
 }
-gls.right[4] = {
+gls.right[5] = {
   FileFormat = {
     provider = 'FileFormat',
     separator = ' ',
@@ -204,7 +203,7 @@ gls.right[4] = {
     highlight = {colors.grey,colors.bg},
   }
 }
-gls.right[5] = {
+gls.right[6] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' | ',
@@ -212,7 +211,7 @@ gls.right[5] = {
     highlight = {colors.grey,colors.bg},
   },
 }
-gls.right[6] = {
+gls.right[7] = {
   PerCent = {
     provider = 'LinePercent',
     separator = ' |',
@@ -220,7 +219,7 @@ gls.right[6] = {
     highlight = {colors.grey,colors.bg},
   }
 }
-gls.right[7] = {
+gls.right[8] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow,colors.purple},
