@@ -60,8 +60,8 @@ local opt = {noremap = true, silent = true}
 
 vim.g.mapleader = " "
 
--- mappings 
-vim.api.nvim_set_keymap("n", "<C-p>", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt)
+-- mappings
+vim.api.nvim_set_keymap("n", "<C-p>", [[<Cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ results_height = 15; previewer = false }))<CR>]], opt)
 vim.api.nvim_set_keymap(
     "n",
     "<Leader>fp",
