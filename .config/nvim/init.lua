@@ -69,6 +69,5 @@ cmd("highlight FloatermBorder guifg=#3e4451")
  cmd("highlight Error guifg=#FF3333 guibg=NONE")
 
 -- tree folder name , icon color
-cmd("highlight NvimTreeFolderIcon guifg = #61afef")
 cmd("highlight NvimTreeFolderName guifg = #61afef")
-
+cmd("highlight NvimTreeFolderIcon guifg = #73D0FF")
