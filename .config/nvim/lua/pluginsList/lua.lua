@@ -43,7 +43,6 @@ return require("packer").startup(
         use {"joukevandermaas/vim-ember-hbs"}
         -- Popup
         use {"nvim-lua/popup.nvim"}
-        use {"voldikss/vim-floaterm"}
         -- Scratchpad
         use {"Konfekt/vim-scratchpad"}
         -- Statusline

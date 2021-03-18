@@ -63,11 +63,6 @@ map("x", "<leader>r", ":%s///g<Left><Left><Left>", opts)
 map("x", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
 
 --------------------------------------------------------------------
--- voldikss/vim-floaterm
---------------------------------------------------------------------
-map("n", "<F1>", ":FloatermNew --height=0.85 --width=0.85 --wintype=floating --name=lazygit-float --title=lazygit --autoclose=2  lazygit<CR>", silent_opts)
-
---------------------------------------------------------------------
 -- tpope/vim-commentary
 --------------------------------------------------------------------
 map("n", "<C-k>", ":Commentary<CR>", opts)

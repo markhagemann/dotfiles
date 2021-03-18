@@ -62,9 +62,6 @@ cmd("highlight TelescopeResultsBorder  guifg=#3e4451")
 cmd("highlight TelescopePreviewBorder  guifg=#525865")
 cmd("highlight PmenuSel  guibg=#98c379")
 
--- floaterm
-cmd("highlight FloatermBorder guifg=#3e4451")
-
 -- lspsaga-nvim
  cmd("highlight Error guifg=#FF3333 guibg=NONE")
 
