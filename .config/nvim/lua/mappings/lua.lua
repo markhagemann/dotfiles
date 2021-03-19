@@ -65,8 +65,8 @@ map("x", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
 --------------------------------------------------------------------
 -- tpope/vim-commentary
 --------------------------------------------------------------------
-map("n", "<C-k>", ":Commentary<CR>", opts)
-map("v", "<C-k>", ":Commentary<CR>", opts)
+map("n", "<leader>/", ":Commentary<CR>", opts)
+map("v", "<leader>/", ":Commentary<CR>", opts)
 
 --------------------------------------------------------------------
 -- LSP

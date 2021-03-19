@@ -11,6 +11,7 @@ return require("packer").startup(
         -- Debugging
         use {"mfussenegger/nvim-lua-debugger"}
         use {"mfussenegger/nvim-dap"}
+        use {"theHamsta/nvim-dap-virtual-text"}
         -- File manager
         use {"airblade/vim-rooter"}
         use {"kyazdani42/nvim-web-devicons"}

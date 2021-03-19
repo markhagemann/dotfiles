@@ -24,7 +24,6 @@ require "colorizer".setup()
 
 local cmd = vim.cmd
 local g = vim.g
-local indent = 2
 
 cmd("colorscheme ayu")
 cmd('let ayucolor="mirage"')
@@ -40,6 +39,8 @@ vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
 g.vim_json_syntax_conceal = 0
 g.indentLine_enabled = 1
 g.indentLine_char_list = {'▏'}
+
+g.dap_virtual_text = 'all frames'
 
 g.mapleader = " "
 
