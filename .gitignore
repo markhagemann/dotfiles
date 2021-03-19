@@ -33,3 +33,4 @@ vscode-node-debug2
 .config
 .config/nvim/.netrwhist
 !.config/nvim
+!.config/jesseduffield
