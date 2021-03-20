@@ -1,6 +1,4 @@
-local ts_config = require("nvim-treesitter.configs")
-
-ts_config.setup {
+require'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "javascript",
         "typescript",
@@ -12,6 +10,7 @@ ts_config.setup {
         "rust",
         "lua"
     },
+    autotag = {enable = true},
     highlight = {
         enable = true,
         use_languagetree = true
