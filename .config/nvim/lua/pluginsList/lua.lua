@@ -16,7 +16,6 @@ return require("packer").startup(
         use {"theHamsta/nvim-dap-virtual-text"}
         -- File manager
         use {"airblade/vim-rooter"}
-        use {"kyazdani42/nvim-web-devicons"}
         use {"kyazdani42/nvim-tree.lua"}
         -- File searching and replacing
         use {"brooth/far.vim"}
@@ -26,6 +25,12 @@ return require("packer").startup(
         -- Git
         use {"APZelos/blamer.nvim"}
         use {"airblade/vim-gitgutter"}
+        -- Icon support
+        use {"kyazdani42/nvim-web-devicons"}
+        -- use {
+        --   'yamatsum/nvim-web-nonicons',
+        --   requires = {'kyazdani42/nvim-web-devicons'}
+        -- }
         -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
         use { 'Yggdroot/indentLine'}
