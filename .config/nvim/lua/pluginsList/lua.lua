@@ -25,7 +25,7 @@ return require("packer").startup(
         use {"nvim-telescope/telescope-media-files.nvim"}
         -- Git
         use {"APZelos/blamer.nvim"}
-        use {"lewis6991/gitsigns.nvim"}
+        use {"airblade/vim-gitgutter"}
         -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
         use { 'Yggdroot/indentLine'}
@@ -43,7 +43,7 @@ return require("packer").startup(
         use {"elzr/vim-json"}
         use {"plasticboy/vim-markdown"}
         use {"joukevandermaas/vim-ember-hbs"}
-        use {"andymass/vim-matchup"}
+        -- use {"andymass/vim-matchup"}
         -- Popup
         use {"nvim-lua/popup.nvim"}
         -- Scratchpad

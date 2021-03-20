@@ -26,14 +26,10 @@ opt("o", "mouse", "a")
 opt("w", "signcolumn", "yes")
 opt("o", "cmdheight", 2)
 
--- update interval for gitsigns
 opt("o", "updatetime", 250)
 opt("o", "clipboard", "unnamedplus")
 
--- for indentLine
 opt("b", "expandtab", true )
-opt("b", "shiftwidth", 2 )
-
 
 local M = {}
 

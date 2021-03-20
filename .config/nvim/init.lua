@@ -1,6 +1,5 @@
 -- load plugins
 require("blamer-nvim.lua")
-require("gitsigns.lua")
 require("lspkind").init(
     {
         File = " "
