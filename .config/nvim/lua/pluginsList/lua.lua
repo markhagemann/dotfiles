@@ -5,6 +5,8 @@ return require("packer").startup(
     function()
         -- Package manager
         use {"wbthomason/packer.nvim", opt = true}
+
+
         -- Colorscheme
         use {"kuntau/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
@@ -23,7 +25,6 @@ return require("packer").startup(
         use {"nvim-telescope/telescope-media-files.nvim"}
         -- Git
         use {"APZelos/blamer.nvim"}
-        use {"nvim-lua/plenary.nvim"}
         use {"lewis6991/gitsigns.nvim"}
         -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
@@ -34,24 +35,28 @@ return require("packer").startup(
         use {"neovim/nvim-lspconfig"}
         use {"glepnir/lspsaga.nvim"}
         use {"hrsh7th/nvim-compe"}
-        use {"windwp/nvim-autopairs"}
-        use {"alvan/vim-closetag"}
-        use {"tweekmonster/startuptime.vim"}
+        -- use {"alvan/vim-closetag"}
         use {"onsails/lspkind-nvim"}
         use {"nvim-treesitter/nvim-treesitter"}
+        use {"windwp/nvim-ts-autotag"}
+        use {"windwp/nvim-autopairs"}
         use {"elzr/vim-json"}
         use {"plasticboy/vim-markdown"}
         use {"joukevandermaas/vim-ember-hbs"}
+        use {"andymass/vim-matchup"}
         -- Popup
         use {"nvim-lua/popup.nvim"}
         -- Scratchpad
         use {"Konfekt/vim-scratchpad"}
         -- Statusline
         use {"glepnir/galaxyline.nvim"}
+        -- Utility
+        use {"tweekmonster/startuptime.vim"}
+        use {"nvim-lua/plenary.nvim"}
         -- Whitespace trim
         use {"ntpeters/vim-better-whitespace"}
         -- Word manipulation
-        use {"tpope/vim-commentary"}
+        use {"terrortylor/nvim-comment"}
         use {"chaoren/vim-wordmotion"}
     end
 )

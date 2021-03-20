@@ -21,3 +21,5 @@ dap.configurations.javascript = {
     console = 'integratedTerminal',
   },
 }
+
+vim.g.dap_virtual_text = v:true

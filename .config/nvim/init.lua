@@ -21,6 +21,7 @@ require("vim-better-whitespace.lua")
 require("vim-rooter.lua")
 require("web-devicons.lua")
 require "colorizer".setup()
+require('nvim_comment').setup()
 
 local cmd = vim.cmd
 local g = vim.g

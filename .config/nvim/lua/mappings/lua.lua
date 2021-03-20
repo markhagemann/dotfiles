@@ -34,12 +34,13 @@ map("n", "<M-k>", ":resize +2<CR>", silent_opts)
 map("n", "<M-h>", ":vertical resize -2<CR>", silent_opts)
 map("n", "<M-l>", ":vertical resize +2<CR>", silent_opts)
 
--- Cycle through splits.
-map("n", "<S-Tab>", "<C-w>w")
-
 -- Split
 map("n", "<leader>h", ":split<CR>", silent_opts)
 map("n", "<leader>v", ":vsplit<CR>", silent_opts)
+
+-- Update shiftwidth
+map("n", "<leader>sw2", ":set shiftwidth=2<CR>", opts)
+map("n", "<leader>sw4", ":set shiftwidth=4<CR>", opts)
 
 -- Switch buffers
 map("n", "H", ":bp<CR>", silent_opts)
@@ -62,11 +63,19 @@ map("n", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
 map("x", "<leader>r", ":%s///g<Left><Left><Left>", opts)
 map("x", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
 
+
+-- Allow for delete and paste to not replace my existing register
+map("n", "d", '"_d')
+map("v", "d", '"_d')
+map("x", "d", '"_d')
+
+map("x", "p", '"_dP')
+
 --------------------------------------------------------------------
--- tpope/vim-commentary
+-- terrortylor/nvim-comment
 --------------------------------------------------------------------
-map("n", "<leader>/", ":Commentary<CR>", opts)
-map("v", "<leader>/", ":Commentary<CR>", opts)
+map("n", "<leader>/", ":CommentToggle<CR>", opts)
+map("v", "<leader>/", ":CommentToggle<CR>", opts)
 
 --------------------------------------------------------------------
 -- LSP
@@ -82,7 +91,7 @@ map("n", "td", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 -- map("n", "tD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 -- map("n", "td", "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", silent_opts)
 map("n", "tr", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", silent_opts)
-map("n", "ld", ":Lspsaga show_line_diagnostics<CR>", silent_opts)
+map("n", "<leader>ld", ":Lspsaga show_line_diagnostics<CR>", silent_opts)
 map("n", "[e", ":Lspsaga diagnostic_jump_next<CR>", silent_opts)
 map("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", silent_opts)
 -- map("n", "tr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
@@ -98,3 +107,20 @@ map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_fol
 -- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 -- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+
+--------------------------------------------------------------------
+-- Debugging
+--------------------------------------------------------------------
+map("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>", silent_opts)
+map("n", "<F10>", "<cmd>lua require'dap'.step_over()<CR>", silent_opts)
+map("n", "<F11>", "<cmd>lua require'dap'.step_into()<CR>", silent_opts)
+map("n", "<F12>", "<cmd>lua require'dap'.step_out()<CR>", silent_opts)
+map("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", silent_opts)
+map("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", silent_opts)
+map("n", "<leader>dlb", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", silent_opts)
+map("n", "<leader>de", "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", silent_opts)
+map("n", "<leader>dr", "<cmd>lua require'dap'.repl_open({}, 'vsplit')<CR><C-w>l", silent_opts)
+map("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<CR>", silent_opts)
+map("n", "<leader>dK", "<cmd>lua require'dap.ui.variables'.hover(function () return vim.fn.expand('<cexpr>') end)<CR>", silent_opts)
+map("v", "<leader>dK", "<cmd>lua require'dap.ui.variables'.visual_hover()<CR>", silent_opts)
+map("n", "<leader>d?", "<cmd>lua require'dap.ui.variables'.scopes()<CR>", silent_opts)
