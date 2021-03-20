@@ -40,6 +40,7 @@ vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
 g.vim_json_syntax_conceal = 0
 g.indentLine_enabled = 1
 g.indentLine_char_list = {'▏'}
+g.indentLine_color_gui = '#2c394a'
 
 g.dap_virtual_text = 'all frames'
 
