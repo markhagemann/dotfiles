@@ -1,3 +1,18 @@
+
+local cmd = vim.cmd
+local g = vim.g
+
+cmd("colorscheme ayu")
+cmd('let ayucolor="mirage"')
+cmd("let ayu_comment_italic=1")
+cmd("let ayu_string_italic=0")
+cmd("let ayu_type_italic=1")
+cmd("let ayu_keyword_italic=1")
+cmd("syntax enable")
+cmd("syntax on")
+vim.api.nvim_command('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
+vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
+
 -- load plugins
 require("blamer-nvim.lua")
 require("lspkind").init(
@@ -22,20 +37,7 @@ require("web-devicons.lua")
 require "colorizer".setup()
 require('nvim_comment').setup()
 
-local cmd = vim.cmd
-local g = vim.g
-
-cmd("colorscheme ayu")
-cmd('let ayucolor="mirage"')
-cmd("let ayu_comment_italic=1")
-cmd("let ayu_string_italic=0")
-cmd("let ayu_type_italic=1")
-cmd("let ayu_keyword_italic=1")
-cmd("syntax enable")
-cmd("syntax on")
-vim.api.nvim_command('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
-vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
-
+-- Misc plugin settings
 g.vim_json_syntax_conceal = 0
 g.indentLine_enabled = 1
 g.indentLine_char_list = {'▏'}

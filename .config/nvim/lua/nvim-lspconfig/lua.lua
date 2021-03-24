@@ -9,7 +9,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
         {
             underline = false,
             update_in_insert = false,
-            virtual_text = false,
+            virtual_text = true,
         }
     )(...)
     pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
