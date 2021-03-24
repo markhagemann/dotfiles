@@ -109,6 +109,12 @@ map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_fol
 map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
 --------------------------------------------------------------------
+--sbdchd/neoformat
+--------------------------------------------------------------------
+map("n", "<leader>f", ":Neoformat eslint_d<CR>", opts)
+map("v", "<leader>f", ":Neoformat eslint_d<CR>", opts)
+
+--------------------------------------------------------------------
 -- Debugging
 --------------------------------------------------------------------
 map("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>", silent_opts)

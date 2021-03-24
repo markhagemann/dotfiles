@@ -171,6 +171,16 @@ lspconfig.efm.setup {
     }
 }
 
+vim.g.neoformat_vue_eslint_d = {
+  exe = 'eslint_d',
+  args = {'--stdin', '--stdin-filename', '"%:p"', '--fix-to-stdout'},
+  stdin = 1
+}
+
+vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_typescript = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_vue = {'prettier', 'eslint_d'}
+
 local function eslint_config_exists()
   local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
 
