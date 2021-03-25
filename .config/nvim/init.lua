@@ -12,6 +12,9 @@ cmd("syntax enable")
 cmd("syntax on")
 vim.api.nvim_command('autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o')
 vim.api.nvim_command('autocmd BufNewFile,BufRead * setlocal formatoptions-=cro')
+vim.api.nvim_command('autocmd FileType vim setlocal foldmethod=marker')
+-- vim.api.nvim_command('autocmd FileType javascript setlocal foldmethod=indent')
+vim.api.nvim_command('autocmd FileType markdown setlocal nofoldenable')
 
 -- load plugins
 require("blamer-nvim.lua")
@@ -59,6 +62,11 @@ cmd("highlight DiffAdd guifg=#81A1C1 guibg = none")
 cmd("highlight DiffChange guifg =#3A3E44 guibg = none")
 cmd("highlight DiffModified guifg = #81A1C1 guibg = none")
 cmd("highlight EndOfBuffer guifg=#282c34")
+
+cmd("highlight foldcolumn guibg=bg")
+cmd("highlight Folded guifg=#8294ad guibg=bg")
+cmd("highlight FoldColumn guifg=#233144")
+cmd("highlight clear SignColumn")
 
 cmd("highlight TelescopeBorder   guifg=#3e4451")
 cmd("highlight TelescopePromptBorder   guifg=#3e4451")

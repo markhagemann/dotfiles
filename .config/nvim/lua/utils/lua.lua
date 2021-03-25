@@ -21,6 +21,10 @@ opt("w", "number", true)
 opt("w", "rnu", true)
 opt("o", "numberwidth", 2)
 
+opt("o", "foldmethod", "indent")
+opt("o", "foldcolumn", "2")
+opt("o", "foldlevelstart", 99)
+
 opt("o", "mouse", "a")
 
 opt("w", "signcolumn", "yes")
