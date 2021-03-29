@@ -55,7 +55,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
 # Automatically start tmux
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
@@ -233,7 +233,8 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  sudo /etc/init.d/dbus start &> /dev/null
+  # sudo /etc/init.d/dbus start &> /dev/null
+  /etc/init.d/dbus start &> /dev/null
 fi
 
 export GDK_SCALE=0.5
@@ -244,3 +245,5 @@ export GDK_DPI_SCALE=1.25
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export YVM_DIR=/home/drache/.yvm

@@ -1,3 +1,4 @@
+require("pluginsList.lua")
 
 local cmd = vim.cmd
 local g = vim.g
@@ -29,7 +30,6 @@ require("nvim-autopairs").setup()
 require("nvim-compe.lua")
 require("nvim-lspconfig.lua")
 require("nvimTree.lua")
-require("pluginsList.lua")
 require("statusline.lua")
 require("telescope-nvim.lua")
 require("treesitter.lua")
