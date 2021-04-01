@@ -57,7 +57,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "-",
+    "_",
     ":NvimTreeFindFile<CR>",
     {
         noremap = true,

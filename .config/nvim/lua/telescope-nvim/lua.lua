@@ -1,19 +1,6 @@
 local action_state = require('telescope.actions.state')
 local actions = require('telescope.actions')
 
-require'telescope.builtin'.buffers{
-  attach_mappings = function(prompt_bufnr, map)
-    local delete_buf = function()
-      local selection = action_state.get_selected_entry()
-      actions.close(prompt_bufnr)
-      vim.api.nvim_buf_delete(selection.bufnr, { force = true })
-    end
-
-    map('i', 'X', delete_buf)
-
-    return true
-  end
-}
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -85,7 +72,6 @@ vim.api.nvim_set_keymap(
     opt
 )
 vim.api.nvim_set_keymap("n", "<Leader>g", [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
--- vim.api.nvim_set_keymap("n", "<Leader>b", [[<Cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ results_height = 15; previewer = false }))<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>b", [[<Cmd>lua require('mhagemann/telescope').my_buffer()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fh", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)

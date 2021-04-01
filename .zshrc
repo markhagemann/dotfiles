@@ -25,7 +25,9 @@ ZSH_DISABLE_COMPFIX=true
 # If you come from bash you might have to change your $PATH.
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
-export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
+export PATH=$PATH:$HOME/bin
+export PATH=~/.local/bin:$PATH
+# export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
 export PYENV_ROOT="$HOME/.pyenv"
 export GOPATH=$HOME/go
@@ -98,7 +100,7 @@ alias etmux="nvim ~/.tmux.conf"
 alias evim="nvim ~/.config/nvim/init.lua"
 alias ezsh="nvim ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
-alias oni="oni2.exe"
+# alias oni="oni2.exe"
 alias synctime="sudo hwclock -s"
 alias vim="nvim"
 
@@ -233,8 +235,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  # sudo /etc/init.d/dbus start &> /dev/null
-  /etc/init.d/dbus start &> /dev/null
+  sudo /etc/init.d/dbus start &> /dev/null
 fi
 
 export GDK_SCALE=0.5
