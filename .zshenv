@@ -1,5 +1,4 @@
 # Aliases
-alias code="code.exe"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
 alias df="dotfiles"

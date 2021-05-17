@@ -48,6 +48,8 @@ return require("packer").startup(
         use {"elzr/vim-json"}
         use {"plasticboy/vim-markdown"}
         use {"joukevandermaas/vim-ember-hbs"}
+        use{"leafgarland/typescript-vim"}
+        use{"peitalin/vim-jsx-typescript"}
         -- use {"andymass/vim-matchup"}
         -- Popup
         use {"nvim-lua/popup.nvim"}

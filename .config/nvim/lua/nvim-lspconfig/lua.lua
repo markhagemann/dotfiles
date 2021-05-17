@@ -154,11 +154,11 @@ lspconfig.efm.setup {
             lua = {luafmt},
             go = {golint, goimports},
             python = {black, isort, flake8, mypy},
-            vue = {eslint},
-            typescript = {eslint},
-            javascript = {eslint},
-            typescriptreact = {eslint},
-            javascriptreact = {eslint},
+            vue = {prettier, eslint},
+            typescript = {prettier, eslint},
+            javascript = {prettier, eslint},
+            typescriptreact = {prettier, eslint},
+            javascriptreact = {prettier, eslint},
             yaml = {prettier},
             json = {prettier},
             html = {prettier},
@@ -171,6 +171,18 @@ lspconfig.efm.setup {
     }
 }
 
+vim.g.neoformat_javascriptreact_eslint_d = {
+  exe = 'eslint_d',
+  args = {'--stdin', '--stdin-filename', '"%:p"', '--fix-to-stdout'},
+  stdin = 1
+}
+
+vim.g.neoformat_typescriptreact_eslint_d = {
+  exe = 'eslint_d',
+  args = {'--stdin', '--stdin-filename', '"%:p"', '--fix-to-stdout'},
+  stdin = 1
+}
+
 vim.g.neoformat_vue_eslint_d = {
   exe = 'eslint_d',
   args = {'--stdin', '--stdin-filename', '"%:p"', '--fix-to-stdout'},
@@ -179,6 +191,8 @@ vim.g.neoformat_vue_eslint_d = {
 
 vim.g.neoformat_enabled_javascript = {'prettier', 'eslint_d'}
 vim.g.neoformat_enabled_typescript = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_javascriptreact = {'prettier', 'eslint_d'}
+vim.g.neoformat_enabled_typescriptreact = {'prettier', 'eslint_d'}
 vim.g.neoformat_enabled_vue = {'prettier', 'eslint_d'}
 
 local function eslint_config_exists()
