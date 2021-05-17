@@ -24,6 +24,7 @@ return require("packer").startup(
         -- Git
         use {"APZelos/blamer.nvim"}
         use {"airblade/vim-gitgutter"}
+        use {"sindrets/diffview.nvim"}
         -- Icon support
         use {"kyazdani42/nvim-web-devicons"}
         -- use {

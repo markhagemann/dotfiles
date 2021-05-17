@@ -39,7 +39,8 @@ require("vim-better-whitespace.lua")
 require("vim-rooter.lua")
 require("web-devicons.lua")
 require "colorizer".setup()
-require('nvim_comment').setup()
+require("nvim_comment").setup()
+require("diffview.lua")
 
 -- Misc plugin settings
 g.vim_json_syntax_conceal = 0
