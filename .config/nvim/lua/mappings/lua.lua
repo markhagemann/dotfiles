@@ -130,3 +130,25 @@ map("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<CR>", silent_opts)
 map("n", "<leader>dK", "<cmd>lua require'dap.ui.variables'.hover(function () return vim.fn.expand('<cexpr>') end)<CR>", silent_opts)
 map("v", "<leader>dK", "<cmd>lua require'dap.ui.variables'.visual_hover()<CR>", silent_opts)
 map("n", "<leader>d?", "<cmd>lua require'dap.ui.variables'.scopes()<CR>", silent_opts)
+
+--------------------------------------------------------------------
+-- folke/trouble.vim
+--------------------------------------------------------------------
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+  {silent = true, noremap = true}
+)

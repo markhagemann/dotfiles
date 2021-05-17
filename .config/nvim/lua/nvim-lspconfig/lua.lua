@@ -3,13 +3,15 @@ vim.cmd [[packadd nvim-compe]]
 
 local lspconfig = require "lspconfig"
 
+-- TODO: Add toggle for virtual_text
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
     vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
         {
-            underline = false,
+            underline = true,
             update_in_insert = false,
             virtual_text = false,
+            signs = true,
         }
     )(...)
     pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})

@@ -6,7 +6,6 @@ return require("packer").startup(
         -- Package manager
         use {"wbthomason/packer.nvim", opt = true}
 
-
         -- Colorscheme
         use {"kuntau/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
@@ -40,6 +39,18 @@ return require("packer").startup(
         use {"neovim/nvim-lspconfig"}
         use {"glepnir/lspsaga.nvim"}
         use {"hrsh7th/nvim-compe"}
+        use {"folke/lsp-colors.nvim"}
+        use {
+          "folke/trouble.nvim",
+          requires = "kyazdani42/nvim-web-devicons",
+          config = function()
+            require("trouble").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+            }
+          end
+        }
         -- use {"alvan/vim-closetag"}
         use {"onsails/lspkind-nvim"}
         use {"nvim-treesitter/nvim-treesitter"}
