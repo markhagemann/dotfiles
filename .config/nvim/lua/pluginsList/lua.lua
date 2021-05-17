@@ -68,9 +68,21 @@ return require("packer").startup(
         use {"Konfekt/vim-scratchpad"}
         -- Statusline
         use {"glepnir/galaxyline.nvim"}
+        -- Todo Tracker
+        use {
+          "folke/todo-comments.nvim",
+          requires = "nvim-lua/plenary.nvim",
+          config = function()
+            require("todo-comments").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+            }
+          end
+        }
         -- Utility
         use {"tweekmonster/startuptime.vim"}
-        use {"nvim-lua/plenary.nvim"}
+        -- use {"nvim-lua/plenary.nvim"}
         -- Whitespace trim
         use {"ntpeters/vim-better-whitespace"}
         -- Word manipulation
