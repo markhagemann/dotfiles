@@ -1,5 +1,4 @@
 .dotfiles.git
-.dotfiles.git
 .git/
 .scratchpads/
 zsh_history_fix
@@ -36,3 +35,4 @@ vscode-node-debug2
 !.config/nvim
 !.config/jesseduffield
 .config
+.config/nvim/plugin/

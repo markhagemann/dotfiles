@@ -39,7 +39,7 @@ return require("packer").startup(
         use {"sbdchd/neoformat"}
         use {"neovim/nvim-lspconfig"}
         use {"glepnir/lspsaga.nvim"}
-        use {"hrsh7th/nvim-compe"}
+        use {"hrsh7th/nvim-compe", branch = 'master'}
         use {"folke/lsp-colors.nvim"}
         use {
           "folke/trouble.nvim",
