@@ -1,8 +1,1 @@
-# reporting: "off"
-# on: 1
-# gui:
-#   theme:
-#     selectedLineBgColor:
-#       - reverse
-#       - bold
-#
+reporting: "off"
