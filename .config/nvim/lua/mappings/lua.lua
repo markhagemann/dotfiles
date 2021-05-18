@@ -115,6 +115,11 @@ map("n", "<leader>f", ":Neoformat eslint_d<CR>", opts)
 map("v", "<leader>f", ":Neoformat eslint_d<CR>", opts)
 
 --------------------------------------------------------------------
+-- Konfekt/vim-scratchpad
+--------------------------------------------------------------------
+map("n", "<leader>dsp", ":<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>", opts)
+
+--------------------------------------------------------------------
 -- Debugging
 --------------------------------------------------------------------
 map("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>", silent_opts)

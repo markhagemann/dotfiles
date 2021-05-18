@@ -29,10 +29,9 @@ vscode-node-debug2
 .psql_history
 .profile
 .pki
+.config
 .config/nvim/.netrwhist
 .config/nvim/.scratchpads
-.config/nvim/plugin
+.config/nvim/plugin/
 !.config/nvim
 !.config/jesseduffield
-.config
-.config/nvim/plugin/

@@ -16,8 +16,6 @@ return require("packer").startup(
         -- File manager
         use {"airblade/vim-rooter"}
         use {"kyazdani42/nvim-tree.lua"}
-        -- File searching and replacing
-        use {"brooth/far.vim"}
         -- Fuzzy finder
         use {"nvim-telescope/telescope.nvim"}
         use {"nvim-telescope/telescope-media-files.nvim"}
@@ -83,6 +81,7 @@ return require("packer").startup(
         }
         -- Utility
         use {"tweekmonster/startuptime.vim"}
+        use {"tpope/vim-abolish"}
         -- use {"nvim-lua/plenary.nvim"}
         -- Whitespace trim
         use {"ntpeters/vim-better-whitespace"}
