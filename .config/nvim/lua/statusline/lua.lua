@@ -132,7 +132,7 @@ gls.left[7] = {
     condition = checkwidth,
     -- separator = ' | ',
     -- separator_highlight = {colors.darkblue,colors.bg},
-    icon = '  ',
+    icon = '   ',
     highlight = {colors.green,colors.bg},
   }
 }

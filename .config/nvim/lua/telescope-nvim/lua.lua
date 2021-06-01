@@ -72,7 +72,8 @@ vim.api.nvim_set_keymap(
     opt
 )
 vim.api.nvim_set_keymap("n", "<Leader>g", [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>b", [[<Cmd>lua require('mhagemann/telescope').my_buffer()<CR>]], opt)
+vim.api.nvim_set_keymap("n", "<Leader>b", [[<Cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ results_height = 15; previewer = false }))<CR>]], opt)
+-- vim.api.nvim_set_keymap("n", "<Leader>b", [[<Cmd>lua require('mhagemann/telescope').my_buffer()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fh", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>f", [[<Cmd> Neoformat<CR>]], opt)

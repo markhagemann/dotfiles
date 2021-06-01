@@ -3,8 +3,25 @@ local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
 return require("packer").startup(
     function()
+        -------------------
         -- Package manager
+        -------------------
         use {"wbthomason/packer.nvim", opt = true}
+
+        -------------------
+        -- Commonly depended on
+        -------------------
+
+        -- Icon support
+        use {"kyazdani42/nvim-web-devicons"}
+        -- Popup
+        use {"nvim-lua/popup.nvim"}
+        -- Utility
+        use {"nvim-lua/plenary.nvim"}
+
+        -------------------
+        -- General
+        -------------------
 
         -- Colorscheme
         use {"kuntau/ayu-vim"}
@@ -17,14 +34,16 @@ return require("packer").startup(
         use {"airblade/vim-rooter"}
         use {"kyazdani42/nvim-tree.lua"}
         -- Fuzzy finder
-        use {"nvim-telescope/telescope.nvim"}
+        use {
+          'nvim-telescope/telescope.nvim',
+          requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+        }
         use {"nvim-telescope/telescope-media-files.nvim"}
         -- Git
         use {"APZelos/blamer.nvim"}
         use {"airblade/vim-gitgutter"}
         use {"sindrets/diffview.nvim"}
         -- Icon support
-        use {"kyazdani42/nvim-web-devicons"}
         -- use {
         --   'yamatsum/nvim-web-nonicons',
         --   requires = {'kyazdani42/nvim-web-devicons'}
@@ -61,8 +80,6 @@ return require("packer").startup(
         use{"leafgarland/typescript-vim"}
         use{"peitalin/vim-jsx-typescript"}
         -- use {"andymass/vim-matchup"}
-        -- Popup
-        use {"nvim-lua/popup.nvim"}
         -- Scratchpad
         use {"Konfekt/vim-scratchpad"}
         -- Statusline
@@ -82,7 +99,6 @@ return require("packer").startup(
         -- Utility
         use {"tweekmonster/startuptime.vim"}
         use {"tpope/vim-abolish"}
-        -- use {"nvim-lua/plenary.nvim"}
         -- Whitespace trim
         use {"ntpeters/vim-better-whitespace"}
         -- Word manipulation
