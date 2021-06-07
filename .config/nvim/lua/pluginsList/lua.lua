@@ -24,6 +24,7 @@ return require("packer").startup(
         -------------------
 
         -- Colorscheme
+        use {"folke/tokyonight.nvim"}
         use {"kuntau/ayu-vim"}
         use {"norcalli/nvim-colorizer.lua"}
         -- Debugging
@@ -31,9 +32,20 @@ return require("packer").startup(
         use {"mfussenegger/nvim-dap"}
         use {"theHamsta/nvim-dap-virtual-text"}
         -- File manager
+        use {
+          "ahmedkhalf/lsp-rooter.nvim",
+          config = function()
+            require("lsp-rooter").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+            }
+          end
+        }
         use {"airblade/vim-rooter"}
         use {"kyazdani42/nvim-tree.lua"}
         -- Fuzzy finder
+        use {"famiu/bufdelete.nvim"}
         use {
           'nvim-telescope/telescope.nvim',
           requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
@@ -77,8 +89,9 @@ return require("packer").startup(
         use {"elzr/vim-json"}
         use {"plasticboy/vim-markdown"}
         use {"joukevandermaas/vim-ember-hbs"}
-        use{"leafgarland/typescript-vim"}
-        use{"peitalin/vim-jsx-typescript"}
+        use {"leafgarland/typescript-vim"}
+        use {"peitalin/vim-jsx-typescript"}
+        use {"folke/lua-dev.nvim"}
         -- use {"andymass/vim-matchup"}
         -- Scratchpad
         use {"Konfekt/vim-scratchpad"}
