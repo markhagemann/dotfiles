@@ -120,8 +120,8 @@ gls.left[4] = {
 gls.left[5] = {
   GitBranch = {
     provider = 'GitBranch',
-    -- separator = ' ',
-    -- separator_highlight = {colors.purple,colors.bg},
+    separator = ' ',
+    separator_highlight = {colors.darkblue,colors.bg},
     condition = buffer_not_empty,
     highlight = {colors.grey,colors.bg},
   }
