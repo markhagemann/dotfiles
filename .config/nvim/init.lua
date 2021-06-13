@@ -43,6 +43,7 @@ require("nvim_comment").setup()
 require("diffview.lua")
 
 -- Misc plugin settings
+g.gitgutter_sign_priority=1
 g.vim_json_syntax_conceal = 0
 g.indentLine_enabled = 1
 g.indentLine_char_list = {'▏'}

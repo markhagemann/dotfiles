@@ -30,10 +30,12 @@ export PATH=~/.local/bin:$PATH
 # export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
 export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
 export PYENV_ROOT="$HOME/.pyenv"
-export GOPATH=$HOME/go
-export PATH="$PATH:$GOPATH/bin"
+export PATH=$PATH:/usr/local/go/bin
+export HOMEGOPATH=$HOME/go
+export PATH="$PATH:$HOMEGOPATH/bin"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 
@@ -78,7 +80,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node npx tmux z zsh-pyenv zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 function zshalias()
 {
@@ -211,7 +213,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  sudo /etc/init.d/dbus start &> /dev/null
+  /etc/init.d/dbus start &> /dev/null
 fi
 
 export GDK_SCALE=0.5
@@ -222,5 +224,3 @@ export GDK_DPI_SCALE=1.25
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export YVM_DIR=/home/drache/.yvm
