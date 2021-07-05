@@ -27,12 +27,10 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH=$PATH:$HOME/bin
 export PATH=~/.local/bin:$PATH
-# export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
-export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
-export PYENV_ROOT="$HOME/.pyenv"
 export PATH=$PATH:/usr/local/go/bin
 export HOMEGOPATH=$HOME/go
 export PATH="$PATH:$HOMEGOPATH/bin"
+export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
@@ -213,7 +211,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  /etc/init.d/dbus start &> /dev/null
+  sudo /etc/init.d/dbus start &> /dev/null
 fi
 
 export GDK_SCALE=0.5
