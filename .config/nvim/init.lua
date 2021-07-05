@@ -45,9 +45,8 @@ require("diffview.lua")
 -- Misc plugin settings
 g.gitgutter_sign_priority=1
 g.vim_json_syntax_conceal = 0
-g.indentLine_enabled = 1
-g.indentLine_char_list = {'▏'}
-g.indentLine_color_gui = '#2c394a'
+g.indent_blankline_enabled = 1
+g.indent_blankline_char_list = {'▏'}
 
 g.dap_virtual_text = 'all frames'
 
@@ -56,6 +55,7 @@ g.mapleader = " "
 -- highlights
 cmd("highlight Normal ctermbg=NONE guibg=NONE")
 cmd("highlight NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE")
+cmd("highlight IndentBlanklineChar guifg=#2c394a gui=nocombine")
 cmd("highlight VertSplit guibg=NONE guifg=#151b23")
 cmd("highlight LineNr guibg=NONE")
 cmd("highlight CursorLineNr guifg=#5CCFE6 guibg=NONE")

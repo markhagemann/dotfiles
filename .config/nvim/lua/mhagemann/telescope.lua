@@ -15,7 +15,6 @@ m.my_buffer = function()
     return true
   end
   opts.previewer = false
-  opts.results_height = 15
   opts.initial_mode = 'normal'
   -- define more opts here
   -- opts.show_all_buffers = true

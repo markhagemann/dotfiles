@@ -62,7 +62,6 @@ return require("packer").startup(
         -- }
         -- Line indent
         use {"lukas-reineke/indent-blankline.nvim"}
-        use { 'Yggdroot/indentLine'}
         -- LSP
         use {"tpope/vim-sleuth"}
         use {"sbdchd/neoformat"}
