@@ -47,7 +47,14 @@ vim.lsp.protocol.CompletionItemKind = {
 
 -- https://github.com/theia-ide/typescript-language-server
 lspconfig.tsserver.setup {
-    on_attach = on_attach
+ on_attach = function(client, bufnr)
+  require "lsp_signature".on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "single"
+    }
+  })
+  end
 }
 
 local function get_lua_runtime()

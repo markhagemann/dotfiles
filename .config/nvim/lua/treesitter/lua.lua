@@ -11,6 +11,9 @@ require'nvim-treesitter.configs'.setup {
         "lua"
     },
     autotag = {enable = true},
+    context_commentstring = {
+        enable = true
+    },
     highlight = {
         enable = true,
         use_languagetree = true

@@ -66,6 +66,8 @@ return require("packer").startup(
         use {"tpope/vim-sleuth"}
         use {"sbdchd/neoformat"}
         use {"neovim/nvim-lspconfig"}
+        use {"kabouzeid/nvim-lspinstall"}
+        use {"ray-x/lsp_signature.nvim"}
         use {"glepnir/lspsaga.nvim"}
         use {"hrsh7th/nvim-compe", branch = 'master'}
         use {"folke/lsp-colors.nvim"}
@@ -115,6 +117,7 @@ return require("packer").startup(
         use {"ntpeters/vim-better-whitespace"}
         -- Word manipulation
         use {"terrortylor/nvim-comment"}
+        use {"JoosepAlviste/nvim-ts-context-commentstring"}
         use {"chaoren/vim-wordmotion"}
     end
 )
