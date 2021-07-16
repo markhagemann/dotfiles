@@ -12,12 +12,7 @@ local config = {
   },
   -- list of plugins that should be taken from ~/projects
   -- this is NOT packer functionality!
-  local_plugins = {
-    folke = true,
-    ["nvim-compe"] = false,
-    ["null-ls.nvim"] = true,
-    -- ["nvim-treesitter"] = true,
-  },
+  local_plugins = {},
 }
 
 local function plugins(use)
@@ -29,17 +24,18 @@ local function plugins(use)
     "neovim/nvim-lspconfig",
     opt = true,
     event = "BufReadPre",
-    wants = { "workspace.nvim", "nvim-lsp-ts-utils", "null-ls.nvim", "lua-dev.nvim" },
+    wants = { "nvim-lsp-ts-utils", "null-ls.nvim", "lua-dev.nvim" },
     config = function()
       require("config.lsp")
     end,
     requires = {
-      "folke/workspace.nvim",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
     },
   })
+
+  use({"ray-x/lsp_signature.nvim"})
 
   use({
     "hrsh7th/nvim-compe",
@@ -95,34 +91,27 @@ local function plugins(use)
     config = [[require('config.treesitter')]],
   })
 
-  -- Theme: color schemes
-  -- use("tjdevries/colorbuddy.vim")
-  use({
-    -- "shaunsingh/nord.nvim",
-    -- "shaunsingh/moonlight.nvim",
-    -- { "olimorris/onedark.nvim", requires = "rktjmp/lush.nvim" },
-    -- "joshdick/onedark.vim",
-    -- "wadackel/vim-dogrun",
-    -- { "npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim" },
-    -- "bluz71/vim-nightfly-guicolors",
-    -- { "marko-cerovac/material.nvim" },
-    -- "sainnhe/edge",
-    -- { "embark-theme/vim", as = "embark" },
-    -- "norcalli/nvim-base16.lua",
-    -- "RRethy/nvim-base16",
-    -- "novakne/kosmikoa.nvim",
-    -- "glepnir/zephyr-nvim",
-    -- "ghifarit53/tokyonight-vim"
-    -- "sainnhe/sonokai",
-    -- "morhetz/gruvbox",
-    -- "arcticicestudio/nord-vim",
-    -- "drewtempelmeyer/palenight.vim",
-    -- "Th3Whit3Wolf/onebuddy",
-    -- "christianchiarulli/nvcode-color-schemes.vim",
-    -- "Th3Whit3Wolf/one-nvim"
+  -- Debugging
+  use ({"mfussenegger/nvim-lua-debugger"})
+  use ({"mfussenegger/nvim-dap"})
+  use ({"theHamsta/nvim-dap-virtual-text"})
 
+  -- File Manager
+  use ({"kyazdani42/nvim-tree.lua"})
+  use {
+    "ahmedkhalf/lsp-rooter.nvim",
+    config = function()
+      require("lsp-rooter").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  -- Theme: color schemes
+  use({
     "folke/tokyonight.nvim",
-    -- event = "VimEnter",
     config = function()
       require("config.theme")
     end,
@@ -174,12 +163,11 @@ local function plugins(use)
       require("config.telescope")
     end,
     cmd = { "Telescope" },
-    keys = { "<leader><space>", "<leader>fz", "<leader>pp" },
+    keys = { "<C-p>" },
     wants = {
       "plenary.nvim",
       "popup.nvim",
       "telescope-z.nvim",
-      -- "telescope-frecency.nvim",
       "telescope-fzy-native.nvim",
       "telescope-project.nvim",
       "trouble.nvim",
@@ -192,7 +180,6 @@ local function plugins(use)
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-symbols.nvim",
       "nvim-telescope/telescope-fzy-native.nvim",
-      -- { "nvim-telescope/telescope-frecency.nvim", requires = "tami5/sql.nvim" }
     },
   })
 
@@ -239,9 +226,9 @@ local function plugins(use)
       require("config.specs")
     end,
   })
-  -- use { "Xuyuanp/scrollbar.nvim", config = function() require("config.scrollbar") end }
 
-  -- Git Gutter
+  -- Git 
+  use {"APZelos/blamer.nvim"}
   use({
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -251,11 +238,6 @@ local function plugins(use)
       require("config.gitsigns")
     end,
   })
-  -- use {
-  --   "kdheepak/lazygit.nvim",
-  --   cmd = "LazyGit",
-  --   config = function() vim.g.lazygit_floating_window_use_plenary = 0 end
-  -- }
   use({
     "TimUntersberger/neogit",
     cmd = "Neogit",
@@ -297,12 +279,7 @@ local function plugins(use)
     cmd = { "MarkdownPreview" },
   })
 
-  -- use { "tjdevries/train.nvim", cmd = { "TrainClear", "TrainTextObj", "TrainUpDown", "TrainWord" } }
-
-  -- use({ "wfxr/minimap.vim", config = function()
-  --   require("config.minimap")
-  -- end })
-
+  -- Utility
   use({
     "phaazon/hop.nvim",
     keys = { "gh" },
@@ -343,6 +320,7 @@ local function plugins(use)
   })
 
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
+  use({"tpope/vim-abolish"})
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
@@ -395,9 +373,6 @@ local function plugins(use)
     end,
   })
 
-  -- use({ "wellle/targets.vim" })
-
-  -- use("DanilaMihailov/vim-tips-wiki")
   use("nanotee/luv-vimdocs")
   use({
     "andymass/vim-matchup",
