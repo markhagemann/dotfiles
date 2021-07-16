@@ -17,11 +17,11 @@ vim.g.dashboard_custom_header = {
 }
 
 vim.g.dashboard_custom_shortcut = {
-  ["last_session"] = "SPC s l",
-  ["find_history"] = "SPC f r",
-  ["find_file"] = "SPC spc",
-  ["new_file"] = "SPC f n",
-  ["change_colorscheme"] = "SPC h c",
-  ["find_word"] = "SPC f g",
-  ["book_marks"] = "SPC f b",
+  ["last_session"] = "<leader> s l",
+  ["find_history"] = "<leader> f r",
+  ["find_file"] = "<C-p>",
+  ["new_file"] = "<leader> f n",
+  -- ["change_colorscheme"] = "<leader> h c",
+  ["find_word"] = "<leader> /",
+  ["book_marks"] = "<leader> f b",
 }
