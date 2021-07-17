@@ -7,11 +7,22 @@ local presets = require("which-key.plugins.presets")
 presets.objects["a("] = nil
 wk.setup({ show_help = false, triggers = "auto", plugins = { spelling = true }, key_labels = { ["<leader>"] = "SPC" } })
 
+-- Edit Vim config file in a new tab.
+util.nmap("<leader>ev", ":tabnew $MYVIMRC<CR>")
+
+-- Remap macro record key
+util.nmap("Q", "q")
+util.nmap("q", "<Nop>")
+
+-- Update shiftwidth
+util.nmap("<leader>sw2", ":set shiftwidth=2<CR>", opts)
+util.nmap("<leader>sw4", ":set shiftwidth=4<CR>", opts)
+
 -- Move to window using the <ctrl> movement keys
-util.nmap("<left>", "<C-w>h")
-util.nmap("<down>", "<C-w>j")
-util.nmap("<up>", "<C-w>k")
-util.nmap("<right>", "<C-w>l")
+util.nmap("<C-h>", "<C-w>h")
+util.nmap("<C-j>", "<C-w>j")
+util.nmap("<C-k>", "<C-w>k")
+util.nmap("<C-l>", "<C-w>l")
 
 -- Resize window using <ctrl> arrow keys
 util.nnoremap("<S-Up>", ":resize +2<CR>")
@@ -28,8 +39,8 @@ util.vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 util.inoremap("<A-k>", "<Esc>:m .-2<CR>==gi")
 
 -- Switch buffers with tab
-util.nnoremap("<C-Left>", ":bprevious<cr>")
-util.nnoremap("<C-Right>", ":bnext<cr>")
+util.nnoremap("H", ":bprevious<cr>")
+util.nnoremap("L", ":bnext<cr>")
 
 -- Easier pasting
 util.nnoremap("[p", ":pu!<cr>")
@@ -51,12 +62,24 @@ util.onoremap("N", "'nN'[v:searchforward]", { expr = true })
 -- telescope <ctrl-r> in command line
 -- vim.cmd([[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]])
 
--- markdown
-util.nnoremap("=t", "<cmd>TableFormat<cr>")
-
 -- better indenting
 util.vnoremap("<", "<gv")
 util.vnoremap(">", ">gv")
+
+-- Press * to search for the term under the cursor or a visual selection and
+-- then press a key below to replace all instances of it in the current file.
+util.nmap("<leader>r", ":%s///g<Left><Left><Left>", opts)
+util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+
+-- The same as above but instead of acting on the whole file it will be
+-- restricted to the previously visually selected range. You can do that by
+-- pressing *, visually selecting the range you want it to apply to and then
+-- press a key below to replace all instances of it in the current selection.
+util.nmap("<leader>r", ":%s///g<Left><Left><Left>", opts)
+util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+
+-- Konfekt/vim-scratchpad
+util.nmap("<leader>dsp", ":<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>", opts)
 
 -- makes * and # work on visual mode too.
 vim.api.nvim_exec(
@@ -152,8 +175,9 @@ local leader = {
   },
   f = {
     name = "+file",
-    t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
-    f = { "<cmd>Telescope find_files<cr>", "Find File" },
+    t = { "<cmd>NvimTreeToggle<cr>", "NvimTreeToggle" },
+    f = { "<cmd>NvimTreeFindFile<cr>", "NvimTreeFindFile" },
+    p = { "<cmd>Telescope find_files<cr>", "Find File" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     n = { "<cmd>enew<cr>", "New File" },
     z = "Zoxide",
@@ -208,7 +232,7 @@ local leader = {
     l = { "<cmd>tablast<CR>", "Last" },
   },
   ["`"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-  [" "] = "Find File",
+  ["p"] = "Find File",
   ["."] = { ":Telescope file_browser<CR>", "Browse Files" },
   [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
   ["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },

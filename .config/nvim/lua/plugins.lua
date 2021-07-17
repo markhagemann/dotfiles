@@ -72,7 +72,7 @@ local function plugins(use)
     "b3nj5m1n/kommentary",
     opt = true,
     wants = "nvim-ts-context-commentstring",
-    keys = { "gc", "gcc" },
+    keys = { "<leader>/" },
     config = function()
       require("config.comments")
     end,
@@ -92,12 +92,26 @@ local function plugins(use)
   })
 
   -- Debugging
-  use ({"mfussenegger/nvim-lua-debugger"})
-  use ({"mfussenegger/nvim-dap"})
-  use ({"theHamsta/nvim-dap-virtual-text"})
+  use({
+    "mfussenegger/nvim-dap",
+    wants = { "mfussenegger/nvim-lua-debugger", "theHamsta/nvim-dap-virtual-text" },
+    config = function()
+      require("config.dap")
+    end,
+    requires = {
+      "mfussenegger/nvim-lua-debugger",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+  })
 
   -- File Manager
-  use ({"kyazdani42/nvim-tree.lua"})
+  use({
+    "kyazdani42/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeClose" },
+    config = function()
+      require("config.tree")
+    end,
+  })
   use {
     "ahmedkhalf/lsp-rooter.nvim",
     config = function()
@@ -126,9 +140,6 @@ local function plugins(use)
     end,
   })
 
-  -- Dashboard
-  use({ "glepnir/dashboard-nvim", config = [[require('config.dashboard')]] })
-
   use({
     "norcalli/nvim-terminal.lua",
     ft = "terminal",
@@ -145,14 +156,6 @@ local function plugins(use)
     module = "spectre",
     wants = { "plenary.nvim", "popup.nvim" },
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
-  })
-
-  use({
-    "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeClose" },
-    config = function()
-      require("config.tree")
-    end,
   })
 
   -- Fuzzy finder
@@ -211,6 +214,9 @@ local function plugins(use)
     end,
   })
 
+  -- Scratchpad
+  use({"Konfekt/vim-scratchpad"})
+
   -- Smooth Scrolling
   use({
     "karb94/neoscroll.nvim",
@@ -228,7 +234,12 @@ local function plugins(use)
   })
 
   -- Git 
-  use {"APZelos/blamer.nvim"}
+  use({
+    "APZelos/blamer.nvim",
+    config = function()
+      require("config.blamer")
+    end,
+  })
   use({
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -289,14 +300,6 @@ local function plugins(use)
       -- require("util").nmap("s", "<cmd>HopChar1<CR>")
       -- you can configure Hop the way you like here; see :h hop-config
       require("hop").setup({})
-    end,
-  })
-
-  use({
-    "ggandor/lightspeed.nvim",
-    event = "BufReadPost",
-    config = function()
-      require("config.lightspeed")
     end,
   })
 

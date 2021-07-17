@@ -57,7 +57,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
 # Automatically start tmux
-ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOSTART=true
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
