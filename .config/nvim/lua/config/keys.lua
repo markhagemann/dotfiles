@@ -15,10 +15,10 @@ util.nmap("Q", "q")
 util.nmap("q", "<Nop>")
 
 -- Allow for delete and paste to not replace my existing register
-util.nmap("d", '"_d')
-util.vmap("d", '"_d')
-util.xmap("d", '"_d')
-util.xmap("p", '"_dP')
+-- util.nmap("d", '"_d')
+-- util.vmap("d", '"_d')
+-- util.xmap("d", '"_d')
+-- util.xmap("p", '"_dP')
 
 -- Update shiftwidth
 util.nmap("<leader>sw2", ":set shiftwidth=2<CR>", opts)

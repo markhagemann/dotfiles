@@ -57,14 +57,9 @@ local function on_attach(client, bufnr)
   end
 end
 
-local lua_cmd = {
-  "/Users/folke/projects/lua-language-server/bin/macOS/lua-language-server",
-  "-E",
-  "-e",
-  "LANG=en",
-  "/Users/folke/projects/lua-language-server/main.lua",
-}
-lua_cmd = { "lua-language-server" }
+USER = vim.fn.expand('$USER')
+local sumneko_root_path = "/home/" .. USER .. "/packages/lua-language-server"
+local sumneko_binary = "/home/" .. USER .. "/packages/lua-language-server/bin/Linux/lua-language-server"
 
 local servers = {
   -- pyright = {},
@@ -80,7 +75,25 @@ local servers = {
   -- intelephense = {},
   efm = require("config.lsp.efm").config,
   sumneko_lua = {
-    cmd = lua_cmd,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+      Lua = {
+          runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+              -- Setup your lua path
+              path = vim.split(package.path, ';')
+          },
+          diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim'}
+          },
+          workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+          }
+      }
+    }
   },
   vimls = {},
   -- tailwindcss = {},
