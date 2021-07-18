@@ -67,15 +67,15 @@ local lua_cmd = {
 lua_cmd = { "lua-language-server" }
 
 local servers = {
-  pyright = {},
+  -- pyright = {},
   bashls = {},
   dockerls = {},
   tsserver = {},
   cssls = { cmd = { "css-languageserver", "--stdio" } },
-  rnix = {},
+  -- rnix = {},
   jsonls = { cmd = { "vscode-json-languageserver", "--stdio" } },
   html = { cmd = { "html-languageserver", "--stdio" } },
-  clangd = {},
+  -- clangd = {},
   -- gopls = {},
   -- intelephense = {},
   efm = require("config.lsp.efm").config,
