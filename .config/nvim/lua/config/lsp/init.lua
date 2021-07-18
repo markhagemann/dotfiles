@@ -78,12 +78,10 @@ local servers = {
   clangd = {},
   -- gopls = {},
   -- intelephense = {},
-  ["null-ls"] = {},
-  sumneko_lua = require("lua-dev").setup({
-    -- library = { plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" } },
-    lspconfig = { cmd = lua_cmd },
-  }),
   efm = require("config.lsp.efm").config,
+  sumneko_lua = {
+    cmd = lua_cmd,
+  },
   vimls = {},
   -- tailwindcss = {},
 }
@@ -94,8 +92,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = { "documentation", "detail", "additionalTextEdits" },
 }
 
-require("workspace").setup()
-require("config.lsp.null-ls").setup()
+-- require("workspace").setup()
+require("lua-dev").setup()
 
 for server, config in pairs(servers) do
   lspconfig[server].setup(vim.tbl_deep_extend("force", {

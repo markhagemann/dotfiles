@@ -24,13 +24,12 @@ local function plugins(use)
     "neovim/nvim-lspconfig",
     opt = true,
     event = "BufReadPre",
-    wants = { "nvim-lsp-ts-utils", "null-ls.nvim", "lua-dev.nvim" },
+    wants = { "nvim-lsp-ts-utils", "lua-dev.nvim" },
     config = function()
       require("config.lsp")
     end,
     requires = {
       "jose-elias-alvarez/nvim-lsp-ts-utils",
-      "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
     },
   })
@@ -72,7 +71,7 @@ local function plugins(use)
     "b3nj5m1n/kommentary",
     opt = true,
     wants = "nvim-ts-context-commentstring",
-    keys = { "gc", "gcc" },
+    keys = { "<C-_>", "gc", "gcc" },
     config = function()
       require("config.comments")
     end,

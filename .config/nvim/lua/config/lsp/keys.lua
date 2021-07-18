@@ -16,17 +16,17 @@ function M.setup(client, bufnr)
       l = {
         name = "+lsp",
         i = { "<cmd>LspInfo<cr>", "Lsp Info" },
-        a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "Add Folder" },
-        r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", "Remove Folder" },
-        l = {
-          "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-          "List Folders",
-        },
+        -- a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "Add Folder" },
+        -- r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", "Remove Folder" },
+        -- l = {
+        --   "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+        --   "List Folders",
+        -- },
       },
     },
     x = {
       s = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Search Document Diagnostics" },
-      w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
+      -- w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
     },
   }
 
@@ -59,9 +59,13 @@ function M.setup(client, bufnr)
   util.nnoremap("[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   util.nnoremap("]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 
-  for _, c in ipairs(client.resolved_capabilities.signature_help_trigger_characters) do
+  local trigger_chars = client.resolved_capabilities.signature_help_trigger_characters
+  trigger_chars = { "," }
+  for _, c in ipairs(trigger_chars) do
     util.inoremap(c, function()
-      vim.defer_fn(vim.lsp.buf.signature_help, 0)
+      vim.defer_fn(function()
+        -- pcall(vim.lsp.buf.signature_help)
+      end, 0)
       return c
     end, {
       noremap = true,
