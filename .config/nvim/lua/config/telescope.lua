@@ -88,7 +88,7 @@ local util = require("util")
 
 util.nnoremap("<C-p>", M.project_files)
 util.nnoremap("<Leader>fd", function()
-  require("telescope.builtin").git_files({ cwd = "~/dot" })
+  require("telescope.builtin").find_files({ cwd = "~/.config/" })
 end)
 
 util.nnoremap("<leader>fz", function()

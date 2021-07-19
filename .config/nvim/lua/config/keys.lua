@@ -21,8 +21,8 @@ util.nmap("q", "<Nop>")
 -- util.xmap("p", '"_dP')
 
 -- Update shiftwidth
-util.nmap("<leader>sw2", ":set shiftwidth=2<CR>", opts)
-util.nmap("<leader>sw4", ":set shiftwidth=4<CR>", opts)
+util.nmap("<leader>sw2", ":set shiftwidth=2<CR>")
+util.nmap("<leader>sw4", ":set shiftwidth=4<CR>")
 
 -- Move to window using the <ctrl> movement keys
 util.nmap("<C-h>", "<C-w>h")
@@ -74,18 +74,18 @@ util.vnoremap(">", ">gv")
 
 -- Press * to search for the term under the cursor or a visual selection and
 -- then press a key below to replace all instances of it in the current file.
-util.nmap("<leader>r", ":%s///g<Left><Left><Left>", opts)
-util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+util.nmap("<leader>r", ":%s///g<Left><Left><Left>")
+util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>")
 
 -- The same as above but instead of acting on the whole file it will be
 -- restricted to the previously visually selected range. You can do that by
 -- pressing *, visually selecting the range you want it to apply to and then
 -- press a key below to replace all instances of it in the current selection.
-util.nmap("<leader>r", ":%s///g<Left><Left><Left>", opts)
-util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+util.nmap("<leader>r", ":%s///g<Left><Left><Left>")
+util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>")
 
 -- Konfekt/vim-scratchpad
-util.nmap("<leader>dsp", ":<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>", opts)
+util.nmap("<leader>dsp", ":<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>")
 
 -- makes * and # work on visual mode too.
 vim.api.nvim_exec(
