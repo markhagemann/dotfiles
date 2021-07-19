@@ -11,8 +11,16 @@ local selene = {
 }
 
 local prettierLocal = {
-  formatCommand = "./node_modules/.bin/prettier --stdin --stdin-filepath ${INPUT}",
-  formatStdin = true,
+    formatCommand = ([[
+        ./node_modules/.bin/prettier
+        ${--config-precedence:configPrecedence}
+        ${--tab-width:tabWidth}
+        ${--single-quote:singleQuote}
+        ${--trailing-comma:trailingComma}
+    ]]):gsub(
+        "\n",
+        ""
+    )
 }
 
 local prettierGlobal = {
@@ -20,11 +28,22 @@ local prettierGlobal = {
   formatStdin = true,
 }
 
+-- local eslint = {
+--   lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
+--   lintIgnoreExitCode = true,
+--   lintStdin = true,
+--   lintFormats = { "%f(%l,%c): %tarning %m", "%f(%l,%c): %trror %m" },
+-- }
+
 local eslint = {
-  lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
-  lintIgnoreExitCode = true,
-  lintStdin = true,
-  lintFormats = { "%f(%l,%c): %tarning %m", "%f(%l,%c): %trror %m" },
+    lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = {
+        "%f(%l,%c): %tarning %m",
+        "%f(%l,%c): %rror %m"
+    },
+    lintSource = "eslint"
 }
 
 local shellcheck = {
@@ -46,7 +65,8 @@ local eslintPrettier = { prettierLocal, eslint }
 M.config = {
   init_options = { documentFormatting = true },
   settings = {
-    rootMarkers = { "package.json", ".git" },
+    -- rootMarkers = { "package.json", ".git" },
+    rootMarkers = {".git/"},
     languages = {
       lua = { selene, stylua },
       typescript = eslintPrettier,
