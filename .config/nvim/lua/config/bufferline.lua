@@ -1,10 +1,28 @@
 require("bufferline").setup({
   highlights = {
     buffer_selected = {
-        gui = "bold"
+      gui = "bold"
     },
     diagnostic_selected = {
-        gui = "bold"
+      gui = "bold"
+    },
+    error_diagnostic_selected = {
+      gui = "bold"
+    },
+    error_selected = {
+      gui = "bold"
+    },
+    info_diagnostic_selected = {
+      gui = "bold"
+    },
+    info_selected = {
+      gui = "bold"
+    },
+    warning_selected = {
+      gui = "bold"
+    },
+    warning_diagnostic_selected = {
+      gui = "bold"
     },
   },
   options = {

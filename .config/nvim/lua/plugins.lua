@@ -34,8 +34,8 @@ local function plugins(use)
     },
   })
 
-  use({"joukevandermaas/vim-ember-hbs"})
-  use({"ray-x/lsp_signature.nvim"})
+  use({ "joukevandermaas/vim-ember-hbs" })
+  use({ "ray-x/lsp_signature.nvim" })
 
   use({
     "hrsh7th/nvim-compe",
@@ -215,7 +215,7 @@ local function plugins(use)
   })
 
   -- Scratchpad
-  use({"Konfekt/vim-scratchpad"})
+  use({ "Konfekt/vim-scratchpad" })
 
   -- Smooth Scrolling
   use({
@@ -233,7 +233,7 @@ local function plugins(use)
     end,
   })
 
-  -- Git 
+  -- Git
   use({
     "APZelos/blamer.nvim",
     config = function()
@@ -323,7 +323,8 @@ local function plugins(use)
   })
 
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
-  use({"tpope/vim-abolish"})
+  use({ "tpope/vim-abolish" })
+  use({ "chaoren/vim-wordmotion" })
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
