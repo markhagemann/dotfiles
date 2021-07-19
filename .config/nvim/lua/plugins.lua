@@ -236,6 +236,7 @@ local function plugins(use)
   -- Git
   use({
     "APZelos/blamer.nvim",
+    after = "sindrets/diffview.nvim",
     config = function()
       require("config.blamer")
     end,
@@ -323,8 +324,14 @@ local function plugins(use)
   })
 
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
-  use({ "tpope/vim-abolish" })
-  use({ "chaoren/vim-wordmotion" })
+  use({
+    "tpope/vim-abolish",
+    event = "BufReadPre",
+  })
+  use({
+    "chaoren/vim-wordmotion",
+    event = "BufReadPre",
+  })
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
