@@ -34,6 +34,7 @@ local function plugins(use)
     },
   })
 
+  use({"joukevandermaas/vim-ember-hbs"})
   use({"ray-x/lsp_signature.nvim"})
 
   use({
