@@ -8,6 +8,7 @@ vim.bo.undofile = true ]]
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.opt.showcmd = false -- hide command from statusline
 vim.opt.autowrite = true -- enable auto write
 vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
