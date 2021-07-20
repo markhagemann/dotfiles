@@ -159,6 +159,7 @@ local function plugins(use)
   })
 
   -- Fuzzy finder
+  use({'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use({
     "nvim-telescope/telescope.nvim",
     opt = true,
@@ -171,10 +172,10 @@ local function plugins(use)
       "plenary.nvim",
       "popup.nvim",
       "telescope-z.nvim",
-      "telescope-fzy-native.nvim",
       "telescope-project.nvim",
       "trouble.nvim",
       "telescope-symbols.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim"
     },
     requires = {
       "nvim-telescope/telescope-z.nvim",
