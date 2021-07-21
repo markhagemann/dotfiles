@@ -31,10 +31,10 @@ util.nmap("<C-k>", "<C-w>k")
 util.nmap("<C-l>", "<C-w>l")
 
 -- Resize window using <ctrl> arrow keys
-util.nnoremap("<S-Up>", ":resize +2<CR>")
-util.nnoremap("<S-Down>", ":resize -2<CR>")
-util.nnoremap("<S-Left>", ":vertical resize -2<CR>")
-util.nnoremap("<S-Right>", ":vertical resize +2<CR>")
+util.nnoremap("<A-Up>", ":resize +2<CR>")
+util.nnoremap("<A-Down>", ":resize -2<CR>")
+util.nnoremap("<A-Left>", ":vertical resize -2<CR>")
+util.nnoremap("<A-Right>", ":vertical resize +2<CR>")
 
 -- Move Lines
 util.nnoremap("<A-j>", ":m .+1<CR>==")
