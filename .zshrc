@@ -40,19 +40,9 @@ fi
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-case "$(uname -s)" in
-
-  Linux)
-
-  # Used for linux when `host.docker.internal` doesn't work in docker-compose
-  export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
-  ;;
-
-esac
 
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# ZSH_THEME="spaceship"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
@@ -178,20 +168,6 @@ unsetopt correct_all
 setopt correct
 export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
-# Set Spaceship as prompt
-# autoload -U promptinit; promptinit
-# prompt spaceship
-# SPACESHIP_TIME_SHOW=true
-# SPACESHIP_TIME_COLOR=#00afff
-# SPACESHIP_TIME_12HR=true
-# SPACESHIP_DOCKER_SHOW=false
-# SPACESHIP_BATTERY_SHOW=false
-# SPACESHIP_PACKAGE_SHOW=false
-# SPACESHIP_NODE_SHOW=false
-# SPACESHIP_GIT_STATUS_STASHED=''
-# SPACESHIP_GIT_BRANCH_COLOR=#8787ff
-# SPACESHIP_DIR_COLOR=#00d7d7
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 _fix_cursor() {
@@ -207,6 +183,17 @@ export PATH=~/.yarn/bin:$PATH
 
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
+
+  case "$(uname -s)" in
+
+    Linux)
+
+    # Used for linux when `host.docker.internal` doesn't work in docker-compose
+    export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+    ;;
+
+  esac
+
   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 

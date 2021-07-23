@@ -175,7 +175,6 @@ local function plugins(use)
       "telescope-project.nvim",
       "trouble.nvim",
       "telescope-symbols.nvim",
-      "nvim-telescope/telescope-fzf-native.nvim"
     },
     requires = {
       "nvim-telescope/telescope-z.nvim",
@@ -183,7 +182,6 @@ local function plugins(use)
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-symbols.nvim",
-      "nvim-telescope/telescope-fzy-native.nvim",
     },
   })
 
@@ -237,7 +235,6 @@ local function plugins(use)
   -- Git
   use({
     "APZelos/blamer.nvim",
-    after = "sindrets/diffview.nvim",
     config = function()
       require("config.blamer")
     end,
