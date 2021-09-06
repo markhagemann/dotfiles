@@ -41,7 +41,7 @@ telescope.setup({
     --   },
     -- },
     -- file_sorter = require"telescope.sorters".get_fzy_file
-    -- file_ignore_patterns = {},
+    file_ignore_patterns = {"node_modules", ".lock"},
     -- generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
     -- shorten_path = true,
     winblend = 10,
