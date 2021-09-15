@@ -20,6 +20,7 @@ local function plugins(use)
   use({ "wbthomason/packer.nvim", opt = true })
 
   -- LSP
+  use({"tpope/vim-sleuth"})
   use({
     "neovim/nvim-lspconfig",
     opt = true,
@@ -33,7 +34,6 @@ local function plugins(use)
       "folke/lua-dev.nvim",
     },
   })
-
   use({ "joukevandermaas/vim-ember-hbs" })
   use({ "ray-x/lsp_signature.nvim" })
 
