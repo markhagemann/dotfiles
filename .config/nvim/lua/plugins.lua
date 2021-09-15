@@ -92,17 +92,17 @@ local function plugins(use)
   })
 
   -- Debugging
-  -- use({
-  --   "mfussenegger/nvim-dap",
-  --   wants = { "mfussenegger/nvim-lua-debugger", "theHamsta/nvim-dap-virtual-text" },
-  --   config = function()
-  --     require("config.dap")
-  --   end,
-  --   requires = {
-  --     "mfussenegger/nvim-lua-debugger",
-  --     "theHamsta/nvim-dap-virtual-text",
-  --   },
-  -- })
+  use({
+    "mfussenegger/nvim-dap",
+    wants = { "mfussenegger/nvim-lua-debugger", "theHamsta/nvim-dap-virtual-text" },
+    config = function()
+      require("config.dap")
+    end,
+    requires = {
+      "mfussenegger/nvim-lua-debugger",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+  })
 
   -- File Manager
   use({
