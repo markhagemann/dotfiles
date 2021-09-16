@@ -24,17 +24,11 @@ util.nmap("q", "<Nop>")
 util.nmap("<leader>sw2", ":set shiftwidth=2<CR>")
 util.nmap("<leader>sw4", ":set shiftwidth=4<CR>")
 
--- Move to window using the <ctrl> movement keys
-util.nmap("<C-h>", "<C-w>h")
-util.nmap("<C-j>", "<C-w>j")
-util.nmap("<C-k>", "<C-w>k")
-util.nmap("<C-l>", "<C-w>l")
-
 -- Resize window using <ctrl> arrow keys
-util.nnoremap("<A-Up>", ":resize +2<CR>")
-util.nnoremap("<A-Down>", ":resize -2<CR>")
-util.nnoremap("<A-Left>", ":vertical resize -2<CR>")
-util.nnoremap("<A-Right>", ":vertical resize +2<CR>")
+util.nnoremap("<C-k>", ":resize +2<CR>")
+util.nnoremap("<C-j>", ":resize -2<CR>")
+util.nnoremap("<C-h>", ":vertical resize -2<CR>")
+util.nnoremap("<C-l>", ":vertical resize +2<CR>")
 
 -- Move Lines
 util.nnoremap("<A-j>", ":m .+1<CR>==")
