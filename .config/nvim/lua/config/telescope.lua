@@ -17,7 +17,6 @@ telescope.setup({
 		-- mappings = { i = { ["<esc>"] = actions.close } },
 		vimgrep_arguments = {
 			"rg",
-			"--hidden",
 			"--color=never",
 			"--no-heading",
 			"--with-filename",
