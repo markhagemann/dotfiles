@@ -21,6 +21,7 @@ local function plugins(use)
 
 	-- LSP
 	use({ "tpope/vim-sleuth" })
+
 	use({
 		"neovim/nvim-lspconfig",
 		opt = true,
@@ -34,7 +35,9 @@ local function plugins(use)
 			"folke/lua-dev.nvim",
 		},
 	})
+
 	use({ "joukevandermaas/vim-ember-hbs" })
+
 	use({ "ray-x/lsp_signature.nvim" })
 
 	use({
@@ -141,7 +144,9 @@ local function plugins(use)
 			require("terminal").setup()
 		end,
 	})
+
 	use({ "nvim-lua/plenary.nvim", module = "plenary" })
+
 	use({ "nvim-lua/popup.nvim", module = "popup" })
 
 	use({
@@ -154,6 +159,7 @@ local function plugins(use)
 
 	-- Fuzzy finder
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+
 	use({
 		"nvim-telescope/telescope.nvim",
 		opt = true,
@@ -218,6 +224,7 @@ local function plugins(use)
 			require("config.scroll")
 		end,
 	})
+
 	use({
 		"edluffy/specs.nvim",
 		after = "neoscroll.nvim",
@@ -233,6 +240,7 @@ local function plugins(use)
 			require("config.blamer")
 		end,
 	})
+
 	use({
 		"lewis6991/gitsigns.nvim",
 		event = "BufReadPre",
@@ -242,6 +250,7 @@ local function plugins(use)
 			require("config.gitsigns")
 		end,
 	})
+
 	use({
 		"TimUntersberger/neogit",
 		cmd = "Neogit",
@@ -274,6 +283,7 @@ local function plugins(use)
 		requires = "godlygeek/tabular",
 		ft = "markdown",
 	})
+
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = function()
@@ -284,6 +294,13 @@ local function plugins(use)
 	})
 
 	-- Utility
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup()
+		end,
+	})
+
 	use({
 		"phaazon/hop.nvim",
 		keys = { "gh" },
