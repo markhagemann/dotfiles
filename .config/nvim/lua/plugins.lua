@@ -25,7 +25,7 @@ local function plugins(use)
 		"neovim/nvim-lspconfig",
 		opt = true,
 		event = "BufReadPre",
-		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim" },
+		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp" },
 		config = function()
 			require("config.lsp")
 		end,
@@ -38,7 +38,7 @@ local function plugins(use)
 	use({ "ray-x/lsp_signature.nvim" })
 
 	use({
-		"hrsh7th/nvim-compe",
+		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		opt = true,
 		config = function()
@@ -46,6 +46,10 @@ local function plugins(use)
 		end,
 		wants = { "LuaSnip" },
 		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
 			{
 				"L3MON4D3/LuaSnip",
 				wants = "friendly-snippets",
