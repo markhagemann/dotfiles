@@ -194,16 +194,6 @@ local function plugins(use)
 		end,
 	})
 
-	-- Tabs
-	use({
-		"akinsho/nvim-bufferline.lua",
-		event = "BufReadPre",
-		wants = "nvim-web-devicons",
-		config = function()
-			require("config.bufferline")
-		end,
-	})
-
 	-- Terminal
 	use({
 		"akinsho/nvim-toggleterm.lua",
