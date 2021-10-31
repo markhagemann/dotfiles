@@ -106,15 +106,15 @@ function M.log(msg, hl, name)
 end
 
 function M.warn(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultWarning", name)
+  M.log(msg, "DiagnosticWarn", name)
 end
 
 function M.error(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultError", name)
+  M.log(msg, "DiagnosticError", name)
 end
 
 function M.info(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultInformation", name)
+  M.log(msg, "DiagnosticInfo", name)
 end
 
 function M.toggle(option, silent)
@@ -165,6 +165,14 @@ function M.docs()
     project_name = name,
   }
   docgen.generate_readme(metadata)
+end
+
+function M.lsp_config()
+  local ret = {}
+  for _, client in pairs(vim.lsp.get_active_clients()) do
+    ret[client.name] = { root_dir = client.config.root_dir, settings = client.config.settings }
+  end
+  dump(ret)
 end
 
 return M
