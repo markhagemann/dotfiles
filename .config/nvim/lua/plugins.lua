@@ -26,7 +26,13 @@ local function plugins(use)
 		"neovim/nvim-lspconfig",
 		opt = true,
 		event = "BufReadPre",
-		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp", "e-kaput.nvim" },
+		wants = {
+			"nvim-lsp-ts-utils",
+			"lua-dev.nvim",
+			"cmp-nvim-lsp",
+			"e-kaput.nvim",
+			"nvim-lsp-installer",
+		},
 		config = function()
 			require("config.lsp")
 		end,
@@ -34,7 +40,12 @@ local function plugins(use)
 			"jose-elias-alvarez/nvim-lsp-ts-utils",
 			"folke/lua-dev.nvim",
 			"kaputi/e-kaput.nvim",
+			"williamboman/nvim-lsp-installer",
 		},
+	})
+	use({ -- Support for non-LSP stuff via LSP (configured in LSP)
+		"jose-elias-alvarez/null-ls.nvim",
+		branch = "main",
 	})
 
 	use({ "joukevandermaas/vim-ember-hbs" })
