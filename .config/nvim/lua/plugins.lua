@@ -293,6 +293,10 @@ local function plugins(use)
 	})
 
 	use({
+		"sayanarijit/exec-cursorline-insert-stdout.nvim",
+	})
+
+	use({
 		"phaazon/hop.nvim",
 		keys = { "gh" },
 		cmd = { "HopWord", "HopChar1" },

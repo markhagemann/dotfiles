@@ -65,17 +65,17 @@ vim.g.loaded_matchparen = 1
 
 -- Use proper syntax highlighting in code blocks
 local fences = {
-  "lua",
-  -- "vim",
-  "json",
-  "typescript",
-  "javascript",
-  "js=javascript",
-  "ts=typescript",
-  "shell=sh",
-  "python",
-  "sh",
-  "console=sh",
+	"lua",
+	-- "vim",
+	"json",
+	"typescript",
+	"javascript",
+	"js=javascript",
+	"ts=typescript",
+	"shell=sh",
+	"python",
+	"sh",
+	"console=sh",
 }
 vim.g.markdown_fenced_languages = fences
 
@@ -87,8 +87,8 @@ vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 
-vim.cmd([[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]])
-vim.cmd([[autocmd FileType markdown setlocal spell]])
+cmd([[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]])
+cmd([[autocmd FileType markdown setlocal spell]])
 
 -- Check if we need to reload the file when it changed
 cmd("au FocusGained * :checktime")
@@ -112,5 +112,5 @@ cmd([[autocmd BufRead,BufNewFile *.fish setfiletype fish]])
 cmd([[autocmd BufRead,BufNewFile *.nix setfiletype nix]])
 
 -- windows to close with "q"
-vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
+cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
