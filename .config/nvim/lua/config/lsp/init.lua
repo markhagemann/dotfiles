@@ -43,6 +43,7 @@ else
 	-- require("config.lsp.saga")
 	require("config.lsp.diagnostics")
 	require("config.lsp.kind").setup()
+	require("config.lsp.e-kaput")
 end
 
 local function on_attach(client, bufnr)

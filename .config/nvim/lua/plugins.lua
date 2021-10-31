@@ -26,13 +26,14 @@ local function plugins(use)
 		"neovim/nvim-lspconfig",
 		opt = true,
 		event = "BufReadPre",
-		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp" },
+		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp", "e-kaput.nvim"},
 		config = function()
 			require("config.lsp")
 		end,
 		requires = {
 			"jose-elias-alvarez/nvim-lsp-ts-utils",
 			"folke/lua-dev.nvim",
+			"kaputi/e-kaput.nvim",
 		},
 	})
 
