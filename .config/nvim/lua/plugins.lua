@@ -26,7 +26,7 @@ local function plugins(use)
 		"neovim/nvim-lspconfig",
 		opt = true,
 		event = "BufReadPre",
-		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp", "e-kaput.nvim"},
+		wants = { "nvim-lsp-ts-utils", "lua-dev.nvim", "cmp-nvim-lsp", "e-kaput.nvim" },
 		config = function()
 			require("config.lsp")
 		end,
@@ -53,6 +53,7 @@ local function plugins(use)
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"David-Kunz/cmp-npm",
 			"saadparwaiz1/cmp_luasnip",
 			{
 				"L3MON4D3/LuaSnip",

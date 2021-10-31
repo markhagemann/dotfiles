@@ -26,6 +26,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "npm", keyword_length = 4 },
 	},
 	formatting = {
 		format = require("config.lsp.kind").cmp_format(),
