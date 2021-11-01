@@ -62,28 +62,11 @@ telescope.setup({
 
 telescope.load_extension("z")
 
-local M = {}
-
-M.project_files = function(opts)
-  opts = opts or {}
-
-  local _git_pwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-
-  if vim.v.shell_error ~= 0 then
-    local client = vim.lsp.get_active_clients()[1]
-    if client then
-      opts.cwd = client.config.root_dir
-    end
-    require("telescope.builtin").find_files(opts)
-    return
-  end
-
-  require("telescope.builtin").git_files(opts)
-end
-
 local util = require("util")
 
-util.nnoremap("<C-p>", M.project_files)
+util.nnoremap("<C-p>", function()
+  require("telescope.builtin").find_files()
+end)
 util.nnoremap("<Leader>fd", function()
   require("telescope.builtin").find_files({ cwd = "~/.config/" })
 end)
