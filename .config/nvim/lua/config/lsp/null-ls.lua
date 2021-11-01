@@ -8,11 +8,11 @@ function M.setup(options)
     sources = {
       nls.builtins.formatting.prettier_d_slim,
       nls.builtins.formatting.stylua,
-      nls.builtins.formatting.fish_indent,
+      -- nls.builtins.formatting.fish_indent,
       nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
       nls.builtins.formatting.eslint_d,
       nls.builtins.diagnostics.shellcheck,
-      nls.builtins.diagnostics.markdownlint,
+      -- nls.builtins.diagnostics.markdownlint,
       nls.builtins.diagnostics.selene,
       nls.builtins.code_actions.gitsigns,
     },
