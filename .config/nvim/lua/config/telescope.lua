@@ -14,27 +14,26 @@ telescope.setup({
     },
   },
   defaults = {
-    layout_config = { prompt_position = "top", height = 0.4, vertical = { width = 0.5 } },
+    layout_config = { prompt_position = "top", height = 25, vertical = { width = 0.5 } },
     layout_strategy = "vertical",
+    preview = false,
     sorting_strategy = "ascending",
-    pickers = {
-      buffers = {
-        show_all_buffers = true,
-        sort_lastused = true,
-      },
-      find_files = {
-        hidden = true,
-      },
-      live_grep = {
-        layout_config = { prompt_position = "bottom", height = 0.6 },
-        layout_strategy = "horizontal",
-        preview = { check_mime_type = false },
+  },
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+    },
+    find_files = {
+      hidden = true,
+    },
+    live_grep = {
+      layout_config = { prompt_position = "bottom", height = 0.6 },
+      layout_strategy = "horizontal",
+      preview = {
+        check_mime_type = false,
       },
     },
-    -- preview = {
-    --   check_mime_type = false,
-    -- },
-    preview = false,
     mappings = { i = { ["<c-t>"] = trouble.open_with_trouble } },
     vimgrep_arguments = {
       "rg",
@@ -58,12 +57,7 @@ telescope.load_extension("fzf")
 local util = require("util")
 
 util.nnoremap("<C-p>", function()
-  require("telescope.builtin").find_files({
-    hidden = true,
-    layout_config = { prompt_position = "top", height = 0.3 },
-    layout_strategy = "vertical",
-    sorting_strategy = "ascending",
-  })
+  require("telescope.builtin").find_files()
 end)
 
 util.nnoremap("<leader>fz", function()
