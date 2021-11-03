@@ -195,6 +195,7 @@ local function plugins(use)
       "nvim-telescope/telescope-symbols.nvim",
     },
   })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
   -- Indent Guides and rainbow brackets
   use({
@@ -349,8 +350,6 @@ local function plugins(use)
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
-  use({ "mjlbach/babelfish.nvim", module = "babelfish" })
-
   use({
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
@@ -398,13 +397,10 @@ local function plugins(use)
     end,
   })
 
-  use("nanotee/luv-vimdocs")
   use({
     "andymass/vim-matchup",
     event = "CursorMoved",
   })
-  use({ "camspiers/snap", rocks = { "fzy" }, module = "snap" })
-  use("kmonad/kmonad-vim")
 end
 
 return packer.setup(config, plugins)

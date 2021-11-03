@@ -22,7 +22,15 @@ local servers = {
   jsonls = {},
   html = {},
   clangd = {},
-  sumneko_lua = {},
+  sumneko_lua = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
+    },
+  },
   vimls = {},
   eslint = {},
   ansiblels = {},
