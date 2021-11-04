@@ -23,6 +23,15 @@ telescope.setup({
     buffers = {
       show_all_buffers = true,
       sort_lastused = true,
+      theme = "dropdown",
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        },
+        n = {
+          ["<c-d>"] = "delete_buffer",
+        },
+      },
     },
     find_files = {
       hidden = true,
