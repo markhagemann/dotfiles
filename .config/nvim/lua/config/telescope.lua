@@ -13,17 +13,13 @@ telescope.setup({
       -- the default case_mode is "smart_case"
     },
   },
-  defaults = {
-    layout_config = { prompt_position = "top", height = 25, vertical = { width = 0.5 } },
-    layout_strategy = "vertical",
-    preview = false,
-    sorting_strategy = "ascending",
-  },
+  defaults = {},
   pickers = {
     buffers = {
       show_all_buffers = true,
       sort_lastused = true,
       theme = "dropdown",
+      previewer = false,
       mappings = {
         i = {
           ["<c-d>"] = "delete_buffer",
@@ -35,6 +31,8 @@ telescope.setup({
     },
     find_files = {
       hidden = true,
+      theme = "dropdown",
+      previewer = false,
     },
     live_grep = {
       layout_config = { prompt_position = "bottom", height = 0.6 },
@@ -44,15 +42,15 @@ telescope.setup({
       },
     },
     mappings = { i = { ["<c-t>"] = trouble.open_with_trouble } },
-    vimgrep_arguments = {
-      "rg",
-      "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-    },
+    -- vimgrep_arguments = {
+    --   "rg",
+    --   "--color=never",
+    --   "--no-heading",
+    --   "--with-filename",
+    --   "--line-number",
+    --   "--column",
+    --   "--smart-case",
+    -- },
     prompt_prefix = " ",
     selection_caret = " ",
     file_ignore_patterns = { "node_modules", ".lock" },
