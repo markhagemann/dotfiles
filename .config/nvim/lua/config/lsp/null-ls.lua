@@ -11,7 +11,7 @@ function M.setup(options)
       -- nls.builtins.formatting.fish_indent,
       nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
       nls.builtins.formatting.eslint_d,
-      nls.builtins.formatting.stylelint,
+      nls.builtins.formatting.stylelint_d,
       nls.builtins.diagnostics.shellcheck,
       -- nls.builtins.diagnostics.markdownlint,
       -- nls.builtins.diagnostics.selene,
