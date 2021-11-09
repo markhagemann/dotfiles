@@ -33,7 +33,7 @@ local servers = {
   },
   vimls = {},
   eslint = {},
-  ansiblels = {},
+  -- ansiblels = {},
   tailwindcss = {},
 }
 
