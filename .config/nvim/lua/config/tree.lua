@@ -6,9 +6,9 @@ vim.g.nvim_tree_show_icons = {
 	files = 1,
 }
 
-require("nvim-tree.events").on_nvim_tree_ready(function()
-	vim.cmd("NvimTreeRefresh")
-end)
+-- require("nvim-tree.events").on_nvim_tree_ready(function()
+-- 	vim.cmd("NvimTreeRefresh")
+-- end)
 
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 -- default mappings
