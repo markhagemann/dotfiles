@@ -49,6 +49,7 @@ local function plugins(use)
   })
 
   use({ "joukevandermaas/vim-ember-hbs" })
+  use({ "hashivim/vim-terraform" })
 
   use({ "ray-x/lsp_signature.nvim" })
 
