@@ -163,14 +163,6 @@ local function plugins(use)
 
   use({ "nvim-lua/popup.nvim", module = "popup" })
 
-  use({
-    "windwp/nvim-spectre",
-    opt = true,
-    module = "spectre",
-    wants = { "plenary.nvim", "popup.nvim" },
-    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
-  })
-
   -- Fuzzy finder
   use({
     "nvim-telescope/telescope.nvim",
@@ -218,6 +210,25 @@ local function plugins(use)
 
   -- Scratchpad
   use({ "Konfekt/vim-scratchpad" })
+
+  -- Search and replace
+  use({
+    "windwp/nvim-spectre",
+    opt = true,
+    module = "spectre",
+    wants = { "plenary.nvim", "popup.nvim" },
+    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
+  })
+
+  use({
+    "VonHeikemen/searchbox.nvim",
+    requires = {
+      { "MunifTanjim/nui.nvim" },
+    },
+    config = function()
+      require("config.searchbox")
+    end,
+  })
 
   -- Smooth Scrolling
   use({
