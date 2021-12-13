@@ -337,7 +337,7 @@ local function plugins(use)
     wants = "nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     config = function()
-      require("trouble").setup({ auto_open = false, auto_preview = false, mode = "lsp_document_diagnostics" })
+      require("trouble").setup({ auto_open = false, auto_preview = false, mode = "document_diagnostics" })
     end,
   })
 
