@@ -18,10 +18,11 @@ local config = {
 local function plugins(use)
   -- Packer can manage itself as an optional plugin
   use({ "wbthomason/packer.nvim", opt = true })
-
-  -- LSP
+  use({ "nvim-lua/plenary.nvim", module = "plenary" })
+  use({ "nvim-lua/popup.nvim", module = "popup" })
   use({ "tpope/vim-sleuth" })
 
+  -- LSP
   use({
     "neovim/nvim-lspconfig",
     opt = true,
@@ -124,6 +125,7 @@ local function plugins(use)
       "theHamsta/nvim-dap-virtual-text",
     },
   })
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
   -- File Manager
   use({
@@ -134,34 +136,14 @@ local function plugins(use)
     end,
   })
 
-  -- Theme: color schemes
+  -- Folds
   use({
-    "folke/tokyonight.nvim",
+    "anuvyklack/pretty-fold.nvim",
     config = function()
-      require("config.theme")
+      require("pretty-fold").setup({})
+      require("pretty-fold.preview").setup()
     end,
   })
-
-  -- Theme: icons
-  use({
-    "kyazdani42/nvim-web-devicons",
-    module = "nvim-web-devicons",
-    config = function()
-      require("nvim-web-devicons").setup({ default = true })
-    end,
-  })
-
-  use({
-    "norcalli/nvim-terminal.lua",
-    ft = "terminal",
-    config = function()
-      require("terminal").setup()
-    end,
-  })
-
-  use({ "nvim-lua/plenary.nvim", module = "plenary" })
-
-  use({ "nvim-lua/popup.nvim", module = "popup" })
 
   -- Fuzzy finder
   use({
@@ -199,15 +181,6 @@ local function plugins(use)
     end,
   })
 
-  -- Terminal
-  use({
-    "akinsho/nvim-toggleterm.lua",
-    keys = "<M-`>",
-    config = function()
-      require("config.terminal")
-    end,
-  })
-
   -- Scratchpad
   use({ "Konfekt/vim-scratchpad" })
 
@@ -218,16 +191,6 @@ local function plugins(use)
     module = "spectre",
     wants = { "plenary.nvim", "popup.nvim" },
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
-  })
-
-  use({
-    "VonHeikemen/searchbox.nvim",
-    requires = {
-      { "MunifTanjim/nui.nvim" },
-    },
-    config = function()
-      require("config.searchbox")
-    end,
   })
 
   -- Smooth Scrolling
@@ -281,6 +244,14 @@ local function plugins(use)
     wants = "nvim-web-devicons",
   })
 
+  -- Theme: color schemes
+  use({
+    "folke/tokyonight.nvim",
+    config = function()
+      require("config.theme")
+    end,
+  })
+
   use({
     "norcalli/nvim-colorizer.lua",
     event = "BufReadPre",
@@ -289,25 +260,18 @@ local function plugins(use)
     end,
   })
 
-  use({ "npxbr/glow.nvim", cmd = "Glow" })
-
+  -- Theme: icons
   use({
-    "plasticboy/vim-markdown",
-    opt = true,
-    requires = "godlygeek/tabular",
-    ft = "markdown",
-  })
-
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function()
-      vim.fn["mkdp#util#install"]()
+    "kyazdani42/nvim-web-devicons",
+    module = "nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup({ default = true })
     end,
-    ft = "markdown",
-    cmd = { "MarkdownPreview" },
   })
 
   -- Utility
+  use({ "npxbr/glow.nvim", cmd = "Glow" })
+
   use({
     "luukvbaal/stabilize.nvim",
     config = function()
@@ -361,19 +325,6 @@ local function plugins(use)
   })
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
-
-  use({
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    opt = true,
-    wants = "twilight.nvim",
-    requires = { "folke/twilight.nvim" },
-    config = function()
-      require("zen-mode").setup({
-        plugins = { gitsigns = true, tmux = true, kitty = { enabled = false, font = "+2" } },
-      })
-    end,
-  })
 
   use({
     "folke/todo-comments.nvim",
