@@ -13,7 +13,11 @@ telescope.setup({
       -- the default case_mode is "smart_case"
     },
   },
-  defaults = {},
+  defaults = {
+    preview = {
+      treesitter = false,
+    },
+  },
   pickers = {
     buffers = {
       show_all_buffers = true,
@@ -53,7 +57,15 @@ telescope.setup({
     -- },
     prompt_prefix = " ",
     selection_caret = " ",
-    file_ignore_patterns = { "node_modules", ".lock" },
+
+    file_ignore_patterns = {
+      "node_modules",
+      ".work/.*",
+      ".cache/.*",
+      ".idea/.*",
+      "dist/.*",
+      ".git/.*",
+    },
     winblend = 10,
   },
 })
