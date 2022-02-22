@@ -41,10 +41,6 @@ telescope.setup({
     live_grep = {
       layout_config = { prompt_position = "bottom", height = 0.6 },
       layout_strategy = "horizontal",
-      preview = {
-        treesitter = false,
-        check_mime_type = false,
-      },
     },
     mappings = { i = { ["<c-t>"] = trouble.open_with_trouble } },
     -- vimgrep_arguments = {
