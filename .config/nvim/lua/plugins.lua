@@ -104,14 +104,19 @@ local function plugins(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    opt = true,
-    event = "BufRead",
-    requires = {
-      { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
     config = [[require('config.treesitter')]],
   })
+  -- use({
+  --   "nvim-treesitter/nvim-treesitter",
+  --   run = ":TSUpdate",
+  --   opt = true,
+  --   event = "BufRead",
+  --   requires = {
+  --     { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+  --     "nvim-treesitter/nvim-treesitter-textobjects",
+  --   },
+  --   config = [[require('config.treesitter')]],
+  -- })
 
   -- Debugging
   use({
@@ -273,7 +278,7 @@ local function plugins(use)
   use({
     "bennypowers/nvim-regexplainer",
     config = function()
-      require("regexplainer").setup()
+      require("config.regexplainer")
     end,
     requires = {
       "nvim-lua/plenary.nvim",
