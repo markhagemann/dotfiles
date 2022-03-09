@@ -270,6 +270,16 @@ local function plugins(use)
   })
 
   -- Utility
+  use({
+    "bennypowers/nvim-regexplainer",
+    config = function()
+      require("regexplainer").setup()
+    end,
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  })
   use({ "npxbr/glow.nvim", cmd = "Glow" })
 
   use({
