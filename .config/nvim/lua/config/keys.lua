@@ -142,13 +142,13 @@ local leader = {
     ["b"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
     ["B"] = {
       "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-      "Set Breakpoint",
+      "Set Breakpoint Condition",
     },
     ["L"] = {
       "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-      "Set Breakpoint",
+      "Log point message",
     },
-    ["e"] = { "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", "Set Breakpoint" },
+    ["e"] = { "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", "Set Exception Breakpoint" },
     ["r"] = { "<cmd>lua require'dap'.repl_open({}, 'vsplit')<CR><C-w>l", "Repl Open" },
     ["l"] = { "<cmd>lua require'dap'.run_last()<CR>", "Run Last" },
     ["h"] = {

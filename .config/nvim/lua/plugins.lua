@@ -131,6 +131,7 @@ local function plugins(use)
     },
   })
   use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  use({ "Pocco81/DAPInstall.nvim" })
 
   -- File Manager
   use({
@@ -275,6 +276,20 @@ local function plugins(use)
   })
 
   -- Utility
+  use({
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup()
+    end,
+  })
+
+  use({
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  })
+
   use({
     "bennypowers/nvim-regexplainer",
     config = function()
