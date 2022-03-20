@@ -201,6 +201,18 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
   sudo /etc/init.d/dbus start &> /dev/null
+
+  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+  DOCKER_DISTRO="Ubuntu-20.04"
+  DOCKER_DIR=/mnt/wsl/shared-docker
+  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+  export DOCKER_HOST="unix://$DOCKER_SOCK"
+  if [ ! -S "$DOCKER_SOCK" ]; then
+      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+      chgrp docker "$DOCKER_DIR"
+      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+  fi
+
 fi
 
 export GDK_SCALE=0.5
