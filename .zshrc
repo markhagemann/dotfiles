@@ -1,3 +1,42 @@
+# WSL 2 specific settings.
+if grep -q "microsoft" /proc/version &>/dev/null; then
+
+  case "$(uname -s)" in
+
+    Linux)
+
+    # Used for linux when `host.docker.internal` doesn't work in docker-compose
+    export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+    ;;
+
+  esac
+
+  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+  export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+  export DISPLAY=$IP:0.0
+  export LIBGL_ALWAYS_INDIRECT=1
+
+  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+  sudo /etc/init.d/dbus start &> /dev/null
+
+  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+  DOCKER_DISTRO=$(. /etc/os-release; echo "$NAME")
+  DOCKER_DIR=/mnt/wsl/shared-docker
+  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+  export DOCKER_HOST="unix://$DOCKER_SOCK"
+  if [ ! -S "$DOCKER_SOCK" ]; then
+      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+      chgrp docker "$DOCKER_DIR"
+      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+  fi
+
+fi
+
+export GDK_SCALE=0.5
+export GDK_DPI_SCALE=1.25
+
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -180,46 +219,6 @@ precmd_functions+=(_fix_cursor)
 export YVM_DIR=$HOME/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 export PATH=~/.yarn/bin:$PATH
-
-# WSL 2 specific settings.
-if grep -q "microsoft" /proc/version &>/dev/null; then
-
-  case "$(uname -s)" in
-
-    Linux)
-
-    # Used for linux when `host.docker.internal` doesn't work in docker-compose
-    export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
-    ;;
-
-  esac
-
-  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-  export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-  export DISPLAY=$IP:0.0
-  export LIBGL_ALWAYS_INDIRECT=1
-
-  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  sudo /etc/init.d/dbus start &> /dev/null
-
-  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
-  DOCKER_DISTRO=$(. /etc/os-release; echo "$NAME")
-  DOCKER_DIR=/mnt/wsl/shared-docker
-  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
-  export DOCKER_HOST="unix://$DOCKER_SOCK"
-  if [ ! -S "$DOCKER_SOCK" ]; then
-      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-      chgrp docker "$DOCKER_DIR"
-      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
-  fi
-
-fi
-
-export GDK_SCALE=0.5
-export GDK_DPI_SCALE=1.25
-
-
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
