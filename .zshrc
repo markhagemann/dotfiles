@@ -203,7 +203,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   sudo /etc/init.d/dbus start &> /dev/null
 
   # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
-  DOCKER_DISTRO="Ubuntu-20.04"
+  DOCKER_DISTRO=$(. /etc/os-release; echo "$NAME")
   DOCKER_DIR=/mnt/wsl/shared-docker
   DOCKER_SOCK="$DOCKER_DIR/docker.sock"
   export DOCKER_HOST="unix://$DOCKER_SOCK"
