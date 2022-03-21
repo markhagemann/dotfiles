@@ -16,6 +16,7 @@ telescope.setup({
   defaults = {
     preview = {
       treesitter = false,
+      timeout = 3000,
     },
   },
   pickers = {
