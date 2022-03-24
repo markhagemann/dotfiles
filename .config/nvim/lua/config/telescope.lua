@@ -16,7 +16,6 @@ telescope.setup({
   defaults = {
     preview = {
       treesitter = false,
-      timeout = 3000,
     },
   },
   pickers = {
@@ -40,6 +39,7 @@ telescope.setup({
       previewer = false,
     },
     live_grep = {
+      debounce = 100,
       layout_config = { prompt_position = "bottom", height = 0.6 },
       layout_strategy = "horizontal",
     },
