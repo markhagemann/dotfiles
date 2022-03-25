@@ -21,7 +21,7 @@ telescope.setup({
   pickers = {
     buffers = {
       wrap_results = true,
-      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.4 },
+      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.5 },
       show_all_buffers = true,
       sort_lastused = true,
       theme = "dropdown",
@@ -38,7 +38,7 @@ telescope.setup({
     find_files = {
       wrap_results = true,
       ignore = true,
-      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.4 },
+      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.5 },
       theme = "dropdown",
       previewer = false,
     },
