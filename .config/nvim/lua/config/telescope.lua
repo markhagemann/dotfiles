@@ -20,6 +20,8 @@ telescope.setup({
   },
   pickers = {
     buffers = {
+      wrap_results = true,
+      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.4 },
       show_all_buffers = true,
       sort_lastused = true,
       theme = "dropdown",
@@ -34,13 +36,15 @@ telescope.setup({
       },
     },
     find_files = {
-      hidden = true,
+      wrap_results = true,
+      ignore = true,
+      layout_config = { anchor = "N", prompt_position = "bottom", height = 0.4, width = 0.4 },
       theme = "dropdown",
       previewer = false,
     },
     live_grep = {
       debounce = 100,
-      layout_config = { prompt_position = "bottom", height = 0.6 },
+      layout_config = { anchor = "NW", prompt_position = "top", height = 0.9, width = 0.9 },
       layout_strategy = "horizontal",
     },
     mappings = { i = { ["<c-t>"] = trouble.open_with_trouble } },
