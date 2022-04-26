@@ -2,10 +2,13 @@ local function clock()
   return " " .. os.date("%H:%M")
 end
 
-local function lsp_progress()
+local function lsp_progress(self, is_active)
+  if not is_active then
+    return
+  end
   local messages = vim.lsp.util.get_progress_messages()
   if #messages == 0 then
-    return
+    return ""
   end
   local status = {}
   for _, msg in pairs(messages) do
@@ -19,11 +22,13 @@ end
 
 vim.cmd([[autocmd User LspProgressUpdate let &ro = &ro]])
 
+local gps = require("nvim-gps")
+
 local config = {
   options = {
     theme = "tokyonight",
-    section_separators = { "", "" },
-    component_separators = { "", "" },
+    section_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
     -- section_separators = { "", "" },
     -- component_separators = { "", "" },
     icons_enabled = true,
@@ -31,7 +36,11 @@ local config = {
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch" },
-    lualine_c = { { "diagnostics", sources = { "nvim_diagnostic" } }, "filename" },
+    lualine_c = {
+      { "diagnostics", sources = { "nvim_lsp" } },
+      "filename",
+      { gps.get_location, cond = gps.is_available },
+    },
     lualine_x = { "filetype", lsp_progress },
     lualine_y = { "progress" },
     lualine_z = { clock },

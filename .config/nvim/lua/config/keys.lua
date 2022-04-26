@@ -126,12 +126,7 @@ local leader = {
   b = {
     name = "+buffer",
     ["b"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-    ["p"] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
-    ["["] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
-    ["n"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
-    ["]"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
     ["d"] = { "<cmd>:bd<CR>", "Delete Buffer" },
-    ["g"] = { "<cmd>:BufferLinePick<CR>", "Goto Buffer" },
   },
   d = {
     name = "+debugging",

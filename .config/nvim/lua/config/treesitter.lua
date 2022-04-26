@@ -1,9 +1,3 @@
-local gcc = vim.fn.getenv("NIX_GCC")
-
-if gcc and gcc ~= vim.NIL then
-  require("nvim-treesitter.install").compilers = { gcc }
-end
-
 local ts_configs = require("nvim-treesitter.configs")
 ts_configs.setup({
   ensure_installed = {
@@ -21,7 +15,7 @@ ts_configs.setup({
     "jsonc",
     "latex",
     "lua",
-    "nix",
+    "markdown",
     "python",
     "regex",
     "rust",
@@ -31,12 +25,13 @@ ts_configs.setup({
     "typescript",
     "vue",
     "yaml",
+    "wgsl",
     -- "json",
     -- "markdown",
   },
   highlight = { enable = true, use_languagetree = true },
   indent = { enable = false },
-  context_commentstring = { enable = true },
+  context_commentstring = { enable = true, enable_autocmd = false },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -50,6 +45,13 @@ ts_configs.setup({
     enable = true,
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold" },
+  },
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+    },
   },
   playground = {
     enable = true,
@@ -97,13 +99,3 @@ ts_configs.setup({
     },
   },
 })
-
--- Add Markdown
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.jsonc.filetype_to_parsername = "json"
-parser_config.markdown = {
-  install_info = {
-    url = "https://github.com/ikatyang/tree-sitter-markdown",
-    files = { "src/parser.c", "src/scanner.cc" },
-  },
-}

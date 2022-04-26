@@ -49,7 +49,7 @@ vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 vim.opt.wrap = false -- Disable line wrap
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
-vim.o.shortmess = "IToOlxfitn"
+-- vim.o.shortmess = "IToOlxfitn"
 
 -- don't load the plugins below
 vim.g.loaded_gzip = 1
@@ -105,9 +105,6 @@ cmd([[
 
 -- Highlight on yank
 cmd("au TextYankPost * lua vim.highlight.on_yank {}")
-
--- ftdetect
-cmd([[autocmd BufRead,BufNewFile *.fish setfiletype fish]])
 
 -- windows to close with "q"
 vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])

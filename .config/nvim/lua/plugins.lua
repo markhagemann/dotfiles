@@ -18,6 +18,8 @@ local config = {
 local function plugins(use)
   -- Packer can manage itself as an optional plugin
   use({ "wbthomason/packer.nvim", opt = true })
+  use({ "nathom/filetype.nvim" })
+  use({ "stevearc/dressing.nvim", event = "BufReadPre" })
   use({ "nvim-lua/plenary.nvim", module = "plenary" })
   use({ "nvim-lua/popup.nvim", module = "popup" })
   use({ "tpope/vim-sleuth" })
@@ -49,6 +51,16 @@ local function plugins(use)
     branch = "main",
   })
 
+  use({
+    "SmiteshP/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter",
+    wants = "nvim-treesitter",
+    module = "nvim-gps",
+    config = function()
+      require("nvim-gps").setup({ separator = "   " })
+    end,
+  })
+
   use({ "joukevandermaas/vim-ember-hbs" })
   use({ "hashivim/vim-terraform" })
 
@@ -77,6 +89,7 @@ local function plugins(use)
       },
       "rafamadriz/friendly-snippets",
       {
+        module = "nvim-autopairs",
         "windwp/nvim-autopairs",
         config = function()
           require("config.autopairs")
@@ -91,15 +104,15 @@ local function plugins(use)
   })
 
   use({
-    "b3nj5m1n/kommentary",
+    "numToStr/Comment.nvim",
     opt = true,
-    wants = "nvim-ts-context-commentstring",
-    keys = { "<C-_>", "gc", "gcc" },
+    keys = { "gc", "gcc", "gbc" },
     config = function()
       require("config.comments")
     end,
-    requires = "JoosepAlviste/nvim-ts-context-commentstring",
   })
+
+  use({ "JoosepAlviste/nvim-ts-context-commentstring", module = "ts_context_commentstring" })
 
   use({
     "nvim-treesitter/nvim-treesitter",

@@ -6,34 +6,36 @@ vim.o.completeopt = "menu,menuone,noselect"
 local cmp = require("cmp")
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			-- For `luasnip` user.
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-	},
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-		{ name = "path" },
-		{ name = "npm", keyword_length = 4 },
-	},
-	formatting = {
-		format = require("config.lsp.kind").cmp_format(),
-	},
-	documentation = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	},
+  snippet = {
+    expand = function(args)
+      -- For `luasnip` user.
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+    { name = "buffer" },
+    { name = "path" },
+    { name = "npm", keyword_length = 4 },
+  },
+  formatting = {
+    format = require("config.lsp.kind").cmp_format(),
+  },
+  window = {
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+  },
 })
 -- require("compe").setup({
 --   enabled = true,
