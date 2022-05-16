@@ -12,13 +12,14 @@ local config = {
   },
   -- list of plugins that should be taken from ~/projects
   -- this is NOT packer functionality!
+  opt_default = true,
   local_plugins = {},
 }
 
 local function plugins(use)
   -- Packer can manage itself as an optional plugin
-  use({ "wbthomason/packer.nvim", opt = true })
-  use({ "nathom/filetype.nvim" })
+  use({ "wbthomason/packer.nvim" })
+  use({ "nathom/filetype.nvim", opt = false })
   use({ "stevearc/dressing.nvim", event = "BufReadPre" })
   use({ "nvim-lua/plenary.nvim", module = "plenary" })
   use({ "nvim-lua/popup.nvim", module = "popup" })
@@ -27,10 +28,10 @@ local function plugins(use)
   -- LSP
   use({
     "neovim/nvim-lspconfig",
-    opt = true,
     event = "BufReadPre",
     wants = {
       "nvim-lsp-ts-utils",
+      "null-ls.nvim",
       "lua-dev.nvim",
       "cmp-nvim-lsp",
       "e-kaput.nvim",
@@ -41,6 +42,7 @@ local function plugins(use)
     end,
     requires = {
       "jose-elias-alvarez/nvim-lsp-ts-utils",
+      "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
       "kaputi/e-kaput.nvim",
       "williamboman/nvim-lsp-installer",
@@ -57,7 +59,7 @@ local function plugins(use)
     wants = "nvim-treesitter",
     module = "nvim-gps",
     config = function()
-      require("nvim-gps").setup({ separator = "   " })
+      require("nvim-gps").setup({ separator = " " })
     end,
   })
 
@@ -69,7 +71,6 @@ local function plugins(use)
   use({
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    opt = true,
     config = function()
       require("config.compe")
     end,
@@ -105,7 +106,6 @@ local function plugins(use)
 
   use({
     "numToStr/Comment.nvim",
-    opt = true,
     keys = { "gc", "gcc", "gbc" },
     config = function()
       require("config.comments")
@@ -114,22 +114,23 @@ local function plugins(use)
 
   use({ "JoosepAlviste/nvim-ts-context-commentstring", module = "ts_context_commentstring" })
 
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = [[require('config.treesitter')]],
-  })
   -- use({
   --   "nvim-treesitter/nvim-treesitter",
   --   run = ":TSUpdate",
-  --   opt = true,
-  --   event = "BufRead",
-  --   requires = {
-  --     { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
-  --     "nvim-treesitter/nvim-treesitter-textobjects",
-  --   },
   --   config = [[require('config.treesitter')]],
   -- })
+
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    event = "BufRead",
+    requires = {
+      { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-textsubjects",
+    },
+    config = [[require('config.treesitter')]],
+  })
 
   -- Debugging
   use({
@@ -158,6 +159,7 @@ local function plugins(use)
   -- Folds
   use({
     "anuvyklack/pretty-fold.nvim",
+    requires = "anuvyklack/nvim-keymap-amend",
     config = function()
       require("pretty-fold").setup({})
       require("pretty-fold.preview").setup()
@@ -167,7 +169,6 @@ local function plugins(use)
   -- Fuzzy finder
   use({
     "nvim-telescope/telescope.nvim",
-    opt = true,
     config = function()
       require("config.telescope")
     end,
@@ -206,7 +207,6 @@ local function plugins(use)
   -- Search and replace
   use({
     "windwp/nvim-spectre",
-    opt = true,
     module = "spectre",
     wants = { "plenary.nvim", "popup.nvim" },
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
@@ -266,6 +266,7 @@ local function plugins(use)
   -- Theme: color schemes
   use({
     "folke/tokyonight.nvim",
+    opt = false,
     config = function()
       require("config.theme")
     end,
