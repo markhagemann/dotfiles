@@ -1,11 +1,11 @@
 require("e-kaput").setup({
-	enabled = true, -- true | false,  Enable EKaput.
-	transparency = 25, -- 0 - 100 , transparecy percentage.
-	borders = false, -- true | false, Borders.
-	error_sign = "", -- Error sign.
-	warning_sign = "", -- Information sign.
-	hint_sign = "", -- Hint sign.
-	information_sign = "",
+  enabled = true, -- true | false,  Enable EKaput.
+  transparency = 25, -- 0 - 100 , transparecy percentage.
+  borders = false, -- true | false, Borders.
+  error_sign = "", -- Error sign.
+  warning_sign = "", -- Information sign.
+  hint_sign = "", -- Hint sign.
+  information_sign = "",
 })
 
 vim.cmd([[

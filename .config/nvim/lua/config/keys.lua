@@ -12,28 +12,17 @@ wk.setup({
   key_labels = { ["<leader>"] = "SPC" },
 })
 
--- Edit Vim config file in a new tab.
-util.nmap("<leader>ev", ":tabnew $MYVIMRC<CR>")
-
--- Remap macro record key
-util.nmap("Q", "q")
-util.nmap("q", "<Nop>")
-
--- Allow for delete and paste to not replace my existing register
--- util.nmap("d", '"_d')
--- util.vmap("d", '"_d')
--- util.xmap("d", '"_d')
--- util.xmap("p", '"_dP')
-
--- Update shiftwidth
-util.nmap("<leader>sw2", ":set shiftwidth=2<CR>")
-util.nmap("<leader>sw4", ":set shiftwidth=4<CR>")
+-- Move to window using the <ctrl> movement keys
+util.nmap("<left>", "<C-w>h")
+util.nmap("<down>", "<C-w>j")
+util.nmap("<up>", "<C-w>k")
+util.nmap("<right>", "<C-w>l")
 
 -- Resize window using <ctrl> arrow keys
-util.nnoremap("<C-k>", ":resize +2<CR>")
-util.nnoremap("<C-j>", ":resize -2<CR>")
-util.nnoremap("<C-h>", ":vertical resize -2<CR>")
-util.nnoremap("<C-l>", ":vertical resize +2<CR>")
+util.nnoremap("<S-Up>", ":resize +2<CR>")
+util.nnoremap("<S-Down>", ":resize -2<CR>")
+util.nnoremap("<S-Left>", ":vertical resize -2<CR>")
+util.nnoremap("<S-Right>", ":vertical resize +2<CR>")
 
 -- Move Lines
 util.nnoremap("<A-j>", ":m .+1<CR>==")
@@ -44,8 +33,8 @@ util.vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 util.inoremap("<A-k>", "<Esc>:m .-2<CR>==gi")
 
 -- Switch buffers with tab
-util.nnoremap("H", ":bprevious<cr>")
-util.nnoremap("L", ":bnext<cr>")
+util.nnoremap("<C-Left>", ":bprevious<cr>")
+util.nnoremap("<C-Right>", ":bnext<cr>")
 
 -- Easier pasting
 util.nnoremap("[p", ":pu!<cr>")
@@ -64,27 +53,43 @@ util.nnoremap("N", "'nN'[v:searchforward]", { expr = true })
 util.xnoremap("N", "'nN'[v:searchforward]", { expr = true })
 util.onoremap("N", "'nN'[v:searchforward]", { expr = true })
 
+-- Add undo break-points
+util.inoremap(",", ",<c-g>u")
+util.inoremap(".", ".<c-g>u")
+util.inoremap(";", ";<c-g>u")
+
+-- save in insert mode
+util.inoremap("<C-s>", "<esc>:w<cr>")
+util.nnoremap("<C-s>", "<esc>:w<cr>")
+util.nnoremap("<C-c>", "<esc>ciw")
+
 -- telescope <ctrl-r> in command line
 -- vim.cmd([[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]])
+
+-- markdown
+util.nnoremap("=t", "<cmd>TableFormat<cr>")
 
 -- better indenting
 util.vnoremap("<", "<gv")
 util.vnoremap(">", ">gv")
 
--- Press * to search for the term under the cursor or a visual selection and
--- then press a key below to replace all instances of it in the current file.
-util.nmap("<leader>r", ":%s///g<Left><Left><Left>")
-util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>")
+util.nnoremap("<space>cu", function()
+  local number = math.random(math.pow(2, 127) + 1, math.pow(2, 128))
+  return "i" .. string.format("%.0f", number)
+end, {
+  expr = true,
+})
 
--- The same as above but instead of acting on the whole file it will be
--- restricted to the previously visually selected range. You can do that by
--- pressing *, visually selecting the range you want it to apply to and then
--- press a key below to replace all instances of it in the current selection.
-util.nmap("<leader>r", ":%s///g<Left><Left><Left>")
-util.nmap("<leader>rc", ":%s///gc<Left><Left><Left><Left>")
-
--- Konfekt/vim-scratchpad
-util.nmap("<leader>dsp", ":<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>")
+wk.register({
+  ["]"] = {
+    name = "next",
+    r = { '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', "Next Reference" },
+  },
+  ["["] = {
+    name = "previous",
+    r = { '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', "Next Reference" },
+  },
+})
 
 -- makes * and # work on visual mode too.
 vim.api.nvim_exec(
@@ -122,40 +127,20 @@ local leader = {
     ["s"] = { "<C-W>s", "split-window-below" },
     ["v"] = { "<C-W>v", "split-window-right" },
   },
-  c = { v = { "<cmd>Vista!!<CR>", "Vista" }, o = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" } },
   b = {
     name = "+buffer",
     ["b"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-    ["d"] = { "<cmd>:bd<CR>", "Delete Buffer" },
-  },
-  d = {
-    name = "+debugging",
-    ["<F5>"] = { "<cmd>lua require'dap'.continue()<CR>", "Continue" },
-    ["<F10>"] = { "<cmd>lua require'dap'.step_over()<CR>", "Step Over" },
-    ["<F11>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step Into" },
-    ["<F12>"] = { "<cmd>lua require'dap'.step_out()<CR>", "Step Out" },
-    ["b"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
-    ["B"] = {
-      "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-      "Set Breakpoint Condition",
-    },
-    ["L"] = {
-      "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-      "Log point message",
-    },
-    ["e"] = { "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", "Set Exception Breakpoint" },
-    ["r"] = { "<cmd>lua require'dap'.repl_open({}, 'vsplit')<CR><C-w>l", "Repl Open" },
-    ["l"] = { "<cmd>lua require'dap'.run_last()<CR>", "Run Last" },
-    ["h"] = {
-      "<cmd>lua require'dap.ui.variables'.hover(function () return vim.fn.expand('<cexpr>') end)<CR>",
-      "Hover",
-    },
-    ["v"] = { "<cmd>lua require'dap.ui.variables'.visual_hover()<CR>", "Visual Hover" },
-    ["s"] = { "<cmd>lua require'dap.ui.variables'.scopes()<CR>", "Scopes" },
+    ["p"] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["["] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["n"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
+    ["]"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
+    ["d"] = { "<cmd>:BDelete this<CR>", "Delete Buffer" },
+    ["D"] = { "<cmd>:bd<CR>", "Delete Buffer & Window" },
+    ["g"] = { "<cmd>:BufferLinePick<CR>", "Goto Buffer" },
   },
   g = {
     name = "+git",
-    g = { "<cmd>Neogit<CR>", "NeoGit" },
+    g = { "<cmd>Neogit kind=split<CR>", "NeoGit" },
     l = {
       function()
         require("util").float_terminal("lazygit")
@@ -193,16 +178,22 @@ local leader = {
     name = "+search",
     g = { "<cmd>Telescope live_grep<cr>", "Grep" },
     b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Goto Symbol" },
+    s = {
+      function()
+        require("telescope.builtin").lsp_document_symbols({
+          symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait" },
+        })
+      end,
+      "Goto Symbol",
+    },
     h = { "<cmd>Telescope command_history<cr>", "Command History" },
     m = { "<cmd>Telescope marks<cr>", "Jump to Mark" },
     r = { "<cmd>lua require('spectre').open()<CR>", "Replace (Spectre)" },
   },
   f = {
     name = "+file",
-    t = { "<cmd>NvimTreeToggle<cr>", "NvimTreeToggle" },
-    f = { "<cmd>NvimTreeFindFile<cr>", "NvimTreeFindFile" },
-    p = { "<cmd>Telescope find_files<cr>", "Find File" },
+    t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     n = { "<cmd>enew<cr>", "New File" },
     z = "Zoxide",
@@ -212,6 +203,7 @@ local leader = {
     name = "+open",
     p = { "<cmd>MarkdownPreview<cr>", "Markdown Preview" },
     g = { "<cmd>Glow<cr>", "Markdown Glow" },
+    n = { "<cmd>lua require('github-notifications.menu').notifications()<cr>", "GitHub Notifications" },
   },
   p = {
     name = "+project",
@@ -244,22 +236,10 @@ local leader = {
       "Line Numbers",
     },
   },
-  -- ["<tab>"] = {
-  --   name = "workspace",
-  --   ["<tab>"] = { "<cmd>tabnew<CR>", "New Tab" },
-
-  --   n = { "<cmd>tabnext<CR>", "Next" },
-  --   d = { "<cmd>tabclose<CR>", "Close" },
-  --   p = { "<cmd>tabprevious<CR>", "Previous" },
-  --   ["]"] = { "<cmd>tabnext<CR>", "Next" },
-  --   ["["] = { "<cmd>tabprevious<CR>", "Previous" },
-  --   f = { "<cmd>tabfirst<CR>", "First" },
-  --   l = { "<cmd>tablast<CR>", "Last" },
-  -- },
   ["`"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-  ["p"] = "Find File",
+  [" "] = "Find File",
   ["."] = { ":Telescope file_browser<CR>", "Browse Files" },
-  [","] = { "<cmd>Telescope buffers<cr>", "Switch Buffer" },
+  [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
   ["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
   q = {
@@ -272,22 +252,20 @@ local leader = {
   },
   x = {
     name = "+errors",
-    x = { "<cmd>TroubleToggle<cr>", "Trouble" },
-    -- w = { "<cmd>TroubleWorkspaceToggle<cr>", "Workspace Trouble" },
-    d = { "<cmd>TroubleDocumentToggle<cr>", "Document Trouble" },
+    x = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble" },
+    t = { "<cmd>TodoTrouble<cr>", "Todo Trouble" },
+    T = { "<cmd>TodoTelescope<cr>", "Todo Telescope" },
     l = { "<cmd>lopen<cr>", "Open Location List" },
     q = { "<cmd>copen<cr>", "Open Quickfix List" },
   },
+  Z = { [[<cmd>lua require("zen-mode").reset()<cr>]], "Zen Mode" },
+  z = { [[<cmd>ZenMode<cr>]], "Zen Mode" },
   T = { [[<Plug>PlenaryTestFile]], "Plenary Test" },
   D = {
     function()
       util.docs()
     end,
     "Create Docs from README.md",
-  },
-  E = {
-    [[<cmd>lua require"exec-cursorline-insert-stdout".execute{prepare_for_next_command = true}<cr>]],
-    "Execute Cursorline",
   },
 }
 

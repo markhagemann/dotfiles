@@ -1,4 +1,4 @@
-require("config.lsp.diagnostics")
+require("config.lsp.diagnostics").setup()
 require("config.lsp.kind").setup()
 
 local function on_attach(client, bufnr)
@@ -14,27 +14,31 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-  pyright = {},
+  ansiblels = {},
   bashls = {},
-  dockerls = {},
-  tsserver = {},
-  cssls = {},
-  jsonls = {},
-  html = {},
   clangd = {},
-  sumneko_lua = {
+  cssls = {},
+  dockerls = {},
+  eslint = {},
+  html = {},
+  jsonls = {},
+  pyright = {},
+  rust_analyzer = {
     settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
+      ["rust-analyzer"] = {
+        cargo = { allFeatures = true },
+        -- enable clippy on save
+        checkOnSave = {
+          command = "clippy",
+          extraArgs = { "--no-deps" },
         },
       },
     },
   },
+  sumneko_lua = {},
+  tsserver = {},
   vimls = {},
-  eslint = {},
-  -- ansiblels = {},
-  tailwindcss = {},
+  -- tailwindcss = {},
 }
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())

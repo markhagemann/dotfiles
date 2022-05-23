@@ -8,9 +8,10 @@ vim.bo.undofile = true ]]
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.g.node_host_prog = "/Users/folke/.pnpm-global/5/node_modules/neovim/bin/cli.js"
 vim.opt.autowrite = true -- enable auto write
 vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
-vim.opt.conceallevel = 0 -- Don't conceal anything
+vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
 vim.opt.concealcursor = "n" -- Hide * markup for bold and italic
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.cursorline = true -- Enable highlighting of the current line
@@ -53,6 +54,7 @@ vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
 -- don't load the plugins below
 vim.g.loaded_gzip = 1
+vim.g.loaded_fzf = 1
 vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_zipPlugin = 1

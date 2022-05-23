@@ -10,21 +10,30 @@ local config = {
       return require("packer.util").float({ border = "single" })
     end,
   },
+  opt_default = true,
   -- list of plugins that should be taken from ~/projects
   -- this is NOT packer functionality!
-  opt_default = true,
   local_plugins = {},
 }
 
 local function plugins(use)
   -- Packer can manage itself as an optional plugin
   use({ "wbthomason/packer.nvim" })
-  use({ "nathom/filetype.nvim", opt = false })
+  use({
+    "nathom/filetype.nvim",
+    opt = false,
+    config = function()
+      require("config.filetype")
+    end,
+  })
   use({ "stevearc/dressing.nvim", event = "BufReadPre" })
-  use({ "nvim-lua/plenary.nvim", module = "plenary" })
-  use({ "nvim-lua/popup.nvim", module = "popup" })
-  use({ "tpope/vim-sleuth" })
-
+  use({
+    "rcarriga/nvim-notify",
+    event = "VimEnter",
+    config = function()
+      vim.notify = require("notify")
+    end,
+  })
   -- LSP
   use({
     "neovim/nvim-lspconfig",
@@ -33,7 +42,7 @@ local function plugins(use)
       "nvim-lsp-ts-utils",
       "null-ls.nvim",
       "lua-dev.nvim",
-      "cmp-nvim-lsp",
+      -- "cmp-nvim-lsp",
       "e-kaput.nvim",
       "nvim-lsp-installer",
     },
@@ -48,11 +57,6 @@ local function plugins(use)
       "williamboman/nvim-lsp-installer",
     },
   })
-  use({ -- Support for non-LSP stuff via LSP (configured in LSP)
-    "jose-elias-alvarez/null-ls.nvim",
-    branch = "main",
-  })
-
   use({
     "SmiteshP/nvim-gps",
     requires = "nvim-treesitter/nvim-treesitter",
@@ -63,10 +67,12 @@ local function plugins(use)
     end,
   })
 
-  use({ "joukevandermaas/vim-ember-hbs" })
-  use({ "hashivim/vim-terraform" })
+  use({
+    "simrat39/rust-tools.nvim",
+    module = "rust-tools",
+  })
 
-  use({ "ray-x/lsp_signature.nvim" })
+  use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
 
   use({
     "hrsh7th/nvim-cmp",
@@ -76,10 +82,9 @@ local function plugins(use)
     end,
     wants = { "LuaSnip" },
     requires = {
-      "hrsh7th/cmp-nvim-lsp",
+      { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "David-Kunz/cmp-npm",
       "saadparwaiz1/cmp_luasnip",
       {
         "L3MON4D3/LuaSnip",
@@ -114,12 +119,6 @@ local function plugins(use)
 
   use({ "JoosepAlviste/nvim-ts-context-commentstring", module = "ts_context_commentstring" })
 
-  -- use({
-  --   "nvim-treesitter/nvim-treesitter",
-  --   run = ":TSUpdate",
-  --   config = [[require('config.treesitter')]],
-  -- })
-
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -132,151 +131,12 @@ local function plugins(use)
     config = [[require('config.treesitter')]],
   })
 
-  -- Debugging
-  use({
-    "mfussenegger/nvim-dap",
-    wants = { "mfussenegger/nvim-lua-debugger", "theHamsta/nvim-dap-virtual-text" },
-    config = function()
-      require("config.dap")
-    end,
-    requires = {
-      "mfussenegger/nvim-lua-debugger",
-      "theHamsta/nvim-dap-virtual-text",
-    },
-  })
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-  use({ "Pocco81/DAPInstall.nvim" })
-
-  -- File Manager
-  use({
-    "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeClose" },
-    config = function()
-      require("config.tree")
-    end,
-  })
-
-  -- Folds
-  use({
-    "anuvyklack/pretty-fold.nvim",
-    requires = "anuvyklack/nvim-keymap-amend",
-    config = function()
-      require("pretty-fold").setup({})
-      require("pretty-fold.preview").setup()
-    end,
-  })
-
-  -- Fuzzy finder
-  use({
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require("config.telescope")
-    end,
-    cmd = { "Telescope" },
-    keys = { "<C-p>" },
-    wants = {
-      "plenary.nvim",
-      "popup.nvim",
-      "telescope-z.nvim",
-      "telescope-project.nvim",
-      "trouble.nvim",
-      "telescope-symbols.nvim",
-    },
-    requires = {
-      "nvim-telescope/telescope-z.nvim",
-      "nvim-telescope/telescope-project.nvim",
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-symbols.nvim",
-    },
-  })
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-  -- Indent Guides and rainbow brackets
-  use({
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = function()
-      require("config.blankline")
-    end,
-  })
-
-  -- Scratchpad
-  use({ "Konfekt/vim-scratchpad" })
-
-  -- Search and replace
-  use({
-    "windwp/nvim-spectre",
-    module = "spectre",
-    wants = { "plenary.nvim", "popup.nvim" },
-    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
-  })
-
-  -- Smooth Scrolling
-  use({
-    "karb94/neoscroll.nvim",
-    keys = { "<C-u>", "<C-d>", "gg", "G" },
-    config = function()
-      require("config.scroll")
-    end,
-  })
-
-  use({
-    "edluffy/specs.nvim",
-    after = "neoscroll.nvim",
-    config = function()
-      require("config.specs")
-    end,
-  })
-
-  -- Git
-  use({
-    "APZelos/blamer.nvim",
-    config = function()
-      require("config.blamer")
-    end,
-  })
-
-  use({
-    "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
-    wants = "plenary.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("config.gitsigns")
-    end,
-  })
-
-  use({
-    "TimUntersberger/neogit",
-    cmd = "Neogit",
-    config = function()
-      require("config.neogit")
-    end,
-  })
-
-  -- Statusline
-  use({
-    "hoob3rt/lualine.nvim",
-    event = "VimEnter",
-    config = [[require('config.lualine')]],
-    wants = "nvim-web-devicons",
-  })
-
   -- Theme: color schemes
   use({
     "folke/tokyonight.nvim",
     opt = false,
     config = function()
       require("config.theme")
-    end,
-  })
-
-  use({
-    "norcalli/nvim-colorizer.lua",
-    event = "BufReadPre",
-    config = function()
-      require("config.colorizer")
     end,
   })
 
@@ -289,42 +149,142 @@ local function plugins(use)
     end,
   })
 
-  -- Utility
+  use({ "nvim-lua/plenary.nvim", module = "plenary" })
+  use({ "nvim-lua/popup.nvim", module = "popup" })
+
   use({
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup()
-    end,
+    "windwp/nvim-spectre",
+    module = "spectre",
+    wants = { "plenary.nvim", "popup.nvim" },
+    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   })
 
   use({
-    "max397574/better-escape.nvim",
+    "kyazdani42/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeClose" },
     config = function()
-      require("better_escape").setup()
+      require("config.tree")
     end,
   })
 
+  -- Fuzzy finder
   use({
-    "bennypowers/nvim-regexplainer",
+    "nvim-telescope/telescope.nvim",
     config = function()
-      require("config.regexplainer")
+      require("config.telescope")
     end,
+    cmd = { "Telescope" },
+    module = "telescope",
+    keys = { "<C-p>", "<leader>fz", "<leader>pp" },
+    wants = {
+      "plenary.nvim",
+      "popup.nvim",
+      "telescope-z.nvim",
+      "telescope-fzy-native.nvim",
+      "telescope-project.nvim",
+      "trouble.nvim",
+      "telescope-symbols.nvim",
+    },
     requires = {
+      "nvim-telescope/telescope-z.nvim",
+      "nvim-telescope/telescope-project.nvim",
+      "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+      "nvim-telescope/telescope-symbols.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim",
     },
   })
+
+  -- Indent Guides and rainbow brackets
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("config.blankline")
+    end,
+  })
+
+  -- Tabs
+  use({
+    "akinsho/nvim-bufferline.lua",
+    event = "BufReadPre",
+    wants = "nvim-web-devicons",
+    config = function()
+      require("config.bufferline")
+    end,
+  })
+
+  -- Smooth Scrolling
+  use({
+    "karb94/neoscroll.nvim",
+    keys = { "<C-u>", "<C-d>", "gg", "G" },
+    config = function()
+      require("config.scroll")
+    end,
+  })
+  use({
+    "edluffy/specs.nvim",
+    after = "neoscroll.nvim",
+    config = function()
+      require("config.specs")
+    end,
+  })
+
+  -- Git Gutter
+  use({
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
+    wants = "plenary.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("config.gitsigns")
+    end,
+  })
+  use({
+    "TimUntersberger/neogit",
+    cmd = "Neogit",
+    config = function()
+      require("config.neogit")
+    end,
+  })
+  use({ "rlch/github-notifications.nvim", module = "github-notifications" })
+  use({
+    "APZelos/blamer.nvim",
+    config = function()
+      require("config.blamer")
+    end,
+  })
+
+  -- Statusline
+  use({
+    "nvim-lualine/lualine.nvim",
+    event = "VimEnter",
+    config = [[require('config.lualine')]],
+    wants = "nvim-web-devicons",
+  })
+
+  use({
+    "norcalli/nvim-colorizer.lua",
+    event = "BufReadPre",
+    config = function()
+      require("config.colorizer")
+    end,
+  })
+
   use({ "npxbr/glow.nvim", cmd = "Glow" })
 
   use({
-    "luukvbaal/stabilize.nvim",
-    config = function()
-      require("stabilize").setup()
-    end,
+    "plasticboy/vim-markdown",
+    requires = "godlygeek/tabular",
+    ft = "markdown",
   })
-
   use({
-    "sayanarijit/exec-cursorline-insert-stdout.nvim",
+    "iamcco/markdown-preview.nvim",
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    ft = "markdown",
+    cmd = { "MarkdownPreview" },
   })
 
   use({
@@ -345,13 +305,16 @@ local function plugins(use)
     wants = "nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     config = function()
-      require("trouble").setup({ auto_open = false, auto_preview = false, mode = "document_diagnostics" })
+      require("trouble").setup({
+        auto_open = false,
+        use_diagnostic_signs = true, -- en
+      })
     end,
   })
 
   use({
     "folke/persistence.nvim",
-    event = "VimEnter",
+    event = "BufReadPre",
     module = "persistence",
     config = function()
       require("persistence").setup()
@@ -359,23 +322,19 @@ local function plugins(use)
   })
 
   use({ "tweekmonster/startuptime.vim", cmd = "StartupTime" })
-  use({
-    "tpope/vim-abolish",
-    event = "BufReadPre",
-  })
-  use({
-    "chaoren/vim-wordmotion",
-    event = "BufReadPre",
-  })
 
   use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
+  use({ "mjlbach/babelfish.nvim", module = "babelfish" })
+
+  use({ "folke/twilight.nvim", module = "twilight" })
   use({
-    "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    event = "BufReadPost",
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
     config = function()
-      require("config.todo")
+      require("zen-mode").setup({
+        plugins = { gitsigns = true, tmux = true, kitty = { enabled = false, font = "+2" } },
+      })
     end,
   })
 
@@ -390,6 +349,7 @@ local function plugins(use)
   use({
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    module = "diffview",
     config = function()
       require("config.diffview")
     end,
@@ -404,9 +364,13 @@ local function plugins(use)
     end,
   })
 
+  use("nanotee/luv-vimdocs")
   use({
     "andymass/vim-matchup",
     event = "CursorMoved",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
+    end,
   })
 end
 
