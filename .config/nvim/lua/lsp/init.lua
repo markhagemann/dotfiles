@@ -1,35 +1,24 @@
 local utils = require "utils"
 local lsp = require('lsp-zero')
 
+-- Presets
+-- Refer to: https://github.com/VonHeikemen/lsp-zero.nvim#available-presets
 lsp.preset('recommended')
-lsp.setup()
+lsp.set_preferences({
+    suggest_lsp_servers = true,
+    setup_servers_on_start = true,
+    set_lsp_keymaps = true,
+    configure_diagnostics = true,
+    cmp_capabilities = true,
+    manage_nvim_cmp = true,
+    call_servers = 'local',
+    sign_icons = {
+      error = '✘',
+      warn = '▲',
+      hint = '⚑',
+      info = ''
+    }
+})
 
--- Floating border
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
-    opts.border = opts.border or { { " ", "FloatBorder" } }
-    return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
--- Gutter sign icons
-for type, icon in pairs(utils.signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
--- Prefix diagnostic virtual text
-vim.diagnostic.config {
-    virtual_text = {
-        source = "always",
-        prefix = " ",
-        spacing = 6,
-    },
-    float = {
-        header = false,
-        source = "always",
-    },
-    signs = true,
-    underline = false,
-    update_in_insert = false,
-}
+-- Mappings: 
+-- Refer to: https://github.com/VonHeikemen/lsp-zero.nvim#default-keybindings-1
