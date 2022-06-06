@@ -70,7 +70,6 @@ return packer.startup(function(use)
 	use("windwp/nvim-spectre")
 	use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
 	use("chaoren/vim-wordmotion")
-	use("tpope/vim-sleuth")
 
 	-- Colorschemes
 	use("folke/tokyonight.nvim")
