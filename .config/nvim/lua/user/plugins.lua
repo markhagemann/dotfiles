@@ -68,6 +68,8 @@ return packer.startup(function(use)
 	})
 	use("edluffy/specs.nvim")
 	use("windwp/nvim-spectre")
+	use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
+	use("chaoren/vim-wordmotion")
 
 	-- Colorschemes
 	use("folke/tokyonight.nvim")
