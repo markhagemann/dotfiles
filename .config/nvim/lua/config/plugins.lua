@@ -70,6 +70,7 @@ return packer.startup(function(use)
 	use("windwp/nvim-spectre")
 	use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
 	use("chaoren/vim-wordmotion")
+	use("tpope/vim-sleuth")
 
 	-- Colorschemes
 	use("folke/tokyonight.nvim")
@@ -93,6 +94,7 @@ return packer.startup(function(use)
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	-- use("jose-elias-alvarez/nvim-lsp-ts-utils")
+	use("folke/lsp-colors.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
