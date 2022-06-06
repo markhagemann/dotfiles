@@ -128,3 +128,4 @@ end
 local util = require("util")
 
 util.nnoremap("<C-p>", M.project_files)
+util.nnoremap("<leader>/", ":Telescope live_grep<cr>")
