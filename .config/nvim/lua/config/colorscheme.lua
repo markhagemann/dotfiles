@@ -1,11 +1,11 @@
-vim.cmd [[
+vim.cmd([[
 try
   colorscheme tokyonight
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
 endtry
-]]
+]])
 
 vim.g.material_style = "palenight"
 vim.g.material_italic_comments = 1
