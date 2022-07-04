@@ -26,10 +26,10 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<S-Up>", ":resize -2<CR>", opts)
+keymap("n", "<S-Down>", ":resize +2<CR>", opts)
+keymap("n", "<S-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<S-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -48,6 +48,22 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
+
+-- better indenting
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+-- Press * to search for the term under the cursor or a visual selection and
+-- then press a key below to replace all instances of it in the current file.
+keymap("n", "<leader>r", ":%s///g<Left><Left><Left>", opts)
+keymap("n", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
+
+-- The same as above but instead of acting on the whole file it will be
+-- restricted to the previously visually selected range. You can do that by
+-- pressing *, visually selecting the range you want it to apply to and then
+-- press a key below to replace all instances of it in the current selection.
+keymap("n", "<leader>r", ":%s///g<Left><Left><Left>", opts)
+keymap("n", "<leader>rc", ":%s///gc<Left><Left><Left><Left>", opts)
 
 -- Visual Block --
 -- Move text up and down

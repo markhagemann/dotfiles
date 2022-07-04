@@ -28,6 +28,23 @@ vim.cmd([[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+
+  augroup _focus_check
+    au FocusGained * :checktime
+  augroup end
+
+  augroup _cursor_active_window
+    autocmd InsertLeave,WinEnter * set cursorline
+    autocmd InsertEnter,WinLeave * set nocursorline
+  augroup end
+
+  augroup _last_loc_open_buffer
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+  augroup end
+
+  augroup _highlight_yank
+    au TextYankPost * lua vim.highlight.on_yank {}
+  augroup end
 ]])
 
 -- Autoformat
