@@ -71,6 +71,7 @@ return packer.startup(function(use)
   use({ "kazhala/close-buffers.nvim", cmd = "BDelete" })
   use("chaoren/vim-wordmotion")
   use("Darazaki/indent-o-matic")
+  use("tpope/vim-abolish")
 
   -- Colorschemes
   use("folke/tokyonight.nvim")
