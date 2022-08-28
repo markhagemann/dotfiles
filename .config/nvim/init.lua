@@ -1,27 +1,20 @@
-require("util")
-require("config.options")
-require("config.keymaps")
-require("config.plugins")
-require("config.colorscheme")
-require("config.cmp")
-require("config.lsp")
-require("config.telescope")
-require("config.treesitter")
-require("config.autopairs")
-require("config.comment")
-require("config.gitsigns")
-require("config.nvim-tree")
-require("config.bufferline")
-require("config.lualine")
-require("config.toggleterm")
-require("config.project")
-require("config.impatient")
-require("config.indentline")
-require("config.indent-o-matic")
-require("config.alpha")
-require("config.whichkey")
-require("config.colorizer")
-require("config.neoscroll")
-require("config.trouble")
-require("config.specs")
-require("config.autocommands")
+----------------------
+-- all settings
+----------------------
+require "settings/keymaps"
+require "settings/options"
+require "settings/styles"
+----------------------------------
+-- all configurations for plugins
+----------------------------------
+require "plugins"
+require "plugins/configs/cmp"
+require "plugins/configs/nvim-treesitter"
+require "plugins/configs/telescope"
+-------------------------------------------
+-- mason --> mason-lspconfig --> lspconfig 
+-- must be setup in this order
+-------------------------------------------
+require "plugins/configs/mason"
+require "plugins/configs/mason-lspconfig"
+require "plugins/configs/lspconfig"
