@@ -16,10 +16,10 @@ null_ls.setup {
     formatting.black.with { extra_args = { "--fast" } },
     formatting.eslint_d,
     formatting.google_java_format,
-    formatting.prettier.with {
-      extra_filetypes = { "toml" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
+    -- formatting.prettier.with {
+    --   extra_filetypes = { "toml" },
+    --   extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+    -- },
     formatting.prettierd.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }, extra_filtypes = { "toml" }}),
     formatting.stylua,
     diagnostics.flake8,
