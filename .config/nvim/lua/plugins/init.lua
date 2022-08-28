@@ -85,11 +85,13 @@ packer.startup(function(use)
   use { "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" } -- Indent support (including blank lines)
   use 'edluffy/specs.nvim'
   use 'tpope/vim-abolish'
+  use 'tpope/vim-sleuth'
   use 'folke/lsp-colors.nvim'
   use 'folke/trouble.nvim'
   use 'folke/which-key.nvim'
   use 'karb94/neoscroll.nvim'
   use 'norcalli/nvim-colorizer.lua'
+  use 'chaoren/vim-wordmotion'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
