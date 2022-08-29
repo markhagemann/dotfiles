@@ -6,7 +6,7 @@ end
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
--- local diagnostics = null_ls.builtins.diagnostics
+local diagnostics = null_ls.builtins.diagnostics
 
 -- https://github.com/prettier-solidity/prettier-plugin-solidity
 null_ls.setup {
@@ -21,6 +21,9 @@ null_ls.setup {
     -- },
     formatting.prettierd.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }, extra_filtypes = { "toml" }}),
     formatting.stylua,
+    diagnostics.eslint_d.with({
+      diagnostics_format = '[eslint] #{m}\n(#{c})'
+    }),
     -- diagnostics.flake8,
   },
 }

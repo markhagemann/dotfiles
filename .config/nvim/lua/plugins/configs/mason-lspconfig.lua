@@ -1,7 +1,12 @@
-local lspconfig = require("lspconfig")
-local present, masonLspconfig = pcall(require, "mason-lspconfig")
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
-if not present then
+if not lspconfig_status_ok then
+	return
+end
+
+local mason_lspconfig_status_ok, masonLspconfig = pcall(require, "mason-lspconfig")
+
+if not mason_lspconfig_status_ok then
 	return
 end
 
