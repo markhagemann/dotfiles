@@ -91,6 +91,7 @@ packer.startup(function(use)
 	use({ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" })
 
 	-- Theme
+	use("folke/tokyonight.nvim")
 	use("lunarvim/darkplus.nvim")
 	use("gruvbox-community/gruvbox")
 	use("olivercederborg/poimandres.nvim")
