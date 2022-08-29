@@ -59,6 +59,7 @@ packer.startup(function(use)
   use { "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" }
   use { "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" }
   use 'nvim-telescope/telescope.nvim'      -- Finder, requires fzf and ripgrep
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use({
     "windwp/nvim-spectre",
     module = "spectre",
