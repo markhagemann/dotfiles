@@ -79,22 +79,11 @@ local opts = {
 }
 
 local mappings = {
-   ["b"] = {
-    name = "+buffer",
-    ["b"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-    ["p"] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
-    ["["] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
-    ["n"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
-    ["]"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
-    ["d"] = { "<cmd>:BDelete this<CR>", "Delete Buffer" },
-    ["D"] = { "<cmd>:bd<CR>", "Delete Buffer & Window" },
-    ["g"] = { "<cmd>:BufferLinePick<CR>", "Goto Buffer" },
-  },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     name = "Files",
-    f = { "<cmd>:Telescope find_files <CR>", "Find Files" },
     b = { "<cmd>:Telescope buffers <CR>", "Find Buffers" },
+    f = { "<cmd>:Telescope find_files <CR>", "Find Files" },
     g = { ":Telescope live_grep <CR>", "Find Text" },
     l = { ":NvimTreeFindFile<cr>", "Open File Location" },
     n = { "<cmd>enew<cr>", "New File" },
