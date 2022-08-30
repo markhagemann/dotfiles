@@ -111,6 +111,7 @@ packer.startup(function(use)
 	use("karb94/neoscroll.nvim")
 	use("norcalli/nvim-colorizer.lua")
 	use("chaoren/vim-wordmotion")
+	use("christoomey/vim-tmux-navigator")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
