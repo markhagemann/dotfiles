@@ -104,7 +104,7 @@ packer.startup(function(use)
 	use({ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" }) -- Improve NeoVim startup time
 	use({ "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" }) -- Indent support (including blank lines)
 	use("edluffy/specs.nvim")
-	use("tpope/vim-abolish")
+	use("arthurxavierx/vim-caser")
 	use("tpope/vim-sleuth")
 	use("folke/trouble.nvim")
 	use("folke/which-key.nvim")
