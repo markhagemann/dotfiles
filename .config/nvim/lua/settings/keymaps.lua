@@ -96,4 +96,4 @@ keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 -- Telescope
 keymap("n", "<leader>,", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>/", ":Telescope live_grep<CR>", opts)
-keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)
+keymap("n", "<C-p>", ":Telescope find_files hidden=true<CR>", opts)
