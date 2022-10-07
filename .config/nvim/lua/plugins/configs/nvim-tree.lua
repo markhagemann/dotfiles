@@ -11,6 +11,9 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
+  git = {
+    ignore = false,
+  },
   update_focused_file = {
     enable = true,
     update_cwd = true,
@@ -68,8 +71,6 @@ nvim_tree.setup {
         { key = "<Tab>", cb = tree_cb("preview") },
         { key = "K", cb = tree_cb("first_sibling") },
         { key = "J", cb = tree_cb("last_sibling") },
-        { key = ".", cb = tree_cb("toggle_ignored") },
-        { key = "V", cb = tree_cb("toggle_dotfiles") },
         { key = "<F5>", cb = tree_cb("refresh") },
         { key = { "n", "N" }, cb = tree_cb("create") },
         { key = { "d", "D" }, cb = tree_cb("remove") },
