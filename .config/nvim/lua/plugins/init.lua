@@ -39,13 +39,13 @@ packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Avoids callbacks, used by other plugins
 	use("nvim-lua/popup.nvim") -- Popup for other plugins
 	use("nvim-treesitter/nvim-treesitter") -- Language parsing completion engine
-	use({ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" })
+	use({ "JoosepAlviste/nvim-ts-context-commentstring", commit = "32d9627123321db65a4f158b72b757bcaef1a3f4" })
 
 	-- LSP
 	use("williamboman/mason.nvim") -- UI for fetching/downloading LSPs
 	use("williamboman/mason-lspconfig.nvim") -- Bridges mason and lspconfig
 	use("neovim/nvim-lspconfig") -- Language server protocol implementation
-	use({ "jose-elias-alvarez/null-ls.nvim", commit = "ff40739e5be6581899b43385997e39eecdbf9465" }) -- For formatters and linters
+	use({ "jose-elias-alvarez/null-ls.nvim", commit = "07d4ed4c6b561914aafd787453a685598bec510f" }) -- For formatters and linters
 	use("MunifTanjim/prettier.nvim")
 	use({ "RRethy/vim-illuminate", commit = "c82e6d04f27a41d7fdcad9be0bce5bb59fcb78e5" })
 	use({
@@ -56,11 +56,11 @@ packer.startup(function(use)
 	use("onsails/lspkind.nvim")
 
 	-- Completion
-	use({ "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" }) -- The completion plugin
-	use({ "hrsh7th/cmp-buffer", commit = "62fc67a2b0205136bc3e312664624ba2ab4a9323" }) -- buffer completions
+	use({ "hrsh7th/nvim-cmp", commit = "aee40113c2ba3ab158955f233ca083ca9958d6f8" }) -- The completion plugin
+	use({ "hrsh7th/cmp-buffer", commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa" }) -- buffer completions
 	use({ "hrsh7th/cmp-path", commit = "466b6b8270f7ba89abd59f402c73f63c7331ff6e" }) -- path completions
 	use({ "saadparwaiz1/cmp_luasnip", commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36" }) -- snippet completions
-	use({ "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" })
+	use({ "hrsh7th/cmp-nvim-lsp", commit = "78924d1d677b29b3d1fe429864185341724ee5a2" })
 	use({ "hrsh7th/cmp-nvim-lua", commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21" })
 
 	-- snippets
@@ -74,7 +74,7 @@ packer.startup(function(use)
 
 	-- File Explorer / Search
 	use({ "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" })
-	use({ "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" })
+	use({ "kyazdani42/nvim-tree.lua", commit = "cf908370fb046641e3aaaa6a6177c1b5d165f186" })
 	use("nvim-telescope/telescope.nvim") -- Finder, requires fzf and ripgrep
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({
@@ -85,7 +85,7 @@ packer.startup(function(use)
 	})
 
 	-- Git
-	use({ "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" })
+	use({ "lewis6991/gitsigns.nvim", commit = "9ff7dfb051e5104088ff80556203634fc8f8546d" })
 
 	-- Terminal
 	use({ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" })
@@ -102,7 +102,7 @@ packer.startup(function(use)
 	use("windwp/nvim-ts-autotag")
 	use({ "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" }) -- Commenting support
 	use({ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" }) -- Improve NeoVim startup time
-	use({ "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" }) -- Indent support (including blank lines)
+	use({ "lukas-reineke/indent-blankline.nvim", commit = "db7cbcb40cc00fc5d6074d7569fb37197705e7f6" }) -- Indent support (including blank lines)
 	use("edluffy/specs.nvim")
 	use("arthurxavierx/vim-caser")
 	use("tpope/vim-sleuth")
@@ -119,7 +119,7 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- Automatically set up your configuration after cloning packer.nvim
+	-- Automaticallr set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if Packer_Bootstrap then
 		require("packer").sync()
