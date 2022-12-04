@@ -1,41 +1,34 @@
-----------------------
--- all settings
-----------------------
-require "settings/keymaps"
-require "settings/options"
-require "settings/styles"
+----------------------------------
+-- all utility functions
+----------------------------------
+require("util")
+
 ----------------------------------
 -- all configurations for plugins
 ----------------------------------
-require "plugins"
-require "plugins/configs/autocommands"
-require "plugins/configs/autopairs"
-require "plugins/configs/autotag"
-require "plugins/configs/cmp"
-require "plugins/configs/comment"
-require "plugins/configs/dap"
-require "plugins/configs/gitsigns"
-require "plugins/configs/illuminate"
-require "plugins/configs/indentline"
-require "plugins/configs/lualine"
-require "plugins/configs/lsp-colors"
-require "plugins/configs/lspsaga"
-require "plugins/configs/neoscroll"
-require "plugins/configs/nvim-tree"
-require "plugins/configs/nvim-treesitter"
-require "plugins/configs/null-ls"
-require "plugins/configs/poimandres"
-require "plugins/configs/prettier"
-require "plugins/configs/specs"
-require "plugins/configs/spectre"
-require "plugins/configs/telescope"
-require "plugins/configs/toggleterm"
-require "plugins/configs/trouble"
-require "plugins/configs/whichkey"
--------------------------------------------
--- mason --> mason-lspconfig --> lspconfig 
--- must be setup in this order
--------------------------------------------
-require "plugins/configs/mason"
-require "plugins/configs/mason-lspconfig"
-require "plugins/configs/lspconfig"
+require("config.plugins-setup")
+require("config.plugins.autopairs")
+require("config.plugins.comment")
+require("config.plugins.dap")
+require("config.plugins.gitsigns")
+require("config.plugins.impatient")
+require("config.plugins.lualine")
+require("config.plugins.lsp.formatting")
+require("config.plugins.lsp.mason")
+require("config.plugins.lsp.lspsaga")
+require("config.plugins.lsp.lspconfig")
+require("config.plugins.lsp.null-ls")
+require("config.plugins.nvim-cmp")
+require("config.plugins.nvim-tree")
+require("config.plugins.telescope")
+require("config.plugins.tokyonight")
+require("config.plugins.treesitter")
+require("config.plugins.trouble")
+
+----------------------
+-- all settings
+----------------------
+require("config.core.autocommands")
+require("config.core.options")
+require("config.core.keymaps")
+require("config.core.colorscheme")
