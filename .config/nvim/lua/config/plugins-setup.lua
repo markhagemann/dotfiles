@@ -107,6 +107,7 @@ return packer.startup(function(use)
       require("spaceless").setup()
     end,
   })
+	use("karb94/neoscroll.nvim")
 
   -- Debugging
   use({ "mfussenegger/nvim-dap" })
