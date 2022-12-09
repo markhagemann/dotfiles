@@ -2,13 +2,6 @@
 -- impatient comes first for load time optimisation
 ----------------------
 require "plugins/configs/impatient"
-----------------------
--- all settings
-----------------------
-require "settings/autocommands"
-require "settings/keymaps"
-require "settings/options"
-require "settings/styles"
 ----------------------------------
 -- configurations for most plugins
 ----------------------------------
@@ -40,3 +33,10 @@ require "plugins/configs/whichkey"
 ----------------------------------
 require "plugins/configs/lsp"
 require "plugins/configs/dap"
+
+----------------------
+-- all settings
+----------------------
+require "settings/keymaps"
+require "settings/options"
+require "settings/styles"
