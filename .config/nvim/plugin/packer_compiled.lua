@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["fidget.nvim"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -169,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mini.surround"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/mini.surround",
+    url = "https://github.com/echasnovski/mini.surround"
+  },
   ["neoscroll.nvim"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
@@ -189,11 +199,6 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-colorizer.lua"] = {
-    loaded = true,
-    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
-    url = "https://github.com/norcalli/nvim-colorizer.lua"
-  },
   ["nvim-dap"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-dap",
@@ -204,10 +209,30 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
+  ["nvim-highlight-colors"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-highlight-colors",
+    url = "https://github.com/brenoprata10/nvim-highlight-colors"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-navic"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-navic",
+    url = "https://github.com/SmiteshP/nvim-navic"
+  },
+  ["nvim-notify"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    url = "https://github.com/rcarriga/nvim-notify"
+  },
+  ["nvim-numbertoggle"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nvim-numbertoggle",
+    url = "https://github.com/sitiom/nvim-numbertoggle"
   },
   ["nvim-spectre"] = {
     loaded = false,
@@ -297,6 +322,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
+  },
+  ["vim-abolish"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-abolish",
+    url = "https://github.com/tpope/vim-abolish"
   },
   ["vim-caser"] = {
     loaded = true,

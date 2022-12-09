@@ -96,4 +96,9 @@ keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 -- Telescope
 keymap("n", "<leader>,", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>/", ":Telescope live_grep<CR>", opts)
-keymap("n", "<C-p>", "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", opts)
+keymap(
+  "n",
+  "<C-p>",
+  "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+  opts
+)
