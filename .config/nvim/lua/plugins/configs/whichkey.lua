@@ -1,4 +1,4 @@
-local status_ok, which_key = pcall(require, "which-key")
+local status_ok, wk = pcall(require, "which-key")
 if not status_ok then
   return
 end
@@ -186,7 +186,8 @@ local mappings = {
     l = { "<cmd>lopen<cr>", "Open Location List" },
     q = { "<cmd>copen<cr>", "Open Quickfix List" },
   },
+  ["z"] = { "<cmd>ZenMode<CR>", "Zen" },
 }
 
-which_key.setup(setup)
-which_key.register(mappings, opts)
+wk.setup(setup)
+wk.register(mappings, opts)

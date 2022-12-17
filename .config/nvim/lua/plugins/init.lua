@@ -64,6 +64,10 @@ packer.startup(function(use)
   use("folke/lsp-colors.nvim")
   use("onsails/lspkind.nvim")
   use("j-hui/fidget.nvim")
+  use({
+    "m-demare/hlargs.nvim",
+    requires = { "nvim-treesitter/nvim-treesitter" },
+  })
 
   -- Completion
   use({ "hrsh7th/nvim-cmp", commit = "b0dff0ec4f2748626aae13f011d1a47071fe9abc" }) -- The completion plugin
@@ -104,7 +108,7 @@ packer.startup(function(use)
   use({ "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" })
 
   -- Utility
-  use({ "SmiteshP/nvim-navic" })
+  use({ "stevearc/dressing.nvim", requires = "MunifTanjim/nui.nvim" })
   use({ "nvim-lualine/lualine.nvim", commit = "a52f078026b27694d2290e34efa61a6e4a690621" })
   use({ "windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" }) -- Autopairs, integrates with both cmp and treesitter
   use("windwp/nvim-ts-autotag")
@@ -120,7 +124,7 @@ packer.startup(function(use)
   use("folke/trouble.nvim")
   use("folke/which-key.nvim")
   use("karb94/neoscroll.nvim")
-  use("brenoprata10/nvim-highlight-colors")
+  use({ "NvChad/nvim-colorizer.lua" })
   use("sitiom/nvim-numbertoggle")
   use("chaoren/vim-wordmotion")
   use("christoomey/vim-tmux-navigator")
@@ -128,6 +132,21 @@ packer.startup(function(use)
     "lewis6991/spaceless.nvim",
     config = function()
       require("spaceless").setup()
+    end,
+  })
+  use({ "antoinemadec/FixCursorHold.nvim" })
+  use({
+    "mg979/vim-visual-multi",
+    config = function()
+      vim.g.VM_leader = ";"
+    end,
+  })
+  use({ "folke/zen-mode.nvim" })
+  use({
+    "sunjon/shade.nvim",
+    config = function()
+      require("shade").setup()
+      require("shade").toggle()
     end,
   })
 
