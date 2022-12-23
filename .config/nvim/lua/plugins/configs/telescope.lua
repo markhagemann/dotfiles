@@ -1,27 +1,39 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-	return
+-- import telescope plugin safely
+local telescope_setup, telescope = pcall(require, "telescope")
+if not telescope_setup then
+  return
 end
 
-telescope.setup({
-	defaults = {
-		prompt_prefix = " ",
-		selection_caret = " ",
-		path_display = { "smart" },
-		file_ignore_patterns = { ".git/", "node_modules" },
-	},
+-- import telescope actions safely
+local actions_setup, actions = pcall(require, "telescope.actions")
+if not actions_setup then
+  return
+end
 
-	pickers = {
-		buffers = {
-			show_all_buffers = true,
-			sort_lastused = true,
-			-- theme = "dropdown",
-			-- previewer = false,
-			mappings = {
-				i = {
-					["<M-d>"] = "delete_buffer",
-				},
-			},
-		},
-	},
+-- configure telescope
+telescope.setup({
+  -- configure custom mappings
+  defaults = {
+    file_ignore_patterns = { "yarn.lock" },
+    mappings = {
+      i = {
+        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+        ["<C-j>"] = actions.move_selection_next, -- move to next result
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+      },
+    },
+    pickers = {
+      buffers = {
+        show_all_buffers = true,
+        sort_lastused = true,
+        mappings = {
+          i = {
+            ["<M-d>"] = "delete_buffer",
+          },
+        },
+      },
+    },
+  },
 })
+
+telescope.load_extension("fzf")
