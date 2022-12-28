@@ -149,6 +149,7 @@ packer.startup(function(use)
       require("shade").toggle()
     end,
   })
+  use({ "kburdett/vim-nuuid" })
 
   -- Automaticallr set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
