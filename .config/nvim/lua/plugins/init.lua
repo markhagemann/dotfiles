@@ -68,6 +68,7 @@ packer.startup(function(use)
     "m-demare/hlargs.nvim",
     requires = { "nvim-treesitter/nvim-treesitter" },
   })
+  use({ "joukevandermaas/vim-ember-hbs" })
 
   -- Completion
   use({ "hrsh7th/nvim-cmp", commit = "b0dff0ec4f2748626aae13f011d1a47071fe9abc" }) -- The completion plugin

@@ -5,6 +5,7 @@ alias dot="dotfiles"
 alias dotstatus="dotfiles status -uno"
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
+alias docker-stop-all-containers='docker stop $(docker ps -q)'
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
 # up memory, this command will free your memory after about 20-30 seconds.
