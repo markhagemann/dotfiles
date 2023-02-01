@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
     url = "https://github.com/ravenxrz/DAPInstall.nvim"
   },
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -119,6 +124,11 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/fidget.nvim",
@@ -133,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["hlargs.nvim"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/hlargs.nvim",
+    url = "https://github.com/m-demare/hlargs.nvim"
   },
   ["impatient.nvim"] = {
     loaded = true,
@@ -183,6 +198,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
     url = "https://github.com/karb94/neoscroll.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -282,6 +302,12 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
   },
+  ["shade.nvim"] = {
+    config = { "\27LJ\2\nN\0\0\3\0\4\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\1\0B\0\2\0029\0\3\0B\0\1\1K\0\1\0\vtoggle\nsetup\nshade\frequire\0" },
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/shade.nvim",
+    url = "https://github.com/sunjon/shade.nvim"
+  },
   ["spaceless.nvim"] = {
     config = { "\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14spaceless\frequire\0" },
     loaded = true,
@@ -328,10 +354,20 @@ _G.packer_plugins = {
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-caser",
     url = "https://github.com/arthurxavierx/vim-caser"
   },
+  ["vim-ember-hbs"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-ember-hbs",
+    url = "https://github.com/joukevandermaas/vim-ember-hbs"
+  },
   ["vim-illuminate"] = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
+  },
+  ["vim-nuuid"] = {
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-nuuid",
+    url = "https://github.com/kburdett/vim-nuuid"
   },
   ["vim-sleuth"] = {
     loaded = true,
@@ -342,6 +378,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
+  },
+  ["vim-visual-multi"] = {
+    config = { "\27LJ\2\n-\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\6;\14VM_leader\6g\bvim\0" },
+    loaded = true,
+    path = "/home/drache/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   },
   ["vim-wordmotion"] = {
     loaded = true,
@@ -389,6 +431,14 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Config for: vim-visual-multi
+time([[Config for vim-visual-multi]], true)
+try_loadstring("\27LJ\2\n-\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\6;\14VM_leader\6g\bvim\0", "config", "vim-visual-multi")
+time([[Config for vim-visual-multi]], false)
+-- Config for: shade.nvim
+time([[Config for shade.nvim]], true)
+try_loadstring("\27LJ\2\nN\0\0\3\0\4\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\1\0B\0\2\0029\0\3\0B\0\1\1K\0\1\0\vtoggle\nsetup\nshade\frequire\0", "config", "shade.nvim")
+time([[Config for shade.nvim]], false)
 -- Config for: spaceless.nvim
 time([[Config for spaceless.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14spaceless\frequire\0", "config", "spaceless.nvim")
