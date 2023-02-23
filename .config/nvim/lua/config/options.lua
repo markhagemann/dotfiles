@@ -3,7 +3,10 @@
 -- Add any additional options here
 
 local opt = vim.opt
+local g = vim.g
 opt.conceallevel = 0 -- Don't conceal anything
+opt.swapfile = false
+g.blamer_enabled = true
 
 return {
   opts = { style = "tokyonight-storm" },

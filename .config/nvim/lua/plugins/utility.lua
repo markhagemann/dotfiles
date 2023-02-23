@@ -1,4 +1,5 @@
 return {
+  { "APZelos/blamer.nvim" },
   { "arthurxavierx/vim-caser" },
   { "christoomey/vim-tmux-navigator" },
   { "chaoren/vim-wordmotion" },
