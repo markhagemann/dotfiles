@@ -1,7 +1,6 @@
-# reporting: "off"
-# startuppopupversion: 1
-# gui:
-#   theme:
-#     selectedLineBgColor:
-#       - reverse
-#       - bold
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
