@@ -7,7 +7,7 @@ return {
       ensure_installed = {
         "flake8",
         "html-lsp",
-        "json-lsp",
+        -- "json-lsp",
         "pyright",
         "shellcheck",
         "shfmt",
