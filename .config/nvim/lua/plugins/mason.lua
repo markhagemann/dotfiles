@@ -7,7 +7,7 @@ return {
       ensure_installed = {
         "flake8",
         "html-lsp",
-        -- "json-lsp",
+        "json-lsp",
         "pyright",
         "shellcheck",
         "shfmt",
@@ -15,7 +15,6 @@ return {
         "lua-language-server",
         "terraform-ls",
         "typescript-language-server",
-        -- "vue-language-server",
         "vetur-vls",
         "yaml-language-server",
       },
