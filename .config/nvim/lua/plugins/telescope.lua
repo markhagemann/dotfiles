@@ -14,7 +14,16 @@ return {
       },
     },
   },
-  -- add telescope-fzf-native
+  {
+    "telescope.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-media-files.nvim",
+      build = "make",
+      config = function()
+        require("telescope").load_extension("media_files")
+      end,
+    },
+  },
   {
     "telescope.nvim",
     dependencies = {
