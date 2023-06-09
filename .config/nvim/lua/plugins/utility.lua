@@ -18,7 +18,6 @@ return {
       vim.g.VM_leader = ";"
     end,
   },
-  { "NvChad/nvim-colorizer.lua" },
   { "sitiom/nvim-numbertoggle" },
   { "tpope/vim-sleuth" },
 }
