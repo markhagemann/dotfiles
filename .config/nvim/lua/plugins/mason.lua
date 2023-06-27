@@ -16,7 +16,7 @@ return {
         "terraform-ls",
         "typescript-language-server",
         "vetur-vls",
-        "yaml-language-server",
+        -- "yaml-language-server",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

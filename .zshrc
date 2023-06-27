@@ -107,7 +107,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node tmux vi-mode z zsh-pyenv zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 
 function zshalias()
 {
