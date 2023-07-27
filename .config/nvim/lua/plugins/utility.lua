@@ -13,11 +13,27 @@ return {
     end,
   },
   {
+    "m4xshen/hardtime.nvim",
+    opts = {
+      disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+    },
+  },
+  {
     "mg979/vim-visual-multi",
     config = function()
       vim.g.VM_leader = ";"
     end,
   },
   { "sitiom/nvim-numbertoggle" },
+  {
+    "tomiis4/Hypersonic.nvim",
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    config = function()
+      require("hypersonic").setup({
+        -- config
+      })
+    end,
+  },
   { "tpope/vim-sleuth" },
 }
