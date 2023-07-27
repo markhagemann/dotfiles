@@ -13,12 +13,6 @@ return {
     end,
   },
   {
-    "m4xshen/hardtime.nvim",
-    opts = {
-      disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
-    },
-  },
-  {
     "mg979/vim-visual-multi",
     config = function()
       vim.g.VM_leader = ";"
