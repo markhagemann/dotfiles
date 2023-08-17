@@ -1,22 +1,63 @@
+local function on_attach(bufnr)
+  local api = require("nvim-tree.api")
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", "o", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", "h", api.tree.change_root_to_parent, opts("Up"))
+  vim.keymap.set("n", "l", api.tree.change_root_to_node, opts("CD"))
+  vim.keymap.set("n", "|", api.node.open.vertical, opts("Open: Vertical Split"))
+  vim.keymap.set("n", "-", api.node.open.horizontal, opts("Open: Horizontal Split"))
+  vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
+  vim.keymap.set("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
+  vim.keymap.set("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
+  vim.keymap.set("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
+  vim.keymap.set("n", "<F5>", api.tree.reload, opts("Refresh"))
+  vim.keymap.set("n", "n", api.fs.create, opts("Create"))
+  vim.keymap.set("n", "N", api.fs.create, opts("Create"))
+  vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
+  vim.keymap.set("n", "D", api.fs.remove, opts("Delete"))
+  vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
+  vim.keymap.set("n", "R", api.fs.rename, opts("Rename"))
+  vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
+  vim.keymap.set("n", "c", api.fs.copy.node, opts("Copy"))
+  vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
+  vim.keymap.set("n", "y", api.fs.copy.filename, opts("Copy Name"))
+  vim.keymap.set("n", "Y", api.fs.copy.relative_path, opts("Copy Relative Path"))
+  vim.keymap.set("n", "gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
+  vim.keymap.set("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
+  vim.keymap.set("n", "}c", api.node.navigate.git.next, opts("Next Git"))
+  vim.keymap.set("n", "q", api.tree.close, opts("Close"))
+  vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
+end
+
 return {
   -- add symbols-outline
   {
     "nvim-tree/nvim-tree.lua",
+    commit = "ace64228ad5d89035fbe6f85e7f45a1f7b9e29c1",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
       { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
     },
+
     config = function()
       local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
       if not config_status_ok then
         return
       end
 
-      local tree_cb = nvim_tree_config.nvim_tree_callback
-
       require("nvim-tree").setup({
+        on_attach = on_attach,
         git = {
           ignore = false,
         },
@@ -65,33 +106,6 @@ return {
         view = {
           width = 30,
           side = "left",
-          mappings = {
-            list = {
-              { key = { "<CR>", "o" }, cb = tree_cb("edit") },
-              { key = "h", cb = tree_cb("dir_up") },
-              { key = "l", cb = tree_cb("cd") },
-              { key = "|", cb = tree_cb("vsplit") },
-              { key = "-", cb = tree_cb("split") },
-              { key = "<C-t>", cb = tree_cb("tabnew") },
-              { key = "<Tab>", cb = tree_cb("preview") },
-              { key = "K", cb = tree_cb("first_sibling") },
-              { key = "J", cb = tree_cb("last_sibling") },
-              { key = "<F5>", cb = tree_cb("refresh") },
-              { key = { "n", "N" }, cb = tree_cb("create") },
-              { key = { "d", "D" }, cb = tree_cb("remove") },
-              { key = { "r", "R" }, cb = tree_cb("rename") },
-              { key = "x", cb = tree_cb("cut") },
-              { key = "c", cb = tree_cb("copy") },
-              { key = "p", cb = tree_cb("paste") },
-              { key = "y", cb = tree_cb("copy_name") },
-              { key = "Y", cb = tree_cb("copy_path") },
-              { key = "gy", cb = tree_cb("copy_absolute_path") },
-              { key = "[c", cb = tree_cb("prev_git_item") },
-              { key = "}c", cb = tree_cb("next_git_item") },
-              { key = "q", cb = tree_cb("close") },
-              { key = "g?", cb = tree_cb("toggle_help") },
-            },
-          },
         },
       })
     end,
