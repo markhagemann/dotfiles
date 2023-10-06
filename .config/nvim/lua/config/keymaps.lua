@@ -3,3 +3,5 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.del({ "n", "v" }, "<A-j>")
+vim.keymap.del({ "n", "v" }, "<A-k>")

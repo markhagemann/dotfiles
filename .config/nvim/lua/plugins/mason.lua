@@ -16,6 +16,7 @@ return {
         "terraform-ls",
         "typescript-language-server",
         "vetur-vls",
+        -- "vue-language-server",
         -- "yaml-language-server",
       },
     },

@@ -35,7 +35,8 @@ fi
 export GDK_SCALE=0.5
 export GDK_DPI_SCALE=1.25
 
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
+# Can't actually remember what this was for - disabling for now
+# [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -86,7 +87,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
 # Automatically start tmux
-ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOSTART=true
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
@@ -108,6 +109,19 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
 plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
+### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 function zshalias()
 {
