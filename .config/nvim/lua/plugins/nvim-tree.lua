@@ -47,9 +47,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
-      -- LazyVim bug stopping default bindings
-      -- { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
-      { "<leader>fe", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
+      { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
     },
 
     config = function()
