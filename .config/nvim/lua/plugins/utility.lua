@@ -30,7 +30,6 @@ return {
       },
     },
   },
-  { "/folke/lsp-colors.nvim" },
   { "kburdett/vim-nuuid" },
   {
     "lewis6991/spaceless.nvim",
