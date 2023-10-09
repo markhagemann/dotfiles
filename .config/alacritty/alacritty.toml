@@ -16,7 +16,7 @@ decorations = "None"
 opacity = 1.0
 
 [font]
-normal = { family = "JetBrainsMono NF", style = "Regular" }
+# normal = { family = "JetBrainsMono NF", style = "Regular" }
 # bold = { family = "JetBrainsMono Bold", style = "Regular" }
 # italic = { family = "JetBrainsMono NF Italic", style = "Regular" }
 size = 15.0
