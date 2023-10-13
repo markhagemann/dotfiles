@@ -37,12 +37,6 @@ return {
       require("spaceless").setup()
     end,
   },
-  {
-    "mg979/vim-visual-multi",
-    config = function()
-      vim.g.VM_leader = ";"
-    end,
-  },
   { "sitiom/nvim-numbertoggle" },
   {
     "tomiis4/Hypersonic.nvim",
