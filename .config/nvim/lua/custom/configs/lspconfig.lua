@@ -1,5 +1,5 @@
 -- Load defaults from NvChad
-require("plugins.configs.lspconfig").defaults()
+-- require("plugins.configs.lspconfig").defaults()
 
 local finders = require "telescope.finders"
 local pickers = require "telescope.pickers"

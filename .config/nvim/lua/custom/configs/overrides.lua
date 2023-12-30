@@ -129,7 +129,6 @@ M.treesitter = {
     "javascript",
     "typescript",
     "tsx",
-    "vue",
     "html",
     "astro",
     "css",
