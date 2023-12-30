@@ -133,9 +133,7 @@ local default_plugins = {
 
       -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.ensure_installed and #opts.ensure_installed > 0 then
-          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
-        end
+        vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
       end, {})
 
       vim.g.mason_binaries_list = opts.ensure_installed
@@ -236,7 +234,7 @@ local default_plugins = {
 
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
     cmd = "Telescope",
     init = function()
       require("core.utils").load_mappings "telescope"
