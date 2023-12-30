@@ -16,6 +16,7 @@ alias evim="cd ~/.config/nvim && nvim ~/.config/nvim/init.lua"
 alias ezsh="nvim ~/.zshrc"
 alias installpacker="git clone https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim"
+alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 alias lzd="lazydocker"
 alias lzg="lazygit"
 alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
