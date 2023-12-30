@@ -1,18 +1,16 @@
-local opt = vim.opt
-local g = vim.g
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = true,
+  signs = true,
+  update_in_insert = false,
+})
 
-vim.cmd [[autocmd FileType * set formatoptions-=cro]] -- Stop continuation of comments on newline
+vim.fn.sign_define("DapBreakpoint", { text = "", numhl = "DapBreakpoint", texthl = "DapBreakpoint" })
+vim.fn.sign_define("DagLogPoint", { text = "", numhl = "DapLogPoint", texthl = "DapLogPoint" })
+vim.fn.sign_define("DapStopped", { text = "", numhl = "DapStopped", texthl = "DapStopped" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "", numhl = "DapBreakpointRejected", texthl = "DapBreakpointRejected" })
 
-vim.schedule(function()
-  vim.keymap.del("n", '"')
-end)
+vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 
-opt.autoread = true -- Enable auto read
-opt.conceallevel = 0 -- Don't conceal anything
-opt.foldcolumn = "1" -- '0' is not bad
-opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-opt.foldlevelstart = 99
-opt.foldenable = true
-opt.swapfile = false
-
-g.blamer_enabled = true
+require "custom.utils.autocmd"
+require "custom.utils.usercmd"
+require "custom.utils.options"
