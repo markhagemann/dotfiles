@@ -8,37 +8,44 @@ return {
       exclude_ft = { "neo-tree" },
     },
   },
-  { "APZelos/blamer.nvim", event = { "BufEnter" } },
+  {
+    "AckslD/muren.nvim",
+    event = { "BufEnter" },
+    config = true,
+  },
+  { "APZelos/blamer.nvim",     event = { "BufEnter" } },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
+      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
+      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
+      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
+      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
+  { "chaoren/vim-wordmotion",       event = { "BufEnter" } },
   {
-    "AckslD/muren.nvim",
-    event = { "BufEnter" },
-    config = true,
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
   },
-  { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.indentscope", version = "*",         event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
     opts = {
       mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
+        add = "gsa",            -- Add surrounding in Normal and Visual modes
+        delete = "gsd",         -- Delete surrounding
+        find = "gsf",           -- Find surrounding (to the right)
+        find_left = "gsF",      -- Find surrounding (to the left)
+        highlight = "gsh",      -- Highlight surrounding
+        replace = "gsr",        -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
@@ -56,7 +63,7 @@ return {
     },
   },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
-  { "kburdett/vim-nuuid", event = "InsertEnter" },
+  { "kburdett/vim-nuuid",                          event = "InsertEnter" },
   {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
@@ -64,7 +71,7 @@ return {
       require("spaceless").setup()
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, event = "BufEnter" },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl",      opts = {}, event = "BufEnter" },
   {
     "numToStr/Comment.nvim",
     opts = {
@@ -82,7 +89,7 @@ return {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
-  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle",            event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",
