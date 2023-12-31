@@ -52,6 +52,7 @@ return {
       },
     },
   },
+  { "folke/todo-comments.nvim", event = { "BufEnter" } },
   {
     "folke/trouble.nvim",
     keys = {
