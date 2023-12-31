@@ -45,10 +45,10 @@ keymap.set("n", "<S-Left>", ":vertical resize -2<CR>")
 keymap.set("n", "<S-Right>", ":vertical resize +2<CR>")
 
 -- Window management
-keymap.set("n", "<leader>-", "<C-w>v")         -- split window vertically
-keymap.set("n", "<leader>|", "<C-w>s")         -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=")        -- make split windows equal width & height
-keymap.set("n", "<leader>sx", ":close<CR>")    -- close current split window
+keymap.set("n", "<leader>wv", "<C-w>v")         -- split window vertically
+keymap.set("n", "<leader>wh", "<C-w>s")         -- split window horizontally
+keymap.set("n", "<leader>we", "<C-w>=")        -- make split windows equal width & height
+keymap.set("n", "<leader>wx", ":close<CR>")    -- close current split window
 
 keymap.set("n", "<leader>to", ":tabnew<CR>")   -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
