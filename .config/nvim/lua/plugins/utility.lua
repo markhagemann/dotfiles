@@ -4,8 +4,8 @@ return {
     event = { "BufLeave" },
     opts = {
       events = { "BufLeave" },
-      silent = false,
-      exclude_ft = { "neo-tree" },
+      silent = true,
+      exclude_ft = { "nvim-tree" },
     },
   },
   {
