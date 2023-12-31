@@ -13,20 +13,20 @@ return {
     event = { "BufEnter" },
     config = true,
   },
-  { "APZelos/blamer.nvim", event = { "BufEnter" } },
+  { "APZelos/blamer.nvim",     event = { "BufEnter" } },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
+      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
+      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
+      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
+      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
+  { "chaoren/vim-wordmotion",       event = { "BufEnter" } },
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -34,20 +34,20 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.animate",     version = "*",         event = { "BufEnter" } },
+  { "echasnovski/mini.hipatterns",  version = "*",         event = { "BufEnter" } },
+  { "echasnovski/mini.indentscope", version = "*",         event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
     opts = {
       mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
+        add = "gsa",            -- Add surrounding in Normal and Visual modes
+        delete = "gsd",         -- Delete surrounding
+        find = "gsf",           -- Find surrounding (to the right)
+        find_left = "gsF",      -- Find surrounding (to the left)
+        highlight = "gsh",      -- Highlight surrounding
+        replace = "gsr",        -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
@@ -64,8 +64,22 @@ return {
       -- refer to the configuration section below
     },
   },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "BufEnter",
+    keys = {
+      -- suggested keymap
+      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
+    },
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      -- options
+    },
+  },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
-  { "kburdett/vim-nuuid", event = "InsertEnter" },
+  { "kburdett/vim-nuuid",                          event = "InsertEnter" },
   {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
@@ -73,7 +87,7 @@ return {
       require("spaceless").setup()
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, event = "BufEnter" },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl",      opts = {}, event = "BufEnter" },
   {
     "numToStr/Comment.nvim",
     opts = {
@@ -91,7 +105,7 @@ return {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
-  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle",            event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",
@@ -149,14 +163,14 @@ return {
 
       harpoon:setup()
 
-      vim.keymap.set("n", "<leader>a", function()
+      vim.keymap.set("n", "<leader>h", function()
         harpoon:list():append()
       end)
       vim.keymap.set("n", "<C-e>", function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end)
 
-      vim.keymap.set("n", "<C-h>", function()
+      vim.keymap.set("n", "<C-a>", function()
         harpoon:list():select(1)
       end)
       vim.keymap.set("n", "<C-t>", function()
