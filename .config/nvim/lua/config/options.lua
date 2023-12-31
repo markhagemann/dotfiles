@@ -46,11 +46,21 @@ opt.splitbelow = true     -- split horizontal window to the bottom
 opt.iskeyword:append("-") -- consider string-string as whole word
 
 -- folding
-opt.foldcolumn = "1" -- '0' is not bad
-opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-opt.foldlevelstart = 99
 opt.foldenable = true
+opt.foldcolumn = "auto" -- show foldcolumn in nvim 0.9
+opt.foldnestmax = 0
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.fillchars = {
+  fold      = ' ',
+  foldopen  = '',
+  foldsep   = ' ',
+  foldclose = '',
+  stl       = ' ',
+  eob       = ' ',
+}
+opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = ""
 
-vim.g.blamer_enabled = true
-vim.g.blamer_enabled = true
 vim.g.blamer_enabled = true
