@@ -27,6 +27,7 @@ return {
     event = { "BufEnter" },
     config = true,
   },
+  { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
