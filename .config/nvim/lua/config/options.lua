@@ -1,5 +1,14 @@
 local opt = vim.opt -- for conciseness
 
+-- Undo settings
+opt.undodir = "~/.config/nvim/.undo/" -- Directory for undo
+opt.undofile = true                   -- Save undos after file closes
+opt.undolevels = 1000                 -- How many undos
+opt.undoreload = 10000                -- number of lines to save for undo
+
+opt.backupdir = "~/.config/nvim/.backup/"
+opt.directory = "~/.config/nvim/.swp/"
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true         -- shows absolute line number on cursor line (when relative number is on)
@@ -46,4 +55,6 @@ opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decr
 opt.foldlevelstart = 99
 opt.foldenable = true
 
+vim.g.blamer_enabled = true
+vim.g.blamer_enabled = true
 vim.g.blamer_enabled = true
