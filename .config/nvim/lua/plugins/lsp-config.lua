@@ -29,6 +29,15 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
+      lspconfig.sumneko_lua.setup({
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' }
+            }
+          }
+        }
+      })
       lspconfig.tsserver.setup({
         capabilites = capabilities,
       })
@@ -51,5 +60,9 @@ return {
     config = function()
       require("symbols-outline").setup()
     end
+  },
+  {
+    "dmmulroy/tsc.nvim",
+    lazy = false
   }
 }
