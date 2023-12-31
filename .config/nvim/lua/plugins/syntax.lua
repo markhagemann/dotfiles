@@ -1,4 +1,4 @@
 return {
-  { "joukevandermaas/vim-ember-hbs" },
-  { "m-demare/hlargs.nvim" },
+  { "joukevandermaas/vim-ember-hbs", event = "BufReadPre" },
+  { "m-demare/hlargs.nvim",          event = "BufEnter" },
 }

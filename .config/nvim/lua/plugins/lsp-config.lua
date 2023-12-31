@@ -1,22 +1,30 @@
 return {
-  { "hinell/lsp-timeout.nvim", dependencies = { "neovim/nvim-lspconfig" } },
+  {
+    "hinell/lsp-timeout.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "neovim/nvim-lspconfig" }
+  },
   {
     "williamboman/mason.nvim",
-    lazy = false,
+    cmd = "Mason",
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     config = function()
       require("mason").setup()
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
     opts = {
       auto_install = true,
     },
   },
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 

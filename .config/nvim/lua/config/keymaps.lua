@@ -6,8 +6,6 @@ local keymap = vim.keymap -- for conciseness
 ---------------------
 -- General Keymaps
 ---------------------
--- Transparency Toggle
-keymap.set("n", "TT", ":TransparentToggle<CR>", { noremap = true })
 
 -- Use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")

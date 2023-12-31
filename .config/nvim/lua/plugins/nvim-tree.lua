@@ -56,7 +56,6 @@ return {
   -- add symbols-outline
   {
     "nvim-tree/nvim-tree.lua",
-    lazy = false,
     commit = "ace64228ad5d89035fbe6f85e7f45a1f7b9e29c1",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -127,6 +126,8 @@ return {
   },
   {
     "antosha417/nvim-lsp-file-operations",
+    -- TODO: Lazy Load - https://github.com/antosha417/nvim-lsp-file-operations/issues/21
+    lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",

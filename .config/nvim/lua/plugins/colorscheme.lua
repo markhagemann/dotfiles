@@ -8,5 +8,12 @@ return {
       vim.cmd.colorscheme("catppuccin")
     end,
   },
-  { "xiyaowong/nvim-transparent" },
+  {
+    "xiyaowong/nvim-transparent",
+    lazy = true,
+    keys = {
+      -- Transparency Toggle
+      { "TT", ":TransparentToggle<CR>", desc = "Toggle Transparency" },
+    },
+  },
 }
