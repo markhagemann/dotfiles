@@ -1,14 +1,14 @@
-return { 
+return {
   { "APZelos/blamer.nvim" },
   { "arthurxavierx/vim-caser" },
   {
     "christoomey/vim-tmux-navigator",
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
+      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
+      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
+      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
+      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
     },
   },
   { "chaoren/vim-wordmotion" },
@@ -20,24 +20,24 @@ return {
     "echasnovski/mini.surround",
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
+        add = "gza",            -- Add surrounding in Normal and Visual modes
+        delete = "gzd",         -- Delete surrounding
+        find = "gzf",           -- Find surrounding (to the right)
+        find_left = "gzF",      -- Find surrounding (to the left)
+        highlight = "gzh",      -- Highlight surrounding
+        replace = "gzr",        -- Replace surrounding
         update_n_lines = "gzn", -- Update `n_lines`
       },
     },
   },
   {
-   "folke/trouble.nvim",
-   dependencies = { "nvim-tree/nvim-web-devicons" },
-   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-   }
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
   },
   { "kburdett/vim-nuuid" },
   {
@@ -46,13 +46,13 @@ return {
       require("spaceless").setup()
     end,
   },
-{
-    'numToStr/Comment.nvim',
+  {
+    "numToStr/Comment.nvim",
     opts = {
-        -- add any options here
+      -- add any options here
     },
     lazy = false,
-},
+  },
   { "sitiom/nvim-numbertoggle" },
   {
     "tomiis4/Hypersonic.nvim",
@@ -65,5 +65,5 @@ return {
     end,
   },
   { "tpope/vim-sleuth" },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}},
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 }
