@@ -1,13 +1,9 @@
 local opt = vim.opt -- for conciseness
 
 -- Undo settings
-opt.undodir = "~/.config/nvim/.undo/" -- Directory for undo
 opt.undofile = true                   -- Save undos after file closes
 opt.undolevels = 1000                 -- How many undos
 opt.undoreload = 10000                -- number of lines to save for undo
-
-opt.backupdir = "~/.config/nvim/.backup/"
-opt.directory = "~/.config/nvim/.swp/"
 
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
