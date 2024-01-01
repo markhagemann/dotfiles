@@ -1,5 +1,13 @@
 return {
   {
+    "folke/neodev.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+    config = function()
+      require("neodev").setup({})
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -17,7 +25,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "folke/neodev.nvim",
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
@@ -32,6 +39,17 @@ return {
         capabilites = capabilities,
       })
 
+      lspconfig.lua_ls.setup({
+        capabilites = capabilities,
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace"
+            }
+          }
+        }
+      })
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
@@ -41,8 +59,12 @@ return {
 
   -- Extras
   {
-    "hinell/lsp-timeout.nvim",
+    "dmmulroy/tsc.nvim",
+    event = "LspAttach",
+  },
+  {
     event = { "BufReadPre", "BufNewFile" },
+    "hinell/lsp-timeout.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
   },
   {
@@ -51,19 +73,21 @@ return {
     opts = {},
   },
   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
+  {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = function()
       require("symbols-outline").setup()
     end,
-  },
-  {
-    "dmmulroy/tsc.nvim",
-    lazy = false,
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
   },
 }

@@ -1,17 +1,3 @@
--- return {
---   "nvim-tree/nvim-tree.lua",
---   version = "*",
---   lazy = false,
---   dependencies = {
---     "nvim-tree/nvim-web-devicons",
---   },
---   config = function()
---
---     require("nvim-tree").setup {
---     }
---   end,
--- }
-
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")
 
@@ -56,7 +42,6 @@ return {
   -- add symbols-outline
   {
     "nvim-tree/nvim-tree.lua",
-    commit = "ace64228ad5d89035fbe6f85e7f45a1f7b9e29c1",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
@@ -65,10 +50,6 @@ return {
     },
 
     config = function()
-      local config_status_ok = pcall(require, "nvim-tree.config")
-      if not config_status_ok then
-        return
-      end
 
       require("nvim-tree").setup({
         on_attach = on_attach,
@@ -126,8 +107,7 @@ return {
   },
   {
     "antosha417/nvim-lsp-file-operations",
-    -- TODO: Lazy Load - https://github.com/antosha417/nvim-lsp-file-operations/issues/21
-    lazy = false,
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
