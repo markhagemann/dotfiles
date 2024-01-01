@@ -60,7 +60,7 @@ return {
   -- Extras
   {
     "dmmulroy/tsc.nvim",
-    event = "LspAttach",
+    event = "VeryLazy",
   },
   {
     event = { "BufReadPre", "BufNewFile" },
@@ -74,14 +74,25 @@ return {
   },
   {
     "pmizio/typescript-tools.nvim",
+    event = "LspAttach",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
   {
     "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
+    event = "LspAttach",
     opts = {},
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
+  {
+    "jinzhongjia/LspUI.nvim",
+    event = "LspAttach",
+    branch = "legacy",
+    config = function()
+      require("LspUI").setup({
+        prompt = false,
+      })
+    end
   },
   {
     "simrat39/symbols-outline.nvim",
