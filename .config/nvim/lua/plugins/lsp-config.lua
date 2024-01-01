@@ -45,16 +45,16 @@ return {
         },
       })
 
-      vim.keymap.set("n", "F2", "<cmd>LspUI rename<CR>")
-      vim.keymap.set("n", "K", "<cmd>LspUI hover<CR>")
-      vim.keymap.set("n", "gi", "<cmd>LspUI implementation<CR>")
-      vim.keymap.set("n", "gc", "<cmd>LspUI declaration<CR>")
-      vim.keymap.set("n", "gd", "<cmd>LspUI definition<CR>")
-      vim.keymap.set("n", "td", "<cmd>LspUI type_definition<CR>")
-      vim.keymap.set("n", "gr", "<cmd>LspUI reference<CR>")
-      vim.keymap.set("n", "]e", "<cmd>LspUI diagnostic prev<CR>")
-      vim.keymap.set("n", "[e", "<cmd>LspUI diagnostic next<CR>")
-      vim.keymap.set("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
+      vim.keymap.set("n", "F2", "<cmd>Lspsaga rename<CR>")
+      vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+      vim.keymap.set("n", "gi", "<cmd>Lspsaga finder imp<CR>")
+      vim.keymap.set("n", "gc", "<cmd>Lspsaga go_to_definition<CR>")
+      vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
+      vim.keymap.set("n", "td", "<cmd>Lspsaga peek_type_definition<CR>")
+      vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<CR>")
+      vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+      vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+      vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
     end,
   },
 
@@ -71,14 +71,15 @@ return {
   --   event = "VeryLazy",
   -- },
   {
-    "jinzhongjia/LspUI.nvim",
-    event = "VeryLazy",
-    branch = "main",
+    'nvimdev/lspsaga.nvim',
+    event = "LspAttach",
     config = function()
-      require("LspUI").setup({
-        prompt = false,
-      })
+      require('lspsaga').setup({})
     end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    }
   },
   {
     event = { "BufReadPre", "BufNewFile" },
@@ -89,55 +90,6 @@ return {
     "Fildo7525/pretty_hover",
     event = "LspAttach",
     opts = {},
-  },
-  {
-    "onsails/lspkind.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspkind").init({
-        -- symbol_map = {
-        --   Array = " ",
-        --   Boolean = "󰨙 ",
-        --   Class = " ",
-        --   Codeium = "󰘦 ",
-        --   Color = " ",
-        --   Control = " ",
-        --   Collapsed = " ",
-        --   Constant = "󰏿 ",
-        --   Constructor = " ",
-        --   Copilot = " ",
-        --   Enum = " ",
-        --   EnumMember = " ",
-        --   Event = " ",
-        --   Field = " ",
-        --   File = " ",
-        --   Folder = " ",
-        --   Function = "󰊕 ",
-        --   Interface = " ",
-        --   Key = " ",
-        --   Keyword = " ",
-        --   Method = "󰊕 ",
-        --   Module = " ",
-        --   Namespace = "󰦮 ",
-        --   Null = " ",
-        --   Number = "󰎠 ",
-        --   Object = " ",
-        --   Operator = " ",
-        --   Package = " ",
-        --   Property = " ",
-        --   Reference = " ",
-        --   Snippet = " ",
-        --   String = " ",
-        --   Struct = "󰆼 ",
-        --   TabNine = "󰏚 ",
-        --   Text = " ",
-        --   TypeParameter = " ",
-        --   Unit = " ",
-        --   Value = " ",
-        --   Variable = "󰀫 ",
-        -- },
-      })
-    end,
   },
   -- {
   --   "pmizio/typescript-tools.nvim",

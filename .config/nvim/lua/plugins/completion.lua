@@ -23,10 +23,13 @@ return {
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+    dependencies = { "onsails/lspkind.nvim" },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
       cmp.setup({
+        mode = "symbol", -- show only symbol annotations
         window = {
           documentation = cmp.config.window.bordered(),
           completion = cmp.config.window.bordered(),
@@ -76,12 +79,12 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'path' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
+          { name = "nvim_lsp" },
+          { name = "path" },
+          { name = "luasnip" },
+          { name = "buffer" },
         }),
-        format = require("lspkind").cmp_format({
+        format = lspkind.cmp_format({
           maxwidth = 50,
           ellipsis_char = "...",
         }),
