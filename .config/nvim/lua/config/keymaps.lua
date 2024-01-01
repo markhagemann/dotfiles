@@ -13,9 +13,6 @@ keymap.set("i", "jk", "<ESC>")
 -- Clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
--- Delete single character without copying into register
-keymap.set("n", "x", '"_x')
-
 -- Increment/decrement numbers
 keymap.set("n", "<leader>+", "<C-a>") -- increment
 keymap.set("n", "<leader>-", "<C-x>") -- decrement

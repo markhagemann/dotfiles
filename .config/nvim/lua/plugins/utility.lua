@@ -13,21 +13,21 @@ return {
     event = { "BufEnter" },
     config = true,
   },
-  { "APZelos/blamer.nvim",     event = { "BufEnter" } },
+  { "APZelos/blamer.nvim", event = { "BufEnter" } },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
-      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
-      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
-      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion",      event = { "BufEnter" } },
-  { 'code-biscuits/nvim-biscuits', event = { "BufEnter" }, dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
+  { "code-biscuits/nvim-biscuits", event = { "BufEnter" }, dependencies = { "nvim-treesitter/nvim-treesitter" } },
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -35,25 +35,25 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.animate",     version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.hipatterns",  version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
   { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
     opts = {
       mappings = {
-        add = "gsa",            -- Add surrounding in Normal and Visual modes
-        delete = "gsd",         -- Delete surrounding
-        find = "gsf",           -- Find surrounding (to the right)
-        find_left = "gsF",      -- Find surrounding (to the left)
-        highlight = "gsh",      -- Highlight surrounding
-        replace = "gsr",        -- Replace surrounding
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
   },
-  { "folke/todo-comments.nvim",                    event = { "BufEnter" } },
+  { "folke/todo-comments.nvim", event = { "BufEnter" } },
   {
     "folke/trouble.nvim",
     keys = {
@@ -65,6 +65,10 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
+  },
+  {
+    "gbprod/cutlass.nvim",
+    event = "BufEnter",
   },
   {
     "HakonHarnes/img-clip.nvim",
@@ -87,8 +91,8 @@ return {
     "karb94/neoscroll.nvim",
     event = "BufEnter",
     config = function()
-      require('neoscroll').setup({})
-    end
+      require("neoscroll").setup({})
+    end,
   },
   {
     "kburdett/vim-nuuid",
@@ -110,6 +114,10 @@ return {
       scope = { enabled = true, show_start = false, show_end = false },
     },
     event = "BufEnter",
+  },
+  {
+    "mawkler/modicator.nvim",
+    dependencies = "catppuccin/nvim"
   },
   { "NvChad/nvim-colorizer.lua", event = "BufEnter" },
   {
@@ -143,11 +151,10 @@ return {
           ale = false,
         },
       }
-
-      )
-    end
+)
+    end,
   },
-  { "sitiom/nvim-numbertoggle",  event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",

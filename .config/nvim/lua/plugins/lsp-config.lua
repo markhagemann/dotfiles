@@ -59,6 +59,13 @@ return {
 
   -- Extras
   {
+    "aznhe21/actions-preview.nvim",
+    event = "LspAttach",
+    config = function()
+      vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+    end,
+  },
+  {
     "dmmulroy/tsc.nvim",
     event = "VeryLazy",
   },
@@ -101,4 +108,11 @@ return {
       require("symbols-outline").setup()
     end,
   },
+  {
+    'VidocqH/lsp-lens.nvim',
+    event = "LspAttach",
+    config = function()
+      require 'lsp-lens'.setup({})
+    end
+  }
 }
