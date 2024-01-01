@@ -80,7 +80,12 @@ return {
     },
   },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
-  { "kburdett/vim-nuuid", event = "InsertEnter" },
+  {
+    "kburdett/vim-nuuid",
+    keys = {
+      { "<leader>uu", "<Plug>Nuuid", desc = "Create New UUID" },
+    },
+  },
   {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
