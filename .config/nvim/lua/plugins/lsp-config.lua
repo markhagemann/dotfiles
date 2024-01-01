@@ -44,10 +44,10 @@ return {
         settings = {
           Lua = {
             completion = {
-              callSnippet = "Replace"
-            }
-          }
-        }
+              callSnippet = "Replace",
+            },
+          },
+        },
       })
 
       vim.keymap.set("n", "F2", "<cmd>LspUI rename<CR>")
@@ -95,7 +95,9 @@ return {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
     opts = {},
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
   },
   {
     "jinzhongjia/LspUI.nvim",
@@ -105,7 +107,7 @@ return {
       require("LspUI").setup({
         prompt = false,
       })
-    end
+    end,
   },
   {
     "simrat39/symbols-outline.nvim",
@@ -115,10 +117,17 @@ return {
     end,
   },
   {
-    'VidocqH/lsp-lens.nvim',
+    "VidocqH/lsp-lens.nvim",
     event = "VeryLazy",
     config = function()
-      require 'lsp-lens'.setup({})
-    end
-  }
+      require("lsp-lens").setup({
+        sections = {
+          definition = true,
+          references = true,
+          implements = true,
+          git_authors = false,
+        },
+      })
+    end,
+  },
 }
