@@ -1,13 +1,5 @@
 return {
   {
-    "folke/neodev.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-    config = function()
-      require("neodev").setup({})
-    end,
-  },
-  {
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -46,6 +38,9 @@ return {
             completion = {
               callSnippet = "Replace",
             },
+            diagnostics = {
+              globals = { "vim" },
+            },
           },
         },
       })
@@ -71,9 +66,19 @@ return {
       vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
     end,
   },
+  -- {
+  --   "dmmulroy/tsc.nvim",
+  --   event = "VeryLazy",
+  -- },
   {
-    "dmmulroy/tsc.nvim",
+    "jinzhongjia/LspUI.nvim",
     event = "VeryLazy",
+    branch = "main",
+    config = function()
+      require("LspUI").setup({
+        prompt = false,
+      })
+    end,
   },
   {
     event = { "BufReadPre", "BufNewFile" },
@@ -86,29 +91,68 @@ return {
     opts = {},
   },
   {
-    "pmizio/typescript-tools.nvim",
+    "onsails/lspkind.nvim",
     event = "LspAttach",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
-  },
-  {
-    "jinzhongjia/LspUI.nvim",
-    event = "VeryLazy",
-    branch = "main",
     config = function()
-      require("LspUI").setup({
-        prompt = false,
+      require("lspkind").init({
+        -- symbol_map = {
+        --   Array = " ",
+        --   Boolean = "󰨙 ",
+        --   Class = " ",
+        --   Codeium = "󰘦 ",
+        --   Color = " ",
+        --   Control = " ",
+        --   Collapsed = " ",
+        --   Constant = "󰏿 ",
+        --   Constructor = " ",
+        --   Copilot = " ",
+        --   Enum = " ",
+        --   EnumMember = " ",
+        --   Event = " ",
+        --   Field = " ",
+        --   File = " ",
+        --   Folder = " ",
+        --   Function = "󰊕 ",
+        --   Interface = " ",
+        --   Key = " ",
+        --   Keyword = " ",
+        --   Method = "󰊕 ",
+        --   Module = " ",
+        --   Namespace = "󰦮 ",
+        --   Null = " ",
+        --   Number = "󰎠 ",
+        --   Object = " ",
+        --   Operator = " ",
+        --   Package = " ",
+        --   Property = " ",
+        --   Reference = " ",
+        --   Snippet = " ",
+        --   String = " ",
+        --   Struct = "󰆼 ",
+        --   TabNine = "󰏚 ",
+        --   Text = " ",
+        --   TypeParameter = " ",
+        --   Unit = " ",
+        --   Value = " ",
+        --   Variable = "󰀫 ",
+        -- },
       })
     end,
   },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   event = "LspAttach",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  -- },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   config = function(_, opts)
+  --     require("lsp_signature").setup(opts)
+  --   end,
+  -- },
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
@@ -116,18 +160,18 @@ return {
       require("symbols-outline").setup()
     end,
   },
-  {
-    "VidocqH/lsp-lens.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lsp-lens").setup({
-        sections = {
-          definition = true,
-          references = true,
-          implements = true,
-          git_authors = false,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "VidocqH/lsp-lens.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("lsp-lens").setup({
+  --       sections = {
+  --         definition = true,
+  --         references = true,
+  --         implements = true,
+  --         git_authors = false,
+  --       },
+  --     })
+  --   end,
+  -- },
 }

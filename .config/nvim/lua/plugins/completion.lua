@@ -42,7 +42,7 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-          ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -76,10 +76,14 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
+          { name = 'nvim_lsp' },
+          { name = 'path' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+        }),
+        format = require("lspkind").cmp_format({
+          maxwidth = 50,
+          ellipsis_char = "...",
         }),
       })
     end,

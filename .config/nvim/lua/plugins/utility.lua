@@ -13,20 +13,20 @@ return {
     event = { "BufEnter" },
     config = true,
   },
-  { "APZelos/blamer.nvim", event = { "BufEnter" } },
+  { "APZelos/blamer.nvim",     event = { "BufEnter" } },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
+      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
+      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
+      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
+      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
+  { "chaoren/vim-wordmotion",      event = { "BufEnter" } },
   { "code-biscuits/nvim-biscuits", event = { "BufEnter" }, dependencies = { "nvim-treesitter/nvim-treesitter" } },
   {
     "dstein64/vim-startuptime",
@@ -35,36 +35,43 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.animate",     version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.hipatterns",  version = "*", event = { "BufEnter" } },
   { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
     opts = {
       mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
+        add = "gsa",            -- Add surrounding in Normal and Visual modes
+        delete = "gsd",         -- Delete surrounding
+        find = "gsf",           -- Find surrounding (to the right)
+        find_left = "gsF",      -- Find surrounding (to the left)
+        highlight = "gsh",      -- Highlight surrounding
+        replace = "gsr",        -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
   },
-  { "folke/todo-comments.nvim", event = { "BufEnter" } },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  { "folke/todo-comments.nvim",                    event = { "BufEnter" } },
   {
     "folke/trouble.nvim",
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
   {
     "gbprod/cutlass.nvim",
@@ -76,14 +83,6 @@ return {
     keys = {
       -- suggested keymap
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
-    },
-  },
-  {
-    "j-hui/fidget.nvim",
-    tag = "v1.1.0",
-    event = "BufEnter",
-    opts = {
-      -- options
     },
   },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
@@ -117,9 +116,9 @@ return {
   },
   {
     "mawkler/modicator.nvim",
-    dependencies = "catppuccin/nvim"
+    dependencies = "catppuccin/nvim",
   },
-  { "NvChad/nvim-colorizer.lua", event = "BufEnter" },
+  { "NvChad/nvim-colorizer.lua",  event = "BufEnter" },
   {
     "numToStr/Comment.nvim",
     opts = {
@@ -150,8 +149,7 @@ return {
           search = false,
           ale = false,
         },
-      }
-)
+      })
     end,
   },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
@@ -231,5 +229,5 @@ return {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  { "windwp/nvim-ts-autotag",   event = "InsertEnter" },
 }

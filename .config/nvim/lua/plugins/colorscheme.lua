@@ -4,6 +4,7 @@ return {
     lazy = false,
     name = "catppuccin",
     priority = 1000,
+    opts = {},
     config = function()
       vim.cmd.colorscheme("catppuccin")
 
@@ -27,6 +28,31 @@ return {
       for hl, col in pairs(TelescopeColor) do
         vim.api.nvim_set_hl(0, hl, col)
       end
+
+      require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        dim_inactive = {
+          enabled = false, -- dims the background color of inactive window
+          shade = "dark",
+          percentage = 0.15, -- percentage of the shade to apply to the inactive window
+        },
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
+          nvimtree = true,
+          treesitter = true,
+          telescope = true,
+          notify = false,
+          ufo = true,
+        },
+      })
+
+      -- setup must be called before loading
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
   {
