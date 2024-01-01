@@ -50,10 +50,16 @@ return {
         }
       })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "F2", "<cmd>LspUI rename<CR>")
+      vim.keymap.set("n", "K", "<cmd>LspUI hover<CR>")
+      vim.keymap.set("n", "gi", "<cmd>LspUI implementation<CR>")
+      vim.keymap.set("n", "gc", "<cmd>LspUI declaration<CR>")
+      vim.keymap.set("n", "gd", "<cmd>LspUI definition<CR>")
+      vim.keymap.set("n", "td", "<cmd>LspUI type_definition<CR>")
+      vim.keymap.set("n", "gr", "<cmd>LspUI reference<CR>")
+      vim.keymap.set("n", "]e", "<cmd>LspUI diagnostic prev<CR>")
+      vim.keymap.set("n", "[e", "<cmd>LspUI diagnostic next<CR>")
+      vim.keymap.set("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
     end,
   },
 
@@ -87,14 +93,14 @@ return {
   },
   {
     "ray-x/lsp_signature.nvim",
-    event = "LspAttach",
+    event = "VeryLazy",
     opts = {},
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
   {
     "jinzhongjia/LspUI.nvim",
-    event = "LspAttach",
-    branch = "legacy",
+    event = "VeryLazy",
+    branch = "main",
     config = function()
       require("LspUI").setup({
         prompt = false,
@@ -110,7 +116,7 @@ return {
   },
   {
     'VidocqH/lsp-lens.nvim',
-    event = "LspAttach",
+    event = "VeryLazy",
     config = function()
       require 'lsp-lens'.setup({})
     end

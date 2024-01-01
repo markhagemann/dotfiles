@@ -1,7 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
   "Hypersonic.nvim": { "branch": "main", "commit": "a98dbd6b5ac1aac3cd895990e08d1ea40e67a9e3" },
-  "LspUI.nvim": { "branch": "legacy", "commit": "a9447e0131c4e34b3003f5da4a3026da49fb0db2" },
+  "LspUI.nvim": { "branch": "main", "commit": "b890e1d89e29e617a76fe295941fa80a5ecc73c3" },
   "LuaSnip": { "branch": "master", "commit": "8ae1dedd988eb56441b7858bd1e8554dfadaa46d" },
   "actions-preview.nvim": { "branch": "master", "commit": "8f79029a36ab6807478f157538a91ccd4af5858f" },
   "auto-save.nvim": { "branch": "main", "commit": "24af023800c48645e6472cb6f30cebe782288446" },
