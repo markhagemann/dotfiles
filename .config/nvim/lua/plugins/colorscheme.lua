@@ -30,7 +30,7 @@ return {
       end
 
       require("catppuccin").setup({
-        flavour = "mocha",   -- latte, frappe, macchiato, mocha
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
         integrations = {
           aerial = true,
           alpha = true,
@@ -65,7 +65,7 @@ return {
           treesitter = true,
           treesitter_context = true,
           which_key = true,
-        }
+        },
       })
 
       -- setup must be called before loading
