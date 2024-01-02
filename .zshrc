@@ -14,7 +14,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
   export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
   export DISPLAY=$IP:0.0
-  export LIBGL_ALWAYS_INDIRECT=1
+  # export LIBGL_ALWAYS_INDIRECT=1
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
   sudo /etc/init.d/dbus start &> /dev/null
