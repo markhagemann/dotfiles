@@ -1,25 +1,27 @@
-import = ["~/.config/alacritty/tokyonight_storm.yml"]
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
 
 [shell]
 program = "/usr/bin/zsh"
 # args = ["-l", "-c", "tmux"]
 
 [env]
-# TERM = "xterm-256color"
-TERM = "alacritty"
+TERM = "xterm-256color"
 
 [window]
 dimensions = { columns = 130, lines = 48 }
 padding = { x = 10, y = 10 }
 position = { x = 500, y = 500 }
 decorations = "None"
-opacity = 1.0
+opacity = 0.93
 
 [font]
-# normal = { family = "JetBrainsMono NF", style = "Regular" }
-# bold = { family = "JetBrainsMono Bold", style = "Regular" }
-# italic = { family = "JetBrainsMono NF Italic", style = "Regular" }
-size = 15.0
+normal = { family = "JetBrains Mono Nerd Font", style = "Regular" }
+bold = { family = "JetBrains Mono Nerd Font", style = "Bold" }
+italic = { family = "JetBrains Mono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrains Mono Nerd Font", style = "Bold Italic" }
+size = 17.0
 
 [mouse]
 hide_when_typing = true
