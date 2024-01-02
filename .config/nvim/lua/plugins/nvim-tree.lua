@@ -50,7 +50,6 @@ return {
     },
 
     config = function()
-
       require("nvim-tree").setup({
         on_attach = on_attach,
         git = {
@@ -92,10 +91,10 @@ return {
           enable = true,
           show_on_dirs = true,
           icons = {
-            hint = "!",
-            info = "",
-            warning = "",
-            error = "",
+            error = "",
+            warning = "",
+            hint = " ",
+            info = "",
           },
         },
         view = {

@@ -35,6 +35,7 @@ return {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
       -- Completion
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
@@ -43,20 +44,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
-      require("mason").setup({
-        ui = { border = "rounded" },
-      })
-
-      local lsp_zero = require("lsp-zero").preset({
-        manage_nvim_cmp = {
-          set_sources = "recommended",
-          set_basic_mappings = true,
-          set_extra_mappings = false,
-          use_luasnip = true,
-          set_format = true,
-          documentation_window = true,
-        },
-      })
+      local lsp_zero = require("lsp-zero")
 
       lsp_zero.on_attach(function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
@@ -74,12 +62,13 @@ return {
       end)
 
       lsp_zero.set_sign_icons({
-        error = "x",
-        warn = "▲",
-        hint = "⚑",
-        info = "»",
+        error = "",
+        warn = "",
+        hint = " ",
+        info = "",
       })
 
+      require("mason").setup({})
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
@@ -94,6 +83,27 @@ return {
             require("lspconfig").lua_ls.setup(lua_opts)
           end,
         },
+      })
+
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          { "bash-language-server" },
+          { "lua-language-server" },
+          { "stylua" },
+          { "html-lsp" },
+          { "emmet-ls" },
+          { "css-lsp" },
+          { "prettier" },
+          { "typescript-language-server" },
+          { "eslint_d" },
+          { "eslint-lsp" },
+          { "tailwindcss-language-server" },
+        },
+
+        auto_update = true,
+        run_on_start = true,
+        start_delay = 3000, -- 3 second delay
+        debounce_hours = 5, -- at least 5 hours between attempts to install/update
       })
 
       lsp_zero.format_mapping("<leader>lf", {
@@ -122,112 +132,116 @@ return {
       lsp_zero.setup()
 
       local cmp = require("cmp")
-      local cmp_action = require("lsp-zero").cmp_action()
-
-      require("luasnip.loaders.from_vscode").lazy_load()
+      local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
+      local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
       cmp.setup({
-        preselect = "item",
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        -- window = {
-        --   completion = cmp.config.window.bordered(),
-        --   documentation = cmp.config.window.bordered(),
-        -- },
-        formatting = {
-          fields = { "menu", "abbr", "kind" },
-
-          format = function(entry, item)
-            local menu_icon = {
-              nvim_lsp = "λ",
-              luasnip = "⋗",
-              buffer = "Ω",
-              path = "/",
-              nvim_lua = "Π",
-            }
-
-            item.menu = menu_icon[entry.source.name]
-
-            return item
-          end,
-        },
-        mapping = {
-          ["<cr>"] = cmp.mapping.confirm({ select = false }),
-          ["<Tab>"] = cmp_action.luasnip_supertab(),
-          ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
         sources = {
-          { name = "luasnip", keyword_length = 2 },
           { name = "path" },
           { name = "nvim_lsp" },
+          { name = "nvim_lua" },
+          { name = "luasnip", keyword_length = 2 },
           { name = "buffer",  keyword_length = 3 },
         },
+        formatting = {
+          fields = { "abbr", "kind", "menu" },
+          format = lspkind.cmp_format({
+            mode = "symbol_text",
+            menu = {
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              nvim_lua = "[Lua]",
+              latex_symbols = "[Latex]",
+            },
+            symbol_map = {
+              Array = " ",
+              Boolean = "󰨙 ",
+              Class = " ",
+              Codeium = "󰘦 ",
+              Color = " ",
+              Control = " ",
+              Collapsed = " ",
+              Constant = "󰏿 ",
+              Constructor = " ",
+              Copilot = " ",
+              Enum = " ",
+              EnumMember = " ",
+              Event = " ",
+              Field = " ",
+              File = " ",
+              Folder = " ",
+              Function = "󰊕 ",
+              Interface = " ",
+              Key = " ",
+              Keyword = " ",
+              Method = "󰊕 ",
+              Module = " ",
+              Namespace = "󰦮 ",
+              Null = " ",
+              Number = "󰎠 ",
+              Object = " ",
+              Operator = " ",
+              Package = " ",
+              Property = " ",
+              Reference = " ",
+              Snippet = " ",
+              String = " ",
+              Struct = "󰆼 ",
+              TabNine = "󰏚 ",
+              Text = " ",
+              TypeParameter = " ",
+              Unit = " ",
+              Value = " ",
+              Variable = "󰀫 ",
+            },
+          }),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select), -- previous suggestion
+          ["<C-j>"] = cmp.mapping.select_next_item(cmp_select), -- next suggestion
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+          -- Accept currently selected item. If none selected, `select` first item.
+          -- Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif check_backspace() then
+              fallback()
+            else
+              fallback()
+            end
+          end, {
+            "i",
+            "s",
+          }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, {
+            "i",
+            "s",
+          }),
+        }),
       })
-
-      -- local cmp = require("cmp")
-      -- local luasnip = require("luasnip")
-      -- local lspkind = require("lspkind")
-      -- local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      --
-      -- cmp.setup({
-      --   sources = {
-      --     { name = "path" },
-      --     { name = "nvim_lsp" },
-      --     { name = "nvim_lua" },
-      --     { name = "luasnip", keyword_length = 2 },
-      --     { name = "buffer",  keyword_length = 3 },
-      --   },
-      --   format = lsp_zero.cmp_format(),
-      --   -- format = lspkind.cmp_format({
-      --   --   maxwidth = 50,
-      --   --   ellipsis_char = "...",
-      --   -- }),
-      --   mapping = cmp.mapping.preset.insert({
-      --     ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select), -- previous suggestion
-      --     ["<C-j>"] = cmp.mapping.select_next_item(cmp_select), -- next suggestion
-      --     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-      --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      --     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-      --     ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
-      --     -- Accept currently selected item. If none selected, `select` first item.
-      --     -- Set `select` to `false` to only confirm explicitly selected items.
-      --     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-      --     ["<Tab>"] = cmp.mapping(function(fallback)
-      --       if cmp.visible() then
-      --         cmp.select_next_item()
-      --       elseif luasnip.expandable() then
-      --         luasnip.expand()
-      --       elseif luasnip.expand_or_jumpable() then
-      --         luasnip.expand_or_jump()
-      --       elseif check_backspace() then
-      --         fallback()
-      --       else
-      --         fallback()
-      --       end
-      --     end, {
-      --       "i",
-      --       "s",
-      --     }),
-      --     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      --       if cmp.visible() then
-      --         cmp.select_prev_item()
-      --       elseif luasnip.jumpable(-1) then
-      --         luasnip.jump(-1)
-      --       else
-      --         fallback()
-      --       end
-      --     end, {
-      --       "i",
-      --       "s",
-      --     }),
-      --   }),
-      -- })
     end,
   },
   -- Extras
@@ -245,18 +259,33 @@ return {
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
       require("lspsaga").setup({
         debug = false,
         use_saga_diagnostic_sign = true,
+        ui = {
+          -- disable lightbulb at end of line
+          code_action = "",
+          border = "rounded",
+          winblend = 0,
+          expand = "",
+          collapse = "",
+          diagnostic = "",
+          kind = {},
+        },
         -- diagnostic sign
-        error_sign = "",
-        warn_sign = "",
-        -- hint_sign = "",
+        error_sign = "",
+        warn_sign = "",
+        hint_sign = " ",
         infor_sign = "",
+        other = "",
         diagnostic_header_icon = "   ",
         -- code action title icon
-        code_action_icon = " ",
+        code_action_iconsign = " ",
         code_action_prompt = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
         finder_definition_icon = "  ",
         finder_reference_icon = "  ",
@@ -277,17 +306,13 @@ return {
 
         code_action_keys = { quit = "q", exec = "<CR>" },
         rename_action_keys = { quit = "<C-c>", exec = "<CR>" },
-        definition_preview_icon = "  ",
+        definition_preview_icon = "  ",
         border_style = "single",
         rename_prompt_prefix = "➤",
         server_filetype_map = {},
         diagnostic_prefix_format = "%d. ",
       })
     end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
   },
   {
     event = { "BufReadPre", "BufNewFile" },
