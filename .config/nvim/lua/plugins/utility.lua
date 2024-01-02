@@ -57,7 +57,14 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
+      lsp = {
+        hover = {
+          enabled = false,
+        },
+        signature = {
+          enabled = false,
+        }
+      },
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -118,7 +125,7 @@ return {
     "mawkler/modicator.nvim",
     dependencies = "catppuccin/nvim",
   },
-  { "NvChad/nvim-colorizer.lua",  event = "BufEnter" },
+  { "NvChad/nvim-colorizer.lua", event = "BufEnter" },
   {
     "numToStr/Comment.nvim",
     opts = {
@@ -152,7 +159,7 @@ return {
       })
     end,
   },
-  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle",  event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",
@@ -229,5 +236,5 @@ return {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  { "windwp/nvim-ts-autotag",   event = "InsertEnter" },
+  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
 }
