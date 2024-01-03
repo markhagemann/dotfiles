@@ -37,9 +37,9 @@ return {
 
         -- typescript specific keymaps (e.g. rename file and update imports)
         if client.name == "tsserver" then
-          vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")      -- rename file and update imports
+          vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
           vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-          vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>")    -- remove unused variables (not in youtube nvim video)
+          vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
         end
       end
 
@@ -72,7 +72,7 @@ return {
         -- pyright = {},
         rust_analyzer = {},
         tsserver = {},
-        html = { filetypes = { 'html', 'twig', 'hbs' } },
+        html = { filetypes = { "html", "twig", "hbs" } },
 
         lua_ls = {
           Lua = {
@@ -134,18 +134,27 @@ return {
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
+      local defaults = require("cmp.config.default")()
+
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       cmp.setup({
+        experimental = {
+          ghost_text = {
+            hl_group = "CmpGhostText",
+          },
+        },
+        sorting = defaults.sorting,
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
         },
         sources = {
           { name = "path" },
           { name = "nvim_lsp" },
           { name = "nvim_lua" },
           { name = "luasnip", keyword_length = 2 },
-          { name = "buffer",  keyword_length = 3 },
+          { name = "buffer", keyword_length = 3 },
         },
         formatting = {
           fields = { "abbr", "kind", "menu" },
@@ -207,7 +216,7 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+          ["<C-e>"] = cmp.mapping.abort(), -- close completion window
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
