@@ -9,7 +9,3 @@ opt.autoread = true -- Enable auto read
 opt.conceallevel = 0 -- Don't conceal anything
 opt.swapfile = false
 g.blamer_enabled = true
-
-return {
-  opts = { style = "tokyonight-storm" },
-}
