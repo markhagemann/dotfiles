@@ -4,38 +4,15 @@ local check_backspace = function()
 end
 
 return {
-  -- {
-  --   "williamboman/mason.nvim",
-  --   cmd = "Mason",
-  --   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-  --   config = function()
-  --     require("mason").setup()
-  --   end,
-  -- },
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   opts = {
-  --     auto_install = true,
-  --   },
-  -- },
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   dependencies = {
-  --     "mason.nvim",
-  --     "williamboman/mason-lspconfig.nvim",
-  --   },
-  -- },
   {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
+    "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       -- LSP
-      "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "folke/neodev.nvim",
       -- Completion
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
@@ -44,9 +21,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
-      local lsp_zero = require("lsp-zero")
-
-      lsp_zero.on_attach(function(client, bufnr)
+      local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
         vim.keymap.set("n", "F2", "<cmd>Lspsaga rename<CR>", opts)
@@ -59,30 +34,79 @@ return {
         vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
         vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
         vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-      end)
 
-      lsp_zero.set_sign_icons({
-        error = "",
-        warn = "",
-        hint = " ",
-        info = "",
+        -- typescript specific keymaps (e.g. rename file and update imports)
+        if client.name == "tsserver" then
+          vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")      -- rename file and update imports
+          vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
+          vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>")    -- remove unused variables (not in youtube nvim video)
+        end
+      end
+
+      local signs = {
+        Error = "",
+        Warn = "",
+        Hint = " ",
+        Info = "",
+      }
+
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      end
+
+      require("mason").setup()
+      require("mason-lspconfig").setup()
+
+      -- Enable the following language servers
+      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      --
+      --  Add any additional override configuration in the following tables. They will be passed to
+      --  the `settings` field of the server config. You must look up that documentation yourself.
+      --
+      --  If you want to override the default filetypes that your language server will attach to you can
+      --  define the property 'filetypes' to the map in question.
+      local servers = {
+        -- clangd = {},
+        gopls = {},
+        -- pyright = {},
+        rust_analyzer = {},
+        tsserver = {},
+        html = { filetypes = { 'html', 'twig', 'hbs' } },
+
+        lua_ls = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            -- diagnostics = { disable = { 'missing-fields' } },
+          },
+        },
+      }
+
+      -- Setup neovim lua configuration
+      require("neodev").setup()
+
+      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+      -- Ensure the servers above are installed
+      local mason_lspconfig = require("mason-lspconfig")
+
+      mason_lspconfig.setup({
+        ensure_installed = vim.tbl_keys(servers),
       })
 
-      require("mason").setup({})
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "tsserver",
-          "eslint",
-          "tailwindcss",
-        },
-        handlers = {
-          lsp_zero.default_setup,
-          lua_ls = function()
-            local lua_opts = lsp_zero.nvim_lua_ls()
-            require("lspconfig").lua_ls.setup(lua_opts)
-          end,
-        },
+      mason_lspconfig.setup_handlers({
+        function(server_name)
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = servers[server_name],
+            filetypes = (servers[server_name] or {}).filetypes,
+          })
+        end,
       })
 
       require("mason-tool-installer").setup({
@@ -105,31 +129,6 @@ return {
         start_delay = 3000, -- 3 second delay
         debounce_hours = 5, -- at least 5 hours between attempts to install/update
       })
-
-      lsp_zero.format_mapping("<leader>lf", {
-        format_opts = {
-          async = true,
-        },
-        servers = {
-          ["null-ls"] = { "javascript", "typescript", "lua" },
-        },
-      })
-
-      lsp_zero.format_on_save({
-        servers = {
-          ["null-ls"] = { "javascript", "typescript", "lua" },
-          ["lua_ls"] = { "lua" },
-          ["tsserver"] = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-        },
-      })
-
-      require("lspconfig").lua_ls.setup(lsp_zero.nvim_lua_ls())
-      require("lspconfig").tsserver.setup({
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        cmd = { "typescript-language-server", "--stdio" },
-      })
-
-      lsp_zero.setup()
 
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -252,10 +251,10 @@ return {
       vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
     end,
   },
-  -- {
-  --   "dmmulroy/tsc.nvim",
-  --   event = "VeryLazy",
-  -- },
+  {
+    "dmmulroy/tsc.nvim",
+    event = "VeryLazy",
+  },
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
@@ -324,20 +323,20 @@ return {
     event = "LspAttach",
     opts = {},
   },
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   event = "LspAttach",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = {},
-  -- },
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "VeryLazy",
-  --   opts = {},
-  --   config = function(_, opts)
-  --     require("lsp_signature").setup(opts)
-  --   end,
-  -- },
+  {
+    "pmizio/typescript-tools.nvim",
+    event = "LspAttach",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
@@ -345,18 +344,18 @@ return {
       require("symbols-outline").setup()
     end,
   },
-  -- {
-  --   "VidocqH/lsp-lens.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("lsp-lens").setup({
-  --       sections = {
-  --         definition = true,
-  --         references = true,
-  --         implements = true,
-  --         git_authors = false,
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "VidocqH/lsp-lens.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("lsp-lens").setup({
+        sections = {
+          definition = true,
+          references = true,
+          implements = true,
+          git_authors = false,
+        },
+      })
+    end,
+  },
 }
