@@ -105,8 +105,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
-### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
+
+## Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
   zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
@@ -118,7 +119,7 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 function zshalias()
 {
