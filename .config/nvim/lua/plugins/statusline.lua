@@ -180,7 +180,7 @@ return {
         hl = function()
           local progress = vim.lsp.util.get_progress_messages()[1]
           return {
-            fg = progress and "dark_purple" or "purple",
+            fg = progress and "pink" or "dark_purple",
             -- style = "bold",
           }
         end,
@@ -192,7 +192,7 @@ return {
           name = "file_type",
           opts = {
             filetype_icon = true,
-            case = "titlecase",
+            case = "lowercase",
           },
         },
         hl = {
@@ -223,22 +223,76 @@ return {
       --   left_sep = "block",
       --   right_sep = "block",
       -- },
-      line_percentage = {
-        provider = "line_percentage",
-        hl = {
-          fg = "peanut",
-          bg = "darkblue",
-          -- style = "bold",
-        },
+      scroll_bar = {
+        provider = function()
+          local chars = setmetatable({
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+          }, {
+            __index = function()
+              return " "
+            end,
+          })
+          local line_ratio = vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0)
+          local position = math.floor(line_ratio * 100)
+
+          local icon = chars[math.floor(line_ratio * #chars)] .. position
+          if position <= 5 then
+            icon = " TOP"
+          elseif position >= 95 then
+            icon = " BOT"
+          end
+          return icon
+        end,
+        hl = function()
+          local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
+          local fg
+          local style
+
+          if position <= 5 then
+            fg = "aqua"
+            style = "bold"
+          elseif position >= 95 then
+            fg = "red"
+            style = "bold"
+          else
+            fg = "purple"
+            style = nil
+          end
+          return {
+            fg = fg,
+            style = style,
+            bg = "bg",
+          }
+        end,
         left_sep = "block",
         right_sep = "block",
-      },
-      scroll_bar = {
-        provider = "scroll_bar",
-        hl = {
-          fg = "peanut",
-          -- style = "bold",
-        },
       },
     }
 
@@ -264,7 +318,6 @@ return {
       c.file_type,
       -- c.file_encoding,
       -- c.position,
-      c.line_percentage,
       c.scroll_bar,
     }
 
@@ -283,6 +336,20 @@ return {
 
     feline.setup({
       components = components,
+      disable = {
+        filetypes = {
+          "NvimTree",
+          "Outline",
+          "dap-repl",
+          "dapui_scopes",
+          "dapui_stacks",
+          "dapui_watches",
+          "dapui_repl",
+          "Trouble",
+          "qf",
+          "help",
+        },
+      },
       theme = theme,
       vi_mode_colors = vi_mode_colors,
     })
