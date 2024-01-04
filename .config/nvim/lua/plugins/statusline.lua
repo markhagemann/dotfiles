@@ -12,7 +12,7 @@ return {
       dark_purple = "#7b38c9",
       orange = "#d19a66",
       peanut = "#f6d5a4",
-      red = "#e06c75",
+      red = "#ff6c95",
       purple = "#9f7afc",
       pink = "#f4afd1",
       aqua = "#61afef",
@@ -77,9 +77,9 @@ return {
       gitBranch = {
         provider = "git_branch",
         hl = {
-          fg = "aqua",
+          fg = "peanut",
           bg = "darkblue",
-          style = "bold",
+          -- style = "bold",
         },
         left_sep = "block",
         right_sep = "block",
@@ -196,7 +196,7 @@ return {
           },
         },
         hl = {
-          fg = "fg",
+          fg = "aqua",
           bg = "darkblue",
           -- style = "bold",
         },
@@ -237,7 +237,7 @@ return {
         provider = "scroll_bar",
         hl = {
           fg = "peanut",
-          style = "bold",
+          -- style = "bold",
         },
       },
     }
