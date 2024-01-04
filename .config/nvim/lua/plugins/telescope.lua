@@ -46,6 +46,7 @@ return {
 
       require("telescope").load_extension("fzy_native")
       require("telescope").load_extension("undo")
+      require("telescope").load_extension("git_worktree")
     end,
   },
 }
