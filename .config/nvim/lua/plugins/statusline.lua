@@ -336,7 +336,7 @@ return {
 
     feline.setup({
       components = components,
-      force_inactive = {
+      disable = {
         filetypes = {
           "NvimTree",
           "Outline",
@@ -345,7 +345,7 @@ return {
           "dapui_stacks",
           "dapui_watches",
           "dapui_repl",
-          "LspTrouble",
+          "Trouble",
           "qf",
           "help",
         },
