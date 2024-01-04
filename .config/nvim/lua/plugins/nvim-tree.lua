@@ -39,7 +39,6 @@ local function on_attach(bufnr)
 end
 
 return {
-  -- add symbols-outline
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {

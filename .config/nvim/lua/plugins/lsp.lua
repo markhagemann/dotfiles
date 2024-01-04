@@ -401,8 +401,24 @@ return {
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = function()
-      require("symbols-outline").setup()
+    opts = {
+      keymaps = {
+        close = { "<Esc>", "q" },
+        goto_location = "<Cr>",
+        focus_location = "f",
+        hover_symbol = "<C-space>",
+        toggle_preview = "K",
+        rename_symbol = "r",
+        code_actions = "a",
+        fold = "c",
+        unfold = "o",
+        fold_all = "C",
+        unfold_all = "O",
+        fold_reset = "R",
+      },
+    },
+    config = function(_, opts)
+      require("symbols-outline").setup(opts)
     end,
   },
   {

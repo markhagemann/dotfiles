@@ -43,7 +43,7 @@ return {
 
           require("statuscol").setup({
             relculright = true,
-            bt_ignore = { "nofile", "prompt", "terminal", "packer" },
+            bt_ignore = { "nofile", "prompt", "terminal" },
             ft_ignore = {
               "NvimTree",
               "dashboard",
