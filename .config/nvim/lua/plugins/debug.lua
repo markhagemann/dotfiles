@@ -17,6 +17,13 @@ return {
         -- require("dap.ext.vscode").load_launchjs()
         local dap = require("dap")
         local dapui = require("dapui")
+
+        vim.fn.sign_define("DapBreakpoint", { text = "", numhl = "DapBreakpoint", texthl = "DapBreakpoint" })
+        vim.fn.sign_define("DagLogPoint", { text = "", numhl = "DapLogPoint", texthl = "DapLogPoint" })
+        vim.fn.sign_define("DapStopped", { text = "", numhl = "DapStopped", texthl = "DapStopped" })
+        vim.fn.sign_define("DapBreakpointRejected",
+          { text = "", numhl = "DapBreakpointRejected", texthl = "DapBreakpointRejected" })
+
         dapui.setup(opts)
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open({})

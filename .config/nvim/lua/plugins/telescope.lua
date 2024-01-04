@@ -11,6 +11,7 @@ keymap.set("n", "<leader>.", builtin.grep_string, {}) -- find string under curso
 keymap.set("n", "<leader>,", builtin.buffers, {}) -- list open buffers in current neovim instance
 keymap.set("n", "<leader>ht", builtin.help_tags, {}) -- list available help tags
 keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+keymap.set("n", "<Leader><tab>", builtin.commands, {}) -- list telescope commands
 
 return {
   {

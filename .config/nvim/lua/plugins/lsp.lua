@@ -13,6 +13,12 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "folke/neodev.nvim",
+      {
+        "pmizio/typescript-tools.nvim",
+        event = "LspAttach",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {},
+      },
       -- Completion
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
@@ -36,10 +42,10 @@ return {
         vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
 
         -- typescript specific keymaps (e.g. rename file and update imports)
-        if client.name == "tsserver" then
-          vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-          vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-          vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+        if client.name == "typescript-tools" then
+          vim.keymap.set("n", "<leader>rf", "<cmd>TsToolsRenameFile<CR>") -- rename file and update imports
+          vim.keymap.set("n", "<leader>oi", "<cmd>TSToolsOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
+          vim.keymap.set("n", "<leader>ru", "<cmd>TSToolsRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
         end
       end
 
@@ -58,6 +64,17 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup()
 
+      vim.diagnostic.config({
+        virtual_text = false,
+        severity_sort = true,
+        float = {
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+        },
+      })
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -71,7 +88,9 @@ return {
         gopls = {},
         -- pyright = {},
         rust_analyzer = {},
-        tsserver = {},
+        eslint = {},
+        -- Handled by typescript-tools
+        -- tsserver = {},
         html = { filetypes = { "html", "twig", "hbs" } },
         taplo = {},
         lua_ls = {
@@ -91,8 +110,20 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+      local lsp_defaults = {
+        flags = {
+          debounce_text_changes = 150,
+        },
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
+        end,
+      }
+
       -- Ensure the servers above are installed
       local mason_lspconfig = require("mason-lspconfig")
+      local lspconfig = require("lspconfig")
+      lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, lsp_defaults)
 
       mason_lspconfig.setup({
         ensure_installed = vim.tbl_keys(servers),
@@ -109,6 +140,12 @@ return {
         end,
       })
 
+      require("typescript-tools").setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        code_lens = "all",
+      })
+
       require("mason-tool-installer").setup({
         ensure_installed = {
           { "bash-language-server" },
@@ -118,7 +155,8 @@ return {
           { "emmet-ls" },
           { "css-lsp" },
           { "prettier" },
-          { "typescript-language-server" },
+          -- Handled by typescript-tools
+          -- { "typescript-language-server" },
           { "eslint_d" },
           { "eslint-lsp" },
           { "tailwindcss-language-server" },
@@ -261,10 +299,6 @@ return {
     end,
   },
   {
-    "dmmulroy/tsc.nvim",
-    event = "VeryLazy",
-  },
-  {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     dependencies = {
@@ -293,35 +327,16 @@ return {
 
         ui = {
           -- currently only round theme
-          theme = "round",
-          -- this option only work in neovim 0.9
-          title = false,
           -- border type can be single,double,rounded,solid,shadow.
-          border = "rounded",
-          winblend = 0,
+          border = "single",
+          winblend = 5,
           expand = "",
           collapse = "",
           preview = " ",
-          code_action = "",
+          code_action = "",
           diagnostic = "",
           incoming = " ",
           outgoing = " ",
-          colors = {
-            --float window normal background color
-            normal_bg = "#141423",
-            --title background color
-            title_bg = "#FF7070",
-            red = "#e95678",
-            magenta = "#b33076",
-            orange = "#FF8700",
-            yellow = "#f7bb3b",
-            green = "#afd700",
-            cyan = "#36d0e0",
-            blue = "#61afef",
-            purple = "#CBA6F7",
-            white = "#d1d4cf",
-            black = "#1c1c19",
-          },
           kind = {},
         },
 
@@ -374,20 +389,14 @@ return {
       })
     end,
   },
-  {
-    event = { "BufReadPre", "BufNewFile" },
-    "hinell/lsp-timeout.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
+  -- {
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   "hinell/lsp-timeout.nvim",
+  --   dependencies = { "neovim/nvim-lspconfig" },
+  -- },
   {
     "Fildo7525/pretty_hover",
     event = "LspAttach",
-    opts = {},
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    event = "LspAttach",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
   {
@@ -419,20 +428,6 @@ return {
     },
     config = function(_, opts)
       require("symbols-outline").setup(opts)
-    end,
-  },
-  {
-    "VidocqH/lsp-lens.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lsp-lens").setup({
-        sections = {
-          definition = true,
-          references = true,
-          implements = true,
-          git_authors = false,
-        },
-      })
     end,
   },
 }

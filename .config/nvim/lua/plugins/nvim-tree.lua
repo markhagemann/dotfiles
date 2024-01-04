@@ -46,6 +46,7 @@ return {
     },
     keys = {
       { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
+      { "<leader>f-", "<cmd>NvimTreeFindFileToggle<cr>", desc = "File Explorer" },
     },
 
     config = function()
