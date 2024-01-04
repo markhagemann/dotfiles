@@ -14,6 +14,7 @@ return {
       -- Integrations
       integrations = {
         gitsigns = true,
+        notify = true,
         nvimtree = true,
         telescope = true,
         illuminate = true,
@@ -48,21 +49,6 @@ return {
           -- Cmp Menu
           PmenuSel = { fg = colors.base, bg = colors.maroon, style = { "bold" } },
 
-          -- Telescope
-          -- TelescopeBorder = { fg = colors.blue },
-          -- TelescopeSelectionCaret = { fg = colors.flamingo },
-          -- TelescopeSelection = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
-          -- TelescopeMatching = { fg = colors.blue },
-          -- TelescopePromptPrefix = { fg = colors.yellow, bg = colors.crust },
-          -- TelescopePromptNormal = { bg = colors.crust },
-          -- TelescopeResultsNormal = { bg = colors.mantle },
-          -- TelescopePreviewNormal = { bg = colors.crust },
-          -- TelescopePromptBorder = { bg = colors.crust, fg = colors.crust },
-          -- TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
-          -- TelescopePreviewBorder = { bg = colors.crust, fg = colors.crust },
-          -- TelescopePromptTitle = { fg = colors.crust, bg = colors.mauve },
-          -- TelescopeResultsTitle = { fg = colors.crust, bg = colors.mauve },
-          -- TelescopePreviewTitle = { fg = colors.crust, bg = colors.mauve },
           TelescopeMatching = { fg = colors.flamingo },
           TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
 
