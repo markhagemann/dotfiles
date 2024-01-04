@@ -7,8 +7,6 @@ return {
     opts = {
       styles = {
         keywords = { "italic" },
-        variables = { "italic" },
-        booleans = { "italic" },
         properties = { "italic" },
       },
       -- Integrations
