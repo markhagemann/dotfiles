@@ -1,18 +1,42 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# WSL 2 specific settings.
+if grep -q "microsoft" /proc/version &>/dev/null; then
+
+  case "$(uname -s)" in
+
+    Linux)
+
+    # Used for linux when `host.docker.internal` doesn't work in docker-compose
+    export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+    ;;
+
+  esac
+
+  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+  export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+  export DISPLAY=$IP:0.0
+  # export LIBGL_ALWAYS_INDIRECT=1
+
+  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+  sudo /etc/init.d/dbus start &> /dev/null
+
+  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+  DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
+  DOCKER_DIR=/mnt/wsl/shared-docker
+  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+  export DOCKER_HOST="unix://$DOCKER_SOCK"
+  if [ ! -S "$DOCKER_SOCK" ]; then
+      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+      chgrp docker "$DOCKER_DIR"
+      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+  fi
+
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+export GDK_SCALE=0.5
+export GDK_DPI_SCALE=1.25
 
-eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
+# eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
+eval "$(dircolors ~/.dir_colors)" || "$(gdircolors ~/.dir_colors)"
 
 # Import private exports that shouldn't be committed
 PRIVEXPORTFILE=~/.zshrcpriv
@@ -23,31 +47,21 @@ ZSH_DISABLE_COMPFIX=true
 
 # If you come from bash you might have to change your $PATH.
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$PATH:/mnt/c/Apps/Development/Onivim2"
-export PATH="$PATH:/mnt/c/Apps/Development/Microsoft VS Code"
+export PATH="$HOME/neovim/bin:$PATH"
+export PATH=$PATH:$HOME/bin
+export PATH=~/.local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+export HOMEGOPATH=$HOME/go
+export PATH="$PATH:$HOMEGOPATH/bin"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 
 # Path to oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
-
-case "$(uname -s)" in
-
-  Linux)
-
-  # Used for linux when `host.docker.internal` doesn't work in docker-compose
-  export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
-  ;;
-
-esac
-
-# Name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# ZSH_THEME="spaceship"
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # TMUX
 # Automatically start tmux
@@ -71,28 +85,22 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git node tmux ssh-agent z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
 
-# Aliases
-alias code="code.exe"
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
-alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-# This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
-# up memory, this command will free your memory after about 20-30 seconds.
-#   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
-alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
-alias envim="nvim ~/.config/nvim/init.vim"
-alias etmux="nvim ~/.tmux.conf"
-alias evim="nvim ~/.config/nvim/init.vim"
-alias ezsh="nvim ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-alias oni="oni2.exe"
-alias synctime="sudo hwclock -s"
-alias vim="nvim"
+## Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 function zshalias()
 {
@@ -107,12 +115,6 @@ if type rg &> /dev/null; then
     -m --height 50% --border
   '
 
-  # This is for Nord theme
-  # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  #   -m --height 50% --border
-  #   --color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
-  #   --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
-  # '
   # Apply the command to CTRL-T as well
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
@@ -192,20 +194,6 @@ unsetopt correct_all
 setopt correct
 export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
-# Set Spaceship as prompt
-# autoload -U promptinit; promptinit
-# prompt spaceship
-# SPACESHIP_TIME_SHOW=true
-# SPACESHIP_TIME_COLOR=#00afff
-# SPACESHIP_TIME_12HR=true
-# SPACESHIP_DOCKER_SHOW=false
-# SPACESHIP_BATTERY_SHOW=false
-# SPACESHIP_PACKAGE_SHOW=false
-# SPACESHIP_NODE_SHOW=false
-# SPACESHIP_GIT_STATUS_STASHED=''
-# SPACESHIP_GIT_BRANCH_COLOR=#8787ff
-# SPACESHIP_DIR_COLOR=#00d7d7
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 _fix_cursor() {
@@ -214,23 +202,10 @@ _fix_cursor() {
 
 precmd_functions+=(_fix_cursor)
 
+# YVM Stuff
 export YVM_DIR=$HOME/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+export PATH=~/.yarn/bin:$PATH
 
-# WSL 2 specific settings.
-if grep -q "microsoft" /proc/version &>/dev/null; then
-  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-
-  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  sudo /etc/init.d/dbus start &> /dev/null
-fi
-
-export GDK_SCALE=0.5
-export GDK_DPI_SCALE=1.25
-
-
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# eval "$(oh-my-posh init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/tokyonight_storm_modified.omp.toml)"
