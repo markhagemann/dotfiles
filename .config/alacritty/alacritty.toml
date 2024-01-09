@@ -10,6 +10,7 @@ program = "/usr/bin/zsh"
 TERM = "xterm-256color"
 
 [window]
+# decorations = "Full"
 decorations = "None"
 dimensions = { columns = 133, lines = 40 }
 dynamic_padding = true

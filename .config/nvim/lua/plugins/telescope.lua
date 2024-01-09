@@ -5,13 +5,14 @@ keymap.set(
   "n",
   "<C-p>",
   "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
-) -- find files within current working directory
-keymap.set("n", "<leader>/", builtin.live_grep, {}) -- find string in current working directory as you type
+)                                                     -- find files within current working directory
+keymap.set("n", "<leader>/", builtin.live_grep, {})   -- find string in current working directory as you type
 keymap.set("n", "<leader>.", builtin.grep_string, {}) -- find string under cursor in current working directory
-keymap.set("n", "<leader>,", builtin.buffers, {}) -- list open buffers in current neovim instance
-keymap.set("n", "<leader>ht", builtin.help_tags, {}) -- list available help tags
-keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-keymap.set("n", "<Leader><tab>", builtin.commands, {}) -- list telescope commands
+keymap.set("n", "<leader>,", builtin.buffers, {})     -- list open buffers in current neovim instance
+keymap.set("n", "<leader>ht", builtin.help_tags, {})  -- list available help tags
+keymap.set("n", "<leader>u", "<CMD>Telescope undo<CR>")
+keymap.set("n", "<Leader>cw", "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
+keymap.set("n", "<Leader>vw", "<CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
 
 return {
   {
@@ -27,6 +28,10 @@ return {
     tag = "0.1.5",
     config = function()
       require("telescope").setup({
+        defaults = {
+          file_sorter = require("telescope.sorters").get_fzy_sorter,
+          path_display = { truncate = 3 } ,
+        },
         extensions = {
           extensions = {
             fzy_native = {

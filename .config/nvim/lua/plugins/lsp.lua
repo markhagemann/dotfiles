@@ -160,6 +160,7 @@ return {
           { "eslint_d" },
           { "eslint-lsp" },
           { "tailwindcss-language-server" },
+          { "vetur-vls" },
         },
 
         auto_update = true,

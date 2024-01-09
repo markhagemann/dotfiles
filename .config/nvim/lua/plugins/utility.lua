@@ -71,13 +71,39 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function(_, opts)
-      vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", { noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
       require("noice").setup(opts)
     end,
   },
-  { "folke/todo-comments.nvim",                    event = { "BufEnter" } },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    -- NOTE: https://github.com/LazyVim/LazyVim/discussions/1583
+    event = "VimEnter",
+    opts = {
+      highlight = {
+        pattern = [[.*<(KEYWORDS)\s*[:@]\s*]], -- vim regex
+      },
+      search = {
+        -- Matches with "TODO: something" and "TODO @PL something"
+        pattern = [[\b(KEYWORDS)\s*[:@]\b]], -- ripgrep regex
+      },
+    },
+    keys = {
+      {
+        "<leader>xt",
+        "<CMD>TodoTrouble<CR>",
+        desc = "Open todos in Trouble",
+        noremap = true,
+        silent = true,
+      },
+    },
+  },
   {
     "folke/trouble.nvim",
+    cmd = { "TodoTrouble", "TroubleToggle" },
+    event = "VimEnter",
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
     },
@@ -176,7 +202,7 @@ return {
       })
     end,
   },
-  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle",                    event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",
@@ -253,7 +279,7 @@ return {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  { "windwp/nvim-ts-autotag",   event = "InsertEnter" },
+  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
