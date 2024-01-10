@@ -11,13 +11,18 @@ return {
     end,
   },
   {
-    "hrsh7th/cmp-nvim-lsp",
-    event = "InsertEnter",
-    config = true,
-  },
-  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    dependencies = { "onsails/lspkind.nvim" },
+    dependencies = {
+      "L3MON4D3/LuaSnip", -- Snippets
+      "onsails/lspkind-nvim", -- Completion menu icons
+      "saadparwaiz1/cmp_luasnip", -- Snippets
+      "hrsh7th/cmp-nvim-lsp", -- LSP completion
+      "hrsh7th/cmp-buffer", -- Buffer completion
+      "hrsh7th/cmp-path", -- Path completion
+      "hrsh7th/cmp-cmdline", -- Command-line completion
+      "hrsh7th/cmp-nvim-lua", -- Nvim builtins completion
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- Signature
+    },
   },
 }
