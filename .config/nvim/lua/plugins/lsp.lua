@@ -88,7 +88,6 @@ return {
         gopls = {},
         -- pyright = {},
         rust_analyzer = {},
-        eslint = {},
         -- Handled by typescript-tools
         -- tsserver = {},
         html = { filetypes = { "html", "twig", "hbs" } },
