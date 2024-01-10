@@ -158,7 +158,7 @@ return {
           -- Handled by typescript-tools
           -- { "typescript-language-server" },
           { "eslint_d" },
-          { "eslint-lsp" },
+          -- { "eslint-lsp" },
           { "tailwindcss-language-server" },
           { "vetur-vls" },
         },
