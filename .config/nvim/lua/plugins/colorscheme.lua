@@ -85,7 +85,7 @@ return {
   },
   {
     "xiyaowong/nvim-transparent",
-    lazy = true,
+    lazy = false,
     keys = {
       -- Transparency Toggle
       { "TT", ":TransparentToggle<CR>", desc = "Toggle Transparency" },
