@@ -255,7 +255,7 @@ return {
     event = "VeryLazy",
     opts = {
       show_icons = true,
-      leader_key = ";", -- Recommended to be a single key
+      leader_key = "<leader>;", -- Recommended to be a single key
     },
   },
   -- { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }, opts = {},
