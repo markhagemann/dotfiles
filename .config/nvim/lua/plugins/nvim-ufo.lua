@@ -136,7 +136,7 @@ return {
       })
 
       require("ufo").setup({
-        close_fold_kinds = { "imports" },
+        -- close_fold_kinds = { "imports" },
         fold_virt_text_handler = handler,
         provider_selector = function(_, filetype, buftype)
           -- use nested markdown folding

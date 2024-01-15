@@ -109,6 +109,13 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+      -- Tell the server the capability of foldingRange,
+      -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+
       local lsp_defaults = {
         flags = {
           debounce_text_changes = 150,
@@ -142,7 +149,7 @@ return {
       require("typescript-tools").setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        code_lens = "all",
+        -- code_lens = "all",
       })
 
       require("mason-tool-installer").setup({

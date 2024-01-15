@@ -1,7 +1,7 @@
 return {
   {
     '0x00-ketsu/autosave.nvim',
-    event = { "InsertLeave", "TextChanged" },
+    event = { "BufLeave" },
     config = function()
       require('autosave').setup {
         -- your configuration comes here
