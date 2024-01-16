@@ -149,7 +149,7 @@ return {
       require("typescript-tools").setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        -- code_lens = "all",
+        code_lens = "all",
       })
 
       require("mason-tool-installer").setup({
@@ -406,14 +406,14 @@ return {
     event = "LspAttach",
     opts = {},
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
-  },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   config = function(_, opts)
+  --     require("lsp_signature").setup(opts)
+  --   end,
+  -- },
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
