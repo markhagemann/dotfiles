@@ -6,7 +6,7 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
     Linux)
 
     # Used for linux when `host.docker.internal` doesn't work in docker-compose
-    export DOCKER_GATEWAY_HOST=$(hostname -I |awk '{print $1}')
+    export DOCKER_GATEWAY_HOST=$(hostname -i |awk '{print $1}')
     ;;
 
   esac
@@ -48,6 +48,7 @@ ZSH_DISABLE_COMPFIX=true
 # If you come from bash you might have to change your $PATH.
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH=$PATH:$HOME/bin
 export PATH=~/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
@@ -86,7 +87,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z zsh-pyenv zsh-nvm zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
+plugins=(git node tmux z pyenv zsh-nvm zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
 
 ## Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {

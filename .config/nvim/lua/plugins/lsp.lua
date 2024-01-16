@@ -85,12 +85,12 @@ return {
       --  define the property 'filetypes' to the map in question.
       local servers = {
         -- clangd = {},
-        gopls = {},
+        -- gopls = {},
         -- pyright = {},
         rust_analyzer = {},
         -- Handled by typescript-tools
         -- tsserver = {},
-        html = { filetypes = { "html", "twig", "hbs" } },
+        -- html = { filetypes = { "html", "twig", "hbs" } },
         taplo = {},
         lua_ls = {
           Lua = {
