@@ -1,12 +1,7 @@
 local keymap = vim.keymap
 
 
-keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>") --- find files within current working directory-
--- keymap.set(
---   "n",
---   "<C-p>",
---   "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
--- )                                               -- find files within current working directory
+keymap.set("n", "<C-p>", "<CMD>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>") --- find files within current working directory-
 keymap.set("n", "<leader>/", "<CMD>Telescope live_grep<CR>") -- find string in current working directory as you type
 keymap.set("n", "<leader>.", "<CMD>Telescope grep_string<CR>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>,", "<CMD>Telescope buffers<CR>") -- list open buffers in current neovim instance
