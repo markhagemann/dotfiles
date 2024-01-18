@@ -1,15 +1,22 @@
 return {
+  -- {
+  --   "3rd/image.nvim",
+  --   event = { "BufEnter" },
+  --   config = function()
+  --     require("image").setup({})
+  --   end,
+  -- },
   {
-    '0x00-ketsu/autosave.nvim',
+    "0x00-ketsu/autosave.nvim",
     event = { "BufLeave" },
     config = function()
-      require('autosave').setup {
-        events = { 'BufLeave' },
+      require("autosave").setup({
+        events = { "BufLeave" },
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
-      }
-    end
+      })
+    end,
   },
   {
     "AckslD/muren.nvim",
