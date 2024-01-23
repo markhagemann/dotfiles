@@ -12,7 +12,7 @@ TERM = "xterm-256color"
 [window]
 # decorations = "Full"
 decorations = "None"
-dimensions = { columns = 133, lines = 40 }
+dimensions = { columns = 115, lines = 30 }
 dynamic_padding = true
 position = { "x" = 100, "y" = 20 }
 opacity = 0.93
