@@ -208,5 +208,9 @@ export YVM_DIR=$HOME/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 export PATH=~/.yarn/bin:$PATH
 
+# Remove duplicates in path
+PATH=$(printf %s "$PATH" \
+     | awk -vRS=: -vORS= '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0) }' )
+
 # eval "$(oh-my-posh init zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/tokyonight_storm_modified.omp.toml)"
