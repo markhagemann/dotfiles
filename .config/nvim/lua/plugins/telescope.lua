@@ -1,6 +1,5 @@
 local keymap = vim.keymap
 
-
 keymap.set("n", "<C-p>", "<CMD>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>") --- find files within current working directory-
 keymap.set("n", "<leader>/", "<CMD>Telescope live_grep<CR>") -- find string in current working directory as you type
 keymap.set("n", "<leader>.", "<CMD>Telescope grep_string<CR>") -- find string under cursor in current working directory
@@ -27,6 +26,13 @@ return {
         defaults = {
           file_sorter = require("telescope.sorters").get_fzy_sorter,
           path_display = { truncate = 3 },
+        },
+        pickers = {
+          live_grep = {
+            additional_args = function(opts)
+              return { "--hidden" }
+            end,
+          },
         },
         extensions = {
           extensions = {
