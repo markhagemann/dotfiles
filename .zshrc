@@ -14,10 +14,11 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
   export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
   export DISPLAY=$IP:0.0
-  export LIBGL_ALWAYS_INDIRECT=1
+  export LIBGL_ALWAYS_INDIRECT=0
+  export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
 
   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  sudo /etc/init.d/dbus start &> /dev/null
+  # sudo /etc/init.d/dbus start &> /dev/null
 
   # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
   DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
