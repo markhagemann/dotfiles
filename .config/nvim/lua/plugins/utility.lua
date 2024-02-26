@@ -78,35 +78,35 @@ return {
       require("blame").setup(opts)
     end,
   },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        hover = {
-          enabled = false,
-        },
-        presets = {
-          -- bottom_search = true,   -- use a classic bottom cmdline for search
-          -- command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-          -- lsp_doc_border = false, -- add a border to hover docs and signature help
-        },
-        signature = {
-          enabled = false,
-        },
-      },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function(_, opts)
-      vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
-      require("noice").setup(opts)
-    end,
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     lsp = {
+  --       hover = {
+  --         enabled = false,
+  --       },
+  --       presets = {
+  --         -- bottom_search = true,   -- use a classic bottom cmdline for search
+  --         -- command_palette = true, -- position the cmdline and popupmenu together
+  --         long_message_to_split = true, -- long messages will be sent to a split
+  --         -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
+  --         -- lsp_doc_border = false, -- add a border to hover docs and signature help
+  --       },
+  --       signature = {
+  --         enabled = false,
+  --       },
+  --     },
+  --   },
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   },
+  --   config = function(_, opts)
+  --     vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
+  --     require("noice").setup(opts)
+  --   end,
+  -- },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
@@ -160,6 +160,13 @@ return {
       -- suggested keymap
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
     },
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = "BufEnter",
+    config = function()
+      require("fidget").setup({})
+    end,
   },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
   {
@@ -218,22 +225,6 @@ return {
     keys = {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
-  },
-  {
-    "petertriho/nvim-scrollbar",
-    event = "BufEnter",
-    config = function()
-      require("scrollbar").setup({
-        handlers = {
-          cursor = false,
-          diagnostic = true,
-          gitsigns = false,
-          handle = true,
-          search = false,
-          ale = false,
-        },
-      })
-    end,
   },
   { "sitiom/nvim-numbertoggle",                    event = "BufEnter" },
   {
