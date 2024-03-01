@@ -164,17 +164,13 @@ return {
   {
     "j-hui/fidget.nvim",
     event = "BufEnter",
-    config = function()
-      require("fidget").setup({})
-    end,
+    opts = {},
   },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
   {
     "karb94/neoscroll.nvim",
     event = "BufEnter",
-    config = function()
-      require("neoscroll").setup({})
-    end,
+    opts = {},
   },
   {
     "kburdett/vim-nuuid",
@@ -185,9 +181,7 @@ return {
   {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
-    config = function()
-      require("spaceless").setup()
-    end,
+    opts = {},
   },
   {
     "lukas-reineke/indent-blankline.nvim",

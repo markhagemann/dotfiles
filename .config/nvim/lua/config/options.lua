@@ -1,5 +1,11 @@
 local opt = vim.opt -- for conciseness
 
+opt.showmode = false -- Already in the status line
+
+-- Decrease update time
+opt.updatetime = 250
+opt.timeoutlen = 300
+
 -- Undo settings
 opt.undofile = true -- Save undos after file closes
 opt.undolevels = 1000 -- How many undos
@@ -8,6 +14,7 @@ opt.undoreload = 10000 -- number of lines to save for undo
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
 
 -- tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
