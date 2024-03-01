@@ -29,3 +29,11 @@ alias removenvimlog="rm /home/drache/.cache/nvim/log"
 alias synctime="sudo hwclock -s"
 alias vim="nvim"
 . "$HOME/.cargo/env"
+
+# Corepack aliases
+alias yarn="corepack yarn"
+alias yarnpkg="corepack yarnpkg"
+alias pnpm="corepack pnpm"
+alias pnpx="corepack pnpx"
+alias npm="corepack npm"
+alias npx="corepack npx"
