@@ -13,7 +13,8 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
 
   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
   export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-  export DISPLAY=$IP:0.0
+  # export DISPLAY=$IP:0.0
+  export ADDITIONAL_DOCKER_PARAMS="--env WAYLAND_DISPLAY --env XDG_RUNTIME_DIR --env PULSE_SERVER -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg"
   export LIBGL_ALWAYS_INDIRECT=0
   export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
 
