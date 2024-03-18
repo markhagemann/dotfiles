@@ -18,10 +18,10 @@ position = { "x" = 100, "y" = 20 }
 opacity = 0.93
 
 [font]
-normal.family = "JetBrains Mono Nerd Font"
-bold.family = "JetBrains Mono Nerd Font"
-italic.family = "JetBrains Mono Nerd Font"
-bold_italic.family = "JetBrains Mono Nerd Font"
+normal.family = "JetBrainsMono NF"
+bold.family = "JetBrainsMono NF"
+italic.family = "JetBrainsMono NF"
+bold_italic.family = "JetBrainsMono NF"
 size = 18.0
 
 [mouse]
