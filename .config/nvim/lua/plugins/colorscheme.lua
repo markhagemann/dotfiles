@@ -12,8 +12,13 @@ return {
       -- Integrations
       integrations = {
         gitsigns = true,
+        fidget = true,
         notify = true,
-        nvimtree = true,
+        nvimtree = {
+          enabled = true,
+          show_root = true,
+          transparent_panel = true,
+        },
         telescope = true,
         illuminate = true,
         treesitter = true,
