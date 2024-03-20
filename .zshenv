@@ -1,6 +1,7 @@
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
+alias delete-merged-local-branches='git checkout develop && git branch --merged | grep -Ev "(^\*|production|staging|edge|develop)" | xargs git branch -d'
 alias dot="dotfiles"
 alias dotstatus="dotfiles status -uno"
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
