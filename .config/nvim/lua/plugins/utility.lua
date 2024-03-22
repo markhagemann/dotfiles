@@ -122,26 +122,18 @@ return {
         pattern = [[\b(KEYWORDS)\s*[:@]\b]], -- ripgrep regex
       },
     },
-    keys = {
-      {
-        "<leader>xt",
-        "<CMD>TodoTrouble<CR>",
-        desc = "Open todos in Trouble",
-        noremap = true,
-        silent = true,
-      },
-    },
   },
-  {
-    "folke/trouble.nvim",
-    cmd = { "TodoTrouble", "TroubleToggle" },
-    event = "VimEnter",
-    keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
-    },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
-  },
+  -- Using Search workspace diagnostics in telescope
+  -- {
+  --   "folke/trouble.nvim",
+  --   cmd = { "TodoTrouble", "TroubleToggle" },
+  --   event = "VimEnter",
+  --   keys = {
+  --     { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+  --   },
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   opts = {},
+  -- },
   {
     "folke/twilight.nvim",
     keys = {
@@ -323,7 +315,6 @@ return {
     config = function()
       local opts = { noremap = true, silent = true }
       vim.keymap.set("n", "<leader>cc", "<cmd>PickColor<cr>", opts)
-      vim.keymap.set("i", "<leader>cc", "<cmd>PickColorInsert<cr>", opts)
       require("color-picker").setup({
         ["icons"] = { "-", "" },
       })

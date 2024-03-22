@@ -15,4 +15,7 @@ require("config.options")
 require("config.keymaps")
 require("config.autocommands")
 
-require("lazy").setup("plugins", { defaults = { lazy = true } })
+require("lazy").setup(
+  { import = "plugins" },
+  { change_detection = { notify = false }, ui = { border = "single" },  defaults = { lazy = true } }
+)

@@ -12,6 +12,8 @@ return {
       },
       -- Integrations
       integrations = {
+        which_key = true,
+        harpoon = true,
         gitsigns = true,
         fidget = true,
         notify = true,

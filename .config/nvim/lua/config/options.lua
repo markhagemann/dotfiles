@@ -23,7 +23,7 @@ opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
 -- popups
-opt.pumblend = 10 -- Popup blend
+opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 
 -- line wrapping
