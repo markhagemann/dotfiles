@@ -45,62 +45,130 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
-      { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer" },
+      { "<leader>ft", "<cmd>NvimTreeToggle<cr>",         desc = "File Explorer" },
       { "<leader>f-", "<cmd>NvimTreeFindFileToggle<cr>", desc = "File Explorer" },
     },
 
     config = function()
       require("nvim-tree").setup({
         on_attach = on_attach,
-        git = {
-          ignore = false,
+        filters = {
+          dotfiles = false,
+          custom = { "^.git$", "^.DS_store$" },
         },
+        live_filter = {
+          always_show_folders = false,
+        },
+        disable_netrw = true,
+        hijack_netrw = true,
+        -- INFO: deprecated
+        -- open_on_setup = false,
+        -- ignore_ft_on_setup = {"alpha"},
+        hijack_cursor = true,
+        hijack_unnamed_buffer_when_opening = false,
+        update_cwd = true,
         update_focused_file = {
           enable = true,
-          update_cwd = true,
+          update_root = false,
+        },
+        view = {
+          adaptive_size = false,
+          centralize_selection = false,
+          preserve_window_proportions = true,
+          side = "left",
+          width = 38,
+        },
+        git = {
+          enable = true,
+          ignore = false,
+          show_on_dirs = true,
+          timeout = 400,
+        },
+        filesystem_watchers = {
+          enable = true,
+          ignore_dirs = {
+            "node_modules",
+            ".git",
+          },
         },
         renderer = {
-          root_folder_modifier = ":t",
+          highlight_git = true,
+          root_folder_label = false,
+          highlight_opened_files = "name",
+          indent_markers = {
+            enable = true,
+          },
+          special_files = { "package.json", "README.md", "readme.md" },
           icons = {
+            show = {
+              file = true,
+              folder = true,
+              folder_arrow = true,
+              git = false,
+            },
             glyphs = {
               default = "",
               symlink = "",
               folder = {
-                arrow_open = "",
-                arrow_closed = "",
-                default = "",
-                open = "",
-                empty = "",
-                empty_open = "",
+                default = "",
+                empty = "",
+                empty_open = "",
+                open = "",
                 symlink = "",
-                symlink_open = "",
+                symlink_open = "",
+                arrow_open = "+",
+                arrow_closed = "·",
               },
               git = {
-                unstaged = "",
-                staged = "S",
+                unstaged = "✗",
+                staged = "✓",
                 unmerged = "",
                 renamed = "➜",
-                untracked = "U",
+                untracked = "★",
                 deleted = "",
                 ignored = "◌",
               },
             },
           },
         },
-        diagnostics = {
-          enable = true,
-          show_on_dirs = true,
-          icons = {
-            error = "",
-            warning = "",
-            hint = " ",
-            info = "",
-          },
-        },
-        view = {
-          width = 30,
-          side = "left",
-        },
+        -- renderer = {
+        --   root_folder_modifier = ":t",
+        --   icons = {
+        --     glyphs = {
+        --       default = "",
+        --       symlink = "",
+        --       folder = {
+        --         arrow_open = "",
+        --         arrow_closed = "",
+        --         default = "",
+        --         open = "",
+        --         empty = "",
+        --         empty_open = "",
+        --         symlink = "",
+        --         symlink_open = "",
+        --       },
+        --       git = {
+        --         unstaged = "",
+        --         staged = "S",
+        --         unmerged = "",
+        --         renamed = "➜",
+        --         untracked = "U",
+        --         deleted = "",
+        --         ignored = "◌",
+        --       },
+        --     },
+        --   },
+        -- },
+        -- diagnostics = {
+        --   enable = true,
+        --   show_on_dirs = true,
+        --   icons = {
+        --     error = "",
+        --     warning = "",
+        --     hint = " ",
+        --     info = "",
+        --   },
+        -- },
       })
     end,
   },
