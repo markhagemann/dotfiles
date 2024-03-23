@@ -22,8 +22,12 @@ return {
       opts = {},
     },
     {
+      "soulis-1256/eagle.nvim",
+      event = "LspAttach",
+    },
+    {
       "simrat39/symbols-outline.nvim",
-      keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+      keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "[S]ymbols [O]utline" } },
       opts = {
         keymaps = {
           close = { "<Esc>", "q" },
@@ -100,12 +104,12 @@ return {
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+        map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+        map("<leader>td", require("telescope.builtin").lsp_type_definitions, "[T]ype [D]efinition")
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
@@ -131,6 +135,9 @@ return {
         --  For example, in C this would take you to the header.
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+        map(']e', '<cmd>lua vim.diagnostic.goto_prev( { severity = { min = vim.diagnostic.severity.ERROR } })<CR>', "Jump to previous diagnostic")
+        map('[e', '<cmd>lua vim.diagnostic.goto_next( { severity = { min = vim.diagnostic.severity.ERROR } })<CR>', "Jump to previous diagnostic")
+
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
@@ -151,9 +158,9 @@ return {
 
         -- typescript specific keymaps (e.g. rename file and update imports)
         if client.name == "typescript-tools" then
-          map("<leader>rf", "<cmd>TsToolsRenameFile<CR>", "TypeScript [R]ename [F]ile")           -- rename file and update imports
+          map("<leader>rf", "<cmd>TsToolsRenameFile<CR>", "TypeScript [R]ename [F]ile") -- rename file and update imports
           map("<leader>oi", "<cmd>TSToolsOrganizeImports<CR>", "TypeScript [O]rganize [I]mports") -- organize imports (not in youtube nvim video)
-          map("<leader>ru", "<cmd>TSToolsRemoveUnused<CR>", "TypeScript [R]emove [U]nused")       -- remove unused variables (not in youtube nvim video)
+          map("<leader>ru", "<cmd>TSToolsRemoveUnused<CR>", "TypeScript [R]emove [U]nused") -- remove unused variables (not in youtube nvim video)
         end
       end,
     })

@@ -123,17 +123,16 @@ return {
       },
     },
   },
-  -- Using Search workspace diagnostics in telescope
-  -- {
-  --   "folke/trouble.nvim",
-  --   cmd = { "TodoTrouble", "TroubleToggle" },
-  --   event = "VimEnter",
-  --   keys = {
-  --     { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
-  --   },
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   opts = {},
-  -- },
+  {
+    "folke/trouble.nvim",
+    cmd = { "TodoTrouble", "TroubleToggle" },
+    event = "VimEnter",
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+  },
   {
     "folke/twilight.nvim",
     keys = {
