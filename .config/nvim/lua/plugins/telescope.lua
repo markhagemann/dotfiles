@@ -55,6 +55,21 @@ return {
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          path_display = { truncate = 3 },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            previewer = false,
+            theme = "dropdown",
+          },
+          live_grep = {
+            additional_args = function(opts)
+              return { "--hidden" }
+            end,
+          },
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
