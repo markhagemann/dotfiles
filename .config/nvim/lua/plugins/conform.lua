@@ -1,5 +1,6 @@
 local js_formatters = {
-  "eslint_d" --[[ , { "prettierd", "prettier" } ]],
+  "eslint_d",
+  { "prettierd", "prettier" },
 }
 
 return {
