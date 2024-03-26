@@ -23,19 +23,19 @@ return {
     event = { "BufEnter" },
     config = true,
   },
-  { "arthurxavierx/vim-caser",     event = "BufEnter" },
+  { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>",  "<cmd>TmuxNavigateLeft<cr>",     desc = "Go to the left pane" },
-      { "<C-j>",  "<cmd>TmuxNavigateDown<cr>",     desc = "Go to the down pane" },
-      { "<C-k>",  "<cmd>TmuxNavigateUp<cr>",       desc = "Go to the up pane" },
-      { "<C-l>",  "<cmd>TmuxNavigateRight<cr>",    desc = "Go to the right pane" },
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion",      event = { "BufEnter" } },
+  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
   { "code-biscuits/nvim-biscuits", event = { "BufEnter" }, dependencies = { "nvim-treesitter/nvim-treesitter" } },
   {
     "dstein64/vim-startuptime",
@@ -44,20 +44,20 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.animate",     version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.hipatterns",  version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
   { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
     event = { "BufEnter" },
     opts = {
       mappings = {
-        add = "gsa",            -- Add surrounding in Normal and Visual modes
-        delete = "gsd",         -- Delete surrounding
-        find = "gsf",           -- Find surrounding (to the right)
-        find_left = "gsF",      -- Find surrounding (to the left)
-        highlight = "gsh",      -- Highlight surrounding
-        replace = "gsr",        -- Replace surrounding
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
@@ -159,14 +159,14 @@ return {
       notification = {
         window = {
           normal_hl = "Comment", -- Base highlight group in the notification window
-          winblend = 0,    -- Background color opacity in the notification window
-          border = "none",   -- Border around the notification window
-          zindex = 45,       -- Stacking priority of the notification window
-          max_width = 0,     -- Maximum width of the notification window
-          max_height = 0,    -- Maximum height of the notification window
-          x_padding = 1,     -- Padding from right edge of window boundary
-          y_padding = 0,     -- Padding from bottom edge of window boundary
-          align = "bottom",  -- How to align the notification window
+          winblend = 0, -- Background color opacity in the notification window
+          border = "none", -- Border around the notification window
+          zindex = 45, -- Stacking priority of the notification window
+          max_width = 0, -- Maximum width of the notification window
+          max_height = 0, -- Maximum height of the notification window
+          x_padding = 1, -- Padding from right edge of window boundary
+          y_padding = 0, -- Padding from bottom edge of window boundary
+          align = "bottom", -- How to align the notification window
           relative = "editor", -- What the notification window position is relative to
         },
       },
@@ -223,10 +223,10 @@ return {
     opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+      { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
     },
   },
-  { "sitiom/nvim-numbertoggle",                    event = "BufEnter" },
+  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",
