@@ -63,15 +63,31 @@ return {
       "hrsh7th/cmp-nvim-lua", -- Nvim builtins completion
       "hrsh7th/cmp-nvim-lsp-signature-help", -- Signature
     },
-    config = function()
+    config = function(_, opts)
       -- See `:help cmp`
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
+      local sorting = defaults.sorting
+      local types = require("cmp.types")
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
       luasnip.config.setup({})
 
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
+      -- Function to sort LSP snippets, so that they appear at the end of LSP suggestions
+      local function deprioritize_snippet(entry1, entry2)
+        if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return false
+        end
+        if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return true
+        end
+      end
+
+      -- Insert `deprioritize_snippet` first in the `comparators` table, so that it has priority
+      -- over the other default comparators
+      table.insert(sorting.comparators, 1, deprioritize_snippet)
 
       cmp.setup({
         experimental = {
@@ -79,7 +95,7 @@ return {
             hl_group = "CmpGhostText",
           },
         },
-        sorting = defaults.sorting,
+        sorting = sorting,
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
