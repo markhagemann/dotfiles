@@ -26,10 +26,10 @@ return {
       before.setup()
 
       -- Jump to previous entry in the edit history
-      vim.keymap.set("n", "<C-h>", before.jump_to_last_edit, { desc = "[C-h] Jump to last edit" })
+      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "[J]ump to [L]ast Edit" })
 
       -- Jump to next entry in the edit history
-      vim.keymap.set("n", "<C-l>", before.jump_to_next_edit, { desc = "[C-l] Jump to next edit" })
+      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "Jump to [N]ext Edit" })
 
       -- Look for previous edits in quickfix list
       vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "[O]pen Edits in [Q]uickfix" })
