@@ -74,7 +74,7 @@ opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldexpr = ""
 
--- mouse integration
+opt.cursorline = true
 opt.mousemoveevent = true
 
 vim.g.blamer_enabled = true

@@ -198,7 +198,6 @@ return {
   --     },
   --   },
   -- },
-  { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
   {
     "karb94/neoscroll.nvim",
     event = "BufEnter",
@@ -232,10 +231,13 @@ return {
   },
   {
     "numToStr/Comment.nvim",
-    opts = {
-      -- add any options here
-    },
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     event = { "BufEnter" },
+    config = function()
+      require("Comment").setup({
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      })
+    end,
   },
   {
     "nvim-pack/nvim-spectre",
