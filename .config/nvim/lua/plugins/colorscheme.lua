@@ -65,6 +65,38 @@ return {
     end,
   },
   {
+    "mawkler/modicator.nvim",
+    lazy = false,
+    after = "catppuccin/nvim",
+    config = function()
+      local colors = require("utils.colors")
+      local modes = {
+        "Normal",
+        "Insert",
+        "Visual",
+        "Command",
+        "Replace",
+        "Select",
+        "Terminal",
+        "TerminalNormal",
+      }
+
+      for _, mode in pairs(modes) do
+        local fg_color = colors.vi_mode_colors[mode:lower()]
+        vim.api.nvim_set_hl(0, mode .. "Mode", { fg = fg_color })
+      end
+
+      require("modicator").setup({
+        show_warnings = true,
+        highlights = {
+          defaults = {
+            bold = true,
+          },
+        },
+      })
+    end,
+  },
+  {
     "xiyaowong/nvim-transparent",
     lazy = false,
     keys = {

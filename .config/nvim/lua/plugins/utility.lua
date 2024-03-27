@@ -129,12 +129,7 @@ return {
       },
     },
     config = function(_, opts)
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>nd",
-        ":NoiceDismiss<CR>",
-        { desc = { "[D]ismiss [N]oice" }, noremap = true }
-      )
+      vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "[D]ismiss [N]oice", noremap = true })
       require("noice").setup(opts)
     end,
   },
