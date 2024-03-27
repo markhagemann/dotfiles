@@ -12,18 +12,21 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
       "pmizio/typescript-tools.nvim",
-      event = "LspAttach",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = {},
     },
     {
       "Fildo7525/pretty_hover",
-      event = "LspAttach",
       opts = {},
     },
     {
       "soulis-1256/eagle.nvim",
-      event = "LspAttach",
+    },
+    {
+      "askfiy/lsp_extra_dim",
+      config = function()
+        require("lsp_extra_dim").setup()
+      end,
     },
     {
       "simrat39/symbols-outline.nvim",
@@ -51,6 +54,7 @@ return {
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { "folke/neodev.nvim", opts = {} },
+    { "Zeioth/garbage-day.nvim" },
   },
   config = function()
     -- Brief aside: **What is LSP?**

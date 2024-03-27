@@ -5,6 +5,11 @@ end
 
 return {
   {
+    "luckasRanarison/tailwind-tools.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {}, -- your configuration
+  },
+  {
     "Jezda1337/nvim-html-css",
     event = "LspAttach",
     dependencies = {
@@ -15,6 +20,8 @@ return {
       require("html-css"):setup()
     end,
   },
+
+  -- Core Completion Plugin
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
