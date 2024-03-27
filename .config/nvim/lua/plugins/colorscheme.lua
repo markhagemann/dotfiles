@@ -17,6 +17,7 @@ return {
         gitsigns = true,
         fidget = true,
         notify = true,
+        noice = true,
         nvimtree = {
           enabled = true,
           show_root = true,

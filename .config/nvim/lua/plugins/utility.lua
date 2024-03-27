@@ -78,35 +78,46 @@ return {
       require("blame").setup(opts)
     end,
   },
-  -- {
-  --   "folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     lsp = {
-  --       hover = {
-  --         enabled = false,
-  --       },
-  --       presets = {
-  --         -- bottom_search = true,   -- use a classic bottom cmdline for search
-  --         -- command_palette = true, -- position the cmdline and popupmenu together
-  --         long_message_to_split = true, -- long messages will be sent to a split
-  --         -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-  --         -- lsp_doc_border = false, -- add a border to hover docs and signature help
-  --       },
-  --       signature = {
-  --         enabled = false,
-  --       },
-  --     },
-  --   },
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   },
-  --   config = function(_, opts)
-  --     vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
-  --     require("noice").setup(opts)
-  --   end,
-  -- },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        hover = {
+          enabled = false,
+        },
+        presets = {
+          -- bottom_search = true,   -- use a classic bottom cmdline for search
+          -- command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
+          -- lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+        signature = {
+          enabled = false,
+        },
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          timeout = 1000,
+          render = "compact",
+          stages = "fade",
+          top_down = false,
+          on_open = function(win)
+            vim.api.nvim_win_set_config(win, { zindex = 100 })
+          end,
+        },
+      },
+    },
+    config = function(_, opts)
+      vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
+      require("noice").setup(opts)
+    end,
+  },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
@@ -152,26 +163,26 @@ return {
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
     },
   },
-  {
-    "j-hui/fidget.nvim",
-    event = "BufEnter",
-    opts = {
-      notification = {
-        window = {
-          normal_hl = "Comment", -- Base highlight group in the notification window
-          winblend = 0, -- Background color opacity in the notification window
-          border = "none", -- Border around the notification window
-          zindex = 45, -- Stacking priority of the notification window
-          max_width = 0, -- Maximum width of the notification window
-          max_height = 0, -- Maximum height of the notification window
-          x_padding = 1, -- Padding from right edge of window boundary
-          y_padding = 0, -- Padding from bottom edge of window boundary
-          align = "bottom", -- How to align the notification window
-          relative = "editor", -- What the notification window position is relative to
-        },
-      },
-    },
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   event = "BufEnter",
+  --   opts = {
+  --     notification = {
+  --       window = {
+  --         normal_hl = "Comment", -- Base highlight group in the notification window
+  --         winblend = 0, -- Background color opacity in the notification window
+  --         border = "none", -- Border around the notification window
+  --         zindex = 45, -- Stacking priority of the notification window
+  --         max_width = 0, -- Maximum width of the notification window
+  --         max_height = 0, -- Maximum height of the notification window
+  --         x_padding = 1, -- Padding from right edge of window boundary
+  --         y_padding = 0, -- Padding from bottom edge of window boundary
+  --         align = "bottom", -- How to align the notification window
+  --         relative = "editor", -- What the notification window position is relative to
+  --       },
+  --     },
+  --   },
+  -- },
   { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufEnter" },
   {
     "karb94/neoscroll.nvim",
