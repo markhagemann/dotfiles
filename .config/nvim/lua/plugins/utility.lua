@@ -23,6 +23,26 @@ return {
     event = { "BufEnter" },
     config = true,
   },
+  {
+    "bloznelis/before.nvim",
+    event = { "BufEnter" },
+    config = function()
+      local before = require("before")
+      before.setup()
+
+      -- Jump to previous entry in the edit history
+      vim.keymap.set("n", "<C-h>", before.jump_to_last_edit, { desc = "[C-h] Jump to last edit" })
+
+      -- Jump to next entry in the edit history
+      vim.keymap.set("n", "<C-l>", before.jump_to_next_edit, { desc = "[C-l] Jump to next edit" })
+
+      -- Look for previous edits in quickfix list
+      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "[O]pen Edits in [Q]uickfix" })
+
+      -- Look for previous edits in telescope (needs telescope, obviously)
+      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "[O]pen [E]dits in Telescope" })
+    end,
+  },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "christoomey/vim-tmux-navigator",
@@ -114,7 +134,12 @@ return {
       },
     },
     config = function(_, opts)
-      vim.api.nvim_set_keymap("n", "<leader>cn", ":NoiceDismiss<CR>", { noremap = true })
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>nd",
+        ":NoiceDismiss<CR>",
+        { desc = { "[D]ismiss [N]oice" }, noremap = true }
+      )
       require("noice").setup(opts)
     end,
   },
@@ -317,6 +342,11 @@ return {
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "volskaya/windovigation.nvim",
+    lazy = false,
+    opts = {},
   },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
