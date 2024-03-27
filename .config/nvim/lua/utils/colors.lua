@@ -1,6 +1,6 @@
 return {
   vi_mode_colors = {
-    normal = "#429ef5",
+    normal = "#6fa1d1",
     op = "#429ef5",
     insert = "#6ff796",
     visual = "#af6dde",
