@@ -12,21 +12,12 @@ return {
       },
       -- Integrations
       integrations = {
-        which_key = true,
-        harpoon = true,
-        gitsigns = true,
         fidget = true,
-        notify = true,
-        noice = true,
-        nvimtree = {
-          enabled = true,
-          show_root = true,
-          transparent_panel = true,
-        },
-        telescope = true,
+        gitsigns = true,
+        harpoon = true,
+        hop = true,
         illuminate = true,
-        treesitter = true,
-        treesitter_context = true,
+        markdown = true,
         native_lsp = {
           enabled = true,
           virtual_text = {
@@ -42,8 +33,17 @@ return {
             information = { "undercurl" },
           },
         },
-        hop = true,
-        markdown = true,
+        noice = true,
+        notify = true,
+        nvimtree = {
+          enabled = true,
+          show_root = true,
+          transparent_panel = true,
+        },
+        telescope = true,
+        treesitter = true,
+        treesitter_context = true,
+        which_key = true,
       },
       custom_highlights = function(colors)
         local TelescopeColor = {}
@@ -58,8 +58,6 @@ return {
       color_overrides = {},
     },
     config = function(_, opts)
-      local colors = require("catppuccin.palettes").get_palette()
-
       require("catppuccin").setup(opts)
 
       -- setup must be called before loading
