@@ -19,11 +19,6 @@ return {
     end,
   },
   {
-    "AckslD/muren.nvim",
-    event = { "BufEnter" },
-    config = true,
-  },
-  {
     "bloznelis/before.nvim",
     event = { "BufEnter" },
     config = function()
@@ -234,11 +229,6 @@ return {
     event = "BufEnter",
   },
   {
-    "mawkler/modicator.nvim",
-    event = "VeryLazy",
-    dependencies = "catppuccin/nvim",
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     event = "BufEnter",
     config = function()
@@ -347,6 +337,13 @@ return {
     "volskaya/windovigation.nvim",
     lazy = false,
     opts = {},
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
   },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
