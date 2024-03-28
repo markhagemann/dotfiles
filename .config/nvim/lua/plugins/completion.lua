@@ -20,7 +20,6 @@ return {
       require("html-css"):setup()
     end,
   },
-
   -- Core Completion Plugin
   {
     "hrsh7th/nvim-cmp",
@@ -89,6 +88,60 @@ return {
       -- over the other default comparators
       table.insert(sorting.comparators, 1, deprioritize_snippet)
 
+      local symbol_map = {
+        Boolean = "󰨙  ",
+        Codeium = "󰘦  ",
+        Control = "  ",
+        Text = "  ",
+        Method = "  ",
+        Function = "  ",
+        Constructor = "  ",
+        Field = "  ",
+        Variable = "  ",
+        Class = "  ",
+        Interface = "  ",
+        Module = "  ",
+        Property = "  ",
+        Unit = "  ",
+        Value = "  ",
+        Enum = "  ",
+        Keyword = "  ",
+        Snippet = "  ",
+        Color = "  ",
+        File = "  ",
+        Reference = "  ",
+        Folder = "  ",
+        EnumMember = "  ",
+        Constant = "  ",
+        Struct = "  ",
+        Event = "  ",
+        Operator = "  ",
+        TypeParameter = "  ",
+        Array = "  ",
+        Collapsed = "  ",
+        Copilot = "  ",
+        Key = " ",
+        Namespace = "󰦮 ",
+        Null = "  ",
+        Number = "󰎠  ",
+        Object = "  ",
+        Package = "  ",
+        String = "  ",
+        TabNine = "󰏚  ",
+      }
+
+      vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
+      vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+      vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpIntemAbbrMatch" })
+      vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+      vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
+      vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
+      vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+      vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
+      vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
+      vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
+      vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
+
       cmp.setup({
         experimental = {
           ghost_text = {
@@ -106,62 +159,28 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         completion = { completeopt = "menu,menuone,noinsert" },
-
         formatting = {
+          before = require("tailwind-tools.cmp").lspkind_format,
           fields = { "abbr", "kind", "menu" },
-          format = lspkind.cmp_format({
-            mode = "symbol_text",
-            menu = {
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              luasnip = "[LuaSnip]",
-              nvim_lua = "[Lua]",
-              latex_symbols = "[Latex]",
-            },
-            symbol_map = {
-              Array = " ",
-              Boolean = "󰨙 ",
-              Class = " ",
-              Codeium = "󰘦 ",
-              Color = " ",
-              Control = " ",
-              Collapsed = " ",
-              Constant = "󰏿 ",
-              Constructor = " ",
-              Copilot = " ",
-              Enum = " ",
-              EnumMember = " ",
-              Event = " ",
-              Field = " ",
-              File = " ",
-              Folder = " ",
-              Function = "󰊕 ",
-              Interface = " ",
-              Key = " ",
-              Keyword = " ",
-              Method = "󰊕 ",
-              Module = " ",
-              Namespace = "󰦮 ",
-              Null = " ",
-              Number = "󰎠 ",
-              Object = " ",
-              Operator = " ",
-              Package = " ",
-              Property = " ",
-              Reference = " ",
-              Snippet = " ",
-              String = " ",
-              Struct = "󰆼 ",
-              TabNine = "󰏚 ",
-              Text = " ",
-              TypeParameter = " ",
-              Unit = " ",
-              Value = " ",
-              Variable = "󰀫 ",
-            },
-          }),
-        },
+          format = function(entry, vim_item)
+            if entry.source.name == "html-css" then
+              vim_item.menu = entry.completion_item.menu
+            else
+              vim_item.menu = ({
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                nvim_lua = "[Lua]",
+                latex_symbols = "[LaTeX]",
+              })[entry.source.name]
+            end
 
+            -- Kind icons
+            vim_item.kind = string.format("%s %s", symbol_map[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+            -- -- Source
+            return vim_item
+          end,
+        },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
@@ -172,6 +191,7 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+          ["<C-s>"] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
           ["<C-e>"] = cmp.mapping.abort(), -- close completion window
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
@@ -235,6 +255,7 @@ return {
             name = "html-css",
             option = {
               enable_on = {
+                "html.handlebars",
                 "html",
                 "jsx",
                 "tsx",
