@@ -3,6 +3,10 @@ local js_formatters = {
   { "prettierd", "prettier" },
 }
 
+local sh_formatters = {
+  "beautysh",
+}
+
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -59,9 +63,11 @@ return {
         return { async = true, lsp_fallback = true }
       end,
       formatters_by_ft = {
+        bash = sh_formatters,
         lua = { "stylua" },
         python = { "isort", "black" },
         javascript = js_formatters,
+        sh = sh_formatters,
         typescript = js_formatters,
         vue = js_formatters,
       },
