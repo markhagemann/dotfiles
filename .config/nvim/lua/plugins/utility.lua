@@ -50,7 +50,26 @@ return {
       { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
     },
   },
-  { "chaoren/vim-wordmotion", event = { "BufEnter" } },
+  {
+    "chrisgrieser/nvim-spider",
+    keys = {
+      {
+        "w",
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "e",
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "b",
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { "n", "o", "x" },
+      },
+    },
+  },
   { "code-biscuits/nvim-biscuits", event = { "BufEnter" }, dependencies = { "nvim-treesitter/nvim-treesitter" } },
   {
     "dstein64/vim-startuptime",
