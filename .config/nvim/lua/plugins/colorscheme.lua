@@ -62,6 +62,13 @@ return {
 
       -- setup must be called before loading
       vim.cmd("colorscheme catppuccin-mocha")
+
+      vim.keymap.set("n", "TT", function()
+        local cat = require("catppuccin")
+        cat.options.transparent_background = not cat.options.transparent_background
+        cat.compile()
+        vim.cmd.colorscheme(vim.g.colors_name)
+      end)
     end,
   },
   {
@@ -95,13 +102,5 @@ return {
         },
       })
     end,
-  },
-  {
-    "xiyaowong/nvim-transparent",
-    lazy = false,
-    keys = {
-      -- Transparency Toggle
-      { "TT", ":TransparentToggle<CR>", desc = "Toggle Transparency" },
-    },
   },
 }
