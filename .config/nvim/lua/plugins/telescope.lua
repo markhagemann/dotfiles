@@ -61,8 +61,9 @@ return {
         pickers = {
           find_files = {
             hidden = true,
-            -- previewer = false,
             theme = "dropdown",
+            previewer = false,
+            follow = true,
           },
           live_grep = {
             additional_args = function(opts)
