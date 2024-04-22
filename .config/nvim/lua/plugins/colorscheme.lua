@@ -94,7 +94,7 @@ return {
       end
 
       require("modicator").setup({
-        show_warnings = true,
+        show_warnings = false,
         highlights = {
           defaults = {
             bold = false,

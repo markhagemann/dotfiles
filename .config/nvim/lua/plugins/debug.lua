@@ -2,7 +2,7 @@ return {
   "mfussenegger/nvim-dap",
 
   dependencies = {
-
+    "nvim-neotest/nvim-nio",
     -- fancy UI for the debugger
     {
       "rcarriga/nvim-dap-ui",
@@ -21,8 +21,10 @@ return {
         vim.fn.sign_define("DapBreakpoint", { text = "", numhl = "DapBreakpoint", texthl = "DapBreakpoint" })
         vim.fn.sign_define("DagLogPoint", { text = "", numhl = "DapLogPoint", texthl = "DapLogPoint" })
         vim.fn.sign_define("DapStopped", { text = "", numhl = "DapStopped", texthl = "DapStopped" })
-        vim.fn.sign_define("DapBreakpointRejected",
-          { text = "", numhl = "DapBreakpointRejected", texthl = "DapBreakpointRejected" })
+        vim.fn.sign_define(
+          "DapBreakpointRejected",
+          { text = "", numhl = "DapBreakpointRejected", texthl = "DapBreakpointRejected" }
+        )
 
         dapui.setup(opts)
         dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -60,8 +62,8 @@ return {
         -- You'll need to check that you have the required things installed
         -- online, please don't ask me how to install them :)
         ensure_installed = {
-          { "js-debug-adapter" },
-          { "node-debug2-adapter" },
+          "js-debug-adapter",
+          "node-debug2-adapter",
         },
       },
     },
