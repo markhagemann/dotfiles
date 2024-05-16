@@ -15,10 +15,52 @@ require("config.options")
 require("config.keymaps")
 require("config.autocommands")
 
-require("lazy").setup(
-  { import = "plugins" },
-  { change_detection = { notify = false }, ui = { border = "single" }, defaults = { lazy = true } }
-)
+require("lazy").setup({ import = "plugins" }, {
+  change_detection = { notify = false },
+  ui = {
+    border = "single",
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
+  defaults = { lazy = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+        "tutor",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
+      },
+    },
+  },
+})
 
 local group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
 

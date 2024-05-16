@@ -33,6 +33,8 @@ bindings = [
   { key = "+", mods = "Control", action = "IncreaseFontSize" },
   { key = "-", mods = "Control", action = "DecreaseFontSize" },
   { key = "0", mods = "Control", action = "ResetFontSize" },
+  { key = "t", mods = "Alt|Shift", chars = "alacritty msg config window.opacity=0.93" },
+  { key = "o", mods = "Alt|Shift", chars = "alacritty msg config window.opacity=1.0" },
   { key = "]", mods = "Alt", action = "ToggleMaximized" },
   { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
 ]

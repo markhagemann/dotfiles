@@ -5,7 +5,7 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  lazy = false,
+  event = "BufEnter",
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -13,7 +13,9 @@ return {
     {
       "pmizio/typescript-tools.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
-      opts = {},
+      opts = {
+        separate_diagnostic_server = false,
+      },
     },
     {
       "Fildo7525/pretty_hover",

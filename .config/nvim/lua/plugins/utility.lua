@@ -102,7 +102,7 @@ return {
     keys = {
       {
         "<leader>tb",
-        "<CMD>ToggleBlame<CR>",
+        "<CMD>BlameToggle<CR>",
         desc = "Open git blame list",
         noremap = true,
         silent = true,
