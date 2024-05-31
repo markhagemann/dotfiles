@@ -45,7 +45,7 @@ return {
     })
 
     require("conform").setup({
-      format_on_save = function(bufnr)
+      format_after_save = function(bufnr)
         -- Disable autoformat on certain filetypes
         local ignore_filetypes = { "sql" }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
@@ -60,7 +60,7 @@ return {
         if bufname:match("/node_modules/") then
           return
         end
-        return { async = true, lsp_fallback = true }
+        return { lsp_fallback = true }
       end,
       formatters_by_ft = {
         bash = sh_formatters,
