@@ -11,13 +11,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
-      "pmizio/typescript-tools.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      opts = {
-        separate_diagnostic_server = false,
-      },
-    },
-    {
       "Fildo7525/pretty_hover",
       opts = {},
     },
@@ -162,13 +155,6 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-
-        -- typescript specific keymaps (e.g. rename file and update imports)
-        if client.name == "typescript-tools" then
-          map("<leader>rf", "<cmd>TsToolsRenameFile<CR>", "TypeScript [R]ename [F]ile") -- rename file and update imports
-          map("<leader>oi", "<cmd>TSToolsOrganizeImports<CR>", "TypeScript [O]rganize [I]mports") -- organize imports (not in youtube nvim video)
-          map("<leader>ru", "<cmd>TSToolsRemoveUnused<CR>", "TypeScript [R]emove [U]nused") -- remove unused variables (not in youtube nvim video)
-        end
       end,
     })
 
@@ -214,10 +200,8 @@ return {
         { "emmet-ls" },
         { "css-lsp" },
         { "prettier" },
-        -- Handled by typescript-tools
-        -- { "typescript-language-server" },
+        { "typescript-language-server" },
         { "eslint_d" },
-        -- { "eslint-lsp" },
         { "tailwindcss-language-server" },
         { "vetur-vls" },
       },
