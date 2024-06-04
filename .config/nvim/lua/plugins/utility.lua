@@ -173,7 +173,9 @@ return {
     cmd = { "TodoTrouble", "TroubleToggle" },
     event = "VimEnter",
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
