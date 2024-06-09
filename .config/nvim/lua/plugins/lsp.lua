@@ -5,7 +5,8 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  event = "BufEnter",
+  -- event = "BufEnter",
+  lazy = false,
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -199,11 +200,12 @@ return {
         { "html-lsp" },
         { "emmet-ls" },
         { "css-lsp" },
-        { "prettier" },
+        -- { "prettier" },
         { "typescript-language-server" },
         { "eslint_d" },
         { "tailwindcss-language-server" },
-        { "vetur-vls" },
+        -- { "vetur-vls" },
+        { "volar" },
       },
 
       auto_update = true,

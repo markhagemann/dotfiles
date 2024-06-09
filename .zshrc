@@ -1,3 +1,17 @@
+# mac specific settings.
+if [ "$(uname)" = "Darwin" ]; then
+  # 15 is lowest setting on UI
+  # 8 was too fast causing duplicate keystrokes
+  # 10 i think this causes issues in bash cli when editing commands, not sure
+  defaults write -g InitialKeyRepeat -int 12
+
+  # 2 is lowest setting on UI
+  defaults write -g KeyRepeat -int 2
+
+  # allow holding key instead of mac default holding key to choose alternate key
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+fi
+
 # WSL 2 specific settings.
 if grep -q "microsoft" /proc/version &>/dev/null; then
 
@@ -37,8 +51,12 @@ fi
 export GDK_SCALE=0.5
 export GDK_DPI_SCALE=1.25
 
-# eval "$(gdircolors ~/.dir_colors)" || "$(dircolors ~/.dir_colors)"
-eval "$(dircolors ~/.dir_colors)" || "$(gdircolors ~/.dir_colors)"
+if ! gdircolors -v &> /dev/null
+then
+  eval "$(gdircolors ~/.dir_colors)"
+else
+  eval "$(dircolors ~/.dir_colors)"
+fi
 
 # Import private exports that shouldn't be committed
 PRIVEXPORTFILE=~/.zshrcpriv
@@ -209,5 +227,4 @@ precmd_functions+=(_fix_cursor)
 PATH=$(printf %s "$PATH" \
      | awk -vRS=: -vORS= '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0) }' )
 
-# eval "$(oh-my-posh init zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/tokyonight_storm_modified.omp.toml)"
