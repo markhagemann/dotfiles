@@ -1,5 +1,7 @@
 # mac specific settings.
 if [ "$(uname)" = "Darwin" ]; then
+  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
+
   # 15 is lowest setting on UI
   # 8 was too fast causing duplicate keystrokes
   # 10 i think this causes issues in bash cli when editing commands, not sure
