@@ -1,3 +1,5 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # mac specific settings.
 if [ "$(uname)" = "Darwin" ]; then
   export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
