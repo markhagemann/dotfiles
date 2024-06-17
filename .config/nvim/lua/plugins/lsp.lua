@@ -12,17 +12,40 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
-      "Fildo7525/pretty_hover",
-      opts = {},
-    },
-    {
-      "soulis-1256/eagle.nvim",
-    },
-    {
       "askfiy/lsp_extra_dim",
       config = function()
         require("lsp_extra_dim").setup()
       end,
+    },
+    { "Bilal2453/luvit-meta", lazy = true },
+    { -- optional completion source for require statements and module annotations
+      "hrsh7th/nvim-cmp",
+      opts = function(_, opts)
+        opts.sources = opts.sources or {}
+        table.insert(opts.sources, {
+          name = "lazydev",
+          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        })
+      end,
+    },
+    {
+      "dmmulroy/ts-error-translator.nvim",
+      config = function()
+        require("ts-error-translator").setup()
+      end,
+    },
+    {
+      "Fildo7525/pretty_hover",
+      opts = {},
+    },
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          "luvit-meta/library",
+        },
+      },
     },
     {
       "simrat39/symbols-outline.nvim",
@@ -48,29 +71,7 @@ return {
       end,
     },
     {
-      "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
-      opts = {
-        library = {
-          -- Library items can be absolute paths
-          -- "~/projects/my-awesome-lib",
-          -- Or relative, which means they will be resolved as a plugin
-          -- "LazyVim",
-          -- When relative, you can also provide a path to the library in the plugin dir
-          "luvit-meta/library", -- see below
-        },
-      },
-    },
-    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-    { -- optional completion source for require statements and module annotations
-      "hrsh7th/nvim-cmp",
-      opts = function(_, opts)
-        opts.sources = opts.sources or {}
-        table.insert(opts.sources, {
-          name = "lazydev",
-          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-        })
-      end,
+      "soulis-1256/eagle.nvim",
     },
     { "Zeioth/garbage-day.nvim" },
   },
@@ -161,6 +162,29 @@ return {
       end,
     })
 
+    require("mason").setup()
+    require("mason-tool-installer").setup({
+      ensure_installed = {
+        { "bash-language-server" },
+        { "lua-language-server" },
+        { "stylua" },
+        { "html-lsp" },
+        { "emmet-ls" },
+        { "css-lsp" },
+        -- { "prettier" },
+        { "typescript-language-server" },
+        { "eslint_d" },
+        { "tailwindcss-language-server" },
+        -- { "vetur-vls" },
+        { "volar" },
+      },
+
+      auto_update = true,
+      run_on_start = true,
+      start_delay = 3000, -- 3 second delay
+      debounce_hours = 5, -- at least 5 hours between attempts to install/update
+    })
+
     local signs = {
       Error = "",
       Warn = "",
@@ -186,7 +210,9 @@ return {
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    local vue_language_server_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/vue-language-server"
+    local mason_registry = require("mason-registry")
+    local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+      .. "/node_modules/@vue/language-server"
 
     local servers = {
       -- pyright = {},
@@ -204,30 +230,6 @@ return {
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
       },
     }
-
-    require("mason").setup()
-
-    require("mason-tool-installer").setup({
-      ensure_installed = {
-        { "bash-language-server" },
-        { "lua-language-server" },
-        { "stylua" },
-        { "html-lsp" },
-        { "emmet-ls" },
-        { "css-lsp" },
-        -- { "prettier" },
-        { "typescript-language-server" },
-        { "eslint_d" },
-        { "tailwindcss-language-server" },
-        -- { "vetur-vls" },
-        { "volar" },
-      },
-
-      auto_update = true,
-      run_on_start = true,
-      start_delay = 3000, -- 3 second delay
-      debounce_hours = 5, -- at least 5 hours between attempts to install/update
-    })
 
     require("mason-lspconfig").setup({
       handlers = {
