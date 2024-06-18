@@ -171,7 +171,7 @@ return {
         { "html-lsp" },
         { "emmet-ls" },
         { "css-lsp" },
-        -- { "prettier" },
+        { "prettier_d" },
         { "typescript-language-server" },
         { "eslint_d" },
         { "tailwindcss-language-server" },

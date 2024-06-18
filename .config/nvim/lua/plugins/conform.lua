@@ -1,6 +1,6 @@
 local js_formatters = {
-  "eslint_d",
   { "prettierd", "prettier" },
+  "eslint_d",
 }
 
 local sh_formatters = {
