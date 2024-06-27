@@ -171,7 +171,7 @@ return {
         { "html-lsp" },
         { "emmet-ls" },
         { "css-lsp" },
-        { "prettier_d" },
+        { "prettierd" },
         { "typescript-language-server" },
         { "eslint_d" },
         { "tailwindcss-language-server" },
@@ -225,6 +225,11 @@ return {
               location = vue_language_server_path,
               languages = { "vue" },
             },
+          },
+          preferences = {
+            -- other preferences...
+            importModuleSpecifierPreference = "relative",
+            importModuleSpecifierEnding = "minimal",
           },
         },
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
