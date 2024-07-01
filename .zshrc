@@ -91,6 +91,7 @@ export ZSH=~/.oh-my-zsh
 # TMUX
 # Automatically start tmux
 ZSH_TMUX_AUTOSTART=true
+TMUX_DIR="~/.config/tmux"
 
 # Automatically connect to a previous session if it exists
 ZSH_TMUX_AUTOCONNECT=true
