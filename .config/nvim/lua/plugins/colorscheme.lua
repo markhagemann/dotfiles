@@ -12,6 +12,7 @@ return {
       },
       -- Integrations
       integrations = {
+        cmp = true,
         fidget = true,
         gitsigns = true,
         harpoon = true,
