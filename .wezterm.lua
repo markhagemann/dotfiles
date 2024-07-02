@@ -3,7 +3,10 @@ local wezterm = require("wezterm")
 return {
 	color_scheme = "Catppuccin Mocha",
 	enable_tab_bar = false,
-	font_size = 19.0,
+	font = wezterm.font_with_fallback({
+		{ family = "JetBrains Mono" },
+	}),
+	font_size = 18.5,
 	initial_cols = 130,
 	initial_rows = 33,
 	max_fps = 240,
