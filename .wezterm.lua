@@ -4,9 +4,9 @@ return {
 	color_scheme = "Catppuccin Mocha",
 	enable_tab_bar = false,
 	font = wezterm.font_with_fallback({
-		{ family = "JetBrains Mono" },
+		{ family = "JetBrainsMono Nerd Font" },
 	}),
-	font_size = 18.5,
+	font_size = 19,
 	initial_cols = 130,
 	initial_rows = 33,
 	max_fps = 240,
