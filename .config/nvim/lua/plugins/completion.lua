@@ -25,6 +25,13 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
+      {
+        "garymjr/nvim-snippets",
+        opts = {
+          friendly_snippets = true,
+        },
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
       -- Snippet Engine & its associated nvim-cmp source
       "onsails/lspkind-nvim", -- Completion menu icons
 
@@ -210,6 +217,7 @@ return {
               }, -- your configuration here
             },
           },
+          { name = "snippets" },
         },
       })
     end,

@@ -181,11 +181,17 @@ return {
     opts = {},
   },
   {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+  },
+  {
     "folke/twilight.nvim",
+    opts = {},
+    event = "VeryLazy",
     keys = {
       { "<leader>tw", "<cmd>Twilight<cr>", desc = "Toggle Twilight" },
     },
-    opts = {},
   },
   {
     "gbprod/cutlass.nvim",
@@ -271,16 +277,6 @@ return {
     event = "BufEnter",
     config = function()
       require("colorizer").setup({})
-    end,
-  },
-  {
-    "numToStr/Comment.nvim",
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-    event = { "BufEnter" },
-    config = function()
-      require("Comment").setup({
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      })
     end,
   },
   {
