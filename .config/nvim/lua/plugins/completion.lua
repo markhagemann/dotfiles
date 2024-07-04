@@ -23,9 +23,34 @@ return {
   -- Core Completion Plugin
   {
     "hrsh7th/nvim-cmp",
+    commit = "b356f2c",
     event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
+      {
+        "L3MON4D3/LuaSnip",
+        build = (function()
+          -- Build Step is needed for regex support in snippets.
+          -- This step is not supported in many windows environments.
+          -- Remove the below condition to re-enable on windows.
+          if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+            return
+          end
+          return "make install_jsregexp"
+        end)(),
+        dependencies = {
+          -- `friendly-snippets` contains a variety of premade snippets.
+          --    See the README about individual language/framework/plugin snippets:
+          --    https://github.com/rafamadriz/friendly-snippets
+          {
+            "rafamadriz/friendly-snippets",
+            config = function()
+              require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+          },
+        },
+      },
+      "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim", -- Completion menu icons
 
       -- Adds other completion capabilities.
@@ -44,9 +69,25 @@ return {
       local defaults = require("cmp.config.default")()
       local sorting = defaults.sorting
       local types = require("cmp.types")
+      local luasnip = require("luasnip")
       local lspkind = require("lspkind")
+      luasnip.config.setup({})
 
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
+      -- Function to sort LSP snippets, so that they appear at the end of LSP suggestions
+      local function deprioritize_snippet(entry1, entry2)
+        if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return false
+        end
+        if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
+          return true
+        end
+      end
+
+      -- Insert `deprioritize_snippet` first in the `comparators` table, so that it has priority
+      -- over the other default comparators
+      table.insert(sorting.comparators, 1, deprioritize_snippet)
 
       local symbol_map = {
         Boolean = "󰨙  ",
@@ -110,8 +151,8 @@ return {
         },
         sorting = sorting,
         snippet = {
-          expand = function(arg)
-            vim.snippet.expand(arg.body)
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
           end,
         },
         window = {
@@ -131,6 +172,7 @@ return {
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[LaTeX]",
+                luasnip = "[LuaSnip]",
               })[entry.source.name]
             end
 
@@ -158,6 +200,10 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
             elseif check_backspace() then
               fallback()
             else
@@ -170,6 +216,8 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
@@ -186,8 +234,19 @@ return {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ["<C-l>"] = cmp.mapping(function() end, { "i", "s" }),
-          ["<C-h>"] = cmp.mapping(function() end, { "i", "s" }),
+          ["<C-l>"] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { "i", "s" }),
+
+          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         }),
         sources = {
           { name = "nvim_lsp" },
@@ -210,6 +269,7 @@ return {
               }, -- your configuration here
             },
           },
+          { name = "luasnip" },
         },
       })
     end,
