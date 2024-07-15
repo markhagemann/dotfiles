@@ -37,6 +37,12 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
       {
+        "OXY2DEV/foldtext.nvim",
+        config = function()
+          require("foldtext").setup()
+        end,
+      },
+      {
         "luukvbaal/statuscol.nvim",
         config = function()
           local builtin = require("statuscol.builtin")
@@ -156,16 +162,16 @@ return {
 
           -- only use indent until a file is opened
           return (filetype == "" or buftype == "nofile") and "indent"
-              or function(bufnr)
-                return require("ufo")
-                    .getFolds(bufnr, "lsp")
-                    :catch(function(err)
-                      return handleFallbackException(bufnr, err, "treesitter")
-                    end)
-                    :catch(function(err)
-                      return handleFallbackException(bufnr, err, "indent")
-                    end)
-              end
+            or function(bufnr)
+              return require("ufo")
+                .getFolds(bufnr, "lsp")
+                :catch(function(err)
+                  return handleFallbackException(bufnr, err, "treesitter")
+                end)
+                :catch(function(err)
+                  return handleFallbackException(bufnr, err, "indent")
+                end)
+            end
         end,
       })
       vim.keymap.set("n", "zO", function()
