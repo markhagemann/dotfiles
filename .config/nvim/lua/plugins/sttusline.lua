@@ -42,7 +42,7 @@ return {
         "git-diff",
         "%=",
         "diagnostics",
-        "lsps-formatters",
+        -- "lsps-formatters",
         "copilot",
         "indent",
         "encoding",

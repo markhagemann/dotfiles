@@ -74,7 +74,7 @@ return {
   },
   {
     "mawkler/modicator.nvim",
-    lazy = false,
+    event = "BufEnter",
     after = "catppuccin/nvim",
     config = function()
       local colors = require("utils.colors")

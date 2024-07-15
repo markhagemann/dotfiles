@@ -80,6 +80,32 @@ return {
   },
   { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
   { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
+  {
+    "echasnovski/mini.icons",
+    opts = {},
+    lazy = true,
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+    config = function()
+      require("mini.icons").setup({
+        filetype = {
+          json = { glyph = "" },
+          jsonc = { glyph = "" },
+
+          sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
+          zsh = { glyph = "󰐣" },
+          bash = { glyph = "󰐣" },
+        },
+        extension = {
+          conf = { glyph = "󰛸", hl = "MiniIconsBlue" },
+        },
+      })
+    end,
+  },
   { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
   {
     "echasnovski/mini.surround",
@@ -131,6 +157,13 @@ return {
           enabled = false,
         },
       },
+      views = {
+        mini = {
+          win_options = {
+            winblend = 0,
+          },
+        },
+      },
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -177,7 +210,6 @@ return {
       { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
       { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
   },
   {
@@ -206,24 +238,14 @@ return {
     },
   },
   -- {
-  --   "j-hui/fidget.nvim",
-  --   event = "BufEnter",
-  --   opts = {
-  --     notification = {
-  --       window = {
-  --         normal_hl = "Comment", -- Base highlight group in the notification window
-  --         winblend = 0, -- Background color opacity in the notification window
-  --         border = "none", -- Border around the notification window
-  --         zindex = 45, -- Stacking priority of the notification window
-  --         max_width = 0, -- Maximum width of the notification window
-  --         max_height = 0, -- Maximum height of the notification window
-  --         x_padding = 1, -- Padding from right edge of window boundary
-  --         y_padding = 0, -- Padding from bottom edge of window boundary
-  --         align = "bottom", -- How to align the notification window
-  --         relative = "editor", -- What the notification window position is relative to
-  --       },
-  --     },
-  --   },
+  --   "JuanBaut/statuscolumn.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   lazy = false,
+  --   config = function()
+  --     require("statuscolumn").setup({
+  --       gradient_hl = "Special",
+  --     })
+  --   end,
   -- },
   {
     "karb94/neoscroll.nvim",
