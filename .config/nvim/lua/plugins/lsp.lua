@@ -210,6 +210,10 @@ return {
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    }
     local mason_registry = require("mason-registry")
     local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
       .. "/node_modules/@vue/language-server"
@@ -233,6 +237,14 @@ return {
           },
         },
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+      },
+      yaml = {
+        schemas = {
+          ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
+            "ci/**/*.yml",
+            ".gitlab-ci.yml",
+          },
+        },
       },
     }
 
