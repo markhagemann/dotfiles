@@ -28,6 +28,14 @@ return {
         hl.CursorLine = {
           bg = "none",
         }
+        hl.FoldColumn = {
+          bg = "none",
+          fg = prompt,
+        }
+        hl.SignColumn = {
+          bg = "none",
+          fg = prompt,
+        }
         hl.NvimTreeWinSeparator = {
           bg = "none",
           fg = prompt,
