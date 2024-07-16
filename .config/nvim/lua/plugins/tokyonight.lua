@@ -1,5 +1,11 @@
 return {
   {
+    dependencies = {
+      {
+        "xiyaowong/transparent.nvim",
+        keys = { { "<leader>TT", "<cmd>TransparentToggle<cr>", desc = "[T]ransparency [T]oggle" } },
+      },
+    },
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
@@ -14,9 +20,9 @@ return {
         -- variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
         sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for floating windows
+        floats = "transparent", -- style for sidebars, see below
       },
-      transparent = true,
+      transparent = vim.g.transparent_enabled,
       on_highlights = function(hl, c)
         local prompt = "#2d3149"
         hl.CursorLine = {
@@ -61,24 +67,7 @@ return {
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)
-
       vim.cmd("colorscheme tokyonight")
-      -- TODO: Can't seem to get the toggle to work
-      -- vim.keymap.set("n", "TT", function()
-      --   local tok = require("tokyonight")
-      --   tok.transparent = not tok.transparent
-      --   print(tok.transparent)
-      --   if tok.transparent then
-      --     tok.styles.sidebars = "transparent"
-      --     tok.styles.floats = "transparent"
-      --   else
-      --     tok.styles.sidebars = "dark"
-      --     tok.styles.floats = "dark"
-      --   end
-      --   tok.load()
-      --   print(vim.g.colors_name)
-      --   vim.cmd.colorscheme(vim.g.colors_name)
-      -- end)
     end,
   },
   {
