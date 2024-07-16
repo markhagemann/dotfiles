@@ -37,12 +37,6 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
       {
-        "OXY2DEV/foldtext.nvim",
-        config = function()
-          require("foldtext").setup()
-        end,
-      },
-      {
         "luukvbaal/statuscol.nvim",
         config = function()
           local builtin = require("statuscol.builtin")
@@ -72,22 +66,6 @@ return {
               "toggleterm",
             },
             segments = {
-              -- Segment: Add padding
-              {
-                text = { " " },
-              },
-              -- Segment: Fold Column
-              {
-                text = { builtin.foldfunc },
-                click = "v:lua.ScFa",
-                maxwidth = 1,
-                colwidth = 1,
-                auto = false,
-              },
-              -- Segment: Add padding
-              {
-                text = { " " },
-              },
               -- Segment : Show signs with one character width
               {
                 sign = {
@@ -103,9 +81,13 @@ return {
                 auto = true,
                 click = "v:lua.ScSa",
               },
+              -- Segment: Add padding
+              {
+                text = { " " },
+              },
               -- Segment: Show line number
               {
-                text = { " ", " ", builtin.lnumfunc, " " },
+                text = { builtin.lnumfunc },
                 click = "v:lua.ScLa",
                 condition = { true, builtin.not_empty },
               },
@@ -118,6 +100,14 @@ return {
                   auto = false,
                 },
                 click = "v:lua.ScSa",
+              },
+              -- Segment: Fold Column
+              {
+                text = { builtin.foldfunc },
+                click = "v:lua.ScFa",
+                maxwidth = 1,
+                colwidth = 1,
+                auto = false,
               },
               -- Segment: Add padding
               {

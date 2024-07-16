@@ -58,8 +58,7 @@ opt.iskeyword:append("-") -- consider string-string as whole word
 
 -- folding
 opt.foldenable = true
-opt.foldcolumn = "auto" -- show foldcolumn in nvim 0.9
-opt.foldnestmax = 0
+opt.foldcolumn = "1"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.fillchars = {
@@ -70,9 +69,10 @@ opt.fillchars = {
   stl = " ",
   eob = " ",
 }
-opt.foldmethod = "expr"
+-- opt.foldnestmax = 0
+-- opt.foldmethod = "expr"
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldexpr = ""
+-- opt.foldexpr = ""
 
 opt.cursorline = true
 opt.mousemoveevent = true
