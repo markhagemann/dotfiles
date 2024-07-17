@@ -2,11 +2,7 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {
-      window = {
-        border = "single", -- none, single, double, shadow
-      },
-    },
+    opts = {},
   },
   -- {
   --   config = function(_, opts) -- This is the function that runs, AFTER loading
