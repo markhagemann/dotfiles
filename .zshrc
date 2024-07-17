@@ -55,11 +55,11 @@ fi
 export GDK_SCALE=0.5
 export GDK_DPI_SCALE=1.25
 
-if !gdircolors -v &> /dev/null
+if gdircolors -v &> /dev/null
 then
-  eval "$(dircolors ~/.dir_colors)"
-else
   eval "$(gdircolors ~/.dir_colors)"
+else
+  eval "$(dircolors ~/.dir_colors)"
 fi
 
 # Import private exports that shouldn't be committed
