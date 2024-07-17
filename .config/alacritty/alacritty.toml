@@ -1,4 +1,7 @@
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+# import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/tokyonight_moon.toml"]
+# import = ["~/.config/alacritty/tokyonight_storm.toml"]
+# import = ["~/.config/alacritty/tokyonight_night.toml"]
 
 [shell]
 program = "/usr/bin/zsh"
@@ -8,18 +11,22 @@ program = "/usr/bin/zsh"
 TERM = "xterm-256color"
 
 [window]
-decorations = "Full"
-# decorations = "None"
+decorations = "None"
 dimensions = { columns = 110, lines = 30 }
 dynamic_padding = true
 position = { "x" = 100, "y" = 20 }
-opacity = 0.97
+opacity = 0.95
 
 [font]
-normal.family = "JetBrainsMono NF"
-bold.family = "JetBrainsMono NF"
-italic.family = "JetBrainsMono NF"
-bold_italic.family = "JetBrainsMono NF"
+normal.family = "SpaceMono Nerd Font"
+bold.family = "SpaceMono Nerd Font"
+italic.family = "SpaceMono Nerd Font"
+bold_italic.family = "SpaceMono Nerd Font"
+# normal.family = "JetBrainsMono NF"
+# normal.style = 'medium'
+# bold.family = "JetBrainsMono NF"
+# italic.family = "JetBrainsMono NF"
+# bold_italic.family = "JetBrainsMono NF"
 size = 14
 
 [mouse]
