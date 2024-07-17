@@ -67,10 +67,6 @@
     "branch": "main",
     "commit": "509cccee17eb165bfdd99d2366f6433745c70287"
   },
-  "foldtext.nvim": {
-    "branch": "main",
-    "commit": "f6ca56912cff3c2cb667f4cbf4d39f76d65d9f2c"
-  },
   "friendly-snippets": {
     "branch": "main",
     "commit": "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4"
