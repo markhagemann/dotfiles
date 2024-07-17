@@ -12,7 +12,7 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # up memory, this command will free your memory after about 20-30 seconds.
 #   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
 alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
-alias etmux="nvim ~/.tmux.conf"
+alias etmux="nvim ~/.config/tmux/tmux.conf"
 alias evim="cd ~/.config/nvim && nvim ~/.config/nvim/init.lua"
 alias ezsh="nvim ~/.zshrc"
 alias installpacker="git clone https://github.com/wbthomason/packer.nvim\

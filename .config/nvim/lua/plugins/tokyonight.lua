@@ -104,7 +104,7 @@ return {
         show_warnings = false,
         highlights = {
           defaults = {
-            bold = false,
+            bold = true,
           },
         },
       })
