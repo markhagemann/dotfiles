@@ -5,8 +5,7 @@ return {
 	color_scheme = "tokyonight_moon",
 	enable_tab_bar = false,
 	font = wezterm.font_with_fallback({
-		{ family = "SpaceMono Nerd Font", harfbuzz_features = { "calt=0", "clig=0", "liga=0" } },
-		{ family = "ZedMono Nerd Font", weight = "Medium" },
+		{ family = "SpaceMono Nerd Font", harfbuzz_features = { "calt=0" } },
 		{ family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	}),
 	font_size = 18,
