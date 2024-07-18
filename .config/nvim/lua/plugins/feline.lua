@@ -18,6 +18,7 @@ return {
       purple = "#9f7afc",
       pink = "#f4afd1",
       aqua = "#61afef",
+      blue = "#429ef5",
       darkblue = "#282c34",
       dark_red = "#70260d",
       grey = "#313244",
@@ -75,45 +76,45 @@ return {
             name = "NeovimModeHLColor",
           }
         end,
-        left_sep = " ",
+        left_sep = "",
         right_sep = " ",
       },
       gitBranch = {
         provider = "git_branch",
         hl = {
           fg = "peanut",
-          bg = "darkblue",
+          bg = "bg",
           -- style = "bold",
         },
-        left_sep = " ",
-        right_sep = " ",
+        left_sep = "",
+        right_sep = "",
       },
       gitDiffAdded = {
         provider = "git_diff_added",
         hl = {
           fg = "green",
-          bg = "darkblue",
+          bg = "bg",
         },
-        left_sep = " ",
-        right_sep = " ",
+        left_sep = "",
+        right_sep = "",
       },
       gitDiffRemoved = {
         provider = "git_diff_removed",
         hl = {
           fg = "red",
-          bg = "darkblue",
+          bg = "bg",
         },
-        left_sep = " ",
-        right_sep = " ",
+        left_sep = "",
+        right_sep = "",
       },
       gitDiffChanged = {
         provider = "git_diff_changed",
         hl = {
           fg = "fg",
-          bg = "darkblue",
+          bg = "bg",
         },
-        left_sep = " ",
-        right_sep = " ",
+        left_sep = "",
+        right_sep = "",
       },
       separator = {
         provider = "",
@@ -192,50 +193,50 @@ return {
         hl = function()
           local progress = vim.lsp.status()[1]
           return {
-            fg = progress and "purple" or "dark_purple",
+            fg = progress and "darkblue" or "blue",
             bg = "bg",
             -- style = "bold",
           }
         end,
-        left_sep = "",
-        right_sep = " | ",
+        left_sep = " ",
+        right_sep = "",
       },
-      file_type = {
-        provider = {
-          name = "file_type",
-          opts = {
-            filetype_icon = true,
-            case = "lowercase",
-          },
-        },
+      -- file_type = {
+      --   provider = {
+      --     name = "file_type",
+      --     opts = {
+      --       filetype_icon = true,
+      --       case = "lowercase",
+      --     },
+      --   },
+      --   hl = {
+      --     fg = "fg",
+      --     bg = "bg",
+      --     -- style = "bold",
+      --   },
+      --   left_sep = " ",
+      --   right_sep = "",
+      -- },
+      -- file_encoding = {
+      --   provider = "file_encoding",
+      --   hl = {
+      --     fg = "orange",
+      --     bg = "darkblue",
+      --     style = "italic",
+      --   },
+      --   left_sep = " ",
+      --   right_sep = " ",
+      -- },
+      position = {
+        provider = "position",
         hl = {
-          fg = "fg",
+          fg = "green",
           bg = "bg",
           -- style = "bold",
         },
-        left_sep = "",
-        right_sep = " | ",
-      },
-      file_encoding = {
-        provider = "file_encoding",
-        hl = {
-          fg = "orange",
-          bg = "darkblue",
-          style = "italic",
-        },
         left_sep = " ",
-        right_sep = " ",
+        right_sep = "",
       },
-      -- position = {
-      --   provider = "position",
-      --   hl = {
-      --     fg = "green",
-      --     bg = "darkblue",
-      --     style = "bold",
-      --   },
-      --   left_sep = "",
-      --   right_sep = " ",
-      -- },
       scroll_bar = {
         provider = function()
           local chars = setmetatable({
@@ -296,7 +297,7 @@ return {
             fg = "aqua"
             style = "bold"
           else
-            fg = "green"
+            fg = "purple"
             style = nil
           end
           return {
@@ -305,8 +306,8 @@ return {
             bg = "bg",
           }
         end,
-        left_sep = "",
-        right_sep = " ",
+        left_sep = " ",
+        right_sep = "",
       },
     }
 
@@ -329,9 +330,9 @@ return {
 
     local right = {
       c.lsp,
-      c.file_type,
+      -- c.file_type,
       -- c.file_encoding,
-      -- c.position,
+      c.position,
       c.scroll_bar,
     }
 
