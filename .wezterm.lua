@@ -11,8 +11,9 @@ return {
 	font_size = 18,
 	initial_cols = 130,
 	initial_rows = 33,
+	macos_window_background_blur = 10,
 	max_fps = 240,
-	window_background_opacity = 0.97,
+	window_background_opacity = 0.93,
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = "RESIZE",
 	window_padding = {
