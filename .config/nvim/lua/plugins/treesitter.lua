@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     build = ":TSUpdate",
     opts = {
       auto_install = true,
@@ -26,6 +29,15 @@ return {
         "yaml",
       },
       highlight = { enable = true },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
+      },
       indent = { enable = true },
     },
     config = function(_, opts)
