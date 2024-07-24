@@ -4,5 +4,6 @@ return {
     insert = "#429ef5",
     visual = "#6ff796",
     command = "#B395FD",
+    terminal = "#61afef",
   },
 }

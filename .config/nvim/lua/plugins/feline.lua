@@ -34,6 +34,13 @@ return {
       BLOCK = "dark_red",
       REPLACE = "red",
       COMMAND = colors.vi_mode_colors.command,
+      TERM = colors.vi_mode_colors.terminal,
+      -- V-REPLACE = "pink",
+      -- ENTER = "pink",
+      -- MORE = "pink",
+      -- SELECT = "darkred",
+      -- SHELL = "cyan",
+      -- NONE = "gray",
     }
 
     local modes = setmetatable({
@@ -56,7 +63,7 @@ return {
       ["rm"] = "M",
       ["r?"] = "C",
       ["!"] = "SH",
-      ["t"] = "T",
+      ["t"] = "TERMINAL",
     }, {
       __index = function()
         return "-"
