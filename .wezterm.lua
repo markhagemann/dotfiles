@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
+	cell_width = 0.9,
 	-- color_scheme = "Catppuccin Mocha",
 	color_scheme = "tokyonight_moon",
 	enable_tab_bar = false,
@@ -9,7 +10,10 @@ return {
 		{ family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	}),
 	dpi = 96,
-	font_size = 14,
+	font_size = 14.5,
+	freetype_load_flags = "NO_HINTING",
+	freetype_render_target = "HorizontalLcd",
+	front_end = "OpenGL",
 	initial_cols = 150,
 	initial_rows = 40,
 	macos_window_background_blur = 6,
