@@ -1,10 +1,12 @@
 local wezterm = require("wezterm")
 
 return {
+	audible_bell = "Disabled",
 	cell_width = 0.9,
 	-- color_scheme = "Catppuccin Mocha",
 	color_scheme = "tokyonight_moon",
 	enable_tab_bar = false,
+	enable_wayland = false,
 	font = wezterm.font_with_fallback({
 		{ family = "SpaceMono Nerd Font", harfbuzz_features = { "calt=0" } },
 		{ family = "JetBrainsMono Nerd Font", weight = "Medium" },
@@ -20,7 +22,7 @@ return {
 	max_fps = 240,
 	window_background_opacity = 0.95,
 	window_close_confirmation = "NeverPrompt",
-	window_decorations = "RESIZE",
+	window_decorations = "NONE",
 	window_padding = {
 		left = 5,
 		right = 5,
