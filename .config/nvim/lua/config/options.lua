@@ -77,5 +77,7 @@ opt.fillchars = {
 opt.cursorline = true
 opt.mousemoveevent = true
 
+opt.laststatus = 3
+
 vim.g.blamer_enabled = true
 vim.g.nuuid_no_mappings = 1
