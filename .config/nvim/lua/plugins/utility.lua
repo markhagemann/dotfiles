@@ -237,6 +237,7 @@ return {
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
     },
   },
+  -- Waiting on RNU support
   -- {
   --   "JuanBaut/statuscolumn.nvim",
   --   event = { "BufReadPre", "BufNewFile" },
@@ -295,6 +296,14 @@ return {
     event = "BufEnter",
   },
   {
+    "m4xshen/hardtime.nvim",
+    event = "BufEnter",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {
+      max_count = 5,
+    },
+  },
+  {
     "NvChad/nvim-colorizer.lua",
     event = "BufEnter",
     config = function()
@@ -311,16 +320,13 @@ return {
       { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
     },
   },
-  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
-    "tomiis4/Hypersonic.nvim",
-    event = "CmdlineEnter",
-    cmd = "Hypersonic",
-    config = function()
-      require("hypersonic").setup({
-        -- config
-      })
-    end,
+    "otavioschwanck/arrow.nvim",
+    event = "VeryLazy",
+    opts = {
+      show_icons = true,
+      leader_key = "<leader>;", -- Recommended to be a single key
+    },
   },
   {
     "RRethy/vim-illuminate",
@@ -358,13 +364,16 @@ return {
       { "[[", desc = "Prev Reference" },
     },
   },
+  { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
-    "otavioschwanck/arrow.nvim",
-    event = "VeryLazy",
-    opts = {
-      show_icons = true,
-      leader_key = "<leader>;", -- Recommended to be a single key
-    },
+    "tomiis4/Hypersonic.nvim",
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    config = function()
+      require("hypersonic").setup({
+        -- config
+      })
+    end,
   },
   -- { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }, opts = {},
   --   event = "VeryLazy",
