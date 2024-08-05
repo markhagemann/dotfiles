@@ -299,8 +299,28 @@ return {
     "m4xshen/hardtime.nvim",
     event = "BufEnter",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {
-      max_count = 5,
+    opts = {},
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    config = function()
+      require("grug-far").setup({})
+    end,
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          require("grug-far").grug_far()
+        end,
+        desc = "[s]earch & [r]eplace across all files (Grug)",
+      },
+      {
+        "<leader>sc",
+        function()
+          require("grug-far").grug_far()
+        end,
+        desc = "[s]earch & Replace across [c]urrent file (Grug)",
+      },
     },
   },
   {
@@ -310,16 +330,16 @@ return {
       require("colorizer").setup({})
     end,
   },
-  {
-    "nvim-pack/nvim-spectre",
-    build = false,
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
-    -- stylua: ignore
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
-    },
-  },
+  -- {
+  --   "nvim-pack/nvim-spectre",
+  --   build = false,
+  --   cmd = "Spectre",
+  --   opts = { open_cmd = "noswapfile vnew" },
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
+  --   },
+  -- },
   {
     "otavioschwanck/arrow.nvim",
     event = "VeryLazy",
