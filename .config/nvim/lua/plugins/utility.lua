@@ -1,11 +1,4 @@
 return {
-  -- {
-  --   "3rd/image.nvim",
-  --   event = { "BufEnter" },
-  --   config = function()
-  --     require("image").setup({})
-  --   end,
-  -- },
   {
     "0x00-ketsu/autosave.nvim",
     config = function()
@@ -16,6 +9,13 @@ return {
         end,
         debounce_delay = 5000,
       })
+    end,
+  },
+  {
+    "adelarsq/image_preview.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("image_preview").setup()
     end,
   },
   {
@@ -157,6 +157,17 @@ return {
           enabled = false,
         },
       },
+      routes = {
+        {
+          view = "notify",
+          filter = {
+            event = "msg_showmode",
+            any = {
+              { find = "recording" },
+            },
+          },
+        },
+      },
       views = {
         mini = {
           win_options = {
@@ -256,7 +267,7 @@ return {
   {
     "kburdett/vim-nuuid",
     keys = {
-      { "<leader>uu", "<Plug>Nuuid", desc = "Create New UUID" },
+      { "<leader>u", "<Plug>Nuuid", desc = "Create New UUID" },
     },
   },
   {
@@ -395,60 +406,18 @@ return {
       })
     end,
   },
-  -- { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" }, opts = {},
-  --   event = "VeryLazy",
-  --   config = function()
-  --     local harpoon = require("harpoon")
-  --
-  --     harpoon:setup()
-  --
-  --     vim.keymap.set("n", "<leader>h", function()
-  --       harpoon:list():append()
-  --     end)
-  --     vim.keymap.set("n", "<C-e>", function()
-  --       harpoon.ui:toggle_quick_menu(harpoon:list())
-  --     end)
-  --     -- Toggle previous & next buffers stored within Harpoon list
-  --     vim.keymap.set("n", "<M-q>", function()
-  --       harpoon:list():prev()
-  --     end)
-  --     vim.keymap.set("n", "<M-e>", function()
-  --       harpoon:list():next()
-  --     end)
-  --   end,
-  -- },
+  -- scrolloff_percentage: controls how close the cursor can be to the top or bottom
+  --                       of the screen before scrolling begins
+  {
+    "tonymajestro/smart-scrolloff.nvim",
+    opts = {
+      scrolloff_percentage = 0.2,
+    },
+  },
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "tris203/precognition.nvim",
-  --   event = "VeryLazy",
-  --   config = {
-  --     -- startVisible = true,
-  --     -- showBlankVirtLine = true,
-  --     -- highlightColor = { link = "Comment" },
-  --     hints = {
-  --       -- Hide the following with prio 0
-  --       w = { text = "w", prio = 0 },
-  --       b = { text = "b", prio = 0 },
-  --       e = { text = "e", prio = 0 },
-  --       -- Caret = { text = "^", prio = 2 },
-  --       -- Dollar = { text = "$", prio = 1 },
-  --       -- MatchingPair = { text = "%", prio = 5 },
-  --       -- Zero = { text = "0", prio = 1 },
-  --       -- W = { text = "W", prio = 7 },
-  --       -- B = { text = "B", prio = 6 },
-  --       -- E = { text = "E", prio = 5 },
-  --     },
-  --     -- gutterHints = {
-  --     --     G = { text = "G", prio = 10 },
-  --     --     gg = { text = "gg", prio = 9 },
-  --     --     PrevParagraph = { text = "{", prio = 8 },
-  --     --     NextParagraph = { text = "}", prio = 8 },
-  --     -- },
-  --   },
-  -- },
   {
     "volskaya/windovigation.nvim",
     lazy = false,
