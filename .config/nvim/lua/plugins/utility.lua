@@ -435,8 +435,8 @@ return {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
     config = function()
-      local opts = { noremap = true, silent = true }
-      vim.keymap.set("n", "<leader>cc", "<cmd>PickColor<cr>", opts)
+      local opts = { noremap = true, silent = true, desc = "[p]ick [c]olour" }
+      vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
       require("color-picker").setup({
         ["icons"] = { "-", "" },
       })
