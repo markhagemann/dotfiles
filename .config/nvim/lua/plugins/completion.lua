@@ -4,11 +4,12 @@ local check_backspace = function()
 end
 
 return {
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   opts = {}, -- your configuration
-  -- },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    event = "LspAttach",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {}, -- your configuration
+  },
   {
     "Jezda1337/nvim-html-css",
     event = "LspAttach",
@@ -161,9 +162,9 @@ return {
         },
         completion = { completeopt = "menu,menuone,noinsert" },
         formatting = {
-          -- before = require("tailwind-tools.cmp").lspkind_format,
           fields = { "abbr", "kind", "menu" },
           format = function(entry, vim_item)
+            -- before = require("tailwind-tools.cmp").lspkind_format,
             if entry.source.name == "html-css" then
               vim_item.menu = entry.completion_item.menu
             else
