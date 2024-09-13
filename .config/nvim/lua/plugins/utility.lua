@@ -327,19 +327,21 @@ return {
     keys = {
       {
         "<leader>sr",
-        function()
-          require("grug-far").grug_far()
-        end,
+        ":GrugFar<cr>",
         desc = "[s]earch & [r]eplace across all files (Grug)",
       },
       {
         "<leader>sc",
-        function()
-          require("grug-far").grug_far()
-        end,
+        "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand(' % ') } })<cr>",
         desc = "[s]earch & Replace across [c]urrent file (Grug)",
       },
     },
+  },
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
   },
   {
     "mbbill/undotree",
