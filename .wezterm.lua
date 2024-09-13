@@ -27,6 +27,6 @@ return {
 		left = 5,
 		right = 5,
 		top = 5,
-		bottom = "0.3cell",
+		bottom = "0.1cell",
 	},
 }
