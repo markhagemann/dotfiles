@@ -233,7 +233,7 @@ precmd_functions+=(_fix_cursor)
 PATH=$(printf %s "$PATH" \
      | awk -vRS=: -vORS= '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0) }' )
 
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/space-custom.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/the-unnamed-custom.omp.json)"
 
 # Better ls
 alias ls="eza --icons=always"

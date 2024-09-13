@@ -271,6 +271,13 @@ return {
     },
   },
   {
+    "kevinhwang91/nvim-bqf",
+    keys = {
+      { "<leader>qn", ":cnext<cr>", desc = "[q]uickfix [n]ext" },
+      { "<leader>qp", ":cprevious<cr>", desc = "[q]uickfix [p]revious" },
+    },
+  },
+  {
     "kdheepak/lazygit.nvim",
     cmd = {
       "LazyGit",
@@ -335,6 +342,12 @@ return {
     },
   },
   {
+    "mbbill/undotree",
+    keys = {
+      { "<leader>ut", ":UndotreeToggle<cr>", desc = "[u]ndo [t]ree" },
+    },
+  },
+  {
     "NvChad/nvim-colorizer.lua",
     event = "BufEnter",
     config = function()
@@ -358,6 +371,22 @@ return {
       show_icons = true,
       leader_key = "<leader>;", -- Recommended to be a single key
     },
+  },
+  {
+    "rmagatti/auto-session", -- auto save session
+    event = "VeryLazy",
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = {
+          "~/",
+          "~/Downloads",
+          "~/Documents",
+        },
+        auto_session_use_git_branch = true,
+        auto_save_enabled = true,
+      })
+    end,
   },
   {
     "RRethy/vim-illuminate",
