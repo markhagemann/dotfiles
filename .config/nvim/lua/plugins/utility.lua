@@ -70,7 +70,19 @@ return {
       },
     },
   },
-  { "code-biscuits/nvim-biscuits", event = { "BufEnter" }, dependencies = { "nvim-treesitter/nvim-treesitter" } },
+  { "code-biscuits/nvim-biscuits", event = "BufEnter", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+  {
+    "danilamihailov/beacon.nvim",
+    event = "BufEnter",
+    opts = {
+      fps = 60, --- integer how smooth the animation going to be
+      speed = 1, --- integer speed at wich animation goes
+      width = 10, --- integer width of the beacon window
+      window_events = { "WinEnter", "FocusGained" }, -- table<string> what events trigger cursor highlight
+      winblend = 5, --- integer starting transparency of beacon window :h winblend
+      highlight = { bg = "#5f87cd", ctermbg = 14 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
+    },
+  },
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -78,8 +90,8 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.animate", version = "*", event = { "BufEnter" } },
-  { "echasnovski/mini.hipatterns", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.animate", version = "*", event = "BufEnter" },
+  { "echasnovski/mini.hipatterns", version = "*", event = "BufEnter" },
   {
     "echasnovski/mini.icons",
     opts = {},
@@ -309,7 +321,7 @@ return {
         char = "│",
         tab_char = "│",
       },
-      scope = { enabled = true, show_start = false, show_end = false },
+      scope = { enabled = false, show_start = false, show_end = false },
     },
     event = "BufEnter",
   },
@@ -425,6 +437,34 @@ return {
       { "]]", desc = "Next Reference" },
       { "[[", desc = "Prev Reference" },
     },
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("hlchunk").setup({
+        chunk = {
+          enable = true,
+          chars = {
+            horizontal_line = "─",
+            vertical_line = "│",
+            left_top = "┌",
+            left_bottom = "└",
+            right_arrow = "─",
+          },
+          style = "#b46eff",
+        },
+        indent = {
+          enable = false,
+        },
+        blank = {
+          enable = false,
+        },
+        line_num = {
+          enable = false,
+        },
+      })
+    end,
   },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
