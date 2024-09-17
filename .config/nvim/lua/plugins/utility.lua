@@ -18,6 +18,7 @@ return {
       require("image_preview").setup()
     end,
   },
+  { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "bloznelis/before.nvim",
     event = { "BufEnter" },
@@ -38,7 +39,13 @@ return {
       vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "[O]pen [E]dits in Telescope" })
     end,
   },
-  { "arthurxavierx/vim-caser", event = "BufEnter" },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    lazy = false,
+    config = function()
+      require("nvim-highlight-colors").setup({})
+    end,
+  },
   {
     "christoomey/vim-tmux-navigator",
     event = { "BufEnter" },
@@ -363,13 +370,6 @@ return {
     },
   },
   { "mg979/vim-visual-multi", event = "BufEnter" },
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "BufEnter",
-    config = function()
-      require("colorizer").setup({})
-    end,
-  },
   -- {
   --   "nvim-pack/nvim-spectre",
   --   build = false,
