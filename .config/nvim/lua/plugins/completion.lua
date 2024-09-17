@@ -74,6 +74,29 @@ return {
       local lspkind = require("lspkind")
       luasnip.config.setup({})
 
+      -- `/` cmdline setup.
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
+        }),
+      })
+
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       -- Function to sort LSP snippets, so that they appear at the end of LSP suggestions
