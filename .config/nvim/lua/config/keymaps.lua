@@ -31,7 +31,11 @@ keymap.set("v", ">", ">gv")
 -- Move text up and down
 keymap.set("v", "<A-j>", ":m .+1<CR>==")
 keymap.set("v", "<A-k>", ":m .-2<CR>==")
-keymap.set("v", "p", '"_dP')
+
+-- Make Y behave like C or D
+keymap.set("n", "Y", "y$")
+-- Paste without overwriting register
+vim.keymap.set("v", "p", '"_dP')
 
 -- Navigate buffers
 keymap.set("n", "<S-l>", ":bnext<CR>")
@@ -53,3 +57,11 @@ keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
+
+-- Replace word under cursor across entire buffer
+keymap.set(
+  "n",
+  "<leader>s",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace word under cursor" }
+)

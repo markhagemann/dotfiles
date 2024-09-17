@@ -7,6 +7,9 @@ opt.updatetime = 250
 opt.timeoutlen = 300
 
 -- Undo settings
+opt.backup = false
+opt.swapfile = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true -- Save undos after file closes
 opt.undolevels = 1000 -- How many undos
 opt.undoreload = 10000 -- number of lines to save for undo
@@ -14,7 +17,7 @@ opt.undoreload = 10000 -- number of lines to save for undo
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
-opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
+opt.scrolloff = 20 -- Minimal number of screen lines to keep above and below the cursor.
 
 -- tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
@@ -30,9 +33,11 @@ opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.wrap = false -- disable line wrapping
 
 -- search settings
+opt.hlsearch = false
+opt.inccommand = "split" -- highlights search pattern as you type it
+opt.incsearch = true
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
-opt.inccommand = "split" -- highlights search pattern as you type it
 
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line

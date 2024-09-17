@@ -355,12 +355,14 @@ return {
       require("better_escape").setup()
     end,
   },
+
   {
     "mbbill/undotree",
     keys = {
       { "<leader>ut", ":UndotreeToggle<cr>", desc = "[u]ndo [t]ree" },
     },
   },
+  { "mg979/vim-visual-multi", event = "BufEnter" },
   {
     "NvChad/nvim-colorizer.lua",
     event = "BufEnter",
@@ -386,6 +388,7 @@ return {
       leader_key = "<leader>;", -- Recommended to be a single key
     },
   },
+  { "preservim/vim-pencil", event = "VeryLazy" },
   {
     "rmagatti/auto-session", -- auto save session
     event = "VeryLazy",
