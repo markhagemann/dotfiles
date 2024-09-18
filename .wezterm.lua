@@ -13,7 +13,7 @@ return {
 		{ family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	}),
 	dpi = 96,
-	font_size = 27.5,
+	font_size = 28,
 	freetype_load_flags = "NO_HINTING",
 	freetype_render_target = "HorizontalLcd",
 	front_end = "OpenGL",
