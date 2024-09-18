@@ -183,27 +183,23 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+        -- similar to VSCode completion order
         completion = { completeopt = "menu,menuone,noinsert" },
         formatting = {
-          fields = { "abbr", "kind", "menu" },
-          format = function(entry, vim_item)
-            -- before = require("tailwind-tools.cmp").lspkind_format,
-            if entry.source.name == "html-css" then
-              vim_item.menu = entry.completion_item.menu
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, item)
+            item = require("nvim-highlight-colors").format(entry, item)
+            -- the item.abbr returns the user's virtual object eg. the square when it's Color entry
+            if item.abbr == "" then
+              -- I have kind_icons table looks like kind_icons = { Text = "Tt (this is icon)", ...more icons }
+              item.kind = string.format("%s", symbol_map[item.menu])
             else
-              vim_item.menu = ({
-                buffer = "[Buffer]",
-                nvim_lsp = "[LSP]",
-                nvim_lua = "[Lua]",
-                latex_symbols = "[LaTeX]",
-                luasnip = "[LuaSnip]",
-              })[entry.source.name]
+              item.kind = item.abbr
             end
-
-            -- Kind icons
-            vim_item.kind = string.format("%s %s", symbol_map[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-            -- -- Source
-            return vim_item
+            item.abbr = item.word
+            item.kind_hl_group = item.abbr_hl_group or nil
+            item.abbr_hl_group = nil
+            return item
           end,
         },
         -- For an understanding of why these mappings were

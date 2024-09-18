@@ -176,7 +176,6 @@ return {
         { "stylua" },
         { "tailwindcss-language-server" },
         { "typescript-language-server" },
-        -- { "vetur-vls" },
         { "volar" },
       },
 
