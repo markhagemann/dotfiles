@@ -20,6 +20,16 @@ return {
   },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
+    "barrett-ruth/import-cost.nvim",
+    event = "BufEnter",
+    build = "sh install.sh yarn",
+    -- if on windows
+    -- build = 'pwsh install.ps1 yarn',
+    config = function()
+      require("import-cost").setup({})
+    end,
+  },
+  {
     "bloznelis/before.nvim",
     event = { "BufEnter" },
     config = function()
