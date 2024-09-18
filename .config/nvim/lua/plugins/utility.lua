@@ -94,9 +94,9 @@ return {
     opts = {
       fps = 60, --- integer how smooth the animation going to be
       speed = 1, --- integer speed at wich animation goes
-      width = 10, --- integer width of the beacon window
+      width = 12, --- integer width of the beacon window
       window_events = { "WinEnter", "FocusGained" }, -- table<string> what events trigger cursor highlight
-      winblend = 5, --- integer starting transparency of beacon window :h winblend
+      winblend = 30, --- integer starting transparency of beacon window :h winblend
       highlight = { bg = "#5f87cd", ctermbg = 14 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
     },
   },
