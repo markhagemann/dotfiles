@@ -107,6 +107,7 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
+  { "echasnovski/mini.ai", version = "*", event = "BufEnter" },
   { "echasnovski/mini.animate", version = "*", event = "BufEnter" },
   { "echasnovski/mini.hipatterns", version = "*", event = "BufEnter" },
   {
