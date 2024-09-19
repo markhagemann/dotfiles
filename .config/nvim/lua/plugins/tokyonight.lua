@@ -75,6 +75,7 @@ return {
       vim.keymap.set("n", "<leader>tt", function()
         vim.cmd("TransparentToggle")
         vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
+        vim.api.nvim_set_hl(0, "Normal", { bg = "red", fg = "#fff000" })
         -- vim.cmd("Lazy reload tokyonight.nvim")
         require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
       end, { desc = "[t]ransparency [t]oggle" })
