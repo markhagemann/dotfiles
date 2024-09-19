@@ -1,15 +1,10 @@
 return {
   {
-    dependencies = {
-      {
-        "xiyaowong/transparent.nvim",
-        keys = { { "<leader>TT", "<cmd>TransparentToggle<cr>", desc = "[T]ransparency [T]oggle" } },
-      },
-    },
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {
+
       style = "moon", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
       styles = {
         -- Style to be applied to different syntax groups
@@ -19,8 +14,8 @@ return {
         -- functions = {},
         -- variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for sidebars, see below
+        sidebars = "dark",
+        floats = "transparent",
       },
       transparent = vim.g.transparent_enabled,
       on_highlights = function(hl, c)
@@ -74,9 +69,27 @@ return {
       end,
     },
     config = function(_, opts)
-      require("tokyonight").setup(opts)
-      vim.cmd("colorscheme tokyonight")
+      require("tokyonight").setup({ opts })
+      vim.cmd([[colorscheme tokyonight-moon]])
+
+      vim.keymap.set("n", "<leader>tt", function()
+        vim.cmd("TransparentToggle")
+        vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
+        -- vim.cmd("Lazy reload tokyonight.nvim")
+        require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
+      end, { desc = "[t]ransparency [t]oggle" })
     end,
+  },
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false,
+    -- keys = {
+    --   {
+    --     "<leader>tt",
+    --     "<cmd>TransparentToggle<cr>",
+    --     desc = "[t]ransparency [t]oggle",
+    --   },
+    -- },
   },
   {
     "mawkler/modicator.nvim",
