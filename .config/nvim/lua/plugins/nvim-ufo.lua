@@ -49,6 +49,7 @@ return {
               "dashboard",
               "nvcheatsheet",
               "dapui_watches",
+              "dbui",
               "dap-repl",
               "dapui_console",
               "dapui_stacks",
