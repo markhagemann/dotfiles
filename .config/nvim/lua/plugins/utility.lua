@@ -379,7 +379,6 @@ return {
       { "<leader>ut", ":UndotreeToggle<cr>", desc = "[u]ndo [t]ree" },
     },
   },
-  { "mg979/vim-visual-multi", event = "BufEnter" },
   -- {
   --   "nvim-pack/nvim-spectre",
   --   build = false,
@@ -390,6 +389,17 @@ return {
   --     { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
   --   },
   -- },
+  {
+    "nmac427/guess-indent.nvim",
+    event = "BufEnter",
+    config = function()
+      require("guess-indent").setup({
+        auto_cmd = false, -- Set to false to disable automatic execution
+      })
+      vim.cmd([[ autocmd BufReadPost * :silent GuessIndent ]])
+      vim.keymap.set("n", "<Tab>g", vim.cmd.GuessIndent, { desc = "GuessIndent (manual)" })
+    end,
+  },
   {
     "otavioschwanck/arrow.nvim",
     event = "VeryLazy",
@@ -498,6 +508,7 @@ return {
       scrolloff_percentage = 0.2,
     },
   },
+  -- Sets yaml indentation wrong - guess indent fixes
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },

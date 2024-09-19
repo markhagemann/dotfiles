@@ -4,7 +4,6 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-
       style = "moon", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
       styles = {
         -- Style to be applied to different syntax groups
@@ -72,6 +71,7 @@ return {
       require("tokyonight").setup({ opts })
       vim.cmd([[colorscheme tokyonight-moon]])
 
+      -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent
       vim.keymap.set("n", "<leader>tt", function()
         vim.cmd("TransparentToggle")
         vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
