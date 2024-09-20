@@ -25,9 +25,9 @@ return {
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = "NONE",
 	window_padding = {
-		left = 5,
+		left = 10,
 		right = 5,
-		top = 5,
+		top = 10,
 		-- bottom = "0.2cell",
 		bottom = 1,
 	},

@@ -92,12 +92,12 @@ return {
     "danilamihailov/beacon.nvim",
     event = "BufEnter",
     opts = {
-      fps = 60, --- integer how smooth the animation going to be
-      speed = 1, --- integer speed at wich animation goes
-      width = 12, --- integer width of the beacon window
+      fps = 30, --- integer how smooth the animation going to be
+      speed = 1, --- integer speed at which animation goes
+      width = 5, --- integer width of the beacon window
       window_events = { "WinEnter", "FocusGained" }, -- table<string> what events trigger cursor highlight
-      winblend = 30, --- integer starting transparency of beacon window :h winblend
-      highlight = { bg = "#5f87cd", ctermbg = 14 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
+      winblend = 0, --- integer starting transparency of beacon window :h winblend
+      highlight = { bg = "#5f87cd", ctermbg = 21 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
     },
   },
   {

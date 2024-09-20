@@ -65,3 +65,7 @@ keymap.set(
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Replace word under cursor" }
 )
+
+-- Save and load session
+vim.keymap.set("n", "<leader>SS", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>SL", ":source .session.vim<CR>", { noremap = true, silent = false })
