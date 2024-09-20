@@ -2,6 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     branch = "main",
+    cache = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -17,7 +18,7 @@ return {
           -- functions = {},
           -- variables = {},
           -- Background styles. Can be "dark", "transparent" or "normal"
-          sidebars = is_transparent and "transparent" or "dark",
+          sidebars = "dark",
           floats = is_transparent and "transparent" or "dark",
         },
         transparent = is_transparent,
@@ -81,10 +82,8 @@ return {
       local toggle_transparency = function()
         vim.cmd("TransparentToggle")
         vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
-        -- vim.cmd([[colorscheme tokyonight]])
-        -- vim.cmd("Lazy reload tokyonight.nvim")
-        -- require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
-        -- vim.api.nvim_set_hl(0, "Normal", { bg = "blue", ctermbg = "none", fg = "#fff000" })
+        require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
+        require("lazy.core.loader").reload(require("lazy.core.config").plugins["feline.nvim"])
       end
 
       -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent

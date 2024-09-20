@@ -7,7 +7,8 @@ return {
 
     local theme = {
       fg = "#c7cde7",
-      bg = "none",
+      -- bg = vim.g.transparent_enabled and "none" or "#1D1F2F",
+      bg = vim.g.transparent_enabled and "none" or "#212335",
       black = "#1e2327",
       green = "#98c379",
       yellow = "#e5c07b",
@@ -83,7 +84,7 @@ return {
             name = "NeovimModeHLColor",
           }
         end,
-        left_sep = "",
+        left_sep = " ",
         right_sep = " ",
       },
       gitBranch = {
@@ -289,7 +290,7 @@ return {
           elseif position >= 95 then
             icon = " BOT"
           end
-          return icon
+          return icon .. " "
         end,
         hl = function()
           local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
