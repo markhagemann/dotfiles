@@ -225,7 +225,10 @@ precmd_functions+=(_fix_cursor)
 PATH=$(printf %s "$PATH" \
      | awk -vRS=: -vORS= '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0) }' )
 
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.json)"
+# Redundant oh-my-posh config
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.json)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
 
 # Better ls
 alias ls="eza --icons=always"
@@ -233,7 +236,6 @@ alias ls="eza --icons=always"
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
-
 
 if [ "$(uname)" = "Darwin" ];
 then
