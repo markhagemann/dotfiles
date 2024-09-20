@@ -1,9 +1,12 @@
 return {
   {
     "folke/tokyonight.nvim",
+    branch = "main",
     lazy = false,
     priority = 1000,
-    config = function(_, opts)
+    config = function()
+      local is_transparent = vim.g.transparent_enabled
+
       require("tokyonight").setup({
         style = "moon", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
         styles = {
@@ -14,28 +17,27 @@ return {
           -- functions = {},
           -- variables = {},
           -- Background styles. Can be "dark", "transparent" or "normal"
-          -- sidebars = "dark",
-          sidebars = "transparent",
-          floats = "transparent",
+          sidebars = is_transparent and "transparent" or "dark",
+          floats = is_transparent and "transparent" or "dark",
         },
-        transparent = vim.g.transparent_enabled,
+        transparent = is_transparent,
         on_highlights = function(hl, c)
           local prompt = "#2d3149"
-          hl.CursorLine = {
-            bg = "none",
-          }
-          hl.FoldColumn = {
-            bg = "none",
-            fg = prompt,
-          }
-          hl.SignColumn = {
-            bg = "none",
-            fg = prompt,
-          }
-          hl.NvimTreeWinSeparator = {
-            bg = "none",
-            fg = prompt,
-          }
+          -- hl.CursorLine = {
+          --   bg = "none",
+          -- }
+          -- hl.FoldColumn = {
+          --   bg = "none",
+          --   fg = prompt,
+          -- }
+          -- hl.SignColumn = {
+          --   bg = "none",
+          --   fg = prompt,
+          -- }
+          -- hl.NvimTreeWinSeparator = {
+          --   bg = "none",
+          --   fg = prompt,
+          -- }
           hl.TelescopeNormal = {
             bg = c.bg_dark,
             fg = c.fg_dark,
@@ -63,34 +65,31 @@ return {
             bg = c.bg_dark,
             fg = c.bg_dark,
           }
-          hl.WhichKeyBorder = {
-            bg = "none",
-            fg = prompt,
-          }
+          -- hl.WhichKeyBorder = {
+          --   bg = "none",
+          --   fg = prompt,
+          -- }
         end,
       })
-      vim.cmd([[colorscheme tokyonight-moon]])
-
-      -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent
-      vim.keymap.set("n", "<leader>tt", function()
-        vim.cmd("TransparentToggle")
-        vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
-        vim.api.nvim_set_hl(0, "Normal", { bg = "red", fg = "#fff000" })
-        -- vim.cmd("Lazy reload tokyonight.nvim")
-        require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
-      end, { desc = "[t]ransparency [t]oggle" })
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
-    -- keys = {
-    --   {
-    --     "<leader>tt",
-    --     "<cmd>TransparentToggle<cr>",
-    --     desc = "[t]ransparency [t]oggle",
-    --   },
-    -- },
+    config = function()
+      local toggle_transparency = function()
+        vim.cmd("TransparentToggle")
+        vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
+        -- vim.cmd([[colorscheme tokyonight]])
+        -- vim.cmd("Lazy reload tokyonight.nvim")
+        -- require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
+        -- vim.api.nvim_set_hl(0, "Normal", { bg = "blue", ctermbg = "none", fg = "#fff000" })
+      end
+
+      -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent
+      vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "[t]ransparency [t]oggle" })
+    end,
   },
   {
     "mawkler/modicator.nvim",

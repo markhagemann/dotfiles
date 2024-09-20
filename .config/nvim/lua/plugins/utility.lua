@@ -31,7 +31,7 @@ return {
   },
   {
     "bloznelis/before.nvim",
-    event = { "BufEnter" },
+    event = "BufEnter",
     config = function()
       local before = require("before")
       before.setup()
@@ -58,7 +58,7 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
-    event = { "BufEnter" },
+    event = "BufEnter",
     keys = {
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
       { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
@@ -92,7 +92,7 @@ return {
     "danilamihailov/beacon.nvim",
     event = "BufEnter",
     opts = {
-      fps = 30, --- integer how smooth the animation going to be
+      fps = 60, --- integer how smooth the animation going to be
       speed = 1, --- integer speed at which animation goes
       width = 5, --- integer width of the beacon window
       window_events = { "WinEnter", "FocusGained" }, -- table<string> what events trigger cursor highlight
@@ -136,10 +136,10 @@ return {
       })
     end,
   },
-  { "echasnovski/mini.indentscope", version = "*", event = { "BufEnter" } },
+  { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
   {
     "echasnovski/mini.surround",
-    event = { "BufEnter" },
+    event = "BufEnter",
     opts = {
       mappings = {
         add = "gsa", -- Add surrounding in Normal and Visual modes
@@ -493,6 +493,13 @@ return {
     end,
   },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
+  {
+    "stevearc/quicker.nvim",
+    event = "FileType qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
   {
     "tomiis4/Hypersonic.nvim",
     event = "CmdlineEnter",

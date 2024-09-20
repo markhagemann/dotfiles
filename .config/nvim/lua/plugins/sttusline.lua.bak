@@ -3,7 +3,7 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  event = { "BufEnter" },
+  event = "BufEnter",
   config = function(_, opts)
     local colors = require("utils.colors")
     local diagnostics = require("sttusline.components.diagnostics")
