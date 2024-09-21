@@ -16,14 +16,17 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice atinit"
-        ZSH_TMUX_FIXTERM=true;
-        ZSH_TMUX_AUTOSTART=true;
-        ZSH_TMUX_AUTOCONNECT=true;"
-
 # Add in zsh plugins
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
-zinit light laggardkernel/zsh-tmux
+zinit for \
+    as'null' \
+    configure'--disable-utf8proc --prefix=$PWD --quiet' \
+    make'PREFIX=$PWD --quiet install'\
+    sbin \
+  @tmux/tmux
+
+if [ "$TMUX" = "" ]; then tmux; fi
+
 zinit pack for fzf
 zinit pack for pyenv
 zinit light Aloxaf/fzf-tab
@@ -61,7 +64,6 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
-zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
 
 # Load completions
 autoload -Uz compinit && compinit
