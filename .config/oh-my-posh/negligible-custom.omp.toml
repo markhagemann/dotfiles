@@ -1,0 +1,61 @@
+version = 2
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    type = 'os'
+    style = 'powerline'
+    template = ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+    foreground = '#3c4183'
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    template = '{{ .Path }} '
+    foreground = '#4691ff'
+
+    [blocks.segments.properties]
+      style = 'agnoster_full'
+
+  [[blocks.segments]]
+    type = 'node'
+    style = 'powerline'
+    template = '::  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} '
+    foreground = '#6CA35E'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    template = ':: {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }} {{ if gt .StashCount 0 }}{{ .StashCount }}  {{ end }} '
+    foreground = '#885ffc'
+
+    [blocks.segments.properties]
+      branch_icon = ' '
+      fetch_status = true
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    type = 'time'
+    style = 'plain'
+    template = '{{ .CurrentDate | date .Format }} '
+    foreground = '#8782a5'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'status'
+    style = 'powerline'
+    foreground_templates = ['{{ if gt .Code 0 }}red{{ end }}']
+    template = ' # '
+    foreground = '#9887c3'
+
+    [blocks.segments.properties]
+      always_enabled = true
