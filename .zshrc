@@ -17,36 +17,39 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+zinit light laggardkernel/zsh-tmux
+zinit ice atinit"
+        ZSH_TMUX_FIXTERM=true;
+        ZSH_TMUX_AUTOSTART=false;
+        ZSH_TMUX_AUTOCONNECT=true;"
+zinit pack for fzf
+zinit pack for pyenv
 zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
-# sharkdp/bat
-zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zinit light sharkdp/bat
+
+zinit wait lucid light-mode for lukechilds/zsh-nvm
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 # ogham/exa, replacement for ls
 zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
 zinit light ogham/exa
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
 zinit wait"1" lucid from"gh-r" as"null" for \
      sbin"**/bat"       @sharkdp/bat \
      sbin"exa* -> exa"  ogham/exa
-zinit for \
-    configure'--disable-utf8proc' \
-    make \
-  @tmux/tmux
+zinit ice pick'init.zsh'
 zi for \
     from'gh-r' \
     sbin'**/rg -> rg' \
   BurntSushi/ripgrep
-zinit pack for fzf
-zinit pack for pyenv
-zinit ice wait"2" as"command" from"gh-r" lucid \
-  mv"zoxide*/zoxide -> zoxide" \
-  atclone"./zoxide init zsh > init.zsh" \
-  atpull"%atclone" src"init.zsh" nocompile'!'
-zinit light ajeetdsouza/zoxide
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -56,6 +59,7 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -88,25 +92,15 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
-
-# Shell integrations
-eval "$(zoxide init --cmd cd zsh)"
-# Use oh-my-posh
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
-
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# TMUX
-# Automatically start tmux
-ZSH_TMUX_AUTOSTART=true
-TMUX_DIR="~/.config/tmux"
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
 
-# Automatically connect to a previous session if it exists
-ZSH_TMUX_AUTOCONNECT=true
+export NVM_COMPLETION=true
+export NVM_SYMLINK_CURRENT="true"
+
+TMUX_DIR="~/.config/tmux"
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -139,6 +133,11 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
+
+# Shell integrations
+eval "$(zoxide init zsh)"
+# Use oh-my-posh
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
 
 # Better ls
 alias ls="eza --icons=always"
