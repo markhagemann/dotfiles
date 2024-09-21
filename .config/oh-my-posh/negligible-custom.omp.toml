@@ -5,6 +5,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
+  newline = true
 
   [[blocks.segments]]
     type = 'os'
@@ -63,7 +64,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     type = 'executiontime'
     style = 'plain'
     foreground = '#a9b1d6'
-    template = '<#787c99>::</> {{ .FormattedMs }}'
+    template = '<#787c99>::</> {{ .FormattedMs }} '
 
     [blocks.segments.properties]
       threshold = 1000
@@ -81,7 +82,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       "{{if gt .Code 0}}#f7768e{{end}}",
       "{{if eq .Code 0}}#bb9af7{{end}}",
     ]
-  template = ' ➜ '
+  template = ' ➜'
 
 [transient_prompt]
   foreground_templates = [
@@ -103,7 +104,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [secondary_prompt]
   foreground = '#bb9af7'
-  template = ' ➜➜  '
+  template = ' ➜➜ '
 
 # [[blocks]]
 #   type = 'prompt'

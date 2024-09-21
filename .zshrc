@@ -62,13 +62,13 @@ source $PRIVEXPORTFILE
 # Fix to ignore warning about 'Insecure completion-dependent directories detected'
 ZSH_DISABLE_COMPFIX=true
 
-# If you come from bash you might have to change your $PATH.
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH=$PATH:$HOME/bin
 export PATH=~/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$HOME/.cargo/bin"
 export HOMEGOPATH=$HOME/go
 export PATH="$PATH:$HOMEGOPATH/bin"
 export PYENV_ROOT="$HOME/.pyenv"
