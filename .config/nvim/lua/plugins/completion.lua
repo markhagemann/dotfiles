@@ -77,7 +77,7 @@ return {
       -- `/` cmdline setup.
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline({
-          ["<cr>"] = {
+          ["<c-space>"] = {
             c = cmp.mapping.confirm({ select = false }),
           },
         }),
@@ -89,7 +89,7 @@ return {
       -- `:` cmdline setup.
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline({
-          ["<cr>"] = {
+          ["<c-space>"] = {
             c = cmp.mapping.confirm({ select = false }),
           },
         }),
