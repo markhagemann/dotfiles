@@ -63,7 +63,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
-    foreground = '#a9b1d6'
+    foreground = '#414868'
     template = '<#787c99>::</> {{ .FormattedMs }} '
 
     [blocks.segments.properties]
