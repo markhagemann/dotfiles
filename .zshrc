@@ -1,85 +1,104 @@
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+zinit light jeffreytse/zsh-vi-mode
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+# ogham/exa, replacement for ls
+zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit light ogham/exa
+# All of the above using the for-syntax and also z-a-bin-gem-node annex
+zinit wait"1" lucid from"gh-r" as"null" for \
+     sbin"**/bat"       @sharkdp/bat \
+     sbin"exa* -> exa"  ogham/exa
+zinit for \
+    configure'--disable-utf8proc' \
+    make \
+  @tmux/tmux
+zi for \
+    from'gh-r' \
+    sbin'**/rg -> rg' \
+  BurntSushi/ripgrep
+zinit pack for fzf
+zinit pack for pyenv
+zinit ice wait"2" as"command" from"gh-r" lucid \
+  mv"zoxide*/zoxide -> zoxide" \
+  atclone"./zoxide init zsh > init.zsh" \
+  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# Keybindings
+zinit ice depth=1
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
+
+# Aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
+
+# Shell integrations
+eval "$(zoxide init --cmd cd zsh)"
+# Use oh-my-posh
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
+
 export XDG_CONFIG_HOME="$HOME/.config"
-
-# mac specific settings.
-if [ "$(uname)" = "Darwin" ]; then
-  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
-
-  # 15 is lowest setting on UI
-  # 8 was too fast causing duplicate keystrokes
-  # 10 i think this causes issues in bash cli when editing commands, not sure
-  defaults write -g InitialKeyRepeat -int 12
-
-  # 2 is lowest setting on UI
-  defaults write -g KeyRepeat -int 2
-
-  # allow holding key instead of mac default holding key to choose alternate key
-  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-fi
-
-# WSL 2 specific settings.
-if grep -q "microsoft" /proc/version &>/dev/null; then
-
-  case "$(uname -s)" in
-
-    Linux)
-
-    # Used for linux when `host.docker.internal` doesn't work in docker-compose
-    export DOCKER_GATEWAY_HOST=$(hostname -i |awk '{print $1}')
-    ;;
-
-  esac
-
-  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-  export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-  # export DISPLAY=$IP:0.0
-  export ADDITIONAL_DOCKER_PARAMS="--env WAYLAND_DISPLAY --env XDG_RUNTIME_DIR --env PULSE_SERVER -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg"
-  export LIBGL_ALWAYS_INDIRECT=0
-  export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
-
-  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-  # sudo /etc/init.d/dbus start &> /dev/null
-
-  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
-  DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
-  DOCKER_DIR=/mnt/wsl/shared-docker
-  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
-  export DOCKER_HOST="unix://$DOCKER_SOCK"
-  if [ ! -S "$DOCKER_SOCK" ]; then
-      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-      chgrp docker "$DOCKER_DIR"
-      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
-  fi
-
-fi
-
-export GDK_SCALE=0.5
-export GDK_DPI_SCALE=1.25
-
-# Import private exports that shouldn't be committed
-PRIVEXPORTFILE=~/.zshrcpriv
-source $PRIVEXPORTFILE
-
-# Fix to ignore warning about 'Insecure completion-dependent directories detected'
-ZSH_DISABLE_COMPFIX=true
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$HOME/neovim/bin:$PATH"
-export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
-export PATH=$PATH:$HOME/bin
-export PATH=~/.local/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$PATH:$HOME/.cargo/bin"
-export HOMEGOPATH=$HOME/go
-export PATH="$PATH:$HOMEGOPATH/bin"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-fi
-
-# Path to oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
 
 # TMUX
 # Automatically start tmux
@@ -95,66 +114,31 @@ ENABLE_CORRECTION="true"
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# zstyle :omz:plugins:ssh-agent agent-forwarding on
-plugins=(git node tmux z fzf asdf pyenv zsh-nvm zsh-autosuggestions fast-syntax-highlighting zsh-vi-mode)
-
-# Add fzf settings
-export FZF_BASE="~/fzf.plugin.zsh"
-export FZF_DEFAULT_COMMAND='rg --files'
-
-
-# Fix slowness of pastes with zsh-syntax-highlighting.zsh
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-}
-
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
-# Fix slowness of pastes
-source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# Import private exports that shouldn't be committed
+PRIVEXPORTFILE=~/.zshrcpriv
+source $PRIVEXPORTFILE
 
 function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
 
-source $ZSH/oh-my-zsh.sh
-
-setopt CSH_NULL_GLOB
-unsetopt correct_all
-
-# Spell checks
-setopt correct
-export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
-
-_fix_cursor() {
-   echo -ne '\e[5 q'
-}
-
-precmd_functions+=(_fix_cursor)
-
-# Remove duplicates in path
-PATH=$(printf %s "$PATH" \
-     | awk -vRS=: -vORS= '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0) }' )
-
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
-
-# Redundant starship config
-# export STARSHIP_CONFIG=~/.config/starship/starship.toml
-# eval "$(starship init zsh)"
+# Add path
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/neovim/bin:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+export PATH=$PATH:$HOME/bin
+export PATH=~/.local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$HOME/.cargo/bin"
+export HOMEGOPATH=$HOME/go
+export PATH="$PATH:$HOMEGOPATH/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
 
 # Better ls
 alias ls="eza --icons=always"
@@ -244,3 +228,55 @@ zvm_after_lazy_keybindings() {
     zvm_bindkey visual 'x' my_zvm_vi_delete
     zvm_bindkey visual 'y' my_zvm_vi_yank
 }
+
+# mac specific settings.
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
+
+  # 15 is lowest setting on UI
+  # 8 was too fast causing duplicate keystrokes
+  # 10 i think this causes issues in bash cli when editing commands, not sure
+  defaults write -g InitialKeyRepeat -int 12
+
+  # 2 is lowest setting on UI
+  defaults write -g KeyRepeat -int 2
+
+  # allow holding key instead of mac default holding key to choose alternate key
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+fi
+
+# WSL 2 specific settings.
+if grep -q "microsoft" /proc/version &>/dev/null; then
+
+  case "$(uname -s)" in
+
+    Linux)
+
+    # Used for linux when `host.docker.internal` doesn't work in docker-compose
+    export DOCKER_GATEWAY_HOST=$(hostname -i |awk '{print $1}')
+    ;;
+
+  esac
+
+  # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+  export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+  # export DISPLAY=$IP:0.0
+  export ADDITIONAL_DOCKER_PARAMS="--env WAYLAND_DISPLAY --env XDG_RUNTIME_DIR --env PULSE_SERVER -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg"
+  export LIBGL_ALWAYS_INDIRECT=0
+  export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
+
+  # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+  # sudo /etc/init.d/dbus start &> /dev/null
+
+  # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+  DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
+  DOCKER_DIR=/mnt/wsl/shared-docker
+  DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+  export DOCKER_HOST="unix://$DOCKER_SOCK"
+  if [ ! -S "$DOCKER_SOCK" ]; then
+      mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+      chgrp docker "$DOCKER_DIR"
+      /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+  fi
+
+fi
