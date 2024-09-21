@@ -12,16 +12,18 @@ if [ ! -d "$ZINIT_HOME" ]; then
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
+
+zinit ice atinit"
+        ZSH_TMUX_FIXTERM=true;
+        ZSH_TMUX_AUTOSTART=true;
+        ZSH_TMUX_AUTOCONNECT=true;"
 
 # Add in zsh plugins
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
 zinit light laggardkernel/zsh-tmux
-zinit ice atinit"
-        ZSH_TMUX_FIXTERM=true;
-        ZSH_TMUX_AUTOSTART=false;
-        ZSH_TMUX_AUTOCONNECT=true;"
 zinit pack for fzf
 zinit pack for pyenv
 zinit light Aloxaf/fzf-tab
