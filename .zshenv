@@ -1,6 +1,5 @@
 # Aliases
-alias c='clear'
-alias cat=bat
+# alias cat=bat
 alias cl='clear'
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
