@@ -1,4 +1,7 @@
 # Aliases
+alias c='clear'
+alias cat=bat
+alias cl='clear'
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
 alias delete-merged-local-branches='git checkout develop && git pull && git branch --merged | grep -Ev "(^\*|production|staging|edge|develop)" | xargs git branch -d'
@@ -18,18 +21,65 @@ alias ezsh="nvim ~/.zshrc"
 alias installpacker="git clone https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim"
 alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+alias la=tree
 alias lzd="lazydocker"
 alias lzg="lazygit"
 alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
 alias listlogfilesize="du -h /home/drache/.cache/nvim | sort -rh | head -5"
-alias kc="kubectl"
+alias ls='ls --color'
 alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias oni="oni2.exe"
 alias removepacker="rm -rf ~/.local/share/nvim/site/pack/packer"
 alias removenvimlog="rm /home/drache/.cache/nvim/log"
 alias synctime="sudo hwclock -s"
 alias vim="nvim"
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
+
+# Git
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gp="git push origin HEAD"
+alias gpu="git pull origin"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
+alias gco="git checkout"
+alias gb='git branch'
+alias gba='git branch -a'
+alias gadd='git add'
+alias ga='git add -p'
+alias gcoall='git checkout -- .'
+alias gr='git remote'
+alias gre='git reset'
+
+# Docker
+alias dco="docker compose"
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias dl="docker ps -l -q"
+alias dx="docker exec -it"
+
+# Dirs
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# K8S
+alias k="kubectl"
+alias ka="kubectl apply -f"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kdel="kubectl delete"
+alias kl="kubectl logs"
+alias kgpo="kubectl get pod"
+alias kgd="kubectl get deployments"
+alias kx="kubectx"
+alias kns="kubens"
+alias kl="kubectl logs -f"
+alias ke="kubectl exec -it"
+alias kcns='kubectl config set-context --current --namespace'
+alias podname=''
 
 # Corepack aliases
 alias yarn="corepack yarn"
