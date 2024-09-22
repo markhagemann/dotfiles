@@ -34,6 +34,12 @@ alias vim="nvim"
 # . "$HOME/.cargo/env"
 
 # Git
+alias dst="dot status"
+alias ddiff="dot diff"
+alias dc="dot add -p"
+alias dc="dot commit -m"
+alias dca="dot commit -a -m"
+alias dp="dot push origin HEAD"
 alias gc="git commit -m"
 alias gca="git commit -a -m"
 alias gp="git push origin HEAD"
@@ -42,13 +48,11 @@ alias gst="git status"
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 alias gdiff="git diff"
 alias gco="git checkout"
+alias gcf="git checkout -b"
 alias gb='git branch'
 alias gba='git branch -a'
 alias gadd='git add'
 alias ga='git add -p'
-alias gcoall='git checkout -- .'
-alias gr='git remote'
-alias gre='git reset'
 
 # Docker
 alias dco="docker compose"
