@@ -55,7 +55,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = "kubectl"
   style = "powerline"
   foreground = "#7aa2f7"
-  template = "<#787c99>::</> {{.Context}}{{if .Namespace}} <#787c99>::</> {{.Namespace}}{{end}} "
+  template = "<#787c99>::</> {{if .Namespace}}{{.Namespace}}@{{end}}{{.Context}} "
 
     [properties.context_aliases]
     "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
