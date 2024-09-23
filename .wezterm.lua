@@ -1,5 +1,9 @@
 local wezterm = require("wezterm")
 
+local is_darwin = function()
+	return wezterm.target_triple:find("darwin") ~= nil
+end
+
 return {
 	audible_bell = "Disabled",
 	cell_width = 0.9,
@@ -13,7 +17,10 @@ return {
 		{ family = "JetBrainsMono Nerd Font", weight = "Medium" },
 	}),
 	dpi = 96,
-	font_size = 15,
+	dpi_by_screen = {
+		["Built-in Retina Display"] = 144,
+	},
+	font_size = 20,
 	freetype_load_flags = "NO_HINTING",
 	freetype_render_target = "HorizontalLcd",
 	front_end = "OpenGL",
@@ -21,9 +28,9 @@ return {
 	initial_rows = 40,
 	macos_window_background_blur = 6,
 	max_fps = 240,
-	window_background_opacity = 0.99,
+	window_background_opacity = is_darwin and 0.95 or 0.99,
 	window_close_confirmation = "NeverPrompt",
-	window_decorations = "NONE",
+	window_decorations = is_darwin and "RESIZE" or "NONE",
 	window_padding = {
 		left = 10,
 		right = 5,
