@@ -185,12 +185,13 @@ return {
       debounce_hours = 5, -- at least 5 hours between attempts to install/update
     })
 
-    local signs = {
-      Error = "",
-      Warn = "",
-      Hint = " ",
-      Info = "",
-    }
+    local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+    -- local signs = {
+    --   Error = "",
+    --   Warn = "",
+    --   Hint = " ",
+    --   Info = "",
+    -- }
 
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
