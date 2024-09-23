@@ -4,12 +4,13 @@ local check_backspace = function()
 end
 
 return {
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    event = "LspAttach",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {}, -- your configuration
-  },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   event = "LspAttach",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = {}, -- your configuration
+  -- },
+  { "js-everts/cmp-tailwind-colors" },
   {
     "Jezda1337/nvim-html-css",
     event = "LspAttach",

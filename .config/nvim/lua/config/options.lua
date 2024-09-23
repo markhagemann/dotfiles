@@ -64,7 +64,7 @@ opt.iskeyword:append("-") -- consider string-string as whole word
 
 -- folding
 opt.foldenable = true
-opt.foldcolumn = "1"
+opt.foldcolumn = "auto"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.fillchars = {

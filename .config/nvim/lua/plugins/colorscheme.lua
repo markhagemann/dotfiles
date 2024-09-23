@@ -39,6 +39,10 @@ return {
           --   bg = "none",
           --   fg = prompt,
           -- }
+          hl.NvimTreeOpenedHL = {
+            bg = "none",
+            fg = "#73daca",
+          }
           hl.TelescopeNormal = {
             bg = c.bg_dark,
             fg = c.fg_dark,

@@ -69,6 +69,7 @@ return {
         javascript = js_formatters,
         sh = sh_formatters,
         typescript = js_formatters,
+        typescriptreact = js_formatters,
         vue = js_formatters,
       },
     })
