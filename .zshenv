@@ -4,12 +4,6 @@ alias cl='clear'
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
 alias delete-merged-local-branches='git checkout develop && git pull && git branch --merged | grep -Ev "(^\*|production|staging|edge|develop)" | xargs git branch -d'
-alias dot="dotfiles"
-alias dotstatus="dotfiles status -uno"
-alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
-alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
-alias docker-stop-all-containers='docker stop $(docker ps -q)'
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
 # up memory, this command will free your memory after about 20-30 seconds.
 #   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
@@ -26,14 +20,13 @@ alias lzg="lazygit"
 alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
 alias listlogfilesize="du -h /home/drache/.cache/nvim | sort -rh | head -5"
 alias ls='ls --color'
-alias ohmyzsh="mate ~/.oh-my-zsh"
-alias removepacker="rm -rf ~/.local/share/nvim/site/pack/packer"
 alias removenvimlog="rm /home/drache/.cache/nvim/log"
 alias synctime="sudo hwclock -s"
 alias vim="nvim"
 # . "$HOME/.cargo/env"
 
 # Git
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias dst="dot status"
 alias ddiff="dot diff"
 alias dc="dot add -p"
@@ -60,6 +53,9 @@ alias dps="docker ps"
 alias dpa="docker ps -a"
 alias dl="docker ps -l -q"
 alias dx="docker exec -it"
+alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
+alias docker-remove-stopped-containers='docker rm -v $(docker ps -a -q -f status=exited)'
+alias docker-stop-all-containers='docker stop $(docker ps -q)'
 
 # Dirs
 alias ..="cd .."
