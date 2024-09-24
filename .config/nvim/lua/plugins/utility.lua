@@ -278,6 +278,24 @@ return {
       { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
     },
   },
+  {
+    "harrisoncramer/gitlab.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "stevearc/dressing.nvim",
+      "echasnovski/mini.icons",
+    },
+    enabled = true,
+    build = function()
+      require("gitlab.server").build(true)
+    end, -- Builds the Go binary
+    config = function()
+      require("gitlab").setup()
+    end,
+  },
   -- Waiting on RNU support
   -- {
   --   "JuanBaut/statuscolumn.nvim",
