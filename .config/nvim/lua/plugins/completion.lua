@@ -64,6 +64,7 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- LSP completion
       "hrsh7th/cmp-nvim-lua", -- Nvim builtins completion
       "hrsh7th/cmp-nvim-lsp-signature-help", -- Signature
+      "f3fora/cmp-spell",
     },
     config = function(_, opts)
       -- See `:help cmp`
@@ -279,6 +280,9 @@ return {
         }),
         sources = {
           { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "nvim_lua" },
+          { name = "buffer" },
           { name = "path" },
           {
             name = "html-css",
@@ -296,6 +300,16 @@ return {
                 -- "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
                 -- "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
               }, -- your configuration here
+            },
+          },
+          {
+            name = "spell",
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+              preselect_correct_word = true,
             },
           },
           { name = "luasnip" },

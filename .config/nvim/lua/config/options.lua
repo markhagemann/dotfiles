@@ -44,8 +44,6 @@ opt.cursorline = true -- highlight the current cursor line
 
 -- appearance
 
--- turn on termguicolors for nightfly colorscheme to work
--- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
@@ -84,6 +82,10 @@ opt.cursorline = true
 opt.mousemoveevent = true
 
 opt.laststatus = 3
+
+-- language
+opt.spell = true
+opt.spelllang = { "en_us" }
 
 vim.g.blamer_enabled = true
 vim.g.nuuid_no_mappings = 1
