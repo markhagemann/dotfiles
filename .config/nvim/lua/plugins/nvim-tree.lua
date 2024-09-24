@@ -102,31 +102,31 @@ return {
           icons = {
             show = {
               file = true,
-              folder = true,
+              folder = false,
               folder_arrow = true,
               git = false,
             },
-            glyphs = {
-              default = "",
-              symlink = "",
-              folder = {
-                default = "",
-                empty = "",
-                empty_open = "",
-                open = "",
-                symlink = "",
-                symlink_open = "",
-              },
-              git = {
-                unstaged = "✗",
-                staged = "✓",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "★",
-                deleted = "",
-                ignored = "◌",
-              },
-            },
+            -- glyphs = {
+            --   default = "",
+            --   symlink = "",
+            --   folder = {
+            --     default = "",
+            --     empty = "",
+            --     empty_open = "",
+            --     open = "",
+            --     symlink = "",
+            --     symlink_open = "",
+            --   },
+            --   git = {
+            --     unstaged = "✗",
+            --     staged = "✓",
+            --     unmerged = "",
+            --     renamed = "➜",
+            --     untracked = "★",
+            --     deleted = "",
+            --     ignored = "◌",
+            --   },
+            -- },
           },
         },
       })

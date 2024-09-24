@@ -43,19 +43,19 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = "yarn"
   style = "powerline"
   foreground = "#c0caf5"
-  template = "󰄛 {{ .Full }} "
+  template = "󰄛 {{ .Full }} <#787c99>::</> "
 
   [[blocks.segments]]
     type = 'node'
     style = 'powerline'
-    template = '<#787c99>::</>  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} '
+    template = ' {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} <#787c99>::</> '
     foreground = '#41a6b5'
 
   [[blocks.segments]]
   type = "kubectl"
   style = "powerline"
-  foreground = "#7aa2f7"
-  template = "<#787c99>::</> {{if .Namespace}}{{.Namespace}}@{{end}}{{.Context}} "
+  foreground = "#7dcfff"
+  template = "{{if .Namespace}}{{.Namespace}}@{{end}}{{.Context}} "
 
     [properties.context_aliases]
     "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
