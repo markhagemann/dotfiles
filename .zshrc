@@ -129,8 +129,7 @@ export PATH=$PATH:$HOME/bin
 export PATH=~/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$PATH:$HOME/.cargo/bin"
-export HOMEGOPATH=$HOME/go
-export PATH="$PATH:$HOMEGOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -147,6 +146,13 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.
 alias ls="eza --icons=always"
 
 . "$HOME/.atuin/bin/env"
+
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/plugins/golang/set-env.zsh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 eval "$(atuin init zsh)"
 
