@@ -110,12 +110,12 @@ return {
               default = "",
               symlink = "",
               folder = {
-                default = "",
-                empty = "",
-                empty_open = "",
-                open = "",
-                symlink = "",
-                symlink_open = "",
+                default = "",
+                empty = "",
+                empty_open = "",
+                open = "",
+                symlink = "",
+                symlink_open = "",
               },
               git = {
                 unstaged = "✗",
