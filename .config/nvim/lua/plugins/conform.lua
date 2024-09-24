@@ -65,6 +65,7 @@ return {
       formatters_by_ft = {
         bash = sh_formatters,
         lua = { "stylua" },
+        go = { "gofmt" },
         python = { "isort", "black" },
         javascript = js_formatters,
         sh = sh_formatters,
