@@ -26,6 +26,7 @@ alias vim="nvim"
 # . "$HOME/.cargo/env"
 
 # Git
+alias dot="dotfiles"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias dst="dot status"
 alias ddiff="dot diff"
