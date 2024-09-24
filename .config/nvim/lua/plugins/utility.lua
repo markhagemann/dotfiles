@@ -87,7 +87,6 @@ return {
       },
     },
   },
-  { "code-biscuits/nvim-biscuits", event = "BufEnter", dependencies = { "nvim-treesitter/nvim-treesitter" } },
   {
     "danilamihailov/beacon.nvim",
     event = "BufEnter",
@@ -267,10 +266,6 @@ return {
     },
   },
   {
-    "gbprod/cutlass.nvim",
-    event = "BufEnter",
-  },
-  {
     "HakonHarnes/img-clip.nvim",
     event = "BufEnter",
     keys = {
@@ -307,11 +302,6 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "karb94/neoscroll.nvim",
-    event = "BufEnter",
-    opts = {},
-  },
   {
     "kburdett/vim-nuuid",
     keys = {
@@ -401,16 +391,6 @@ return {
       { "<leader>ut", ":UndotreeToggle<cr>", desc = "[u]ndo [t]ree" },
     },
   },
-  -- {
-  --   "nvim-pack/nvim-spectre",
-  --   build = false,
-  --   cmd = "Spectre",
-  --   opts = { open_cmd = "noswapfile vnew" },
-  --   -- stylua: ignore
-  --   keys = {
-  --     { "<leader>sr", function() require("spectre").open() end, desc = "[S]earch & [R]eplace in files (Spectre)" },
-  --   },
-  -- },
   {
     "nmac427/guess-indent.nvim",
     event = "BufEnter",
@@ -468,6 +448,10 @@ return {
           require("illuminate")["goto_" .. dir .. "_reference"](false)
         end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
       end
+
+      vim.cmd("hi IlluminatedWordText guibg=none gui=underline")
+      vim.cmd("hi IlluminatedWordRead guibg=none gui=underline")
+      vim.cmd("hi IlluminatedWordWrite guibg=none gui=underline")
 
       map("]]", "next")
       map("[[", "prev")
@@ -532,14 +516,6 @@ return {
       })
     end,
   },
-  -- scrolloff_percentage: controls how close the cursor can be to the top or bottom
-  --                       of the screen before scrolling begins
-  {
-    "tonymajestro/smart-scrolloff.nvim",
-    opts = {
-      scrolloff_percentage = 0.2,
-    },
-  },
   -- Sets yaml indentation wrong - guess indent fixes
   {
     "tpope/vim-sleuth",
@@ -555,7 +531,7 @@ return {
     event = "InsertEnter",
     config = true,
     -- use opts = {} for passing setup options
-    -- this is equalent to setup({}) function
+    -- this is equivalent to setup({}) function
   },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
