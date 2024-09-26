@@ -30,17 +30,23 @@ return {
     end
 
     map_key("<C-u>", function()
-      neoscroll.scroll(-vim.wo.scroll, true, rel_time(vim.wo.scroll))
+      neoscroll.scroll(-vim.wo.scroll, {
+        move_cursor = true,
+        duration = rel_time(vim.wo.scroll),
+      })
     end)
 
     map_key("<C-d>", function()
-      neoscroll.scroll(vim.wo.scroll, true, rel_time(vim.wo.scroll))
+      neoscroll.scroll(vim.wo.scroll, {
+        move_cursor = true,
+        duration = rel_time(vim.wo.scroll),
+      })
     end)
 
     -- other mappings ...
-
-    map_key("zz", function()
-      neoscroll.zz(rel_time(0.33))
-    end)
+    --
+    -- map_key("zz", function()
+    --   neoscroll.zz(rel_time(0.33))
+    -- end)
   end,
 }

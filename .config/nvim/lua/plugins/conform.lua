@@ -1,12 +1,3 @@
-local js_formatters = {
-  { "prettierd", "prettier" },
-  "eslint_d",
-}
-
-local sh_formatters = {
-  "beautysh",
-}
-
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -44,6 +35,38 @@ return {
       desc = "Re-enable autoformat-on-save",
     })
 
+    ---Selects the first available formatter.
+    ---
+    ---@param bufnr integer
+    ---@param ... string
+    ---@return string
+    local function first(bufnr, ...)
+      local conform = require("conform")
+      for i = 1, select("#", ...) do
+        local formatter = select(i, ...)
+        if conform.get_formatter_info(formatter, bufnr).available then
+          return formatter
+        end
+      end
+      return select(1, ...)
+    end
+
+    local function select_prettier(bufnr)
+      return first(bufnr, "prettierd", "prettier")
+    end
+
+    local function use_prettier(bufnr)
+      return { select_prettier(bufnr) }
+    end
+
+    local function use_web_formatters(bufnr)
+      return { "eslint_d", select_prettier(bufnr) }
+    end
+
+    -- local sh_formatters = {
+    --   "beautysh",
+    -- }
+
     require("conform").setup({
       format_after_save = function(bufnr)
         -- Disable autoformat on certain filetypes
@@ -60,18 +83,20 @@ return {
         if bufname:match("/node_modules/") then
           return
         end
-        return { lsp_fallback = true }
+        return { lsp_fallback = true, stop_after_first = true }
       end,
       formatters_by_ft = {
-        bash = sh_formatters,
+        -- bash = sh_formatters,
+        css = use_web_formatters,
+        html = use_prettier,
         lua = { "stylua" },
         go = { "gofmt" },
         python = { "isort", "black" },
-        javascript = js_formatters,
-        sh = sh_formatters,
-        typescript = js_formatters,
-        typescriptreact = js_formatters,
-        vue = js_formatters,
+        javascript = use_web_formatters,
+        -- sh = sh_formatters,
+        typescript = use_web_formatters,
+        typescriptreact = use_web_formatters,
+        vue = use_web_formatters,
       },
     })
   end,

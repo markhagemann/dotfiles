@@ -279,11 +279,11 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         }),
         sources = {
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lua" },
-          { name = "buffer" },
-          { name = "path" },
+          { name = "nvim_lsp", max_item_count = 30 },
+          { name = "nvim_lsp_signature_help", max_item_count = 30 },
+          { name = "nvim_lua", max_item_count = 30 },
+          { name = "buffer", max_item_count = 30 },
+          { name = "path", max_item_count = 30 },
           {
             name = "html-css",
             option = {
