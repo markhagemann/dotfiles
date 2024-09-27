@@ -35,7 +35,12 @@ keymap.set("v", "<A-k>", ":m .-2<CR>==")
 -- Make Y behave like C or D
 keymap.set("n", "Y", "y$")
 -- Paste without overwriting register
-vim.keymap.set("v", "p", '"_dP')
+keymap.set("v", "p", '"_dP')
+-- System clipboard
+keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "Copy to system clipboard" })
+keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
 
 -- Navigate buffers
 keymap.set("n", "<S-l>", ":bnext<CR>")
@@ -67,5 +72,5 @@ keymap.set(
 )
 
 -- Save and load session
-vim.keymap.set("n", "<leader>SS", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
-vim.keymap.set("n", "<leader>SL", ":source .session.vim<CR>", { noremap = true, silent = false })
+keymap.set("n", "<leader>SS", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
+keymap.set("n", "<leader>SL", ":source .session.vim<CR>", { noremap = true, silent = false })
