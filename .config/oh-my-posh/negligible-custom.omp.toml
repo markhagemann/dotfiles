@@ -84,12 +84,13 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     ]
   template = ' ➜'
 
-[transient_prompt]
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
-  ]
-  template = ' ➜ '
+# NOTE: Transient Prompt is breaking zsh-vi-mode
+# [transient_prompt]
+#   foreground_templates = [
+#     "{{if gt .Code 0}}red{{end}}",
+#     "{{if eq .Code 0}}magenta{{end}}",
+#   ]
+#   template = ' ➜ '
   # WIP: https://github.com/JanDeDobbeleer/oh-my-posh/issues/4822
   # [[blocks.segments]]
   #   type = 'time'
