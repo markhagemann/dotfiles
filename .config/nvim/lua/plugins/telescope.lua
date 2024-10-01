@@ -46,16 +46,22 @@ return {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
         -- pickers = {}
         defaults = {
           path_display = { truncate = 3 },
+          mappings = {
+            n = {
+              -- I'm used to closing buffers with "d" from bufexplorer
+              ["d"] = require("telescope.actions").delete_buffer,
+              -- I'm also used to quitting bufexplorer with q instead of escape
+              ["q"] = require("telescope.actions").close,
+            },
+          },
         },
         pickers = {
+          buffers = {
+            initial_mode = "normal",
+          },
           find_files = {
             hidden = true,
             -- theme = "dropdown",

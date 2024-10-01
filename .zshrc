@@ -142,6 +142,19 @@ eval "$(zoxide init zsh)"
 # Use oh-my-posh
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
 
+# zsh-vi-mode
+ZVM_VI_ESCAPE_BINDKEY=jk
+ZVM_VI_INSERT_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+ZVM_VI_VISUAL_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+ZVM_VI_OPPEND_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+
+function zvm_after_lazy_keybindings() {
+  # Remap to go to the beginning of the line
+  zvm_bindkey vicmd 'gh' beginning-of-line
+  # Remap to go to the end of the line
+  zvm_bindkey vicmd 'gl' end-of-line
+}
+
 # Better ls
 alias ls="eza --icons=always"
 
