@@ -92,9 +92,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Keybindings
 zinit ice depth=1
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -159,6 +156,7 @@ function zvm_after_lazy_keybindings() {
 alias ls="eza --icons=always"
 
 . "$HOME/.atuin/bin/env"
+
 
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/plugins/golang/set-env.zsh"
