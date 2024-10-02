@@ -16,7 +16,7 @@ return {
       local factor = win_ratio * lines_ratio
       local log_factor = 1 / math.log(1 / factor + 1, 2)
       local time = 300 * log_factor
-      print(time)
+      -- print(time)
       return time
     end
 
