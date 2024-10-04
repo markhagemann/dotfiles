@@ -106,51 +106,6 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  { "echasnovski/mini.ai", version = "*", event = "BufEnter" },
-  { "echasnovski/mini.animate", version = "*", event = "BufEnter" },
-  { "echasnovski/mini.hipatterns", version = "*", event = "BufEnter" },
-  {
-    "echasnovski/mini.icons",
-    opts = {},
-    lazy = true,
-    init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
-    end,
-    config = function()
-      require("mini.icons").setup({
-        filetype = {
-          json = { glyph = "" },
-          jsonc = { glyph = "" },
-
-          sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
-          zsh = { glyph = "󰐣" },
-          bash = { glyph = "󰐣" },
-        },
-        extension = {
-          conf = { glyph = "󰛸", hl = "MiniIconsBlue" },
-        },
-      })
-    end,
-  },
-  { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
-  {
-    "echasnovski/mini.surround",
-    event = "BufEnter",
-    opts = {
-      mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
-        update_n_lines = "gsn", -- Update `n_lines`
-      },
-    },
-  },
   {
     "FabijanZulj/blame.nvim",
     opts = {},
@@ -224,22 +179,6 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "[D]ismiss [N]oice", noremap = true })
       require("noice").setup(opts)
     end,
-  },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    -- NOTE: https://github.com/LazyVim/LazyVim/discussions/1583
-    event = "VimEnter",
-    opts = {
-      highlight = {
-        pattern = [[.*<(KEYWORDS)\s*[:@]\s*]], -- vim regex
-      },
-      search = {
-        -- Matches with "TODO: something" and "TODO @PL something"
-        pattern = [[\b(KEYWORDS)\s*[:@]\b]], -- ripgrep regex
-      },
-    },
   },
   {
     "folke/trouble.nvim",
