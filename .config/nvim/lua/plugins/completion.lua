@@ -24,8 +24,7 @@ return {
   },
   -- Core Completion Plugin
   {
-    "hrsh7th/nvim-cmp",
-    commit = "b356f2c",
+    "iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
