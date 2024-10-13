@@ -156,10 +156,8 @@ function zvm_after_lazy_keybindings() {
 alias ls="eza --icons=always"
 
 . "$HOME/.atuin/bin/env"
-
-
 . "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/plugins/golang/set-env.zsh"
+. "$HOME/.gvm/scripts/gvm"
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
