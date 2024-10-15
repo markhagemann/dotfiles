@@ -205,6 +205,10 @@ return {
     },
   },
   {
+    "gbprod/cutlass.nvim",
+    event = "BufEnter",
+  },
+  {
     "HakonHarnes/img-clip.nvim",
     event = "BufEnter",
     keys = {
