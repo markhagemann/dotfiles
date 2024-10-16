@@ -206,7 +206,12 @@ return {
   },
   {
     "gbprod/cutlass.nvim",
-    event = "BufEnter",
+    lazy = false,
+    opts = {
+      -- your configuration comes here
+      -- or don't set opts to use the default settings
+      -- refer to the configuration section below
+    },
   },
   {
     "HakonHarnes/img-clip.nvim",
