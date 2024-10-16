@@ -239,7 +239,8 @@ return {
             importModuleSpecifierEnding = "minimal",
           },
         },
-        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        -- Used for when hybridMode is enabled
+        -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         settings = {
           typescript = {
             inlayHints = {
@@ -256,6 +257,19 @@ return {
         },
       },
       volar = {
+        -- NOTE: Uncomment to enable volar in file types other than vue.
+        -- (Similar to Takeover Mode)
+
+        -- filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
+
+        -- NOTE: Uncomment to restrict Volar to only Vue/Nuxt projects. This will enable Volar to work alongside other language servers (tsserver).
+
+        -- root_dir = require("lspconfig").util.root_pattern(
+        --   "vue.config.js",
+        --   "vue.config.ts",
+        --   "nuxt.config.js",
+        --   "nuxt.config.ts"
+        -- ),
         init_options = {
           vue = {
             hybridMode = false,
