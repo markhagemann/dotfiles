@@ -1,5 +1,6 @@
 local opt = vim.opt -- for conciseness
 
+opt.autowrite = true -- Write the contents of the file, if it has been modified
 opt.confirm = true -- Confirm unsaved changes on quit
 opt.showmode = false -- Already in the status line
 
@@ -35,7 +36,7 @@ opt.wrap = false -- disable line wrapping
 
 -- search settings
 opt.hlsearch = false
-opt.inccommand = "split" -- highlights search pattern as you type it
+opt.inccommand = "nosplit" -- preview incremental substitute
 opt.incsearch = true
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
@@ -53,7 +54,9 @@ opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
 -- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+-- only set clipboard if not in ssh, to make sure the OSC 52
+-- integration works automatically. Requires Neovim >= 0.10.0
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- split windows
 opt.splitright = true -- split vertical window to the right
@@ -83,6 +86,8 @@ opt.cursorline = true
 opt.mousemoveevent = true
 
 opt.laststatus = 3
+
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 
 -- language
 opt.spell = true
