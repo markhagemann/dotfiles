@@ -1,5 +1,6 @@
 local opt = vim.opt -- for conciseness
 
+opt.confirm = true -- Confirm unsaved changes on quit
 opt.showmode = false -- Already in the status line
 
 -- Decrease update time
