@@ -137,7 +137,10 @@ fi
 # Shell integrations
 eval "$(zoxide init zsh)"
 # Use oh-my-posh
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
+# Use starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
 
 # zsh-vi-mode
 ZVM_VI_ESCAPE_BINDKEY=jk
