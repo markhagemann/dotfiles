@@ -41,7 +41,7 @@ Macos = '󰀵'
 Unknown = '󰠥'
 
 [os]
-format = '[$symbol](bold fg:#73daca) '
+format = '[$symbol](#414868) '
 disabled = false
 
 # Shows current directory
