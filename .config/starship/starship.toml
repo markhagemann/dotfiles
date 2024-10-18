@@ -9,7 +9,7 @@ $character
 """
 
 [character]
-success_symbol = '[➜](bold fg:#73daca)'
+success_symbol = '[➜](bold fg:#414868)'
 error_symbol = '[✗](bold fg:#f7768e)'
 vimcmd_symbol = '[V](bold green)'
 
@@ -19,10 +19,6 @@ variable = 'SHELL'
 format = "$symbol"
 disabled = false
 
-[os]
-format = '[$symbol](bold fg:#41a6b5) '
-disabled = false
-
 [os.symbols]
 Windows = ' '
 Arch = '󰣇'
@@ -30,24 +26,20 @@ Ubuntu = ''
 Macos = '󰀵'
 Unknown = '󰠥'
 
-# Shows the username
-[username]
-disabled = true
-
-# Shows the hostname
-[hostname]
-disabled = true
+[os]
+format = '[$symbol](bold fg:#73daca) '
+disabled = false
 
 # Shows current directory
 [directory]
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = false
-style = 'bold fg:#668cbe'
+style = 'bold fg:#73daca'
 
 # Shows current git branch
 [git_branch]
-format = '[|](bold fg:#414868) [$symbol$branch(:$remote_branch)]($style)'
+format = '[|](bold fg:#414868) [$symbol$branch(:$remote_branch)]($style) '
 disabled = false
 style = 'bold fg:#bb9af7'
 
@@ -82,4 +74,12 @@ disabled = true
 disabled = true
 
 [terraform]
+disabled = true
+
+# Shows the username
+[username]
+disabled = true
+
+# Shows the hostname
+[hostname]
 disabled = true
