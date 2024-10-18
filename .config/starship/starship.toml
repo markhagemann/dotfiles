@@ -45,7 +45,7 @@ disabled = false
 
 # Shows current directory
 [directory]
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = '…/'
 truncate_to_repo = false
 style = 'bold fg:#73daca'
