@@ -57,7 +57,6 @@ zi for \
   BurntSushi/ripgrep
 
 # Add in snippets
-zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
@@ -112,11 +111,6 @@ COMPLETION_WAITING_DOTS="true"
 # Import private exports that shouldn't be committed
 PRIVEXPORTFILE=~/.zshrcpriv
 source $PRIVEXPORTFILE
-
-function zshalias()
-{
-  grep "^alias" ~/.zshrc > ~/.zshenv
-}
 
 # Add path
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -227,3 +221,8 @@ if grep -q "microsoft" /proc/version &>/dev/null; then
   fi
 
 fi
+
+function zshalias()
+{
+  grep "^alias" ~/.zshrc > ~/.zshenv
+}
