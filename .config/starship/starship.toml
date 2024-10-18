@@ -4,14 +4,27 @@
 add_newline = true
 command_timeout = 2000
 
-format = """$env_var$os$directory$git_branch$git_status$kubernetes$nodejs$python
+format = """$env_var$os$directory$git_branch$git_status$kubernetes$fill$cmd_duration$time
 $character
 """
 
+[fill]
+symbol = ' '
+
+[time]
+format = '[$time]($style) '
+disabled = false
+style = 'dimmed fg:#5560a6'
+
 [character]
 success_symbol = '[➜](bold fg:#414868)'
-error_symbol = '[✗](bold fg:#f7768e)'
+error_symbol = '[➜](bold fg:#414868)'
 vimcmd_symbol = '[V](bold green)'
+
+[cmd_duration]
+min_time = 500
+style = 'dimmed fg:#41a6b5'
+format = '[took](dimmed fg:#41a6b5) [$duration]($style) [|](bold fg:#414868) '
 
 [env_var]
 symbol = ""
@@ -39,18 +52,22 @@ style = 'bold fg:#73daca'
 
 # Shows current git branch
 [git_branch]
-format = '[|](bold fg:#414868) [$symbol$branch(:$remote_branch)]($style) '
+format = '[|](fg:#414868) [$symbol$branch(:$remote_branch)]($style) '
 disabled = false
-style = 'bold fg:#bb9af7'
+style = 'fg:#8477f7'
 
 # Shows current git status
 [git_status]
 disabled = false
-style = 'bold fg:#bb9af7'
+style = 'fg:#8477f7'
+stashed = ''
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
 
 # Shows kubernetes context and namespace
 [kubernetes]
-format = '[|](bold fg:#414868) [󱃾 $context](bold #7aa2f7) '
+format = '[|](fg:#414868) [󱃾 $context](#7aa2f7) '
 disabled = false
 
 # ---
@@ -68,7 +85,8 @@ disabled = true
 disabled = true
 
 [nodejs]
-disabled = true
+format =  '[$symbol($version )]($style)'
+disabled = false
 
 [ruby]
 disabled = true
