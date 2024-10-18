@@ -1,0 +1,104 @@
+#Location: ~/.config/starship.toml
+#What_is_starship: https://starship.rs/
+
+add_newline = true
+command_timeout = 2000
+
+format = """$env_var$os$directory$git_branch$git_status$kubernetes$fill$cmd_duration$time
+$character
+"""
+
+[fill]
+symbol = ' '
+
+[time]
+format = '[$time]($style) '
+disabled = false
+style = 'dimmed fg:#5560a6'
+
+[character]
+success_symbol = '[➜](bold fg:#414868)'
+error_symbol = '[➜](bold fg:#414868)'
+vimcmd_symbol = '[V](bold green)'
+
+[cmd_duration]
+min_time = 500
+style = 'dimmed fg:#41a6b5'
+format = '[took](dimmed fg:#41a6b5) [$duration]($style) [|](bold fg:#414868) '
+
+[env_var]
+symbol = ""
+variable = 'SHELL'
+format = "$symbol"
+disabled = false
+
+[os.symbols]
+Windows = ' '
+Arch = '󰣇'
+Linux = '󰣇'
+Ubuntu = ''
+Macos = '󰀵'
+Unknown = '󰠥'
+
+[os]
+format = '[$symbol](bold fg:#73daca) '
+disabled = false
+
+# Shows current directory
+[directory]
+truncation_length = 2
+truncation_symbol = '…/'
+truncate_to_repo = false
+style = 'bold fg:#73daca'
+
+# Shows current git branch
+[git_branch]
+format = '[|](fg:#414868) [$symbol$branch(:$remote_branch)]($style) '
+disabled = false
+style = 'fg:#8477f7'
+
+# Shows current git status
+[git_status]
+disabled = false
+style = 'fg:#8477f7'
+stashed = ''
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+
+# Shows kubernetes context and namespace
+[kubernetes]
+format = '[|](fg:#414868) [󱃾 $context](#7aa2f7) '
+disabled = false
+
+# ---
+
+[vagrant]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[helm]
+disabled = true
+
+[python]
+disabled = true
+
+[nodejs]
+format =  '[$symbol($version )]($style)'
+disabled = false
+
+[ruby]
+disabled = true
+
+[terraform]
+disabled = true
+
+# Shows the username
+[username]
+disabled = true
+
+# Shows the hostname
+[hostname]
+disabled = true
