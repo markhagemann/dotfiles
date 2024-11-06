@@ -319,6 +319,7 @@ return {
         "dbui",
         "Diffview*",
         "Dressing*",
+        "grug-far",
         "help",
         "httpResult",
         "lazy",

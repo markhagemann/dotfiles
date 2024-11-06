@@ -59,9 +59,9 @@ return {
           },
         },
         pickers = {
-          buffers = {
-            initial_mode = "normal",
-          },
+          -- buffers = {
+          --   initial_mode = "normal",
+          -- },
           find_files = {
             hidden = true,
             -- theme = "dropdown",
