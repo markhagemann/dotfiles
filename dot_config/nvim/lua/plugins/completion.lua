@@ -193,7 +193,7 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         -- similar to VSCode completion order
-        completion = { completeopt = "menu,menuone,noinsert" },
+        completion = { completeopt = "menu,menuone,noinsert", keyword_length = 2 },
         formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, item)

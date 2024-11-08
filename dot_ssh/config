@@ -1,3 +1,5 @@
+Include /Users/mhagemann/.config/colima/ssh_config
+
 AddKeysToAgent yes
 
 # MacOS only
