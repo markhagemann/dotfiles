@@ -75,4 +75,5 @@ alias kns="kubens"
 alias kl="kubectl logs -f"
 alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
+alias kcunset="kubectl config unset current-context"
 alias podname=''
