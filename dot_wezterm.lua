@@ -5,6 +5,7 @@ local is_linux = function()
 end
 
 return {
+	animation_fps = 240,
 	audible_bell = "Disabled",
 	cell_width = 0.9,
 	-- color_scheme = "Catppuccin Mocha",
