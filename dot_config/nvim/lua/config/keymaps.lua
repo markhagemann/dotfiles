@@ -36,6 +36,9 @@ keymap.set("v", "<A-k>", ":m .-2<CR>==")
 keymap.set("n", "Y", "y$")
 -- Paste without overwriting register
 keymap.set("v", "p", '"_dP')
+-- Delete without overwriting register
+keymap.set("v", "d", '"_d')
+keymap.set("n", "d", '"_d')
 -- System clipboard
 keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "Copy to system clipboard" })
