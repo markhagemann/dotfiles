@@ -388,7 +388,7 @@ return {
     event = "VeryLazy",
     opts = {
       show_icons = true,
-      leader_key = "<leader>;", -- Recommended to be a single key
+      leader_key = ";", -- Recommended to be a single key
     },
   },
   { "preservim/vim-pencil", event = "VeryLazy" },
