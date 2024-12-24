@@ -97,6 +97,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+export MANPAGER="nvim +Man!"
+
 export NVM_COMPLETION=true
 export NVM_SYMLINK_CURRENT="true"
 
