@@ -68,7 +68,7 @@ behind = '⇣${count}'
 
 # Shows kubernetes context and namespace
 [kubernetes]
-format = '[|](fg:#414868) [󱃾 $context](#7aa2f7) '
+format = '[|](fg:#414868) [󱃾 $context :: $namespace](#7aa2f7) '
 disabled = false
 
 # ---
