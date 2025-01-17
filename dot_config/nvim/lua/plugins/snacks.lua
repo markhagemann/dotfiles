@@ -9,7 +9,6 @@ return {
     bufdelete = { enabled = true },
     dashboard = { enabled = true },
     -- debug = { enabled = true },
-    dim = { enabled = false },
     git = { enabled = true },
     gitbrowse = { enabled = true },
     indent = { enabled = true, scope = { enabled = false }, char = "│" },
@@ -26,15 +25,15 @@ return {
     },
     profiler = { enabled = true },
     quickfile = { enabled = true },
-    scroll = { enabled = false },
     statuscolumn = { enabled = false }, -- need to figure out how fold works with this first
     -- styles = {
     --   notification = {
     --     -- wo = { wrap = true } -- Wrap notifications
     --   },
     -- },
+    -- terminal = { enabled = true }, -- need to investigate
     toggle = { enabled = true },
-    -- words = { enabled = true },
+    -- words = { enabled = true }, -- need to investigate
     zen = { enabled = true },
   },
   keys = {
@@ -151,7 +150,7 @@ return {
       function()
         Snacks.picker.grep_word()
       end,
-      desc = "Visual selection or word",
+      desc = "visual selection or word",
       mode = { "n", "x" },
     },
     -- search
@@ -295,14 +294,14 @@ return {
       function()
         Snacks.scratch()
       end,
-      desc = "Toggle Scratch Buffer",
+      desc = "toggle scratch buffer",
     },
     {
       "<leader>S",
       function()
         Snacks.scratch.select()
       end,
-      desc = "Select Scratch Buffer",
+      desc = "select scratch buffer",
     },
     {
       "<leader>ny",
@@ -373,7 +372,7 @@ return {
       function()
         Snacks.terminal()
       end,
-      desc = "Toggle Terminal",
+      desc = "toggle terminal",
     },
     {
       "<c-_>",
@@ -387,7 +386,7 @@ return {
       function()
         Snacks.words.jump(vim.v.count1)
       end,
-      desc = "Next Reference",
+      desc = "next reference",
       mode = { "n", "t" },
     },
     {
@@ -395,12 +394,12 @@ return {
       function()
         Snacks.words.jump(-vim.v.count1)
       end,
-      desc = "Prev Reference",
+      desc = "prev reference",
       mode = { "n", "t" },
     },
     {
       "<leader>N",
-      desc = "Neovim News",
+      desc = "neovim news",
       function()
         Snacks.win({
           file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
@@ -431,9 +430,9 @@ return {
         vim.print = _G.dd -- Override print to use snacks for `:=` command
 
         -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ur")
+        Snacks.toggle.option("spell", { name = "spelling" }):map("<leader>us")
+        Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
+        Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>urn")
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.line_number():map("<leader>ul")
         Snacks.toggle
@@ -443,7 +442,7 @@ return {
         -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
         Snacks.toggle.inlay_hints():map("<leader>uh")
         Snacks.toggle.indent():map("<leader>ug")
-        Snacks.toggle.dim():map("<leader>uD")
+        -- Snacks.toggle.dim():map("<leader>uD")
       end,
     })
   end,

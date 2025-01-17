@@ -2,9 +2,7 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {
-      preset = "helix",
-    },
+    opts = {},
   },
   -- {
   --   config = function(_, opts) -- This is the function that runs, AFTER loading
