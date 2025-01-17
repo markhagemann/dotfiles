@@ -5,13 +5,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   local targetWidth = width - sufWidth
   local curWidth = 0
   for _, chunk in ipairs(virtText) do
-    local chunkText = chunk[1]
+    local chunkText = chunk1
     local chunkWidth = vim.fn.strdisplaywidth(chunkText)
     if targetWidth > curWidth + chunkWidth then
       table.insert(newVirtText, chunk)
     else
       chunkText = truncate(chunkText, targetWidth - curWidth)
-      local hlGroup = chunk[2]
+      local hlGroup = chunk2
       table.insert(newVirtText, { chunkText, hlGroup })
       chunkWidth = vim.fn.strdisplaywidth(chunkText)
       -- str width returned from truncate() may less than 2nd argument, need padding

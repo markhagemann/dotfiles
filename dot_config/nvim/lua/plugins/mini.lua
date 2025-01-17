@@ -53,7 +53,7 @@ return {
       })
     end,
   },
-  { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
+  -- { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
   {
     "echasnovski/mini.surround",
     version = "*",

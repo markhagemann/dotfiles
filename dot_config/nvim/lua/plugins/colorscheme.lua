@@ -91,7 +91,7 @@ return {
       end
 
       -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent
-      vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "[t]ransparency [t]oggle" })
+      vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "transparency toggle" })
     end,
   },
   {

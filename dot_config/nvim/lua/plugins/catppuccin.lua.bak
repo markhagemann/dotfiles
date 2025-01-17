@@ -41,20 +41,20 @@ return {
           show_root = true,
           transparent_panel = true,
         },
-        telescope = true,
+        telescope = false,
         treesitter = true,
         treesitter_context = true,
         which_key = true,
       },
-      custom_highlights = function(colors)
-        local TelescopeColor = {}
-
-        for hl, col in pairs(TelescopeColor) do
-          vim.api.nvim_set_hl(0, hl, col)
-        end
-
-        return {}
-      end,
+      -- custom_highlights = function(colors)
+      --   local TelescopeColor = {}
+      --
+      --   for hl, col in pairs(TelescopeColor) do
+      --     vim.api.nvim_set_hl(0, hl, col)
+      --   end
+      --
+      --   return {}
+      -- end,
       highlight_overrides = {},
       color_overrides = {},
     },

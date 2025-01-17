@@ -37,16 +37,16 @@ return {
       before.setup()
 
       -- Jump to previous entry in the edit history
-      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "[J]ump to [L]ast Edit" })
+      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "Jump to Last Edit" })
 
       -- Jump to next entry in the edit history
-      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "Jump to [N]ext Edit" })
+      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "Jump to Next Edit" })
 
       -- Look for previous edits in quickfix list
-      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "[O]pen Edits in [Q]uickfix" })
+      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "Open Edits in Quickfix" })
 
       -- Look for previous edits in telescope (needs telescope, obviously)
-      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "[O]pen [E]dits in Telescope" })
+      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "Open Edits in Telescope" })
     end,
   },
   {
@@ -106,94 +106,80 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  {
-    "FabijanZulj/blame.nvim",
-    opts = {},
-    keys = {
-      {
-        "<leader>tb",
-        "<CMD>BlameToggle<CR>",
-        desc = "Open git blame list",
-        noremap = true,
-        silent = true,
-      },
-    },
-    config = function(_, opts)
-      require("blame").setup(opts)
-    end,
-  },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-  -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        hover = {
-          enabled = false,
-        },
-        presets = {
-          -- bottom_search = true,   -- use a classic bottom cmdline for search
-          -- command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-          -- lsp_doc_border = false, -- add a border to hover docs and signature help
-        },
-        signature = {
-          enabled = false,
-        },
-      },
-      routes = {
-        {
-          view = "notify",
-          filter = {
-            event = "msg_showmode",
-            any = {
-              { find = "recording" },
-            },
-          },
-        },
-      },
-      views = {
-        mini = {
-          win_options = {
-            winblend = 0,
-          },
-        },
-      },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      {
-        "rcarriga/nvim-notify",
-        opts = {
-          timeout = 1000,
-          render = "compact",
-          stages = "fade",
-          top_down = false,
-          on_open = function(win)
-            vim.api.nvim_win_set_config(win, { zindex = 100 })
-          end,
-        },
-      },
-    },
-    config = function(_, opts)
-      vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "[D]ismiss [N]oice", noremap = true })
-      require("noice").setup(opts)
-    end,
-  },
+  -- {
+  --   "FabijanZulj/blame.nvim",
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       "<leader>tb",
+  --       "<CMD>BlameToggle<CR>",
+  --       desc = "Open git blame list",
+  --       noremap = true,
+  --       silent = true,
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("blame").setup(opts)
+  --   end,
+  -- },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     lsp = {
+  --       hover = {
+  --         enabled = false,
+  --       },
+  --       presets = {
+  --         -- bottom_search = true,   -- use a classic bottom cmdline for search
+  --         -- command_palette = true, -- position the cmdline and popupmenu together
+  --         long_message_to_split = true, -- long messages will be sent to a split
+  --         -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
+  --         -- lsp_doc_border = false, -- add a border to hover docs and signature help
+  --       },
+  --       signature = {
+  --         enabled = false,
+  --       },
+  --     },
+  --     routes = {
+  --       {
+  --         view = "notify",
+  --         filter = {
+  --           event = "msg_showmode",
+  --           any = {
+  --             { find = "recording" },
+  --           },
+  --         },
+  --       },
+  --     },
+  --     views = {
+  --       mini = {
+  --         win_options = {
+  --           winblend = 0,
+  --         },
+  --       },
+  --     },
+  --   },
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     {
+  --       "rcarriga/nvim-notify",
+  --       opts = {
+  --         timeout = 1000,
+  --         render = "compact",
+  --         stages = "fade",
+  --         top_down = false,
+  --         on_open = function(win)
+  --           vim.api.nvim_win_set_config(win, { zindex = 100 })
+  --         end,
+  --       },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "Dismiss Noice", noremap = true })
+  --     require("noice").setup(opts)
+  --   end,
+  -- },
   {
     "folke/trouble.nvim",
     cmd = { "TodoTrouble", "TroubleToggle" },
@@ -215,7 +201,7 @@ return {
     opts = {},
     event = "VeryLazy",
     keys = {
-      { "<leader>tw", "<cmd>Twilight<cr>", desc = "[t]oggle t[w]ilight" },
+      { "<leader>tw", "<cmd>Twilight<cr>", desc = "toggle twilight" },
     },
   },
   {
@@ -264,8 +250,8 @@ return {
   {
     "kevinhwang91/nvim-bqf",
     keys = {
-      { "<leader>qn", ":cnext<cr>", desc = "[q]uickfix [n]ext" },
-      { "<leader>qp", ":cprevious<cr>", desc = "[q]uickfix [p]revious" },
+      { "<leader>qn", ":cnext<cr>", desc = "quickfix next" },
+      { "<leader>qp", ":cprevious<cr>", desc = "quickfix previous" },
     },
   },
   {
@@ -292,18 +278,18 @@ return {
     event = { "BufLeave", "InsertEnter" },
     opts = {},
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { enabled = false, show_start = false, show_end = false },
-    },
-    event = "BufEnter",
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   opts = {
+  --     indent = {
+  --       char = "│",
+  --       tab_char = "│",
+  --     },
+  --     scope = { enabled = false, show_start = false, show_end = false },
+  --   },
+  --   event = "BufEnter",
+  -- },
   {
     "m4xshen/hardtime.nvim",
     event = "BufEnter",
@@ -350,12 +336,12 @@ return {
       {
         "<leader>sr",
         ":GrugFar<cr>",
-        desc = "[s]earch & [r]eplace across all files (Grug)",
+        desc = "search & replace across all files (Grug)",
       },
       {
         "<leader>sc",
         "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand(' % ') } })<cr>",
-        desc = "[s]earch & Replace across [c]urrent file (Grug)",
+        desc = "search & replace across current file (Grug)",
       },
     },
   },
@@ -369,7 +355,7 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<leader>ut", ":UndotreeToggle<cr>", desc = "[u]ndo [t]ree" },
+      { "<leader>ut", ":UndotreeToggle<cr>", desc = "undo tree" },
     },
   },
   {
@@ -549,7 +535,7 @@ return {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
     config = function()
-      local opts = { noremap = true, silent = true, desc = "[p]ick [c]olour" }
+      local opts = { noremap = true, silent = true, desc = "pick colour" }
       vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
       require("color-picker").setup({
         ["icons"] = { "-", "" },

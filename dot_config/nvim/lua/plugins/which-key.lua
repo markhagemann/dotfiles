@@ -2,7 +2,9 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      preset = "helix",
+    },
   },
   -- {
   --   config = function(_, opts) -- This is the function that runs, AFTER loading
@@ -10,11 +12,11 @@ return {
   --
   --     -- Document existing key chains
   --     -- require("which-key").add({
-  --     --   ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-  --     --   ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-  --     --   ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-  --     --   ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-  --     --   ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+  --     --   ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
+  --     --   ["<leader>d"] = { name = "Document", _ = "which_key_ignore" },
+  --     --   ["<leader>r"] = { name = "Rename", _ = "which_key_ignore" },
+  --     --   ["<leader>s"] = { name = "Search", _ = "which_key_ignore" },
+  --     --   ["<leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
   --     -- })
   --   end,
   -- },

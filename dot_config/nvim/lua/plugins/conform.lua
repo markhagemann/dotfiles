@@ -7,19 +7,19 @@ return {
     --   "<leader>lf",
     --   ":Format<CR>",
     --   mode = "v",
-    --   desc = "[L]SP [F]ormat Range",
+    --   desc = "LSP Format Range",
     -- },
     {
       "<leader>ldf",
       ":FormatDisable<CR>",
       mode = "n",
-      desc = "[L]SP [D]isable Formatting",
+      desc = "LSP Disable Formatting",
     },
     {
       "<leader>lef",
       ":FormatEnable<CR>",
       mode = "n",
-      desc = "[L]SP [E]nable Formatting",
+      desc = "LSP Enable Formatting",
     },
   },
   init = function()
