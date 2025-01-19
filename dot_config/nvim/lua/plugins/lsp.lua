@@ -7,6 +7,7 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
+    "saghen/blink.cmp",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -16,18 +17,7 @@ return {
         require("lsp_extra_dim").setup()
       end,
     },
-    "hrsh7th/cmp-nvim-lsp", -- LSP completion
     { "Bilal2453/luvit-meta", lazy = true },
-    -- { -- optional completion source for require statements and module annotations
-    --   "hrsh7th/nvim-cmp",
-    --   opts = function(_, opts)
-    --     opts.sources = opts.sources or {}
-    --     table.insert(opts.sources, {
-    --       name = "lazydev",
-    --       group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-    --     })
-    --   end,
-    -- },
     {
       "dmmulroy/ts-error-translator.nvim",
       config = function()
@@ -237,9 +227,7 @@ return {
         prefix = "",
       },
     })
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
     capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
       lineFoldingOnly = true,
