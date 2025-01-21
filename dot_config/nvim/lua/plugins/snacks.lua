@@ -13,7 +13,7 @@ return {
     gitbrowse = { enabled = true },
     indent = { enabled = true, scope = { enabled = false }, char = "│" },
     -- input = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = { enabled = true, configure = false },
     notifier = {
       enabled = true,
       timeout = 3000,

@@ -74,11 +74,12 @@ return {
     -- signature = { enabled = true },
 
     sources = {
+      cmdline = {},
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
       default = { "lsp", "path", "snippets", "buffer", "dadbod" },
-      cmdline = {},
+      min_keyword_length = 3,
       providers = {
         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
       },

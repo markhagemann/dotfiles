@@ -38,6 +38,17 @@ return {
       },
     },
     {
+      "rachartier/tiny-inline-diagnostic.nvim",
+      event = "VeryLazy", -- Or `LspAttach`
+      priority = 1000, -- needs to be loaded in first
+      config = function()
+        require("tiny-inline-diagnostic").setup({
+          preset = "powerline",
+          options = { show_source = true, virt_texts = { priority = 5000 } },
+        })
+      end,
+    },
+    {
       "simrat39/symbols-outline.nvim",
       keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
       opts = {
@@ -135,7 +146,7 @@ return {
           local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
           severity = severity and vim.diagnostic.severity[severity] or nil
           return function()
-            go({ severity = severity })
+            go({ severity = severity, float = false })
           end
         end
         map("<leader>cd", vim.diagnostic.open_float, "current diagnostics")
