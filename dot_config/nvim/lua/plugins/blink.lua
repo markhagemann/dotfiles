@@ -62,6 +62,7 @@ return {
         auto_show_delay_ms = 250,
         treesitter_highlighting = true,
       },
+
       ghost_text = {
         enabled = vim.g.ai_cmp,
       },
@@ -69,6 +70,12 @@ return {
         show_on_insert_on_trigger_character = false,
       },
     },
+
+    enabled = function()
+      return not vim.tbl_contains({ "NvimTree" }, vim.bo.filetype)
+        and vim.bo.buftype ~= "prompt"
+        and vim.b.completion ~= false
+    end,
 
     -- experimental signature help support
     -- signature = { enabled = true },

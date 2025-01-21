@@ -106,80 +106,22 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  -- {
-  --   "FabijanZulj/blame.nvim",
-  --   opts = {},
-  --   keys = {
-  --     {
-  --       "<leader>tb",
-  --       "<CMD>BlameToggle<CR>",
-  --       desc = "Open git blame list",
-  --       noremap = true,
-  --       silent = true,
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require("blame").setup(opts)
-  --   end,
-  -- },
-  -- {
-  --   "folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     lsp = {
-  --       hover = {
-  --         enabled = false,
-  --       },
-  --       presets = {
-  --         -- bottom_search = true,   -- use a classic bottom cmdline for search
-  --         -- command_palette = true, -- position the cmdline and popupmenu together
-  --         long_message_to_split = true, -- long messages will be sent to a split
-  --         -- inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-  --         -- lsp_doc_border = false, -- add a border to hover docs and signature help
-  --       },
-  --       signature = {
-  --         enabled = false,
-  --       },
-  --     },
-  --     routes = {
-  --       {
-  --         view = "notify",
-  --         filter = {
-  --           event = "msg_showmode",
-  --           any = {
-  --             { find = "recording" },
-  --           },
-  --         },
-  --       },
-  --     },
-  --     views = {
-  --       mini = {
-  --         win_options = {
-  --           winblend = 0,
-  --         },
-  --       },
-  --     },
-  --   },
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     {
-  --       "rcarriga/nvim-notify",
-  --       opts = {
-  --         timeout = 1000,
-  --         render = "compact",
-  --         stages = "fade",
-  --         top_down = false,
-  --         on_open = function(win)
-  --           vim.api.nvim_win_set_config(win, { zindex = 100 })
-  --         end,
-  --       },
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "Dismiss Noice", noremap = true })
-  --     require("noice").setup(opts)
-  --   end,
-  -- },
+  {
+    "FabijanZulj/blame.nvim",
+    opts = {},
+    keys = {
+      {
+        "<leader>tb",
+        "<CMD>BlameToggle<CR>",
+        desc = "Open git blame list",
+        noremap = true,
+        silent = true,
+      },
+    },
+    config = function(_, opts)
+      require("blame").setup(opts)
+    end,
+  },
   {
     "folke/trouble.nvim",
     cmd = { "TodoTrouble", "TroubleToggle" },
@@ -230,17 +172,6 @@ return {
       require("gitlab").setup()
     end,
   },
-  -- Waiting on RNU support
-  -- {
-  --   "JuanBaut/statuscolumn.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   lazy = false,
-  --   config = function()
-  --     require("statuscolumn").setup({
-  --       gradient_hl = "Special",
-  --     })
-  --   end,
-  -- },
   {
     "kburdett/vim-nuuid",
     keys = {

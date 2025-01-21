@@ -325,18 +325,18 @@ return {
       c.gitDiffAdded,
       c.gitDiffRemoved,
       c.gitDiffChanged,
-      c.separator,
+      -- c.separator,
+      c.fileinfo,
     }
 
-    local middle = {
-      c.fileinfo,
+    -- local middle = {
+    -- }
+
+    local right = {
       c.diagnostic_errors,
       c.diagnostic_warnings,
       c.diagnostic_info,
       c.diagnostic_hints,
-    }
-
-    local right = {
       c.lsp,
       -- c.file_type,
       -- c.file_encoding,
@@ -347,12 +347,12 @@ return {
     local components = {
       active = {
         left,
-        middle,
+        -- middle,
         right,
       },
       inactive = {
         left,
-        middle,
+        -- middle,
         right,
       },
     }
