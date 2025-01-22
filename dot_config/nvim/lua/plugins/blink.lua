@@ -1,6 +1,6 @@
 -- Setup from www.lazyvim.org/extras/coding/blink
 -- and https://www.reddit.com/r/neovim/comments/1hlnv7x/blinkcmp_i_finally_have_a_configuration_that/
-vim.g.lazyvim_blink_main = true
+vim.g.lazyvim_blink_main = false
 
 return {
   "saghen/blink.cmp",
@@ -72,7 +72,7 @@ return {
     },
 
     enabled = function()
-      return not vim.tbl_contains({ "NvimTree" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "lua", "markdown", "NvimTree" }, vim.bo.filetype)
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,

@@ -197,7 +197,8 @@ return {
         { "css-lsp" },
         { "emmet-ls" },
         { "delve" },
-        { "eslint_d" },
+        -- https://github.com/mfussenegger/nvim-lint/issues/462#issuecomment-2291862784
+        { "eslint_d", version = "13.1.2" },
         { "gitlab_ci_ls" },
         { "gopls" },
         { "html-lsp" },
@@ -216,12 +217,6 @@ return {
     })
 
     local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-    -- local signs = {
-    --   Error = "",
-    --   Warn = "",
-    --   Hint = " ",
-    --   Info = "",
-    -- }
 
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
