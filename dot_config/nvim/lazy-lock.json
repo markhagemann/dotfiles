@@ -11,6 +11,7 @@
   "chezmoi.nvim": { "branch": "main", "commit": "f5614261b77cb17df72ba2c4fdbc31f7ee42bc6c" },
   "chezmoi.vim": { "branch": "main", "commit": "abf37336437867cbd99ce2f8849b717415391cc3" },
   "color-picker.nvim": { "branch": "master", "commit": "06cb5f853535dea529a523e9a0e8884cdf9eba4d" },
+  "colorful-menu.nvim": { "branch": "master", "commit": "4a17385c4e229027eb6de0f4d3e095448ab3dec1" },
   "conform.nvim": { "branch": "master", "commit": "6dc21d4ce050c2e592d9635b7983d67baf216e3d" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "3a45525bb182730fe462325c99395529308f431e" },
