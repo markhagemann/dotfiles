@@ -25,15 +25,28 @@ return {
     },
     profiler = { enabled = true },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = false }, -- need to figure out how fold works with this first
+    statuscolumn = {
+      enabled = true,
+      left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+      right = { "fold", "git" }, -- priority of signs on the right (high to low)
+      folds = {
+        open = false, -- show open fold icons
+        git_hl = false, -- use Git Signs hl for fold icons
+      },
+      git = {
+        -- patterns to match Git signs
+        patterns = { "GitSign", "MiniDiffSign" },
+      },
+      refresh = 50, -- refresh at most every 50ms
+    },
     -- styles = {
     --   notification = {
     --     -- wo = { wrap = true } -- Wrap notifications
     --   },
     -- },
-    -- terminal = { enabled = true }, -- need to investigate
+    terminal = { enabled = false },
     toggle = { enabled = true },
-    -- words = { enabled = true }, -- need to investigate
+    words = { enabled = true },
     zen = { enabled = true },
   },
   keys = {
@@ -366,20 +379,6 @@ return {
         Snacks.notifier.hide()
       end,
       desc = "notifications dismissal",
-    },
-    {
-      "<c-/>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "toggle terminal",
-    },
-    {
-      "<c-_>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "which_key_ignore",
     },
     {
       "]]",
