@@ -310,6 +310,11 @@ return {
   },
   { "preservim/vim-pencil", event = "VeryLazy" },
   {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "rmagatti/auto-session", -- auto save session
     event = "VeryLazy",
     config = function()
