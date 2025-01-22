@@ -312,7 +312,9 @@ return {
   {
     "rachartier/tiny-glimmer.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      transparency_color = "#000000",
+    },
   },
   {
     "rmagatti/auto-session", -- auto save session
