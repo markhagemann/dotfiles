@@ -42,6 +42,11 @@ return {
           enabled = true,
         },
       },
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
       menu = {
         cmdline_position = function()
           if vim.g.ui_cmdline_pos ~= nil then
@@ -82,12 +87,6 @@ return {
       },
     },
 
-    enabled = function()
-      return not vim.tbl_contains({ "lua", "markdown", "NvimTree" }, vim.bo.filetype)
-        and vim.bo.buftype ~= "prompt"
-        and vim.b.completion ~= false
-    end,
-
     -- experimental signature help support
     -- signature = { enabled = true },
 
@@ -97,7 +96,7 @@ return {
       -- with blink.compat
       compat = {},
       default = { "lsp", "path", "snippets", "buffer", "dadbod" },
-      min_keyword_length = 3,
+      min_keyword_length = 2,
       providers = {
         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
       },
