@@ -380,16 +380,28 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("hlchunk").setup({
+
         chunk = {
           enable = true,
+          priority = 15,
+          style = {
+            { fg = "#b46eff" },
+            { fg = "#c21f30" },
+          },
+          use_treesitter = true,
           chars = {
+            left_arrow = "─",
             horizontal_line = "─",
             vertical_line = "│",
-            left_top = "┌",
-            left_bottom = "└",
-            right_arrow = "─",
+            left_top = "╭",
+            left_bottom = "╰",
+            right_arrow = ">",
           },
-          style = "#b46eff",
+          textobject = "",
+          max_file_size = 1024 * 1024,
+          error_sign = true,
+          duration = 200,
+          delay = 300,
         },
         indent = {
           enable = false,
