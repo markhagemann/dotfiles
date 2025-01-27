@@ -29,6 +29,7 @@ return {
 	initial_rows = 40,
 	macos_window_background_blur = 6,
 	max_fps = 240,
+	prefer_egl = true,
 	window_background_opacity = is_linux() and 0.99 or 0.95,
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = is_linux() and "NONE" or "RESIZE",

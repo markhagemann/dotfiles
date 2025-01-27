@@ -42,4 +42,16 @@ return {
       ui = { enable = false },
     },
   },
+  {
+    "opdavies/toggle-checkbox.nvim",
+    ft = "markdown",
+    opts = {},
+    keys = {
+      {
+        "<leader>tc",
+        ":lua require('toggle-checkbox').toggle()<CR>",
+        desc = "toggle checkbox",
+      },
+    },
+  },
 }
