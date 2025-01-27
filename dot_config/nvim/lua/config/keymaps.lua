@@ -90,8 +90,8 @@ keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr =
 keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- Navigate buffers
-keymap.set("n", "<S-l>", ":bnext<CR>")
-keymap.set("n", "<S-h>", ":bprevious<CR>")
+keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
+keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 
 -- Resize window using <ctrl> arrow keys
 keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
