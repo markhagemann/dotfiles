@@ -28,6 +28,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Terminal optimization
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup("custom-term-open"),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})
+
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),

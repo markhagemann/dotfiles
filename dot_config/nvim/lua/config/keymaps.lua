@@ -11,6 +11,8 @@ local keymap = vim.keymap -- for conciseness
 
 -- Use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")
+-- Use alt + ` to exit insert mode (habit from 60% keyboards)
+keymap.set("i", "<M-`>", "<ESC>")
 
 -- Clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>")
@@ -119,3 +121,44 @@ keymap.set(
 -- Save and load session
 keymap.set("n", "<leader>SS", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
 keymap.set("n", "<leader>SL", ":source .session.vim<CR>", { noremap = true, silent = false })
+
+-- Function to toggle terminal
+local function toggle_terminal()
+  local term_buf = nil
+  -- Check if a terminal buffer already exists
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buftype == "terminal" then
+      term_buf = buf
+      break
+    end
+  end
+
+  -- If in terminal mode, exit terminal mode first
+  if vim.api.nvim_get_mode().mode == "t" then
+    vim.cmd("stopinsert") -- Exit insert mode
+  end
+
+  if term_buf then
+    -- If terminal is visible, hide it by closing the window
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if vim.api.nvim_win_get_buf(win) == term_buf then
+        vim.api.nvim_win_close(win, true)
+        return
+      end
+    end
+    -- If terminal is hidden, reopen it
+    vim.cmd.split()
+    vim.api.nvim_win_set_buf(0, term_buf)
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 5)
+  else
+    -- If no terminal exists, create a new one
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 5)
+  end
+end
+
+-- Keymap to toggle terminal with unified behavior
+keymap.set({ "n", "t" }, "<leader>`", toggle_terminal, { noremap = true, silent = true })
