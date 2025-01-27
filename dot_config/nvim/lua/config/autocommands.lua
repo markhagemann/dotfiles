@@ -1,26 +1,26 @@
--- Autocommands from LazyVim
+-- autocommands from LazyVim
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
--- Re-open at last position
+-- re-open at last position
 vim.cmd([[ au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]])
 
--- Fixes Autocomment
+-- fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   callback = function()
     vim.cmd("set formatoptions-=cro")
   end,
 })
 
--- Check if we need to reload the file when it changed
+-- check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   command = "checktime",
 })
 
--- Highlight on yank
+-- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Terminal optimization
+-- terminal optimization
 vim.api.nvim_create_autocmd("TermOpen", {
   group = augroup("custom-term-open"),
   callback = function()
@@ -90,6 +90,20 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- automatically close Neo-tree when the last buffer is closed
+vim.api.nvim_create_autocmd("BufDelete", {
+  callback = function()
+    -- Check if Neo-tree is open and there are no other buffers left
+    local bufs = vim.fn.tabpagebuflist()
+    if #bufs == 1 then
+      -- Check if Neo-tree is open and close it
+      if vim.fn.exists(":Neotree") == 2 then
+        vim.cmd("Neotree close")
+      end
+    end
+  end,
+})
+
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
@@ -100,7 +114,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
+-- auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)

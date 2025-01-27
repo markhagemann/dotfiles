@@ -216,16 +216,17 @@ return {
       debounce_hours = 5, -- at least 5 hours between attempts to install/update
     })
 
-    local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
     vim.diagnostic.config({
       virtual_text = false,
       severity_sort = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "󰅚 ",
+          [vim.diagnostic.severity.WARN] = "󰀪 ",
+          [vim.diagnostic.severity.HINT] = "󰌶 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
       float = {
         border = "rounded",
         source = "always",
