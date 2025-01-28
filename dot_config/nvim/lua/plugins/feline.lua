@@ -326,7 +326,7 @@ return {
       c.gitDiffRemoved,
       c.gitDiffChanged,
       -- c.separator,
-      c.fileinfo,
+      -- c.fileinfo,
     }
 
     -- local middle = {
