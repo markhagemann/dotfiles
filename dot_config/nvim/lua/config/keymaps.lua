@@ -70,13 +70,6 @@ keymap.set("v", ">", ">gv")
 keymap.set("v", "<A-j>", ":m .+1<CR>==")
 keymap.set("v", "<A-k>", ":m .-2<CR>==")
 
--- Make Y behave like C or D
-keymap.set("n", "Y", "y$")
--- Paste without overwriting register
-keymap.set("v", "p", '"_d"+P')
--- Delete without overwriting register
-keymap.set("n", "d", '"_d"+y')
-keymap.set("v", "d", '"_d"+y')
 -- System clipboard
 keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "Copy to system clipboard" })
