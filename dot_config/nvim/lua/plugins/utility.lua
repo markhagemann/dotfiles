@@ -1,11 +1,4 @@
 return {
-  {
-    "adelarsq/image_preview.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("image_preview").setup()
-    end,
-  },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "barrett-ruth/import-cost.nvim",
@@ -140,7 +133,7 @@ return {
     event = "BufEnter",
     keys = {
       -- suggested keymap
-      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
+      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
     },
   },
   {
@@ -395,7 +388,7 @@ return {
 
       -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
       -- Smears will blend better on all backgrounds.
-      legacy_computing_symbols_support = true,
+      -- legacy_computing_symbols_support = false,
     },
   },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },

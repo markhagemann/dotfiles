@@ -47,7 +47,18 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "echasnovski/mini.nvim", -- Mini.nvim for icons
+      "echasnovski/mini.nvim",
+      -- {
+      --   "3rd/image.nvim",
+      --   build = false, -- do not build with hererocks
+      --   dependencies = {
+      --     "kiyoon/magick.nvim",
+      --   },
+      --   config = function()
+      --     require("magick").setup()
+      --     require("image").setup()
+      --   end,
+      -- },
     },
     keys = {
       { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "File Explorer" },
@@ -123,6 +134,7 @@ return {
             ["|"] = "open_vsplit",
             ["y"] = copy_path,
             ["Y"] = copy_path,
+            -- ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
           },
         },
       })
