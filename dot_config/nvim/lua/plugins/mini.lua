@@ -2,6 +2,7 @@ return {
 
   {
     "echasnovski/mini.ai",
+    event = "BufEnter",
     version = "*",
     config = function()
       require("mini.ai").setup()
@@ -30,7 +31,6 @@ return {
   {
     "echasnovski/mini.icons",
     opts = {},
-    lazy = true,
     init = function()
       package.preload["nvim-web-devicons"] = function()
         require("mini.icons").mock_nvim_web_devicons()
@@ -56,8 +56,8 @@ return {
   -- { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
   {
     "echasnovski/mini.surround",
-    version = "*",
     event = "BufEnter",
+    version = "*",
     opts = {
       mappings = {
         add = "gsa", -- Add surrounding in Normal and Visual modes

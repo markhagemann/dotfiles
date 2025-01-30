@@ -375,13 +375,13 @@ return {
       end,
       desc = "lazygit current git file history",
     },
-    {
-      "<leader>lg",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "lazygit",
-    },
+    -- {
+    --   "<leader>lg",
+    --   function()
+    --     Snacks.lazygit()
+    --   end,
+    --   desc = "lazygit",
+    -- },
     {
       "<leader>gl",
       function()

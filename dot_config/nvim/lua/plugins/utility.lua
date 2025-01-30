@@ -1,17 +1,5 @@
 return {
   {
-    "0x00-ketsu/autosave.nvim",
-    config = function()
-      require("autosave").setup({
-        events = { "BufLeave" },
-        prompt_message = function()
-          return "Autosave: saved at " .. vim.fn.strftime("%H:%M:%S")
-        end,
-        debounce_delay = 5000,
-      })
-    end,
-  },
-  {
     "adelarsq/image_preview.nvim",
     event = "VeryLazy",
     config = function()
@@ -107,25 +95,6 @@ return {
       },
     },
   },
-  -- {
-  --   "danilamihailov/beacon.nvim",
-  --   event = "BufEnter",
-  --   opts = {
-  --     fps = 60, --- integer how smooth the animation going to be
-  --     speed = 1, --- integer speed at which animation goes
-  --     width = 5, --- integer width of the beacon window
-  --     window_events = { "WinEnter", "FocusGained" }, -- table<string> what events trigger cursor highlight
-  --     winblend = 0, --- integer starting transparency of beacon window :h winblend
-  --     highlight = { bg = "#5f87cd", ctermbg = 21 }, -- vim.api.keyset.highlight table passed to vim.api.nvim_set_hl
-  --   },
-  -- },
-  {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-    config = function()
-      vim.g.startuptime_tries = 10
-    end,
-  },
   {
     "FabijanZulj/blame.nvim",
     opts = {},
@@ -199,48 +168,10 @@ return {
     },
   },
   {
-    "kevinhwang91/nvim-bqf",
-    keys = {
-      { "<leader>qn", ":cnext<cr>", desc = "quickfix next" },
-      { "<leader>qp", ":cprevious<cr>", desc = "quickfix previous" },
-    },
-  },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    },
-  },
-  {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
     opts = {},
   },
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   main = "ibl",
-  --   opts = {
-  --     indent = {
-  --       char = "│",
-  --       tab_char = "│",
-  --     },
-  --     scope = { enabled = false, show_start = false, show_end = false },
-  --   },
-  --   event = "BufEnter",
-  -- },
   {
     "m4xshen/hardtime.nvim",
     event = "BufEnter",
@@ -299,6 +230,7 @@ return {
   },
   {
     "max397574/better-escape.nvim",
+    event = "InsertEnter",
     config = function()
       require("better_escape").setup()
     end,
@@ -494,14 +426,7 @@ return {
     lazy = false,
     opts = {},
   },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   event = "InsertEnter",
-  --   config = true,
-  --   -- use opts = {} for passing setup options
-  --   -- this is equivalent to setup({}) function
-  -- },
-  -- { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
