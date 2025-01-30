@@ -463,7 +463,7 @@ return {
 
       -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
       -- Smears will blend better on all backgrounds.
-      -- legacy_computing_symbols_support = false,
+      legacy_computing_symbols_support = true,
     },
   },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
