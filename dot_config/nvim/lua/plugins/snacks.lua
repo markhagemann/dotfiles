@@ -432,6 +432,27 @@ return {
       desc = "git blame line",
     },
     {
+      "<leader>gf",
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = "lazygit current git file history",
+    },
+    {
+      "<leader>lg",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "lazygit",
+    },
+    {
+      "<leader>gl",
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = "lazygit log (cwd)",
+    },
+    {
       "<leader>ft",
       function()
         Snacks.picker.explorer()
