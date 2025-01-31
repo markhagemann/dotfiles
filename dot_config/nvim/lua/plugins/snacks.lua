@@ -13,7 +13,7 @@ return {
     gitbrowse = { enabled = true },
     indent = { enabled = true, scope = { enabled = false }, char = "│" },
     -- input = { enabled = true },
-    lazygit = { enabled = true, configure = false },
+    lazygit = { enabled = false, configure = false },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -367,27 +367,6 @@ return {
         Snacks.git.blame_line()
       end,
       desc = "git blame line",
-    },
-    {
-      "<leader>gf",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "lazygit current git file history",
-    },
-    {
-      "<leader>lg",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "lazygit",
-    },
-    {
-      "<leader>gl",
-      function()
-        Snacks.lazygit.log()
-      end,
-      desc = "lazygit log (cwd)",
     },
     {
       "<leader>nd",

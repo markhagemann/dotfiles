@@ -161,6 +161,25 @@ return {
     },
   },
   {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
+  {
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
     opts = {},
@@ -361,36 +380,13 @@ return {
       })
     end,
   },
-  {
-    "sphamba/smear-cursor.nvim",
-    event = "BufEnter",
-    opts = {
-      -- stiffness = 0.6,
-      -- trailing_stiffness = 0.3,
-      -- trailing_exponent = 0.1,
-      -- distance_stop_animating = 0.1,
-      -- hide_target_hack = false,
-      -- Cursor color. Defaults to Cursor gui color
-      cursor_color = "#5f87cd",
-
-      -- Background color. Defaults to Normal gui background color
-      -- normal_bg = "#282828",
-
-      -- Smear cursor when switching buffers
-      -- smear_between_buffers = true,
-
-      -- Smear cursor when moving within line or to neighbor lines
-      -- smear_between_neighbor_lines = true,
-
-      -- Use floating windows to display smears over wrapped lines or outside buffers.
-      -- May have performance issues with other plugins.
-      use_floating_windows = false,
-
-      -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-      -- Smears will blend better on all backgrounds.
-      -- legacy_computing_symbols_support = false,
-    },
-  },
+  -- {
+  --   "sphamba/smear-cursor.nvim",
+  --   event = "BufEnter",
+  --   opts = {
+  --     cursor_color = "#5f87cd",
+  --   },
+  -- },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "stevearc/quicker.nvim",
