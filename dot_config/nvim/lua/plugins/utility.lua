@@ -223,12 +223,16 @@ return {
   },
   {
     "max397574/better-escape.nvim",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
-      require("better_escape").setup()
+      require("better_escape").setup({
+        mappings = {
+          t = { j = { false } }, --lazygit navigation fix
+          v = { j = { k = false } }, -- visual select fix
+        },
+      })
     end,
   },
-
   {
     "mbbill/undotree",
     keys = {
@@ -361,13 +365,13 @@ return {
       })
     end,
   },
-  -- {
-  --   "sphamba/smear-cursor.nvim",
-  --   event = "BufEnter",
-  --   opts = {
-  --     cursor_color = "#5f87cd",
-  --   },
-  -- },
+  {
+    "sphamba/smear-cursor.nvim",
+    event = "BufEnter",
+    opts = {
+      cursor_color = "#5f87cd",
+    },
+  },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "stevearc/quicker.nvim",
