@@ -198,6 +198,7 @@ return {
         { "emmet-ls" },
         { "delve" },
         -- https://github.com/mfussenegger/nvim-lint/issues/462#issuecomment-2291862784
+        -- MasonInstall eslint_d@13.1.2
         { "eslint_d", version = "13.1.2" },
         { "gitlab_ci_ls" },
         { "gopls" },

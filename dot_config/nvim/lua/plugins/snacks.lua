@@ -79,7 +79,7 @@ return {
         grep = { hidden = true },
         explorer = {
           hidden = true,
-          auto_close = true,
+          auto_close = false,
           win = {
             list = {
               keys = {
