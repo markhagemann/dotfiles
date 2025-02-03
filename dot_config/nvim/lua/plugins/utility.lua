@@ -367,6 +367,7 @@ return {
   },
   {
     "sphamba/smear-cursor.nvim",
+    tag = "v0.4.1",
     event = "BufEnter",
     opts = {
       cursor_color = "#5f87cd",

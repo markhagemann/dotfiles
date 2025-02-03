@@ -2,7 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     branch = "main",
-    cache = false,
+    -- cache = false,
     lazy = false,
     priority = 1000,
     config = function()
