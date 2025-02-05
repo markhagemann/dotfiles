@@ -89,6 +89,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+# Defaults
+export EDITOR=nvim
+export BROWSER=firefox
+
 # Keybindings
 zinit ice depth=1
 
@@ -132,6 +136,7 @@ fi
 
 # Shell integrations
 eval "$(zoxide init zsh)"
+
 # Use oh-my-posh
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
 # Use starship
@@ -151,8 +156,6 @@ function zvm_after_lazy_keybindings() {
   zvm_bindkey vicmd 'gl' end-of-line
 }
 
-# Better ls
-alias ls="eza --icons=always"
 
 . "$HOME/.atuin/bin/env"
 . "$HOME/.asdf/asdf.sh"
