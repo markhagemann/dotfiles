@@ -21,7 +21,7 @@ return {
 	dpi_by_screen = {
 		["Built-in Retina Display"] = 144,
 	},
-	font_size = is_linux() and 15 or 20.5,
+	font_size = is_linux() and 15 or 19,
 	freetype_load_flags = "NO_HINTING",
 	freetype_render_target = "HorizontalLcd",
 	front_end = "OpenGL",
