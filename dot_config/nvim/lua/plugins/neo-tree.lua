@@ -79,7 +79,6 @@ return {
         hijack_netrw = true,
         view = {
           width = 38,
-          side = "right",
           adaptive_size = false,
           preserve_window_proportions = true,
         },
@@ -87,6 +86,11 @@ return {
           follow_current_file = { enabled = true },
           group_empty_dirs = true,
           use_libuv_file_watcher = true,
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+            visible = true,
+          },
         },
         git = {
           enable = true,
@@ -119,7 +123,7 @@ return {
           },
         },
         window = {
-          position = "right",
+          position = "left",
           width = 38,
           mappings = {
             ["o"] = { "open", nowait = true },
