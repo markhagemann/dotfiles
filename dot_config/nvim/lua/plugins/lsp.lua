@@ -7,7 +7,7 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
-    "saghen/blink.cmp",
+    -- "saghen/blink.cmp",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -235,7 +235,9 @@ return {
         prefix = "",
       },
     })
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    -- local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
       lineFoldingOnly = true,
