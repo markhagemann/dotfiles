@@ -259,13 +259,13 @@ return {
     },
   },
   { "preservim/vim-pencil", event = "VeryLazy" },
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = "VeryLazy",
-    opts = {
-      transparency_color = "#000000",
-    },
-  },
+  -- {
+  --   "rachartier/tiny-glimmer.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     transparency_color = "#000000",
+  --   },
+  -- },
   {
     "rmagatti/auto-session", -- auto save session
     event = "VeryLazy",
