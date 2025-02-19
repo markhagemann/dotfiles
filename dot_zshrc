@@ -32,7 +32,6 @@ zinit pack for pyenv
 zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 
-zinit wait lucid light-mode for lukechilds/zsh-nvm
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
@@ -102,9 +101,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export LANG=en_US.UTF-8
 
 export MANPAGER="nvim +Man!"
-
-export NVM_COMPLETION=true
-export NVM_SYMLINK_CURRENT="true"
 
 TMUX_DIR="~/.config/tmux"
 
