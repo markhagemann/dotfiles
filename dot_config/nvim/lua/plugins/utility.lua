@@ -1,4 +1,20 @@
 return {
+  {
+    "aserowy/tmux.nvim",
+    event = "VeryLazy",
+    opts = {
+      navigation = {
+        -- cycles to opposite pane while navigating into the border
+        cycle_navigation = true,
+
+        -- enables default keybindings (C-hjkl) for normal mode
+        enable_default_keybindings = true,
+
+        -- prevents unzoom tmux when navigating beyond vim border
+        persist_zoom = true,
+      },
+    },
+  },
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     "barrett-ruth/import-cost.nvim",
@@ -56,17 +72,6 @@ return {
     config = function()
       require("nvim-highlight-colors").setup({})
     end,
-  },
-  {
-    "christoomey/vim-tmux-navigator",
-    event = "BufEnter",
-    keys = {
-      { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>", desc = "Go to the previous pane" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "Go to the left pane" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "Go to the down pane" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "Go to the up pane" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "Go to the right pane" },
-    },
   },
   {
     "chrisgrieser/nvim-spider",
