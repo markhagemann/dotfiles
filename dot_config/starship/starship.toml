@@ -34,6 +34,7 @@ disabled = false
 
 [os.symbols]
 Windows = ' '
+CachyOS = '󰣇'
 Arch = '󰣇'
 Linux = '󰣇'
 Ubuntu = ''
@@ -49,7 +50,7 @@ disabled = false
 truncation_length = 2
 truncation_symbol = '…/'
 truncate_to_repo = false
-style = 'bold fg:#73daca'
+style = 'bold fg:#7dcfff'
 
 # Shows current git branch
 [git_branch]
