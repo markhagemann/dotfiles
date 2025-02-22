@@ -1,16 +1,16 @@
 return {
   {
     "echasnovski/mini.files",
-    opts = function(_, opts)
+    opts = {
       -- I didn't like the default mappings, so I modified them
       -- Module mappings created only inside explorer.
       -- Use `''` (empty string) to not create one.
-      opts.mappings = vim.tbl_deep_extend("force", opts.mappings or {}, {
+      mappings = {
         close = "<esc>",
         -- Use this if you want to open several files
-        go_in = "l",
+        go_in_entry = "o",
         -- This opens the file, but quits out of mini.files (default L)
-        go_in_plus = "<CR>",
+        go_in_plus = "l",
         -- I swapped the following 2 (default go_out: h)
         -- go_out_plus: when you go out, it shows you only 1 item to the right
         -- go_out: shows you all the items to the right
@@ -28,15 +28,15 @@ return {
 
         -- Below I created an autocmd with the "," keymap to open the highlighted
         -- directory in a tmux pane on the right
-      })
+      },
 
-      opts.windows = vim.tbl_deep_extend("force", opts.windows or {}, {
+      windows = {
         preview = true,
         width_focus = 30,
         width_preview = 80,
-      })
+      },
 
-      opts.options = vim.tbl_deep_extend("force", opts.options or {}, {
+      options = {
         -- Whether to use for editing directories
         -- Disabled by default in LazyVim because neo-tree is used for that
         use_as_default_explorer = true,
@@ -44,9 +44,8 @@ return {
         -- To get this dir run :echo stdpath('data')
         -- ~/.local/share/neobean/mini.files/trash
         permanent_delete = false,
-      })
-      return opts
-    end,
+      },
+    },
 
     keys = {
       {

@@ -93,10 +93,10 @@ keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Wi
 keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Window management
-keymap.set("n", "<leader>wv", "<C-w>v") -- split window vertically
-keymap.set("n", "<leader>wh", "<C-w>s") -- split window horizontally
-keymap.set("n", "<leader>we", "<C-w>=") -- make split windows equal width & height
-keymap.set("n", "<leader>wx", ":close<CR>") -- close current split window
+keymap.set("n", "<leader>|", "<C-w>v", { desc = "Vertical Split" }) -- split window vertically
+keymap.set("n", "<leader>-", "<C-w>s", { desc = "Horizontal Split" }) -- split window horizontally
+keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize Splits" }) -- make split windows equal width & height
+keymap.set("n", "<leader>wx", ":close<CR>", { desc = "Close Split" }) -- close current split window
 
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
 keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
