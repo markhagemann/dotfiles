@@ -87,7 +87,6 @@ return {
         vim.cmd("TransparentToggle")
         vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
         require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
-        require("lazy.core.loader").reload(require("lazy.core.config").plugins["feline.nvim"])
       end
 
       -- There are issues with this - some background highlight can never be reverted even though other stuff is transparent
