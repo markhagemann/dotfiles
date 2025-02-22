@@ -50,7 +50,7 @@ disabled = false
 truncation_length = 2
 truncation_symbol = '…/'
 truncate_to_repo = false
-style = 'bold fg:#7dcfff'
+style = 'bold fg:#577ac0'
 
 # Shows current git branch
 [git_branch]
