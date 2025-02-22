@@ -28,15 +28,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- terminal optimization
-vim.api.nvim_create_autocmd("TermOpen", {
-  group = augroup("custom-term-open"),
-  callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-  end,
-})
-
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
@@ -123,5 +114,17 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+-- terminal optimization
+-- https://stackoverflow.com/a/63908546/2338672
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
+  group = augroup("custom-term-open"),
+  pattern = "*",
+  callback = function()
+    vim.wo.winbar = ""
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
   end,
 })

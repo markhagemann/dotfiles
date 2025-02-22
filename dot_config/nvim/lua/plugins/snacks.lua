@@ -50,7 +50,7 @@ return {
               action = function()
                 vim.ui.open("https://github.com/notifications")
               end,
-              key = "n",
+              key = "N",
               icon = " ",
               height = 5,
               enabled = true,
@@ -122,6 +122,14 @@ return {
         cwd_bonus = false, -- give bonus for matching files in the cwd
         frecency = false, -- frecency bonus
       },
+      icons = {
+        diagnostics = {
+          Error = "󰅚 ",
+          Warn = "󰀪 ",
+          Hint = "󰌶 ",
+          Info = " ",
+        },
+      },
       sources = {
         files = { hidden = true },
         buffers = { hidden = true, layout = { preset = "vscode" } },
@@ -180,7 +188,7 @@ return {
     --     -- wo = { wrap = true } -- Wrap notifications
     --   },
     -- },
-    terminal = { enabled = false },
+    terminal = { enabled = true },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = true },
@@ -551,6 +559,18 @@ return {
         })
       end,
     },
+    {
+      "`",
+      function()
+        Snacks.terminal.toggle()
+      end,
+      mode = { "n", "t" },
+      desc = "Toggle Terminal",
+    },
+    { "<c-h>", [[<C-\><C-n><C-W>h]], mode = "t", desc = "Window Movement: Move Left" },
+    { "<c-j>", [[<C-\><C-n><C-W>j]], mode = "t", desc = "Window Movement: Move Down" },
+    { "<c-k>", [[<C-\><C-n><C-W>k]], mode = "t", desc = "Window Movement: Move Up" },
+    { "<c-l>", [[<C-\><C-n><C-W>l]], mode = "t", desc = "Window Movement: Move Right" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
