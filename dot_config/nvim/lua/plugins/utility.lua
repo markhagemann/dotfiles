@@ -34,16 +34,16 @@ return {
       before.setup()
 
       -- Jump to previous entry in the edit history
-      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "Jump to Last Edit" })
+      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "jump to last edit" })
 
       -- Jump to next entry in the edit history
-      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "Jump to Next Edit" })
+      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "jump to next edit" })
 
       -- Look for previous edits in quickfix list
-      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "Open Edits in Quickfix" })
+      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "open edits in quickfix" })
 
       -- Look for previous edits in telescope (needs telescope, obviously)
-      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "Open Edits in Telescope" })
+      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "open edits in telescope" })
     end,
   },
   {
@@ -59,8 +59,9 @@ return {
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
         render = function(props)
+          local mini_icons = require("mini.icons")
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+          local icon, color = mini_icons.get("file", filename)
           return { { icon, guifg = color }, { " " }, { filename } }
         end,
       })
@@ -100,7 +101,7 @@ return {
       {
         "<leader>tb",
         "<CMD>BlameToggle<CR>",
-        desc = "Open git blame list",
+        desc = "open git blame list",
         noremap = true,
         silent = true,
       },
@@ -114,16 +115,11 @@ return {
     cmd = { "TodoTrouble", "TroubleToggle" },
     event = "VimEnter",
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-      { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "diagnostics (trouble)" },
+      { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics (trouble)" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "symbols (trouble)" },
     },
     opts = {},
-  },
-  {
-    "folke/ts-comments.nvim",
-    opts = {},
-    event = "VeryLazy",
   },
   {
     "folke/twilight.nvim",
@@ -138,31 +134,13 @@ return {
     event = "BufEnter",
     keys = {
       -- suggested keymap
-      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
+      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "paste clipboard image" },
     },
-  },
-  {
-    "harrisoncramer/gitlab.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "stevearc/dressing.nvim",
-      "echasnovski/mini.icons",
-    },
-    enabled = true,
-    build = function()
-      require("gitlab.server").build(true)
-    end, -- Builds the Go binary
-    config = function()
-      require("gitlab").setup()
-    end,
   },
   {
     "kburdett/vim-nuuid",
     keys = {
-      { "<leader>u", "<Plug>Nuuid", desc = "Create New UUID" },
+      { "<leader>u", "<Plug>Nuuid", desc = "generate uuid" },
     },
   },
   {
@@ -217,12 +195,12 @@ return {
       {
         "<leader>sr",
         ":GrugFar<cr>",
-        desc = "search & replace across all files (Grug)",
+        desc = "search/replace across all files (grug)",
       },
       {
         "<leader>sc",
         "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand(' % ') } })<cr>",
-        desc = "search & replace across current file (Grug)",
+        desc = "search/replace across current file (grug)",
       },
     },
   },
@@ -241,7 +219,7 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<leader>ut", ":UndotreeToggle<cr>", desc = "undo tree" },
+      { "<leader>ut", ":UndotreeToggle<cr>", desc = "toggle undo tree" },
     },
   },
   {
@@ -404,11 +382,11 @@ return {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "volskaya/windovigation.nvim",
-    lazy = false,
-    opts = {},
-  },
+  -- {
+  --   "volskaya/windovigation.nvim",
+  --   lazy = false,
+  --   opts = {},
+  -- },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
     "ziontee113/color-picker.nvim",

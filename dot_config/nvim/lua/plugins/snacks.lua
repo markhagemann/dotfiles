@@ -99,7 +99,13 @@ return {
     -- debug = { enabled = true },
     git = { enabled = true },
     gitbrowse = { enabled = true },
-    indent = { enabled = true, scope = { enabled = false }, char = "│" },
+    indent = {
+      enabled = true,
+      scope = { enabled = false },
+      -- indent = {
+      --   char = "│",
+      -- },
+    },
     image = { enabled = true },
     -- input = { enabled = true },
     lazygit = { enabled = false, configure = false },
@@ -195,13 +201,6 @@ return {
   },
   keys = {
     {
-      "<leader>,",
-      function()
-        Snacks.picker.buffers()
-      end,
-      desc = "buffers",
-    },
-    {
       '<leader>"',
       function()
         Snacks.picker.registers()
@@ -221,13 +220,6 @@ return {
         Snacks.picker.command_history()
       end,
       desc = "command history",
-    },
-    {
-      "<leader><space>",
-      function()
-        Snacks.picker.files()
-      end,
-      desc = "files",
     },
     -- find
     {
@@ -293,14 +285,14 @@ return {
       function()
         Snacks.picker.grep_buffers()
       end,
-      desc = "search open Buffers",
+      desc = "search open buffers",
     },
     {
       "<leader>sg",
       function()
         Snacks.picker.grep()
       end,
-      desc = "Grep",
+      desc = "grep",
     },
     {
       "<leader>sw",
@@ -323,7 +315,7 @@ return {
       function()
         Snacks.picker.registers()
       end,
-      desc = "search Registers",
+      desc = "search registers",
     },
     {
       "<leader>sa",
@@ -344,7 +336,7 @@ return {
       function()
         Snacks.picker.commands()
       end,
-      desc = "search Commands",
+      desc = "search commands",
     },
     {
       "<leader>sd",
@@ -365,7 +357,7 @@ return {
       function()
         Snacks.picker.highlights()
       end,
-      desc = "search Highlights",
+      desc = "search highlights",
     },
     {
       "<leader>sj",
@@ -386,14 +378,14 @@ return {
       function()
         Snacks.picker.loclist()
       end,
-      desc = "search location List",
+      desc = "search location list",
     },
     {
       "<leader>sM",
       function()
         Snacks.picker.man()
       end,
-      desc = "search Man Pages",
+      desc = "search man pages",
     },
     {
       "<leader>sm",
@@ -407,7 +399,7 @@ return {
       function()
         Snacks.picker.resume()
       end,
-      desc = "search Resume",
+      desc = "search resume",
     },
     {
       "<leader>sq",
@@ -437,14 +429,14 @@ return {
       function()
         Snacks.zen()
       end,
-      desc = "Toggle Zen Mode",
+      desc = "toggle zen mode",
     },
     {
       "<leader>Z",
       function()
         Snacks.zen.zoom()
       end,
-      desc = "Toggle Zoom",
+      desc = "toggle zoom",
     },
     {
       "<leader>.",
@@ -567,10 +559,10 @@ return {
       mode = { "n", "t" },
       desc = "Toggle Terminal",
     },
-    { "<c-h>", [[<C-\><C-n><C-W>h]], mode = "t", desc = "Window Movement: Move Left" },
-    { "<c-j>", [[<C-\><C-n><C-W>j]], mode = "t", desc = "Window Movement: Move Down" },
-    { "<c-k>", [[<C-\><C-n><C-W>k]], mode = "t", desc = "Window Movement: Move Up" },
-    { "<c-l>", [[<C-\><C-n><C-W>l]], mode = "t", desc = "Window Movement: Move Right" },
+    { "<c-h>", [[<C-\><C-n><C-W>h]], mode = "t", desc = "window movement: move left" },
+    { "<c-j>", [[<C-\><C-n><C-W>j]], mode = "t", desc = "window movement: move down" },
+    { "<c-k>", [[<C-\><C-n><C-W>k]], mode = "t", desc = "window movement: move up" },
+    { "<c-l>", [[<C-\><C-n><C-W>l]], mode = "t", desc = "window movement: move right" },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
@@ -586,19 +578,20 @@ return {
         vim.print = _G.dd -- Override print to use snacks for `:=` command
 
         -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "spelling" }):map("<leader>us")
-        Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "relative number" }):map("<leader>urn")
-        Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
+        Snacks.toggle.option("spell", { name = "spelling" }):map("<leader>us", { desc = "toggle spelling" })
+        Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw", { desc = "toggle word wrap" })
+        Snacks.toggle
+          .option("relativenumber", { name = "relative number" })
+          :map("<leader>urn", { desc = "toggle relative number" })
+        Snacks.toggle.diagnostics():map("<leader>ud", { desc = "toggle diagnostics" })
+        Snacks.toggle.line_number():map("<leader>ul", { desc = "toggle line numbers" })
         Snacks.toggle
           .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-          :map("<leader>uc")
-        Snacks.toggle.treesitter():map("<leader>uT")
-        -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-        Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.indent():map("<leader>ug")
-        -- Snacks.toggle.dim():map("<leader>uD")
+          :map("<leader>uc", { desc = "toggle conceallevel" })
+        Snacks.toggle.treesitter():map("<leader>uT", { desc = "toggle treesitter highlights" })
+        Snacks.toggle.inlay_hints():map("<leader>uh", { desc = "toggle inlay hints" })
+        Snacks.toggle.indent():map("<leader>ug", { desc = "toggle indent guides" })
+        Snacks.toggle.dim():map("<leader>uD", { desc = "toggle dimming" })
       end,
     })
   end,

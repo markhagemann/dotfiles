@@ -1,33 +1,119 @@
 return {
   {
-    "echasnovski/mini.files",
-    opts = {
-      mappings = {
-        close = "<esc>",
-        go_in_entry = "o",
-        go_in_plus = "l",
-        go_out = "H",
-        go_out_plus = "h",
-        reset = "<BS>",
-        reveal_cwd = ".",
-        show_help = "g?",
-        synchronize = "s",
-        trim_left = "<",
-        trim_right = ">",
-      },
+    "echasnovski/mini.nvim",
+    lazy = false,
+    version = "*",
+    config = function()
+      require("mini.ai").setup()
+      local clue = require("mini.clue")
+      require("mini.diff").setup()
+      require("mini.comment").setup()
+      local files = require("mini.files")
+      require("mini.git").setup()
+      local hipatterns = require("mini.hipatterns")
+      local icons = require("mini.icons")
+      require("mini.pairs").setup()
+      require("mini.surround").setup()
 
-      windows = {
-        preview = true,
-        width_focus = 30,
-        width_preview = 80,
-      },
+      clue.setup({
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          clue.gen_clues.builtin_completion(),
+          clue.gen_clues.g(),
+          clue.gen_clues.marks(),
+          clue.gen_clues.registers(),
+          clue.gen_clues.windows(),
+          clue.gen_clues.z(),
+        },
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<leader>" },
+          { mode = "x", keys = "<leader>" },
 
-      options = {
-        use_as_default_explorer = true,
-        permanent_delete = false,
-      },
-    },
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>" },
 
+          -- `g` key
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+
+          -- Marks
+          { mode = "n", keys = "'" },
+          { mode = "n", keys = "`" },
+          { mode = "x", keys = "'" },
+          { mode = "x", keys = "`" },
+
+          -- Registers
+          { mode = "n", keys = '"' },
+          { mode = "x", keys = '"' },
+          { mode = "i", keys = "<C-r>" },
+          { mode = "c", keys = "<C-r>" },
+
+          -- Window commands
+          { mode = "n", keys = "<C-w>" },
+
+          -- `z` key
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+        },
+        window = {
+          delay = 100,
+        },
+      })
+
+      files.setup({
+        mappings = {
+          close = "<esc>",
+          go_in_entry = "o",
+          go_in_plus = "l",
+          go_out = "H",
+          go_out_plus = "h",
+          reset = "<BS>",
+          reveal_cwd = ".",
+          show_help = "g?",
+          synchronize = "s",
+          trim_left = "<",
+          trim_right = ">",
+        },
+        windows = {
+          preview = true,
+          width_focus = 30,
+          width_preview = 80,
+        },
+        options = {
+          use_as_default_explorer = true,
+          permanent_delete = true,
+        },
+      })
+
+      hipatterns.setup({
+        highlighters = {
+          -- Highlight standalone 'FIXME:', 'HACK:', 'TODO:', 'NOTE:'
+          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+          -- Highlight hex color strings (`#rrggbb`) using that color
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      })
+
+      icons.setup({
+        filetype = {
+          json = { glyph = "" },
+          jsonc = { glyph = "" },
+
+          sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
+          zsh = { glyph = "󰐣" },
+          bash = { glyph = "󰐣" },
+        },
+        extension = {
+          conf = { glyph = "󰛸", hl = "MiniIconsBlue" },
+        },
+      })
+      MiniIcons.mock_nvim_web_devicons()
+    end,
     keys = {
       {
         -- Open the directory of the file currently being edited
@@ -48,7 +134,7 @@ return {
             require("mini.files").open(vim.uv.cwd(), true)
           end
         end,
-        desc = "Open mini.files (Directory of Current File or CWD if not exists)",
+        desc = "open mini files (directory of current file or cwd if not exists)",
       },
       -- Open the current working directory
       {
@@ -56,87 +142,8 @@ return {
         function()
           require("mini.files").open(vim.uv.cwd(), true)
         end,
-        desc = "Open mini.files (cwd)",
+        desc = "open mini files (cwd)",
       },
     },
-
-    config = function(_, opts)
-      -- Set up mini.files
-      require("mini.files").setup(opts)
-      -- Load custom keymaps
-      mini_files_km.setup(opts)
-
-      -- Load Git integration
-      -- git config is slowing mini.files too much, so disabling it
-      mini_files_git.setup()
-    end,
-  },
-  {
-    "echasnovski/mini.ai",
-    event = "BufEnter",
-    version = "*",
-    config = function()
-      require("mini.ai").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.files",
-    event = "BufEnter",
-    version = "*",
-    config = function()
-      require("mini.files").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.hipatterns",
-    event = "VimEnter",
-    version = "*",
-    config = function()
-      local hipatterns = require("mini.hipatterns")
-      hipatterns.setup({
-        highlighters = {
-          -- Highlight standalone 'FIXME:', 'HACK:', 'TODO:', 'NOTE:'
-          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-          -- Highlight hex color strings (`#rrggbb`) using that color
-          hex_color = hipatterns.gen_highlighter.hex_color(),
-        },
-      })
-    end,
-  },
-  {
-    "echasnovski/mini.icons",
-    opts = {},
-    init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
-    end,
-    config = function()
-      require("mini.icons").setup({
-        filetype = {
-          json = { glyph = "" },
-          jsonc = { glyph = "" },
-
-          sh = { glyph = "󰐣", hl = "MiniIconsBlue" },
-          zsh = { glyph = "󰐣" },
-          bash = { glyph = "󰐣" },
-        },
-        extension = {
-          conf = { glyph = "󰛸", hl = "MiniIconsBlue" },
-        },
-      })
-    end,
-  },
-  -- { "echasnovski/mini.indentscope", version = "*", event = "BufEnter" },
-  {
-    "echasnovski/mini.surround",
-    event = "BufEnter",
-    version = "*",
-    opts = {},
   },
 }
