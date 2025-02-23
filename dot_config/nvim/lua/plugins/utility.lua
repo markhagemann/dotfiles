@@ -96,19 +96,20 @@ return {
   },
   {
     "FabijanZulj/blame.nvim",
-    opts = {},
+    opts = {
+      views = {
+        default = virtual_view,
+      },
+    },
     keys = {
       {
-        "<leader>tb",
+        "<leader>gb",
         "<CMD>BlameToggle<CR>",
-        desc = "open git blame list",
+        desc = "git blame",
         noremap = true,
         silent = true,
       },
     },
-    config = function(_, opts)
-      require("blame").setup(opts)
-    end,
   },
   {
     "folke/trouble.nvim",
@@ -313,7 +314,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("hlchunk").setup({
-
         chunk = {
           enable = true,
           priority = 15,
@@ -328,7 +328,8 @@ return {
             vertical_line = "│",
             left_top = "╭",
             left_bottom = "╰",
-            right_arrow = ">",
+            right_arrow = "─",
+            -- right_arrow = ">",
           },
           textobject = "",
           max_file_size = 1024 * 1024,

@@ -4,9 +4,11 @@ return {
   cmd = { "LazyDoToggle", "LazyDoPin" },
   keys = {
     {
-      "<leader>lt",
+      "<leader>tl",
       "<ESC><CMD>LazyDoToggle<CR>",
       mode = { "n" },
+      silent = true,
+      desc = "toggle lazydo",
     },
   },
   event = "VeryLazy",

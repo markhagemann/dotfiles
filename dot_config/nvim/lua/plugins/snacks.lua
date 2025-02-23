@@ -456,15 +456,8 @@ return {
       function()
         Snacks.gitbrowse()
       end,
-      desc = "git Browse",
+      desc = "git browse",
       mode = { "n", "v" },
-    },
-    {
-      "<leader>gb",
-      function()
-        Snacks.git.blame_line()
-      end,
-      desc = "git blame line",
     },
     {
       "<leader>gf",

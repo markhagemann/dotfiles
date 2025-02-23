@@ -48,9 +48,7 @@ return {
 
           -- Marks
           { mode = "n", keys = "'" },
-          { mode = "n", keys = "`" },
           { mode = "x", keys = "'" },
-          { mode = "x", keys = "`" },
 
           -- Registers
           { mode = "n", keys = '"' },
