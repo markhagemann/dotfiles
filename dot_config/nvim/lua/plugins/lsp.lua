@@ -1,8 +1,3 @@
-local check_backspace = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -39,7 +34,22 @@ return {
         },
       },
     },
-    { "kosayoda/nvim-lightbulb" },
+    {
+      "kosayoda/nvim-lightbulb",
+      config = function()
+        require("nvim-lightbulb").setup({
+          sign = {
+            enabled = true,
+            -- Text to show in the sign column.
+            -- Must be between 1-2 characters.
+            text = "󰌶 ",
+            lens_text = "🔎",
+            -- Highlight group to highlight the sign column text.
+            hl = "LightBulbSign",
+          },
+        })
+      end,
+    },
     {
       "rachartier/tiny-inline-diagnostic.nvim",
       event = "VeryLazy", -- Or `LspAttach`

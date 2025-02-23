@@ -6,7 +6,16 @@ return {
     config = function()
       require("mini.ai").setup()
       local clue = require("mini.clue")
-      require("mini.diff").setup()
+      require("mini.diff").setup({
+        view = {
+          style = "sign",
+          signs = {
+            add = "▎",
+            change = "▎",
+            delete = "▎",
+          },
+        },
+      })
       require("mini.comment").setup()
       local files = require("mini.files")
       require("mini.git").setup()
