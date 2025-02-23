@@ -17,7 +17,7 @@ return {
     local pos_cursor = require("sttusline.components.pos-cursor")
     local pos_cursor_progress = require("sttusline.components.pos-cursor-progress")
 
-    local none = "None"
+    local none = "Normal"
 
     diagnostics.set_config({
       icons = {
@@ -28,17 +28,10 @@ return {
       },
       order = { "ERROR", "WARN", "INFO", "HINT" },
     })
-    diagnostics.set_colors({
-
-      { fg = colors.theme.red, bg = none },
-      { fg = colors.theme.yellow, bg = none },
-      { fg = colors.theme.cyan, bg = none },
-      { fg = colors.blue, bg = none },
-    })
     filename.set_colors({
       { bg = none },
       {
-        fg = colors.theme.black,
+        fg = colors.theme.white,
         bg = none,
       },
     })
@@ -75,7 +68,7 @@ return {
       },
       components = {
         mode,
-        filename,
+        -- filename,
         git_branch,
         git_diff,
         diagnostics,

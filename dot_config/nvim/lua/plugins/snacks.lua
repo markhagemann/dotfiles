@@ -97,7 +97,7 @@ return {
       },
     },
     -- debug = { enabled = true },
-    git = { enabled = true },
+    git = { enabled = false },
     gitbrowse = { enabled = true },
     indent = {
       enabled = true,
@@ -256,21 +256,6 @@ return {
         Snacks.picker.recent()
       end,
       desc = "find recent",
-    },
-    -- git
-    {
-      "<leader>gc",
-      function()
-        Snacks.picker.git_log()
-      end,
-      desc = "git commit log",
-    },
-    {
-      "<leader>gs",
-      function()
-        Snacks.picker.git_status()
-      end,
-      desc = "git status",
     },
     -- grep
     {
@@ -496,7 +481,7 @@ return {
       desc = "lazygit",
     },
     {
-      "<leader>gl",
+      "<leader>gc",
       function()
         Snacks.lazygit.log()
       end,
