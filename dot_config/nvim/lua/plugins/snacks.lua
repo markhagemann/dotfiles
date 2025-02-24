@@ -52,8 +52,18 @@ return {
               end,
               key = "N",
               icon = " ",
-              height = 5,
+              height = 2,
               enabled = true,
+            },
+            {
+              title = "Pipelines",
+              cmd = "glab ci list -P 3 -u markhagemannmsts",
+              action = function()
+                vim.fn.jobstart("gh ci list --web", { detach = true })
+              end,
+              key = "P",
+              icon = " ",
+              height = 5,
             },
             -- {
             --   title = "Open Issues",
@@ -67,11 +77,11 @@ return {
             -- },
             {
               icon = " ",
-              title = "Open PRs",
-              cmd = "gh pr list -L 3",
-              key = "P",
+              title = "Open MRs",
+              cmd = "glab mr list -P 5",
+              key = "M",
               action = function()
-                vim.fn.jobstart("gh pr list --web", { detach = true })
+                vim.fn.jobstart("gh mr list --web", { detach = true })
               end,
               height = 7,
             },
