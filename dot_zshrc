@@ -91,6 +91,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Defaults
 export EDITOR=nvim
 export BROWSER=firefox
+export TERM=xterm-kitty
 
 # Keybindings
 zinit ice depth=1
