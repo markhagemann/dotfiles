@@ -118,7 +118,16 @@ return {
     },
     image = { enabled = true },
     -- input = { enabled = true },
-    lazygit = { enabled = false, configure = false },
+    lazygit = {
+      enabled = false,
+      configure = true,
+      config = {
+        os = {
+          editPreset = "nvim-remote",
+          edit = '[ -z ""$NVIM"" ] && (nvim -- {{filename}}) || (nvim --server ""$NVIM"" --remote-send ""q"" && nvim --server ""$NVIM"" --remote {{filename}})',
+        },
+      },
+    },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -235,7 +244,11 @@ return {
     {
       "<leader>fb",
       function()
-        Snacks.picker.buffers()
+        Snacks.picker.buffers({
+          on_show = function()
+            vim.cmd.stopinsert()
+          end,
+        })
       end,
       desc = "find buffers",
     },

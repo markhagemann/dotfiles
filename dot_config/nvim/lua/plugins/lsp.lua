@@ -215,6 +215,8 @@ return {
         { "eslint_d", version = "13.1.2" },
         { "gitlab-ci-ls" },
         { "gopls" },
+        { "gofmt" },
+        { "goimports" },
         { "html-lsp" },
         { "lua-language-server" },
         { "prettierd" },

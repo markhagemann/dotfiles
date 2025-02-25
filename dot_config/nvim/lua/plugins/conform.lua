@@ -90,7 +90,7 @@ return {
         css = use_web_formatters,
         html = use_prettier,
         lua = { "stylua" },
-        go = { "gofmt" },
+        go = { "goimports" },
         python = { "isort", "black" },
         javascript = use_web_formatters,
         -- sh = sh_formatters,

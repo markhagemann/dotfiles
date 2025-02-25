@@ -7,7 +7,7 @@ return {
   config = function(_, opts)
     local colors = require("utils.colors")
     local diagnostics = require("sttusline.components.diagnostics")
-    local filename = require("sttusline.components.filename")
+    -- local filename = require("sttusline.components.filename")
     local mode = require("sttusline.components.mode")
     local git_branch = require("sttusline.components.git-branch")
     local git_diff = require("sttusline.components.git-diff")
@@ -28,13 +28,13 @@ return {
       },
       order = { "ERROR", "WARN", "INFO", "HINT" },
     })
-    filename.set_colors({
-      { bg = none },
-      {
-        fg = colors.theme.white,
-        bg = none,
-      },
-    })
+    -- filename.set_colors({
+    --   { bg = none },
+    --   {
+    --     fg = colors.theme.black,
+    --     bg = none,
+    --   },
+    -- })
     mode.set_config({
       mode_colors = {
         ["STTUSLINE_NORMAL_MODE"] = { fg = colors.vi_mode_colors.normal, bg = none },

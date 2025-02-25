@@ -349,17 +349,17 @@ return {
       })
     end,
   },
-  {
-    "sphamba/smear-cursor.nvim",
-    tag = "v0.4.1",
-    event = "BufEnter",
-    opts = {
-      cursor_color = "#5f87cd",
-      stiffness = 0.9,
-      trailing_stiffness = 0.6,
-      gamma = 0.25,
-    },
-  },
+  -- {
+  --   "sphamba/smear-cursor.nvim",
+  --   tag = "v0.4.1",
+  --   event = "BufEnter",
+  --   opts = {
+  --     cursor_color = "#5f87cd",
+  --     stiffness = 0.9,
+  --     trailing_stiffness = 0.6,
+  --     gamma = 0.25,
+  --   },
+  -- },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "stevearc/quicker.nvim",
