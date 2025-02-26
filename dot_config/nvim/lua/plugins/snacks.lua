@@ -97,7 +97,7 @@ return {
                 -- TODO: This isn't a valid command
                 vim.fn.jobstart("glab ci list --web", { detach = true })
               end,
-              key = "P",
+              key = "p",
               icon = " ",
               height = 5,
               width = 85,
@@ -110,7 +110,7 @@ return {
               action = function()
                 vim.fn.jobstart("gh run list --web", { detach = true })
               end,
-              key = "P",
+              key = "p",
               icon = " ",
               height = 5,
               width = 85,
@@ -131,7 +131,7 @@ return {
               icon = " ",
               title = "Open MRs",
               cmd = "glab mr list -P 5",
-              key = "M",
+              key = "m",
               action = function()
                 -- TODO: This isn't a valid command
                 vim.fn.jobstart("glab mr list --web", { detach = true })
