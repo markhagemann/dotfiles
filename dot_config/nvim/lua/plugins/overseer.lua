@@ -1,7 +1,11 @@
 return {
   "stevearc/overseer.nvim",
   opts = {},
-
+  config = function()
+    require("overseer").setup({
+      templates = { "register-shell-scripts", "builtin" },
+    })
+  end,
   keys = {
     {
       "<leader>or",
@@ -12,7 +16,7 @@ return {
     },
     {
       "<leader>ot",
-      "<ESC><CMD>OverseerToggle<CR>",
+      "<ESC><CMD>OverseerToggle left<CR>",
       mode = { "n", "t" },
       silent = true,
       desc = "overseer toggle",

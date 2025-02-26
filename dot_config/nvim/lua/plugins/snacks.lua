@@ -59,7 +59,8 @@ return {
               title = "Pipelines",
               cmd = "glab ci list -P 3 -u markhagemannmsts",
               action = function()
-                vim.fn.jobstart("gh ci list --web", { detach = true })
+                -- TODO: This isn't a valid command
+                vim.fn.jobstart("glab ci list --web", { detach = true })
               end,
               key = "P",
               icon = " ",
@@ -81,15 +82,10 @@ return {
               cmd = "glab mr list -P 5",
               key = "M",
               action = function()
+                -- TODO: This isn't a valid command
                 vim.fn.jobstart("gh mr list --web", { detach = true })
               end,
               height = 7,
-            },
-            {
-              icon = " ",
-              title = "Git Status",
-              cmd = "git --no-pager diff --stat -B -M -C",
-              height = 10,
             },
           }
           return vim.tbl_map(function(cmd)
