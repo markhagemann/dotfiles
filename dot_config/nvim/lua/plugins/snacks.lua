@@ -9,6 +9,7 @@ return {
     bufdelete = { enabled = true },
     dashboard = {
       enabled = true,
+      width = 90,
       preset = {
         header = table.concat({
           [[             ]],
@@ -32,7 +33,10 @@ return {
         },
         { section = "keys", gap = 1, padding = 1 },
         function()
-          local in_git = Snacks.git.get_root() ~= nil
+          local is_git = Snacks.git.get_root ~= nil
+          local is_gitlab_repo = require("utils.info").is_gitlab_repo()
+          local is_github_repo = require("utils.info").is_github_repo()
+
           local cmds = {
             {
               title = "Browse Repo",
@@ -43,6 +47,7 @@ return {
               key = "b",
               icon = " ",
               height = 1,
+              enabled = is_git,
             },
             {
               title = "Notifications",
@@ -53,6 +58,7 @@ return {
               key = "N",
               icon = " ",
               height = 2,
+              width = 85,
               enabled = true,
             },
             {
@@ -65,17 +71,33 @@ return {
               key = "P",
               icon = " ",
               height = 5,
+              width = 85,
+              enabled = is_gitlab_repo,
             },
-            -- {
-            --   title = "Open Issues",
-            --   cmd = "gh issue list -L 3",
-            --   key = "i",
-            --   action = function()
-            --     vim.fn.jobstart("gh issue list --web", { detach = true })
-            --   end,
-            --   icon = " ",
-            --   height = 5,
-            -- },
+
+            {
+              title = "Pipelines",
+              cmd = "gh run list -L 3",
+              action = function()
+                vim.fn.jobstart("gh run list --web", { detach = true })
+              end,
+              key = "P",
+              icon = " ",
+              height = 5,
+              width = 85,
+              enabled = is_github_repo,
+            },
+            {
+              title = "Open Issues",
+              cmd = "gh issue list -L 3",
+              key = "i",
+              action = function()
+                vim.fn.jobstart("gh issue list --web", { detach = true })
+              end,
+              icon = " ",
+              height = 5,
+              enabled = is_github_repo,
+            },
             {
               icon = " ",
               title = "Open MRs",
@@ -83,16 +105,17 @@ return {
               key = "M",
               action = function()
                 -- TODO: This isn't a valid command
-                vim.fn.jobstart("gh mr list --web", { detach = true })
+                vim.fn.jobstart("glab mr list --web", { detach = true })
               end,
               height = 7,
+              width = 85,
+              enabled = is_gitlab_repo,
             },
           }
           return vim.tbl_map(function(cmd)
             return vim.tbl_extend("force", {
               pane = 2,
               section = "terminal",
-              enabled = in_git,
               padding = 1,
               ttl = 5 * 60,
               indent = 3,

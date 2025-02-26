@@ -24,4 +24,27 @@ function M.plugin_stats()
   }
 end
 
+function M.is_github_repo()
+  -- Check if inside a git repository
+  if Snacks.git.get_root() ~= nil then
+    -- Get the remote URL
+    local remote_url = vim.fn.system("git config --get remote.origin.url"):gsub("\n", "")
+    -- Check if the URL contains "github.com"
+    return remote_url:match("github.com") ~= nil
+  end
+  return false
+end
+
+-- Function to check if the current repository is on GitLab
+function M.is_gitlab_repo()
+  -- Check if inside a git repository
+  if Snacks.git.get_root() ~= nil then
+    -- Get the remote URL
+    local remote_url = vim.fn.system("git config --get remote.origin.url"):gsub("\n", "")
+    -- Check if the URL contains "gitlab.com"
+    return remote_url:match("gitlab.com") ~= nil
+  end
+  return false
+end
+
 return M
