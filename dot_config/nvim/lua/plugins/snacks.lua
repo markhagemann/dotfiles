@@ -21,9 +21,39 @@ return {
           [[             ]],
           [[ n e o v i m ]],
         }, "\n"),
+        keys = {
+          { icon = " ", key = "e", desc = "Explore Directory", action = "<leader>e" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = "󱁤 ", key = "m", desc = "Mason", action = ":Mason", enabled = package.loaded.mason ~= nil },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
       },
       sections = {
         { section = "header" },
+        { section = "startup" },
+        { section = "keys", gap = 1, padding = 1, width = 50 },
+        function()
+          local version = require("utils.info").nvim_version()
+          local plugin_stats = require("utils.info").plugin_stats()
+          local updates = plugin_stats.updates > 0 and "  " .. plugin_stats.updates .. "" or ""
+          return {
+            align = "center",
+            text = {
+              { " ", hl = "footer" },
+              { version, hl = "NonText" },
+              { "    ", hl = "footer" },
+              { tostring(plugin_stats.count), hl = "NonText" },
+              { updates, hl = "special" },
+              { "   󰛕 ", hl = "footer" },
+              { plugin_stats.startuptime .. " ms", hl = "NonText" },
+            },
+            padding = 1,
+          }
+        end,
         {
           pane = 2,
           section = "terminal",
@@ -31,7 +61,6 @@ return {
           height = 5,
           padding = 1,
         },
-        { section = "keys", gap = 1, padding = 1 },
         function()
           local is_git = Snacks.git.get_root ~= nil
           local is_gitlab_repo = require("utils.info").is_gitlab_repo()
@@ -122,25 +151,6 @@ return {
             }, cmd)
           end, cmds)
         end,
-        function()
-          local version = require("utils.info").nvim_version()
-          local plugin_stats = require("utils.info").plugin_stats()
-          local updates = plugin_stats.updates > 0 and "  " .. plugin_stats.updates .. "" or ""
-          return {
-            align = "center",
-            text = {
-              { " ", hl = "footer" },
-              { version, hl = "NonText" },
-              { "    ", hl = "footer" },
-              { tostring(plugin_stats.count), hl = "NonText" },
-              { updates, hl = "special" },
-              { "   󰛕 ", hl = "footer" },
-              { plugin_stats.startuptime .. " ms", hl = "NonText" },
-            },
-            padding = 1,
-          }
-        end,
-        { section = "startup" },
       },
     },
     -- debug = { enabled = true },
