@@ -263,6 +263,16 @@ return {
 
     local servers = {
       -- pyright = {},
+      gopls = {
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      },
       rust_analyzer = {},
       ts_ls = {
         init_options = {

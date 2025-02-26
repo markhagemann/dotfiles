@@ -103,6 +103,24 @@ return {
             }, cmd)
           end, cmds)
         end,
+        function()
+          local version = require("utils.info").nvim_version()
+          local plugin_stats = require("utils.info").plugin_stats()
+          local updates = plugin_stats.updates > 0 and "  " .. plugin_stats.updates .. "" or ""
+          return {
+            align = "center",
+            text = {
+              { " ", hl = "footer" },
+              { version, hl = "NonText" },
+              { "    ", hl = "footer" },
+              { tostring(plugin_stats.count), hl = "NonText" },
+              { updates, hl = "special" },
+              { "   󰛕 ", hl = "footer" },
+              { plugin_stats.startuptime .. " ms", hl = "NonText" },
+            },
+            padding = 1,
+          }
+        end,
         { section = "startup" },
       },
     },
