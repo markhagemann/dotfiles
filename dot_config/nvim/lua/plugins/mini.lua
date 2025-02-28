@@ -1,6 +1,9 @@
 return {
   {
     "echasnovski/mini.nvim",
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
     lazy = false,
     version = "*",
     config = function()
@@ -16,7 +19,13 @@ return {
           },
         },
       })
-      require("mini.comment").setup()
+      require("mini.comment").setup({
+        options = {
+          custom_commentstring = function()
+            return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      })
       local files = require("mini.files")
       require("mini.git").setup()
       local hipatterns = require("mini.hipatterns")
