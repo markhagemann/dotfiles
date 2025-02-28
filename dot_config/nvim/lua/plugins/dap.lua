@@ -138,6 +138,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         "chrome-debug-adapter",
+        "delve",
         "firefox-debug-adapter",
         "go-debug-adapter",
         "js-debug-adapter",

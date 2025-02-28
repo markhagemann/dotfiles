@@ -9,7 +9,7 @@ return {
     bufdelete = { enabled = true },
     dashboard = {
       enabled = true,
-      width = 90,
+      width = 65,
       preset = {
         header = table.concat({
           [[             ]],
@@ -33,9 +33,9 @@ return {
         },
       },
       sections = {
-        { section = "header" },
-        { section = "startup" },
-        { section = "keys", gap = 1, padding = 1, width = 50 },
+        { section = "header", padding = 1 },
+        { section = "startup", padding = 1 },
+        { section = "keys", gap = 1, padding = 1 },
         function()
           local version = require("utils.info").nvim_version()
           local plugin_stats = require("utils.info").plugin_stats()
@@ -87,7 +87,7 @@ return {
               key = "N",
               icon = " ",
               height = 2,
-              width = 85,
+              width = 65,
               enabled = true,
             },
             {
@@ -100,7 +100,7 @@ return {
               key = "p",
               icon = " ",
               height = 5,
-              width = 85,
+              width = 65,
               enabled = is_gitlab_repo,
             },
 
@@ -113,7 +113,7 @@ return {
               key = "p",
               icon = " ",
               height = 5,
-              width = 85,
+              width = 65,
               enabled = is_github_repo,
             },
             {
@@ -137,7 +137,7 @@ return {
                 vim.fn.jobstart("glab mr list --web", { detach = true })
               end,
               height = 7,
-              width = 85,
+              width = 65,
               enabled = is_gitlab_repo,
             },
           }
