@@ -5,6 +5,11 @@ return {
     notify = {
       enabled = false,
     },
+    lsp = {
+      signature = {
+        enabled = false,
+      },
+    },
   },
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

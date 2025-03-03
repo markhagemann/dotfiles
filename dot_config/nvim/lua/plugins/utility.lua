@@ -1,7 +1,6 @@
 return {
   {
     "aserowy/tmux.nvim",
-    event = "VeryLazy",
     opts = {
       navigation = {
         -- cycles to opposite pane while navigating into the border
@@ -12,6 +11,36 @@ return {
 
         -- prevents unzoom tmux when navigating beyond vim border
         persist_zoom = true,
+      },
+    },
+    keys = {
+      {
+        "<C-h>",
+        function()
+          require("tmux").move_left()
+        end,
+        desc = "navigate left",
+      },
+      {
+        "<C-j>",
+        function()
+          require("tmux").move_top()
+        end,
+        desc = "navigate top",
+      },
+      {
+        "<C-k>",
+        function()
+          require("tmux").move_top()
+        end,
+        desc = "navigate top",
+      },
+      {
+        "<C-l>",
+        function()
+          require("tmux").move_right()
+        end,
+        desc = "navigate right",
       },
     },
   },

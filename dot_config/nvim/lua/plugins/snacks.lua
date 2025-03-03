@@ -292,9 +292,9 @@ return {
       "<leader>fb",
       function()
         Snacks.picker.buffers({
-          on_show = function()
-            vim.cmd.stopinsert()
-          end,
+          -- on_show = function()
+          --   vim.cmd.stopinsert()
+          -- end,
         })
       end,
       desc = "find buffers",

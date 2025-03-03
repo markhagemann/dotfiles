@@ -53,23 +53,6 @@ keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "save fi
 keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "add comment below" })
 keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "add comment above" })
 
--- Move Lines
-keymap.set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "move down" })
-keymap.set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "move up" })
-keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move Down" })
-keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move Up" })
-keymap.set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "move down" })
-keymap.set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "move up" })
-
--- Visual --
--- Stay in indent mode
-keymap.set("v", "<", "<gv")
-keymap.set("v", ">", ">gv")
-
--- Move text up and down
-keymap.set("v", "<A-j>", ":m .+1<CR>==")
-keymap.set("v", "<A-k>", ":m .-2<CR>==")
-
 -- System clipboard
 keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "copy to system clipboard" })
 keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "copy to system clipboard" })

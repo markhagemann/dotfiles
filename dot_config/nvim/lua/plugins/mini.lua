@@ -30,6 +30,7 @@ return {
       require("mini.git").setup()
       local hipatterns = require("mini.hipatterns")
       local icons = require("mini.icons")
+      require("mini.move").setup()
       require("mini.pairs").setup()
       require("mini.surround").setup()
 
