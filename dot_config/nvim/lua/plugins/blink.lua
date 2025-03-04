@@ -25,6 +25,11 @@ return {
           enabled = true,
         },
       },
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
       menu = {
         border = "rounded",
         winblend = 0,

@@ -530,6 +530,19 @@ return {
       mode = { "n", "v" },
     },
     {
+      "<leader>gY",
+      function()
+        Snacks.gitbrowse.open({
+          open = function(url)
+            vim.fn.setreg("+", url)
+            Snacks.notify("Copied git url to clipboard: " .. url)
+          end,
+        })
+      end,
+      desc = "git copy url",
+      mode = { "n", "v" },
+    },
+    {
       "<leader>gf",
       function()
         Snacks.lazygit.log_file()
