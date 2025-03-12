@@ -19,7 +19,6 @@
   "garbage-day.nvim": { "branch": "main", "commit": "750ef08ae6031ee3683014c5349144340c08ead6" },
   "git-worktree.nvim": { "branch": "master", "commit": "f247308e68dab9f1133759b05d944569ad054546" },
   "gitlab.nvim": { "branch": "main", "commit": "3b396a5e6b62d953c266ddcc40783b5da998dc89" },
-  "gitportal.nvim": { "branch": "main", "commit": "94323abd74590eafd34ff2e14515dd8e2e607fff" },
   "go-impl.nvim": { "branch": "main", "commit": "e4dd24bdb1cf09197508617545a206b0f6b7419a" },
   "go-tags.nvim": { "branch": "main", "commit": "7f27b113599539aae1e4493d2ee771a438ae2506" },
   "gotests.nvim": { "branch": "main", "commit": "1edbeb91364ab743b11be3ac4f63e498c9821fd7" },

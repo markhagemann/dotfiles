@@ -228,6 +228,7 @@ return {
                 ["<C-t>"] = "terminal",
                 ["x"] = "explorer_move",
                 ["y"] = "explorer_yank",
+                ["Y"] = "copy_path",
                 ["<c-c>"] = "explorer_cd",
                 ["."] = "explorer_focus",
                 ["I"] = "toggle_ignored",
@@ -235,6 +236,51 @@ return {
                 ["Z"] = "explorer_close_all",
               },
             },
+          },
+          actions = {
+            copy_path = function(_, item)
+              local modify = vim.fn.fnamemodify
+
+              local filepath = item.file
+              local filename = modify(filepath, ":t")
+
+              local results = {
+                filepath,
+                modify(filepath, ":."),
+                modify(filepath, ":~"),
+                filename,
+                modify(filename, ":r"),
+                modify(filename, ":e"),
+              }
+
+              local items = {
+                "Absolute path: " .. results[1],
+                "Path relative to CWD: " .. results[2],
+                "Path relative to HOME: " .. results[3],
+                "Filename: " .. results[4],
+              }
+
+              if vim.fn.isdirectory(filepath) == 0 then
+                vim.list_extend(items, {
+                  "Filename without extension: " .. results[5],
+                  "Extension of the filename: " .. results[6],
+                })
+              end
+
+              vim.ui.select(items, { prompt = "Choose to copy to clipboard:" }, function(choice, i)
+                if not choice then
+                  vim.notify("Selection cancelled")
+                  return
+                end
+                if not i then
+                  vim.notify("Invalid selection")
+                  return
+                end
+                local result = results[i]
+                vim.fn.setreg("*", result)
+                vim.notify("Copied: " .. result)
+              end)
+            end,
           },
         },
       },
@@ -263,7 +309,7 @@ return {
     terminal = { enabled = true },
     toggle = { enabled = true },
     words = { enabled = true },
-    zen = { enabled = true },
+    zen = { enabled = false },
   },
   keys = {
     {
@@ -279,6 +325,13 @@ return {
         Snacks.picker.grep()
       end,
       desc = "grep",
+    },
+    {
+      "<leader><leader>",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "buffers",
     },
     {
       "<leader>:",
@@ -333,7 +386,7 @@ return {
       function()
         Snacks.picker.lines()
       end,
-      desc = "search buffer Lines",
+      desc = "search buffer lines",
     },
     {
       "<leader>sB",
@@ -478,21 +531,6 @@ return {
       desc = "search colorschemes",
     },
     -- LSP keymaps within lua/plugins/lsp.lua
-
-    {
-      "<leader>z",
-      function()
-        Snacks.zen()
-      end,
-      desc = "toggle zen mode",
-    },
-    {
-      "<leader>Z",
-      function()
-        Snacks.zen.zoom()
-      end,
-      desc = "toggle zoom",
-    },
     {
       "<leader>.",
       function()

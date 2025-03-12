@@ -276,6 +276,7 @@ return {
       rust_analyzer = {},
       ts_ls = {
         init_options = {
+          -- hostInfo = "neovim",
           plugins = {
             {
               name = "@vue/typescript-plugin",
@@ -284,9 +285,9 @@ return {
             },
           },
           preferences = {
-            -- other preferences...
             importModuleSpecifierPreference = "relative",
-            importModuleSpecifierEnding = "minimal",
+            -- importModuleSpecifierPreference = "project-relative",
+            -- importModuleSpecifierEnding = "minimal",
           },
         },
         -- Used for when hybridMode is enabled
