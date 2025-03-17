@@ -163,6 +163,8 @@ autoload -Uz compinit && compinit
 
 eval "$(atuin init zsh)"
 
+eval "$(~/.local/bin/mise activate zsh)"
+
 if [ "$(uname)" = "Darwin" ];
 then
   eval "$(gdircolors ~/.dir_colors)"
