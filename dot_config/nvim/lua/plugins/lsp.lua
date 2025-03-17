@@ -212,7 +212,6 @@ return {
         { "eslint_d" },
         { "gitlab-ci-ls" },
         { "gopls" },
-        { "gofmt" },
         { "goimports" },
         { "gomodifytags" },
         { "gotests" },
