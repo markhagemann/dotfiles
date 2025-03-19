@@ -306,7 +306,7 @@ return {
     --     -- wo = { wrap = true } -- Wrap notifications
     --   },
     -- },
-    terminal = { enabled = true },
+    terminal = { enabled = false },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
@@ -650,14 +650,14 @@ return {
         })
       end,
     },
-    {
-      "`",
-      function()
-        Snacks.terminal.toggle()
-      end,
-      mode = { "n", "t" },
-      desc = "Toggle Terminal",
-    },
+    -- {
+    --   "`",
+    --   function()
+    --     Snacks.terminal.toggle()
+    --   end,
+    --   mode = { "n", "t" },
+    --   desc = "Toggle Terminal",
+    -- },
     { "<c-h>", [[<C-\><C-n><C-W>h]], mode = "t", desc = "window movement: move left" },
     { "<c-j>", [[<C-\><C-n><C-W>j]], mode = "t", desc = "window movement: move down" },
     { "<c-k>", [[<C-\><C-n><C-W>k]], mode = "t", desc = "window movement: move up" },
