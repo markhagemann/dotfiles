@@ -19,11 +19,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Add in zsh plugins
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
 zinit for \
-    as'null' \
-    configure'--disable-utf8proc --prefix=$PWD --quiet' \
-    make'PREFIX=$PWD --quiet install'\
-    sbin \
+    configure'--disable-utf8proc' \
+    make \
   @tmux/tmux
+# zinit for \
+#     as'null' \
+#     configure'--disable-utf8proc --prefix=$PWD --quiet' \
+#     make'PREFIX=$PWD --quiet install'\
+#     sbin \
+#   @tmux/tmux
 
 if [ "$TMUX" = "" ]; then tmux; fi
 
