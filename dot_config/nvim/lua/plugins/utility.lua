@@ -168,6 +168,20 @@ return {
     },
   },
   {
+    "jake-stewart/auto-cmdheight.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- max cmdheight before displaying hit enter prompt.
+      max_lines = 5,
+
+      -- number of seconds until the cmdheight can restore.
+      duration = 2,
+
+      -- whether key press is required to restore cmdheight.
+      remove_on_key = true,
+    },
+  },
+  {
     "jinh0/eyeliner.nvim",
     event = "VeryLazy",
     config = function()
@@ -204,7 +218,7 @@ return {
   {
     "kburdett/vim-nuuid",
     keys = {
-      { "<leader>u", "<Plug>Nuuid", desc = "generate uuid" },
+      { "<leader>uu", "<Plug>Nuuid", desc = "generate uuid" },
     },
   },
   {
