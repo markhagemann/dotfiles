@@ -11,13 +11,13 @@ return {
     },
     keys = {
       {
-        "<leader>gaj",
+        "<leader>gta",
         "<ESC><CMD>GoTagsAddJSON<CR>",
         mode = { "n" },
         desc = "go tags add json",
       },
       {
-        "<leader>grj",
+        "<leader>gtr",
         "<ESC><CMD>GoTagsRemoveJSON<CR>",
         mode = { "n" },
         desc = "go tags remove json",
@@ -63,7 +63,7 @@ return {
         desc = "generate tests at current line or visual mode",
       },
       {
-        "<leader>gta",
+        "<leader>gtf",
         "<ESC><CMD>GoTestsAll<CR>",
         mode = { "n" },
         desc = "generate tests for all functions and methods",
