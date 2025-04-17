@@ -2,6 +2,9 @@ return {
   {
     "aserowy/tmux.nvim",
     opts = {
+      copy_sync = {
+        enable = false,
+      },
       navigation = {
         -- cycles to opposite pane while navigating into the border
         cycle_navigation = true,
