@@ -92,7 +92,7 @@ return {
             },
             {
               title = "Pipelines",
-              cmd = "glab ci list -P 3 -u markhagemannmsts",
+              cmd = "glab ci list -P 3",
               action = function()
                 -- TODO: This isn't a valid command
                 vim.fn.jobstart("glab ci list --web", { detach = true })
