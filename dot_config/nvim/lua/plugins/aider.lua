@@ -1,6 +1,7 @@
 return {
   "GeorgesAlkhouri/nvim-aider",
   cmd = "Aider",
+  enabled = vim.env.ENABLE_AI_PLUGINS == true,
   keys = {
     { "<leader>a/", "<cmd>Aider toggle<cr>", desc = "aider toggle" },
     { "<leader>as", "<cmd>Aider send<cr>", desc = "aider send", mode = { "n", "v" } },
