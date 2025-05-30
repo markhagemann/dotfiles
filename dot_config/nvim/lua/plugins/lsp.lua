@@ -266,6 +266,67 @@ return {
     local vue_language_server_path =
       vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server")
 
+    vim.lsp.config.vtsls = {
+      cmd = { "vtsls", "--stdio" },
+      filetypes = {
+        "vue",
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+      root_markers = {
+        "tsconfig.json",
+        "package.json",
+        "jsconfig.json",
+        ".git",
+      },
+      settings = {
+        complete_function_calls = true,
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            maxInlayHintLength = 30,
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+          tsserver = {
+            globalPlugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vue_language_server_path,
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
+            },
+          },
+        },
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
+        },
+        javascript = {
+          updateImportsOnFileMove = { enabled = "always" },
+        },
+      },
+    }
+    vim.lsp.enable("vtsls", true)
+
     local servers = {
       -- pyright = {},
       gopls = {
@@ -279,81 +340,6 @@ return {
         },
       },
       rust_analyzer = {},
-      ts_ls = {
-        init_options = {
-          -- hostInfo = "neovim",
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = vue_language_server_path,
-              languages = { "vue" },
-            },
-          },
-          preferences = {
-            importModuleSpecifierPreference = "relative",
-            -- importModuleSpecifierPreference = "project-relative",
-            -- importModuleSpecifierEnding = "minimal",
-          },
-        },
-        -- Used for when hybridMode is enabled
-        -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
-      },
-      volar = {
-        -- NOTE: Uncomment to enable volar in file types other than vue.
-        -- (Similar to Takeover Mode)
-
-        -- filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
-
-        -- NOTE: Uncomment to restrict Volar to only Vue/Nuxt projects. This will enable Volar to work alongside other language servers (tsserver).
-
-        -- root_dir = require("lspconfig").util.root_pattern(
-        --   "vue.config.js",
-        --   "vue.config.ts",
-        --   "nuxt.config.js",
-        --   "nuxt.config.ts"
-        -- ),
-        init_options = {
-          vue = {
-            hybridMode = false,
-          },
-        },
-        settings = {
-          typescript = {
-            inlayHints = {
-              enumMemberValues = {
-                enabled = true,
-              },
-              functionLikeReturnTypes = {
-                enabled = true,
-              },
-              propertyDeclarationTypes = {
-                enabled = true,
-              },
-              parameterTypes = {
-                enabled = true,
-                suppressWhenArgumentMatchesName = true,
-              },
-              variableTypes = {
-                enabled = true,
-              },
-            },
-          },
-        },
-      },
       yaml = {
         schemas = {
           kubernetes = "k8s-*.yaml",

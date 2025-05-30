@@ -6,6 +6,9 @@ return {
       enabled = false,
     },
     lsp = {
+      hover = {
+        silent = true,
+      },
       signature = {
         enabled = false,
       },

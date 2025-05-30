@@ -448,16 +448,6 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
-  {
-    "tomiis4/Hypersonic.nvim",
-    event = "CmdlineEnter",
-    cmd = "Hypersonic",
-    config = function()
-      require("hypersonic").setup({
-        -- config
-      })
-    end,
-  },
   -- Sets yaml indentation wrong - guess indent fixes
   {
     "tpope/vim-sleuth",
