@@ -46,6 +46,7 @@ return {
           action = function()
             return require("obsidian").util.toggle_checkbox()
           end,
+          desc = "toggle checkbox",
           opts = { buffer = true },
         },
         -- Smart action depending on context, either follow link or toggle checkbox.
@@ -63,18 +64,6 @@ return {
         },
       },
       ui = { enable = false },
-    },
-  },
-  {
-    "opdavies/toggle-checkbox.nvim",
-    ft = "markdown",
-    keys = {
-      {
-        "<leader>ch",
-        ":lua require('toggle-checkbox').toggle()<CR>",
-        desc = "toggle checkbox",
-        silent = true,
-      },
     },
   },
 }
