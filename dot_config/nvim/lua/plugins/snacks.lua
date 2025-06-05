@@ -207,6 +207,19 @@ return {
         buffers = { hidden = true, layout = { preset = "vscode" } },
         grep = { hidden = true },
         explorer = {
+          actions = {
+            safe_delete = function(picker)
+              local selected = picker:selected({ fallback = true })
+              local is_root = vim.iter(selected):any(function(s)
+                return not s.parent
+              end)
+              if is_root then
+                vim.print("No, bad boy!")
+                return
+              end
+              picker:action("explorer_del")
+            end,
+          },
           enabled = true,
           hidden = true,
           auto_close = false,
@@ -220,7 +233,7 @@ return {
                 ["o"] = "confirm",
                 ["<BS>"] = "explorer_up",
                 ["a"] = "explorer_add",
-                ["d"] = "explorer_del",
+                ["d"] = "safe_delete",
                 ["r"] = "explorer_rename",
                 ["c"] = "explorer_copy",
                 ["p"] = "explorer_paste",
