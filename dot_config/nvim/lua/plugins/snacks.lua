@@ -8,7 +8,7 @@ return {
     bigfile = { enabled = true },
     bufdelete = { enabled = true },
     dashboard = {
-      enabled = true,
+      enabled = false,
       width = 65,
       preset = {
         header = table.concat({
@@ -207,19 +207,6 @@ return {
         buffers = { hidden = true, layout = { preset = "vscode" } },
         grep = { hidden = true },
         explorer = {
-          actions = {
-            safe_delete = function(picker)
-              local selected = picker:selected({ fallback = true })
-              local is_root = vim.iter(selected):any(function(s)
-                return not s.parent
-              end)
-              if is_root then
-                vim.print("No, bad boy!")
-                return
-              end
-              picker:action("explorer_del")
-            end,
-          },
           enabled = true,
           hidden = true,
           auto_close = false,
@@ -293,6 +280,17 @@ return {
                 vim.fn.setreg("*", result)
                 vim.notify("Copied: " .. result)
               end)
+            end,
+            safe_delete = function(picker)
+              local selected = picker:selected({ fallback = true })
+              local is_root = vim.iter(selected):any(function(s)
+                return not s.parent
+              end)
+              if is_root then
+                vim.print("No, bad boy!")
+                return
+              end
+              picker:action("explorer_del")
             end,
           },
         },
