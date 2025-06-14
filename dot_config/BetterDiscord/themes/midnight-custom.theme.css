@@ -9,7 +9,8 @@
 
 /* IMPORTANT: make sure to enable dark mode in discord settings for the theme to apply properly!!! */
 
-@import url('https://refact0r.github.io/midnight-discord/midnight.css');
+/* @import url('https://refact0r.github.io/midnight-discord/midnight.css'); */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
 
 /* customize things here */
 :root {
@@ -31,8 +32,11 @@
 	--accent-3: hsl(247, 73%, 65%); /* accent buttons */
 	--accent-4: hsl(204, 40%, 51%); /* accent buttons when hovered */
 	--accent-5: hsl(190, 70%, 30%); /* accent buttons when clicked */
+	--accent-new: var(--accent-2); /* stuff that's normally red like mute/deafen buttons */
 	--mention: hsla(236, 56%, 65%, 0.1); /* mentions & mention messages */
 	--mention-hover: hsla(239, 57%, 65%, 0.05); /* mentions & mention messages when hovered */
+	--reply: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 90%) 40%, transparent); /* background of messages that reply to you */
+	--reply-hover: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 95%) 40%, transparent); /* background of messages that reply to you when hovered */
 
 	/* text colors */
 	--text-0: white; /* text on colored elements */
@@ -62,6 +66,11 @@
 	--unread-bar-transition: 0.2s ease; /* unread bar moving into view transition */
 	--moon-spin-transition: 0.4s ease; /* moon icon spin */
 	--icon-spin-transition: 1s ease; /* round icon button spin (settings, emoji, etc.) */
+
+	/* border colors */
+	--border-light: var(--hover); /* light border color */
+	--border: var(--active); /* normal border color */
+	--button-border: hsl(220, 0%, 100%, 0.1); /* neutral border color of buttons */
 
 	/* corner roundness (border-radius) */
 	--roundness-xl: 0px; /* roundness of big panel outer corners */
