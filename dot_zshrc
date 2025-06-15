@@ -77,6 +77,7 @@ export LANG=en_US.UTF-8
 export MANPAGER="nvim +Man!"
 
 TMUX_DIR="~/.config/tmux"
+if [ "$TMUX" = "" ]; then tmux attach-session; fi
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
