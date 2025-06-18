@@ -154,14 +154,14 @@ return {
     },
     opts = {},
   },
-  {
-    "folke/twilight.nvim",
-    opts = {},
-    event = "VeryLazy",
-    keys = {
-      { "<leader>tw", "<cmd>Twilight<cr>", desc = "toggle twilight" },
-    },
-  },
+  -- {
+  --   "folke/twilight.nvim",
+  --   opts = {},
+  --   event = "VeryLazy",
+  --   keys = {
+  --     { "<leader>tw", "<cmd>Twilight<cr>", desc = "toggle twilight" },
+  --   },
+  -- },
   {
     "HakonHarnes/img-clip.nvim",
     event = "BufEnter",
@@ -322,7 +322,7 @@ return {
       leader_key = ";", -- Recommended to be a single key
     },
   },
-  { "preservim/vim-pencil", event = "VeryLazy" },
+  -- { "preservim/vim-pencil", event = "VeryLazy" },
   -- {
   --   "rachartier/tiny-glimmer.nvim",
   --   event = "VeryLazy",
