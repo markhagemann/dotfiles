@@ -4,7 +4,7 @@
 add_newline = true
 command_timeout = 2000
 
-format = """$env_var$os$directory$git_branch$git_status$kubernetes$fill$cmd_duration$time
+format = """$env_var$os$directory$git_branch$git_status$kubernetes$nodejs$golang$fill$cmd_duration$time
 $character
 """
 
@@ -83,6 +83,10 @@ disabled = true
 
 [helm]
 disabled = true
+
+[golang]
+format =  '[$symbol($version )]($style)'
+disabled = false
 
 [python]
 disabled = true
