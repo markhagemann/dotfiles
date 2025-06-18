@@ -275,9 +275,12 @@ alias kcns='kubectl config set-context --current --namespace'
 alias kcunset="kubectl config unset current-context"
 alias podname=''
 
+# Lazy-load gvm
 gvm_lazy_init() {
-  unset -f gvm
-  source ~/.gvm/scripts/gvm
+  # Remove this function and the alias
+  unalias gvm 2>/dev/null
+  unfunction gvm_lazy_init 2>/dev/null
+  source "$HOME/.gvm/scripts/gvm"
   gvm "$@"
 }
 
