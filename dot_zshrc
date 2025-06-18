@@ -75,7 +75,7 @@ zinit ice depth=1
 
 
 TMUX_DIR="~/.config/tmux"
-if [ "$TMUX" = "" ]; then tmux attach-session; fi
+if [ "$TMUX" = "" ]; then tmux; fi
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
