@@ -65,16 +65,14 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 export EDITOR=nvim
 export BROWSER=firefox
 export TERM=xterm-kitty
+export XDG_CONFIG_HOME="$HOME/.config"
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+export MANPAGER="nvim +Man!"
 
 # Keybindings
 zinit ice depth=1
 
-export XDG_CONFIG_HOME="$HOME/.config"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
-export MANPAGER="nvim +Man!"
 
 TMUX_DIR="~/.config/tmux"
 if [ "$TMUX" = "" ]; then tmux attach-session; fi
@@ -276,6 +274,14 @@ alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
 alias kcunset="kubectl config unset current-context"
 alias podname=''
+
+gvm_lazy_init() {
+  unset -f gvm
+  source ~/.gvm/scripts/gvm
+  gvm "$@"
+}
+
+alias gvm=gvm_lazy_init
 
 # Print zprof profiling results at the end
 # zprof
