@@ -234,8 +234,9 @@ return {
         { "staticcheck" },
         { "stylua" },
         { "tailwindcss-language-server" },
-        { "typescript-language-server" },
-        { "volar" },
+        -- { "typescript-language-server" },
+        { "vtsls" },
+        { "vue-ls" },
       },
 
       auto_update = true,
