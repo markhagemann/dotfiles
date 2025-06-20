@@ -331,6 +331,18 @@ return {
   --   },
   -- },
   {
+    "propet/toggle-fullscreen.nvim",
+    keys = {
+      {
+        "<leader>tf",
+        function()
+          require("toggle-fullscreen"):toggle_fullscreen()
+        end,
+        desc = "toggle fullscreen",
+      },
+    },
+  },
+  {
     "rmagatti/auto-session", -- auto save session
     event = "VeryLazy",
     config = function()
@@ -448,6 +460,26 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
+  "SyedAsimShah1/quick-todo.nvim",
+  keys = {
+    {
+      "<leader>tt",
+      "<cmd>lua require('quick-todo').open_todo()<CR>",
+      mode = { "n" },
+      silent = true,
+      desc = "toggle todo",
+    },
+  },
+  config = function()
+    require("quick-todo").setup({
+      window = {
+        height = 0.5,
+        width = 0.5,
+        winblend = 0,
+        border = "rounded",
+      },
+    })
+  end,
   -- Sets yaml indentation wrong - guess indent fixes
   {
     "tpope/vim-sleuth",

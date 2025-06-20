@@ -60,7 +60,8 @@ return {
     end
 
     local function use_web_formatters(bufnr)
-      return { "eslint_d", select_prettier(bufnr) }
+      return { "eslint", select_prettier(bufnr) }
+      -- return { "eslint_d", select_prettier(bufnr) }
     end
 
     -- local sh_formatters = {
