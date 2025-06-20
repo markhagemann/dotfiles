@@ -128,11 +128,9 @@ return {
   },
   {
     "FabijanZulj/blame.nvim",
-    opts = {
-      views = {
-        default = virtual_view,
-      },
-    },
+    config = function()
+      require("blame").setup()
+    end,
     keys = {
       {
         "<leader>gb",
