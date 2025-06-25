@@ -75,11 +75,17 @@ zinit ice depth=1
 
 
 TMUX_DIR="~/.config/tmux"
-if [ "$TMUX" = "" ]; then
-  if [ "$1" == "" ]; then
-      tmux list-sessions
+if [ -z "$TMUX" ]; then
+  if tmux has-session 2>/dev/null; then
+    # Attach to provided session name if given, otherwise first available
+    if [ -n "$1" ]; then
+      tmux attach -t "$1"
+    else
+      tmux attach
+    fi
   else
-      tmux attach -t $1
+    # No sessions exist, create a new one
+    tmux new
   fi
 fi
 
