@@ -1,0 +1,52 @@
+# Zinit initialization
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+# macOS-specific settings
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
+  defaults write -g InitialKeyRepeat -int 12
+  defaults write -g KeyRepeat -int 2
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+fi
+
+# WSL 2 specific settings.
+# if grep -q "microsoft" /proc/version &>/dev/null; then
+#
+#   case "$(uname -s)" in
+#
+#     Linux)
+#
+#     # Used for linux when `host.docker.internal` doesn't work in docker-compose
+#     export DOCKER_GATEWAY_HOST=$(hostname -i |awk '{print $1}')
+#     ;;
+#
+#   esac
+#
+#   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+#   export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
+#   # export DISPLAY=$IP:0.0
+#   export ADDITIONAL_DOCKER_PARAMS="--env WAYLAND_DISPLAY --env XDG_RUNTIME_DIR --env PULSE_SERVER -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg"
+#   export LIBGL_ALWAYS_INDIRECT=0
+#   export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
+#
+#   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
+#   # sudo /etc/init.d/dbus start &> /dev/null
+#
+#   # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+#   DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
+#   DOCKER_DIR=/mnt/wsl/shared-docker
+#   DOCKER_SOCK="$DOCKER_DIR/docker.sock"
+#   export DOCKER_HOST="unix://$DOCKER_SOCK"
+#   if [ ! -S "$DOCKER_SOCK" ]; then
+#       mkdir -pm o=,ug=rwx "$DOCKER_DIR"
+#       chgrp docker "$DOCKER_DIR"
+#       /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
+#   fi
+#
+# fi
+

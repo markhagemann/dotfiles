@@ -61,15 +61,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Defaults
-export EDITOR=nvim
-export BROWSER=firefox
-export TERM=xterm-kitty
-export XDG_CONFIG_HOME="$HOME/.config"
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-export MANPAGER="nvim +Man!"
-
 # Keybindings
 zinit ice depth=1
 
@@ -99,19 +90,6 @@ COMPLETION_WAITING_DOTS="true"
 PRIVEXPORTFILE=~/.zshrcpriv
 source $PRIVEXPORTFILE
 
-# Add path
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$HOME/neovim/bin:$PATH"
-export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
-export PATH=$PATH:$HOME/bin
-export PATH=~/.local/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$GOPATH/bin"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
 . "$HOME/.atuin/bin/env"
 
 # Shell integrations
@@ -137,57 +115,6 @@ function zvm_after_lazy_keybindings() {
   # Remap to go to the end of the line
   zvm_bindkey vicmd 'gl' end-of-line
 }
-
-if [ "$(uname)" = "Darwin" ]; then
-  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
-
-  # 15 is lowest setting on UI
-  # 8 was too fast causing duplicate keystrokes
-  # 10 i think this causes issues in bash cli when editing commands, not sure
-  defaults write -g InitialKeyRepeat -int 12
-
-  # 2 is lowest setting on UI
-  defaults write -g KeyRepeat -int 2
-
-  # allow holding key instead of mac default holding key to choose alternate key
-  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-fi
-
-# WSL 2 specific settings.
-# if grep -q "microsoft" /proc/version &>/dev/null; then
-#
-#   case "$(uname -s)" in
-#
-#     Linux)
-#
-#     # Used for linux when `host.docker.internal` doesn't work in docker-compose
-#     export DOCKER_GATEWAY_HOST=$(hostname -i |awk '{print $1}')
-#     ;;
-#
-#   esac
-#
-#   # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-#   export IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}')
-#   # export DISPLAY=$IP:0.0
-#   export ADDITIONAL_DOCKER_PARAMS="--env WAYLAND_DISPLAY --env XDG_RUNTIME_DIR --env PULSE_SERVER -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg"
-#   export LIBGL_ALWAYS_INDIRECT=0
-#   export MESA_D3D12_DEFAULT_ADAPTER_NAME="NVIDIA"
-#
-#   # Automatically start dbus - https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
-#   # sudo /etc/init.d/dbus start &> /dev/null
-#
-#   # https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
-#   DOCKER_DISTRO=$(. ~/os-details; echo "$DISTRIBUTION_NAME")
-#   DOCKER_DIR=/mnt/wsl/shared-docker
-#   DOCKER_SOCK="$DOCKER_DIR/docker.sock"
-#   export DOCKER_HOST="unix://$DOCKER_SOCK"
-#   if [ ! -S "$DOCKER_SOCK" ]; then
-#       mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-#       chgrp docker "$DOCKER_DIR"
-#       /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd < /dev/null > $DOCKER_DIR/dockerd.log 2>&1"
-#   fi
-#
-# fi
 
 # Aliases
 # alias cat=bat
@@ -286,6 +213,7 @@ alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
 alias kcunset="kubectl config unset current-context"
 alias podname=''
+alias spac="sudo pacman"
 
 # Lazy-load gvm
 gvm_lazy_init() {
