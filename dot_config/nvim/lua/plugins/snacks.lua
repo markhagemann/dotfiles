@@ -312,11 +312,15 @@ return {
       },
       refresh = 50, -- refresh at most every 50ms
     },
-    -- styles = {
-    --   notification = {
-    --     -- wo = { wrap = true } -- Wrap notifications
-    --   },
-    -- },
+    styles = {
+      lazygit = {
+        width = 0,
+        height = 0,
+      },
+      notification = {
+        wo = { wrap = true }, -- Wrap notifications
+      },
+    },
     terminal = { enabled = false },
     toggle = { enabled = true },
     words = { enabled = true },
