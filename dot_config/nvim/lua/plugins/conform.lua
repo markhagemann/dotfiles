@@ -10,13 +10,13 @@ return {
     --   desc = "LSP Format Range",
     -- },
     {
-      "<leader>ldf",
+      "<leader>lfd",
       ":FormatDisable<CR>",
       mode = "n",
       desc = "lsp: disable formatting",
     },
     {
-      "<leader>lef",
+      "<leader>lfe",
       ":FormatEnable<CR>",
       mode = "n",
       desc = "lsp: enable formatting",
