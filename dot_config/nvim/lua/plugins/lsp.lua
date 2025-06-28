@@ -51,12 +51,32 @@ return {
       end,
     },
     {
+      "rachartier/tiny-code-action.nvim",
+      dependencies = {
+        { "nvim-lua/plenary.nvim" },
+
+        -- optional picker via telescope
+        { "nvim-telescope/telescope.nvim" },
+        -- optional picker via fzf-lua
+        { "ibhagwan/fzf-lua" },
+        -- .. or via snacks
+        {
+          "folke/snacks.nvim",
+          opts = {
+            terminal = {},
+          },
+        },
+      },
+      event = "LspAttach",
+      opts = {},
+    },
+    {
       "rachartier/tiny-inline-diagnostic.nvim",
-      event = "VeryLazy", -- Or `LspAttach`
+      event = "LspAttach",
       priority = 1000, -- needs to be loaded in first
       config = function()
         require("tiny-inline-diagnostic").setup({
-          preset = "powerline",
+          preset = "modern",
           options = { show_source = true, virt_texts = { priority = 5000 } },
         })
       end,

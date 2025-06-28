@@ -14,6 +14,7 @@ return {
       optional = true, -- make optional so it's only enabled if any extras need it
       opts = {},
     },
+    "archie-judd/blink-cmp-words",
   },
 
   ---@module 'blink.cmp'
@@ -30,29 +31,29 @@ return {
           preselect = false,
         },
       },
-      menu = {
-        border = "rounded",
-        winblend = 0,
-        scrollbar = true,
-        draw = {
-          -- columns = { { "kind_icon", "label", "label_description", gap = 1 } },
-          components = {
-            kind_icon = {
-              ellipsis = false,
-              text = function(ctx)
-                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                return kind_icon
-              end,
-              -- Optionally, you may also use the highlights from mini.icons
-              highlight = function(ctx)
-                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-                return hl
-              end,
-            },
-          },
-          treesitter = { "lsp" },
-        },
-      },
+      -- menu = {
+      --   border = "rounded",
+      --   winblend = 0,
+      --   scrollbar = true,
+      --   draw = {
+      --     -- columns = { { "kind_icon", "label", "label_description", gap = 1 } },
+      --     components = {
+      --       kind_icon = {
+      --         ellipsis = false,
+      --         text = function(ctx)
+      --           local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+      --           return kind_icon
+      --         end,
+      --         -- Optionally, you may also use the highlights from mini.icons
+      --         highlight = function(ctx)
+      --           local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+      --           return hl
+      --         end,
+      --       },
+      --     },
+      --     treesitter = { "lsp" },
+      --   },
+      -- },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
@@ -77,11 +78,53 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "lazydev", "snippets", "buffer" },
       -- default = { "lsp", "path", "snippets", "buffer", "dadbod" },
-      -- providers = {
-      --   dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-      -- },
+      providers = {
+        -- dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        thesaurus = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.thesaurus",
+          -- All available options
+          opts = {
+            -- A score offset applied to returned items.
+            -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
+            score_offset = 0,
+
+            -- Default pointers define the lexical relations listed under each definition,
+            -- see Pointer Symbols below.
+            -- Default is as below ("antonyms", "similar to" and "also see").
+            pointer_symbols = { "!", "&", "^" },
+          },
+        },
+        dictionary = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.dictionary",
+          -- All available options
+          opts = {
+            -- The number of characters required to trigger completion.
+            -- Set this higher if completion is slow, 3 is default.
+            dictionary_search_threshold = 3,
+
+            -- See above
+            score_offset = 0,
+
+            -- See above
+            pointer_symbols = { "!", "&", "^" },
+          },
+        },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
+      },
+      -- Setup completion by filetype
+      per_filetype = {
+        text = { "dictionary" },
+        markdown = { "thesaurus" },
+      },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
