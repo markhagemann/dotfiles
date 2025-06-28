@@ -90,7 +90,7 @@ local VimMode = {
       return " %2(" .. self.mode_names[self.mode] .. "%) "
     end,
     hl = function(self)
-      return { fg = colors.background, bg = self.mode_color }
+      return { fg = colors.background, bg = self.mode_color, bold = true }
     end,
   },
   {
