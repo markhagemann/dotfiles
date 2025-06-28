@@ -31,29 +31,29 @@ return {
           preselect = false,
         },
       },
-      -- menu = {
-      --   border = "rounded",
-      --   winblend = 0,
-      --   scrollbar = true,
-      --   draw = {
-      --     -- columns = { { "kind_icon", "label", "label_description", gap = 1 } },
-      --     components = {
-      --       kind_icon = {
-      --         ellipsis = false,
-      --         text = function(ctx)
-      --           local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-      --           return kind_icon
-      --         end,
-      --         -- Optionally, you may also use the highlights from mini.icons
-      --         highlight = function(ctx)
-      --           local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-      --           return hl
-      --         end,
-      --       },
-      --     },
-      --     treesitter = { "lsp" },
-      --   },
-      -- },
+      menu = {
+        border = "rounded",
+        winblend = 0,
+        scrollbar = true,
+        draw = {
+          -- columns = { { "kind_icon", "label", "label_description", gap = 1 } },
+          components = {
+            kind_icon = {
+              ellipsis = false,
+              text = function(ctx)
+                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                return kind_icon
+              end,
+              -- Optionally, you may also use the highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+                return hl
+              end,
+            },
+          },
+          treesitter = { "lsp" },
+        },
+      },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,

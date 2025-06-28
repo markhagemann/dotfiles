@@ -4,7 +4,7 @@ return {
   -- enabled = vim.env.ENABLE_AI_PLUGINS == "true",
   enabled = false,
   keys = {
-    { "<leader>a/", "<cmd>Aider toggle<cr>", desc = "aider toggle" },
+    { "<leader>at", "<cmd>Aider toggle<cr>", desc = "aider toggle" },
     { "<leader>as", "<cmd>Aider send<cr>", desc = "aider send", mode = { "n", "v" } },
     { "<leader>ac", "<cmd>Aider command<cr>", desc = "aider commands" },
     { "<leader>ab", "<cmd>Aider buffer<cr>", desc = "aider send buffer" },

@@ -261,7 +261,6 @@ return {
         "undotree",
         "Trouble",
       },
-
       max_count = 6,
     },
   },

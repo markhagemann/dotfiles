@@ -8,7 +8,7 @@ return {
     bigfile = { enabled = true },
     bufdelete = { enabled = true },
     dashboard = {
-      enabled = false,
+      enabled = true,
       width = 65,
       preset = {
         header = table.concat({
@@ -25,7 +25,12 @@ return {
           { icon = " ", key = "e", desc = "Explore Directory", action = "<leader>e" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          {
+            icon = " ",
+            key = "r",
+            desc = "Recent Files",
+            action = ":lua Snacks.picker.recent({ filter = { cwd = true } })",
+          },
           { icon = " ", key = "s", desc = "Restore Session", section = "session" },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
           { icon = "󱁤 ", key = "m", desc = "Mason", action = ":Mason", enabled = package.loaded.mason ~= nil },
@@ -54,103 +59,103 @@ return {
             padding = 1,
           }
         end,
-        {
-          pane = 2,
-          section = "terminal",
-          cmd = "colorscript -e square",
-          height = 5,
-          padding = 1,
-        },
-        function()
-          local is_git = Snacks.git.get_root ~= nil
-          local is_gitlab_repo = require("utils.info").is_gitlab_repo()
-          local is_github_repo = require("utils.info").is_github_repo()
-
-          local cmds = {
-            {
-              title = "Browse Repo",
-              cmd = "",
-              action = function()
-                Snacks.gitbrowse()
-              end,
-              key = "b",
-              icon = " ",
-              height = 1,
-              enabled = is_git,
-            },
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "N",
-              icon = " ",
-              height = 2,
-              width = 65,
-              enabled = true,
-            },
-            {
-              title = "Pipelines",
-              cmd = "glab ci list -P 3",
-              action = function()
-                -- TODO: This isn't a valid command
-                vim.fn.jobstart("glab ci list --web", { detach = true })
-              end,
-              key = "p",
-              icon = " ",
-              height = 5,
-              width = 65,
-              enabled = is_gitlab_repo,
-            },
-
-            {
-              title = "Pipelines",
-              cmd = "gh run list -L 3",
-              action = function()
-                vim.fn.jobstart("gh run list --web", { detach = true })
-              end,
-              key = "p",
-              icon = " ",
-              height = 5,
-              width = 65,
-              enabled = is_github_repo,
-            },
-            {
-              title = "Open Issues",
-              cmd = "gh issue list -L 3",
-              key = "i",
-              action = function()
-                vim.fn.jobstart("gh issue list --web", { detach = true })
-              end,
-              icon = " ",
-              height = 5,
-              enabled = is_github_repo,
-            },
-            {
-              icon = " ",
-              title = "Open MRs",
-              cmd = "glab mr list -P 5",
-              key = "m",
-              action = function()
-                -- TODO: This isn't a valid command
-                vim.fn.jobstart("glab mr list --web", { detach = true })
-              end,
-              height = 7,
-              width = 65,
-              enabled = is_gitlab_repo,
-            },
-          }
-          return vim.tbl_map(function(cmd)
-            return vim.tbl_extend("force", {
-              pane = 2,
-              section = "terminal",
-              padding = 1,
-              ttl = 5 * 60,
-              indent = 3,
-            }, cmd)
-          end, cmds)
-        end,
+        -- {
+        --   pane = 2,
+        --   section = "terminal",
+        --   cmd = "colorscript -e square",
+        --   height = 5,
+        --   padding = 1,
+        -- },
+        -- function()
+        --   local is_git = Snacks.git.get_root ~= nil
+        --   local is_gitlab_repo = require("utils.info").is_gitlab_repo()
+        --   local is_github_repo = require("utils.info").is_github_repo()
+        --
+        --   local cmds = {
+        --     {
+        --       title = "Browse Repo",
+        --       cmd = "",
+        --       action = function()
+        --         Snacks.gitbrowse()
+        --       end,
+        --       key = "b",
+        --       icon = " ",
+        --       height = 1,
+        --       enabled = is_git,
+        --     },
+        --     {
+        --       title = "Notifications",
+        --       cmd = "gh notify -s -a -n5",
+        --       action = function()
+        --         vim.ui.open("https://github.com/notifications")
+        --       end,
+        --       key = "N",
+        --       icon = " ",
+        --       height = 2,
+        --       width = 65,
+        --       enabled = true,
+        --     },
+        --     {
+        --       title = "Pipelines",
+        --       cmd = "glab ci list -P 3",
+        --       action = function()
+        --         -- TODO: This isn't a valid command
+        --         vim.fn.jobstart("glab ci list --web", { detach = true })
+        --       end,
+        --       key = "p",
+        --       icon = " ",
+        --       height = 5,
+        --       width = 65,
+        --       enabled = is_gitlab_repo,
+        --     },
+        --
+        --     {
+        --       title = "Pipelines",
+        --       cmd = "gh run list -L 3",
+        --       action = function()
+        --         vim.fn.jobstart("gh run list --web", { detach = true })
+        --       end,
+        --       key = "p",
+        --       icon = " ",
+        --       height = 5,
+        --       width = 65,
+        --       enabled = is_github_repo,
+        --     },
+        --     {
+        --       title = "Open Issues",
+        --       cmd = "gh issue list -L 3",
+        --       key = "i",
+        --       action = function()
+        --         vim.fn.jobstart("gh issue list --web", { detach = true })
+        --       end,
+        --       icon = " ",
+        --       height = 5,
+        --       enabled = is_github_repo,
+        --     },
+        --     {
+        --       icon = " ",
+        --       title = "Open MRs",
+        --       cmd = "glab mr list -P 5",
+        --       key = "m",
+        --       action = function()
+        --         -- TODO: This isn't a valid command
+        --         vim.fn.jobstart("glab mr list --web", { detach = true })
+        --       end,
+        --       height = 7,
+        --       width = 65,
+        --       enabled = is_gitlab_repo,
+        --     },
+        --   }
+        -- return vim.tbl_map(function(cmd)
+        --   return vim.tbl_extend("force", {
+        --     pane = 2,
+        --     section = "terminal",
+        --     padding = 1,
+        --     ttl = 5 * 60,
+        --     indent = 3,
+        --   }, cmd)
+        -- end, cmds)
+        -- end,
       },
     },
     -- debug = { enabled = true },
@@ -204,7 +209,7 @@ return {
       },
       sources = {
         files = { hidden = true },
-        buffers = { hidden = true, layout = { preset = "vscode" } },
+        buffers = { hidden = true, layout = { preset = "ivy_split" } },
         grep = { hidden = true },
         explorer = {
           enabled = true,
@@ -344,7 +349,7 @@ return {
     {
       "<leader><leader>",
       function()
-        Snacks.picker.buffers()
+        Snacks.picker.buffers({ filter = { cwd = true } })
       end,
       desc = "buffers",
     },
@@ -359,11 +364,7 @@ return {
     {
       "<leader>fb",
       function()
-        Snacks.picker.buffers({
-          -- on_show = function()
-          --   vim.cmd.stopinsert()
-          -- end,
-        })
+        Snacks.picker.buffers({ filter = { cwd = true } })
       end,
       desc = "find buffers",
     },
@@ -391,7 +392,7 @@ return {
     {
       "<leader>fr",
       function()
-        Snacks.picker.recent()
+        Snacks.picker.recent({ filter = { cwd = true } })
       end,
       desc = "find recent",
     },
@@ -406,7 +407,7 @@ return {
     {
       "<leader>sB",
       function()
-        Snacks.picker.grep_buffers()
+        Snacks.picker.grep_buffers({ filter = { cwd = true } })
       end,
       desc = "search open buffers",
     },
@@ -544,21 +545,6 @@ return {
         Snacks.picker.colorschemes()
       end,
       desc = "search colorschemes",
-    },
-    -- LSP keymaps within lua/plugins/lsp.lua
-    {
-      "<leader>.",
-      function()
-        Snacks.scratch()
-      end,
-      desc = "toggle scratch buffer",
-    },
-    {
-      "<leader>S",
-      function()
-        Snacks.scratch.select()
-      end,
-      desc = "select scratch buffer",
     },
     {
       "<leader>ny",

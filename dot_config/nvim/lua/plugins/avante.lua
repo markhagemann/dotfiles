@@ -1,7 +1,7 @@
 return {
   "yetone/avante.nvim",
-  enabled = vim.env.ENABLE_AI_PLUGINS == "true",
-  -- enabled = false,
+  -- enabled = vim.env.ENABLE_AI_PLUGINS == "true",
+  enabled = false,
   build = "make BUILD_FROM_SOURCE=true RUSTONIG_SYSTEM_LIBONIG=1",
   dependencies = {
     "nvim-lua/plenary.nvim",
