@@ -237,7 +237,7 @@ return {
         { "tailwindcss-language-server" },
         -- { "typescript-language-server" },
         { "vtsls" },
-        { "vue-ls" },
+        { "vue-language-server" },
       },
 
       auto_update = true,

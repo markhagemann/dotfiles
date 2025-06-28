@@ -1,7 +1,7 @@
 return {
   "sontungexpt/sttusline",
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    "echasnovski/mini.icons",
   },
   event = "BufEnter",
   config = function(_, opts)

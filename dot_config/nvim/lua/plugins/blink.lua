@@ -77,10 +77,11 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "lsp", "path", "snippets", "buffer", "dadbod" },
-      providers = {
-        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-      },
+      default = { "lsp", "path", "snippets", "buffer" },
+      -- default = { "lsp", "path", "snippets", "buffer", "dadbod" },
+      -- providers = {
+      --   dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+      -- },
     },
     appearance = {
       use_nvim_cmp_as_default = true,

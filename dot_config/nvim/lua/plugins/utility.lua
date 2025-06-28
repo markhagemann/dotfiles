@@ -160,14 +160,14 @@ return {
   --     { "<leader>tw", "<cmd>Twilight<cr>", desc = "toggle twilight" },
   --   },
   -- },
-  {
-    "HakonHarnes/img-clip.nvim",
-    event = "BufEnter",
-    keys = {
-      -- suggested keymap
-      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "paste clipboard image" },
-    },
-  },
+  -- {
+  --   "HakonHarnes/img-clip.nvim",
+  --   event = "BufEnter",
+  --   keys = {
+  --     -- suggested keymap
+  --     { "<leader>pi", "<cmd>PasteImage<cr>", desc = "paste clipboard image" },
+  --   },
+  -- },
   {
     "jake-stewart/auto-cmdheight.nvim",
     event = "VeryLazy",

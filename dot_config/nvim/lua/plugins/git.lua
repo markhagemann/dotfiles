@@ -7,9 +7,8 @@ return {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
       "stevearc/dressing.nvim",
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
     },
-    enabled = true,
     build = function()
       require("gitlab.server").build(true)
     end, -- Builds the Go binary
