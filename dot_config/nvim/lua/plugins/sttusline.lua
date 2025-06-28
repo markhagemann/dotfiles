@@ -3,6 +3,7 @@ return {
   dependencies = {
     "echasnovski/mini.icons",
   },
+  enabled = false,
   event = "BufEnter",
   config = function(_, opts)
     local colors = require("utils.colors")

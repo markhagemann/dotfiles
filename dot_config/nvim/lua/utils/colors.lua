@@ -1,7 +1,8 @@
 return {
   -- Keep in sync with ~/.config/tmux/theme.conf
   theme = {
-    background = "#282a37",
+    background = "#222436",
+    -- background = "#282a37",
     foreground = "#a9b1d6",
     black = "#414868",
     blue = "#7aa2f7",
@@ -23,10 +24,10 @@ return {
   },
 
   vi_mode_colors = {
-    normal = "#F1926B",
+    command = "#F1926B",
     insert = "#429ef5",
     visual = "#6ff796",
-    command = "#B395FD",
+    normal = "#B395FD",
     terminal = "#61afef",
   },
 }

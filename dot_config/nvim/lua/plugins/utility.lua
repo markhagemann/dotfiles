@@ -236,7 +236,7 @@ return {
         "aerial",
         "alpha",
         "checkhealth",
-        "CodeCompanion",
+        "codecompanion",
         "dapui*",
         "dbui",
         "Diffview*",
