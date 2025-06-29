@@ -22,9 +22,9 @@ return {
           [[ n e o v i m ]],
         }, "\n"),
         keys = {
-          { icon = " ", key = "e", desc = "Explore Directory", action = "<leader>e" },
+          -- { icon = " ", key = "e", desc = "Explore Directory", action = "<leader>e" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          -- { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           {
             icon = " ",
             key = "r",
@@ -32,8 +32,8 @@ return {
             action = ":lua Snacks.picker.recent({ filter = { cwd = true } })",
           },
           { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = "󱁤 ", key = "m", desc = "Mason", action = ":Mason", enabled = package.loaded.mason ~= nil },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+          { icon = "󱁤 ", key = "m", desc = "Mason", action = ":Mason" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
