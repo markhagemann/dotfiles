@@ -10,7 +10,7 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = "markdown",
+    ft = { "markdown", "codecompanion" },
     opts = {},
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },

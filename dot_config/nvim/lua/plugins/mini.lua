@@ -9,7 +9,8 @@ return {
     config = function()
       require("mini.ai").setup()
       local clue = require("mini.clue")
-      require("mini.diff").setup({
+      local diff = require("mini.diff")
+      diff.setup({
         view = {
           style = "sign",
           signs = {
@@ -18,6 +19,7 @@ return {
             delete = "▎",
           },
         },
+        source = diff.gen_source.none(),
       })
       require("mini.comment").setup({
         options = {
