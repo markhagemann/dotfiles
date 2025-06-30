@@ -3,25 +3,24 @@ local conditions = require("heirline.conditions")
 local colors = require("utils.colors").theme -- Load theme colors
 local vi_mode_colors = require("utils.colors").vi_mode_colors -- Load vi_mode colors
 
--- Helper to safely get sign text with icons
-local function get_sign_text(sign_name)
-  local sign = vim.fn.sign_getdefined(sign_name)
-  local icon = ""
-
-  -- Define icons for different diagnostic types (matching your diagnostics config)
-  if sign_name == "DiagnosticSignError" then
-    icon = "󰅚 "
-  elseif sign_name == "DiagnosticSignWarn" then
-    icon = "󰀪 "
-  elseif sign_name == "DiagnosticSignHint" then
-    icon = "󰌶 "
-  elseif sign_name == "DiagnosticSignInfo" then
-    icon = " "
-  end
-
-  local sign_text = (sign and sign[1] and sign[1].text) or ""
-  return icon .. sign_text
-end
+-- local function get_sign_text(sign_name)
+--   local sign = vim.fn.sign_getdefined(sign_name)
+--   local icon = ""
+--
+--   -- Define icons for different diagnostic types (matching your diagnostics config)
+--   if sign_name == "DiagnosticSignError" then
+--     icon = "󰅚 "
+--   elseif sign_name == "DiagnosticSignWarn" then
+--     icon = "󰀪 "
+--   elseif sign_name == "DiagnosticSignHint" then
+--     icon = "󰌶 "
+--   elseif sign_name == "DiagnosticSignInfo" then
+--     icon = " "
+--   end
+--
+--   local sign_text = (sign and sign[1] and sign[1].text) or ""
+--   return icon .. sign_text
+-- end
 
 local LeftSlantStart = {
   provider = "",
@@ -266,19 +265,20 @@ local LspDiagnostics = {
     condition = function(self)
       return self.errors > 0
     end,
-    hl = { fg = colors.background, bg = colors.red },
+    hl = { fg = colors.background, bg = colors.bblack },
     {
       {
         provider = "",
       },
       {
         provider = function(self)
-          return get_sign_text("DiagnosticSignError") .. self.errors
+          return self.errors
         end,
+        hl = { bg = colors.bblack, fg = colors.red },
       },
       {
         provider = "",
-        hl = { bg = colors.background, fg = colors.red },
+        hl = { bg = colors.background, fg = colors.bblack },
       },
     },
   },
@@ -287,19 +287,20 @@ local LspDiagnostics = {
     condition = function(self)
       return self.warnings > 0
     end,
-    hl = { fg = colors.background, bg = colors.yellow },
+    hl = { fg = colors.background, bg = colors.bblack },
     {
       {
         provider = "",
       },
       {
         provider = function(self)
-          return get_sign_text("DiagnosticSignWarn") .. self.warnings
+          return self.warnings
         end,
+        hl = { bg = colors.bblack, fg = colors.yellow },
       },
       {
         provider = "",
-        hl = { bg = colors.background, fg = colors.yellow },
+        hl = { bg = colors.background, fg = colors.bblack },
       },
     },
   },
@@ -308,19 +309,20 @@ local LspDiagnostics = {
     condition = function(self)
       return self.hints > 0
     end,
-    hl = { fg = colors.background, bg = colors.green },
+    hl = { fg = colors.background, bg = colors.bblack },
     {
       {
         provider = "",
       },
       {
         provider = function(self)
-          return get_sign_text("DiagnosticSignHint") .. self.hints
+          return self.hints
         end,
+        hl = { bg = colors.bblack, fg = colors.green },
       },
       {
         provider = "",
-        hl = { bg = colors.background, fg = colors.green },
+        hl = { bg = colors.background, fg = colors.bblack },
       },
     },
   },
@@ -329,12 +331,17 @@ local LspDiagnostics = {
     condition = function(self)
       return self.info > 0
     end,
-    hl = { fg = colors.black, bg = colors.background },
+    hl = { fg = colors.background, bg = colors.bblack },
     {
       {
         provider = function(self)
-          return " " .. get_sign_text("DiagnosticSignInfo") .. self.info
+          return self.info
         end,
+        hl = { bg = colors.bblack, fg = colors.blue },
+      },
+      {
+        provider = "",
+        hl = { bg = colors.background, fg = colors.bblack },
       },
     },
   },
