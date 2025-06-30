@@ -1,3 +1,5 @@
+local icons = require("utils.icons")
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -201,10 +203,10 @@ return {
       },
       icons = {
         diagnostics = {
-          Error = "󰅚 ",
-          Warn = "󰀪 ",
-          Hint = "󰌶 ",
-          Info = " ",
+          Error = icons.diagnostics.error,
+          Warn = icons.diagnostics.warn,
+          Hint = icons.diagnostics.hint,
+          Info = icons.diagnostics.info,
         },
       },
       sources = {

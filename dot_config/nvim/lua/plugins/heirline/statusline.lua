@@ -1,26 +1,8 @@
 local utils = require("heirline.utils")
 local conditions = require("heirline.conditions")
 local colors = require("utils.colors").theme -- Load theme colors
+local icons = require("utils.icons") -- Load theme colors
 local vi_mode_colors = require("utils.colors").vi_mode_colors -- Load vi_mode colors
-
--- local function get_sign_text(sign_name)
---   local sign = vim.fn.sign_getdefined(sign_name)
---   local icon = ""
---
---   -- Define icons for different diagnostic types (matching your diagnostics config)
---   if sign_name == "DiagnosticSignError" then
---     icon = "󰅚 "
---   elseif sign_name == "DiagnosticSignWarn" then
---     icon = "󰀪 "
---   elseif sign_name == "DiagnosticSignHint" then
---     icon = "󰌶 "
---   elseif sign_name == "DiagnosticSignInfo" then
---     icon = " "
---   end
---
---   local sign_text = (sign and sign[1] and sign[1].text) or ""
---   return icon .. sign_text
--- end
 
 local LeftSlantStart = {
   provider = "",
@@ -272,7 +254,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return self.errors
+          return icons.diagnostics.error .. self.errors
         end,
         hl = { bg = colors.bblack, fg = colors.red },
       },
@@ -294,7 +276,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return self.warnings
+          return icons.diagnostics.warn .. self.warnings
         end,
         hl = { bg = colors.bblack, fg = colors.yellow },
       },
@@ -316,7 +298,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return self.hints
+          return icons.diagnostics.hint .. self.hints
         end,
         hl = { bg = colors.bblack, fg = colors.green },
       },
@@ -335,7 +317,7 @@ local LspDiagnostics = {
     {
       {
         provider = function(self)
-          return self.info
+          return icons.diagnostics.info .. self.info
         end,
         hl = { bg = colors.bblack, fg = colors.blue },
       },

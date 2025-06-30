@@ -17,15 +17,16 @@ return {
     local encoding = require("sttusline.components.encoding")
     local pos_cursor = require("sttusline.components.pos-cursor")
     local pos_cursor_progress = require("sttusline.components.pos-cursor-progress")
+    local icons = require("utils.icons")
 
     local none = "Normal"
 
     diagnostics.set_config({
       icons = {
-        ERROR = "󰅚 ",
-        WARN = "󰀪 ",
-        HINT = "󰌶 ",
-        INFO = " ",
+        ERROR = icons.diagnostics.error,
+        WARN = icons.diagnostics.warn,
+        HINT = icons.diagnostics.hint,
+        INFO = icons.diagnostics.info,
       },
       order = { "ERROR", "WARN", "INFO", "HINT" },
     })
