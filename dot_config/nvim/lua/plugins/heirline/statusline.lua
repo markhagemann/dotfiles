@@ -3,6 +3,26 @@ local conditions = require("heirline.conditions")
 local colors = require("utils.colors").theme -- Load theme colors
 local vi_mode_colors = require("utils.colors").vi_mode_colors -- Load vi_mode colors
 
+-- Helper to safely get sign text with icons
+local function get_sign_text(sign_name)
+  local sign = vim.fn.sign_getdefined(sign_name)
+  local icon = ""
+
+  -- Define icons for different diagnostic types (matching your diagnostics config)
+  if sign_name == "DiagnosticSignError" then
+    icon = "󰅚 "
+  elseif sign_name == "DiagnosticSignWarn" then
+    icon = "󰀪 "
+  elseif sign_name == "DiagnosticSignHint" then
+    icon = "󰌶 "
+  elseif sign_name == "DiagnosticSignInfo" then
+    icon = " "
+  end
+
+  local sign_text = (sign and sign[1] and sign[1].text) or ""
+  return icon .. sign_text
+end
+
 local LeftSlantStart = {
   provider = "",
   hl = { fg = colors.background, bg = colors.bblack }, -- "bg" here refers to the theme background
@@ -201,7 +221,7 @@ local FileName = {
   end,
   on_click = {
     callback = function()
-      vim.cmd("Telescope find_files")
+      require("snacks").picker.files()
     end,
     name = "sl_filename_click",
   },
@@ -236,10 +256,7 @@ local LspDiagnostics = {
   end,
   on_click = {
     callback = function()
-      require("telescope.builtin").diagnostics({
-        layout_strategy = "center",
-        bufnr = 0,
-      })
+      require("snacks").picker.diagnostics()
     end,
     name = "sl_diagnostics_click",
   },
@@ -256,7 +273,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return vim.fn.sign_getdefined("DiagnosticSignError")[1].text .. self.errors
+          return get_sign_text("DiagnosticSignError") .. self.errors
         end,
       },
       {
@@ -277,7 +294,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text .. self.warnings
+          return get_sign_text("DiagnosticSignWarn") .. self.warnings
         end,
       },
       {
@@ -291,12 +308,19 @@ local LspDiagnostics = {
     condition = function(self)
       return self.hints > 0
     end,
-    hl = { fg = colors.black, bg = colors.background },
+    hl = { fg = colors.background, bg = colors.green },
     {
       {
+        provider = "",
+      },
+      {
         provider = function(self)
-          return " " .. vim.fn.sign_getdefined("DiagnosticSignHint")[1].text .. self.hints
+          return get_sign_text("DiagnosticSignHint") .. self.hints
         end,
+      },
+      {
+        provider = "",
+        hl = { bg = colors.background, fg = colors.green },
       },
     },
   },
@@ -309,7 +333,7 @@ local LspDiagnostics = {
     {
       {
         provider = function(self)
-          return " " .. vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text .. self.info
+          return " " .. get_sign_text("DiagnosticSignInfo") .. self.info
         end,
       },
     },
@@ -713,7 +737,7 @@ return {
     GitBranch,
     -- FileNameBlock,
     LspAttached,
-    -- LspDiagnostics,
+    LspDiagnostics,
     { provider = "%=", hl = { bg = colors.background } },
     CodeCompanionAgent,
     CodeCompanion,

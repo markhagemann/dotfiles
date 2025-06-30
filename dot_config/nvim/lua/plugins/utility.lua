@@ -75,7 +75,7 @@ return {
       vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "open edits in quickfix" })
 
       -- Look for previous edits in telescope (needs telescope, obviously)
-      vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "open edits in telescope" })
+      -- vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "open edits in telescope" })
     end,
   },
   {

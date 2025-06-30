@@ -54,7 +54,7 @@ return {
             -- Number of days after which chats are automatically deleted (0 to disable)
             expiration_days = 14,
             -- Picker interface (auto resolved to a valid picker)
-            picker = "fzf-lua", --- ("telescope", "snacks", "fzf-lua", or "default")
+            picker = "snacks", --- ("telescope", "snacks", "fzf-lua", or "default")
             -- Customize picker keymaps (optional)
             picker_keymaps = {
               rename = { n = "r", i = "<M-r>" },
