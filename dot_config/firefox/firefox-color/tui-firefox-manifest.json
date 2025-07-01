@@ -17,18 +17,18 @@
       ]
     },
     "colors": {
-      "toolbar": "rgb(39, 34, 49)",
+      "toolbar": "rgb(34, 36, 54)",
       "toolbar_text": "rgb(39, 31, 55)",
-      "frame": "rgb(39, 34, 49)",
+      "frame": "rgb(34, 36, 54)",
       "tab_background_text": "rgb(90, 94, 125)",
       "toolbar_field": "rgb(122, 162, 247)",
-      "toolbar_field_text": "rgb(180, 162, 255)",
-      "tab_line": "rgb(255, 255, 255)",
+      "toolbar_field_text": "rgb(139, 126, 196)",
+      "tab_line": "rgb(20, 122, 209)",
       "popup": "rgb(39, 31, 55)",
-      "popup_text": "rgb(180, 162, 255)",
+      "popup_text": "rgb(179, 179, 246)",
       "icons": "rgb(86, 122, 176)",
       "popup_border": "rgb(48, 59, 79)",
-      "tab_loading": "rgb(255, 255, 255)"
+      "tab_loading": "rgb(20, 122, 209)"
     }
   }
 }
