@@ -25,7 +25,7 @@ browser {
     font-weight: bold;
     background-color: var(--tf-bg);
     position: absolute;
-    margin: -1.35rem 0rem;
+    margin: -1.25rem 0rem;
     padding: 0 4px;
   }
 }

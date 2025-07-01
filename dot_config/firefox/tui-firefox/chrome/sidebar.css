@@ -14,7 +14,7 @@
     color: var(--lwt-text-color);
     background-color: var(--tf-bg);
     position: absolute;
-    margin: -0.85rem 0.85rem;
+    margin: -0.65rem 0.85rem;
     padding: 0 4px;
     z-index: 50;
   }
