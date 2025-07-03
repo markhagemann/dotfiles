@@ -29,8 +29,8 @@ return {
   },
   cmd = { "AvanteToggle" },
   keys = {
-    { "<leader>at", "<Cmd>AvanteToggle<CR>", desc = "avante: toggle" },
-    { "<leader>aC", "<Cmd>AvanteClear<CR>", desc = "avante: clear" },
+    { "<leader>at", "<Cmd>AvanteToggle<CR>", desc = "Avante: toggle" },
+    { "<leader>aC", "<Cmd>AvanteClear<CR>", desc = "Avante: clear" },
   },
   version = false, -- Never set this value to "*"! Never!
   opts = {

@@ -20,7 +20,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     recommended = true,
-    desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
+    desc = "Debugging support. requires language specific adapters to be configured. (see lang extras)",
 
     dependencies = {
       "rcarriga/nvim-dap-ui",
@@ -35,25 +35,25 @@ return {
 
     -- stylua: ignore
     keys = {
-      { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "run with args" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "toggle breakpoint" },
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('breakpoint condition: ')) end, desc = "breakpoint condition" },
-      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "run to cursor" },
-      { "<leader>dc", function() require("dap").continue() end, desc = "run/continue" },
-      { "<leader>de", function() require("dapui").eval() end, desc = "evaluate" },
-      { "<leader>dg", function() require("dap").goto_() end, desc = "go to line (no execute)" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "step into" },
-      { "<leader>dj", function() require("dap").down() end, desc = "down" },
-      { "<leader>dk", function() require("dap").up() end, desc = "up" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "run last" },
-      { "<leader>do", function() require("dap").step_over() end, desc = "step over" },
-      { "<leader>dO", function() require("dap").step_out() end, desc = "step out" },
-      { "<leader>dP", function() require("dap").pause() end, desc = "pause" },
-      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "toggle REPL" },
-      { "<leader>ds", function() require("dap").session() end, desc = "session" },
-      { "<leader>dt", function() require("dap").terminate() end, desc = "terminate" },
-      { "<leader>du", function() require("dapui").toggle() end, desc = "toggle DAPUI" },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "widgets" },
+      { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with args" },
+      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('breakpoint condition: ')) end, desc = "Breakpoint condition" },
+      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to cursor" },
+      { "<leader>dc", function() require("dap").continue() end, desc = "Run/continue" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "Evaluate" },
+      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+      { "<leader>di", function() require("dap").step_into() end, desc = "Step into" },
+      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+      { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+      { "<leader>dl", function() require("dap").run_last() end, desc = "Run last" },
+      { "<leader>do", function() require("dap").step_over() end, desc = "Step over" },
+      { "<leader>dO", function() require("dap").step_out() end, desc = "Step out" },
+      { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
+      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle repl" },
+      { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+      { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+      { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle dapui" },
+      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     },
 
     config = function()
@@ -99,8 +99,8 @@ return {
     dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore
     keys = {
-      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "(debug): toggle" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "(debug): eval", mode = {"n", "v"} },
     },
     opts = {},
     config = function(_, opts)

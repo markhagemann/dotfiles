@@ -16,7 +16,7 @@ return {
       function()
         require("lazydocker").toggle()
       end,
-      desc = "lazydocker",
+      desc = "Lazydocker",
     },
   },
 }

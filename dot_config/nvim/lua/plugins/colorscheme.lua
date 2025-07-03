@@ -50,7 +50,7 @@ return {
           --   vim.cmd(":lua print('Transparency enabled:', vim.g.transparent_enabled)")
           --   require("lazy.core.loader").reload(require("lazy.core.config").plugins["tokyonight.nvim"])
           -- end
-          -- vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "transparency toggle" })
+          -- vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "Transparency toggle" })
         end,
       },
     },

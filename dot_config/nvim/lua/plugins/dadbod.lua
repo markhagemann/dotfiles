@@ -14,6 +14,6 @@ return {
   init = function()
     -- Your DBUI configuration
     vim.g.db_ui_use_nerd_fonts = 1
-    vim.keymap.set("n", "<leader>od", ":DBUIToggle<cr>", { desc = "open database" })
+    vim.keymap.set("n", "<leader>od", ":DBUIToggle<cr>", { desc = "Open database" })
   end,
 }

@@ -22,28 +22,28 @@ return {
         function()
           require("tmux").move_left()
         end,
-        desc = "navigate left",
+        desc = "Navigate left",
       },
       {
         "<C-j>",
         function()
           require("tmux").move_top()
         end,
-        desc = "navigate top",
+        desc = "Navigate top",
       },
       {
         "<C-k>",
         function()
           require("tmux").move_top()
         end,
-        desc = "navigate top",
+        desc = "Navigate top",
       },
       {
         "<C-l>",
         function()
           require("tmux").move_right()
         end,
-        desc = "navigate right",
+        desc = "Navigate right",
       },
     },
   },
@@ -66,16 +66,16 @@ return {
       before.setup()
 
       -- Jump to previous entry in the edit history
-      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "jump to last edit" })
+      vim.keymap.set("n", "<leader>jl", before.jump_to_last_edit, { desc = "Jump to last edit" })
 
       -- Jump to next entry in the edit history
-      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "jump to next edit" })
+      vim.keymap.set("n", "<leader>jn", before.jump_to_next_edit, { desc = "Jump to next edit" })
 
       -- Look for previous edits in quickfix list
-      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "open edits in quickfix" })
+      vim.keymap.set("n", "<leader>oq", before.show_edits_in_quickfix, { desc = "Open edits in quickfix" })
 
       -- Look for previous edits in telescope (needs telescope, obviously)
-      -- vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "open edits in telescope" })
+      -- vim.keymap.set("n", "<leader>oe", before.show_edits_in_telescope, { desc = "Open edits in telescope" })
     end,
   },
   {
@@ -140,7 +140,7 @@ return {
       {
         "<leader>gb",
         "<CMD>BlameToggle<CR>",
-        desc = "git blame",
+        desc = "Git blame",
         noremap = true,
         silent = true,
       },
@@ -151,28 +151,12 @@ return {
     cmd = { "TodoTrouble", "TroubleToggle" },
     event = "VimEnter",
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "diagnostics (trouble)" },
-      { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "buffer diagnostics (trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "symbols (trouble)" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (trouble)" },
+      { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer diagnostics (trouble)" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (trouble)" },
     },
     opts = {},
   },
-  -- {
-  --   "folke/twilight.nvim",
-  --   opts = {},
-  --   event = "VeryLazy",
-  --   keys = {
-  --     { "<leader>tw", "<cmd>Twilight<cr>", desc = "toggle twilight" },
-  --   },
-  -- },
-  -- {
-  --   "HakonHarnes/img-clip.nvim",
-  --   event = "BufEnter",
-  --   keys = {
-  --     -- suggested keymap
-  --     { "<leader>pi", "<cmd>PasteImage<cr>", desc = "paste clipboard image" },
-  --   },
-  -- },
   {
     "jake-stewart/auto-cmdheight.nvim",
     event = "VeryLazy",
@@ -224,7 +208,7 @@ return {
   {
     "kburdett/vim-nuuid",
     keys = {
-      { "<leader>uu", "<Plug>Nuuid", desc = "generate uuid" },
+      { "<leader>uu", "<Plug>Nuuid", desc = "Generate uuid" },
     },
   },
   {
@@ -279,12 +263,12 @@ return {
       {
         "<leader>sr",
         ":GrugFar<cr>",
-        desc = "search/replace across all files (grug)",
+        desc = "Search/replace across all files (grug)",
       },
       {
         "<leader>sc",
         "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand(' % ') } })<cr>",
-        desc = "search/replace across current file (grug)",
+        desc = "Search/replace across current file (grug)",
       },
     },
   },
@@ -303,7 +287,7 @@ return {
   {
     "mbbill/undotree",
     keys = {
-      { "<leader>ut", ":UndotreeToggle<cr>", desc = "toggle undo tree" },
+      { "<leader>ut", ":UndotreeToggle<cr>", desc = "Toggle undo tree" },
     },
   },
   {
@@ -314,7 +298,7 @@ return {
         auto_cmd = false, -- Set to false to disable automatic execution
       })
       vim.cmd([[ autocmd BufReadPost * :silent GuessIndent ]])
-      vim.keymap.set("n", "<Tab>g", vim.cmd.GuessIndent, { desc = "GuessIndent (manual)" })
+      vim.keymap.set("n", "<Tab>g", vim.cmd.GuessIndent, { desc = "Guessindent (manual)" })
     end,
   },
   {
@@ -326,13 +310,13 @@ return {
     },
   },
   -- { "preservim/vim-pencil", event = "VeryLazy" },
-  -- {
-  --   "rachartier/tiny-glimmer.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     transparency_color = "#000000",
-  --   },
-  -- },
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    -- opts = {
+    --   transparency_color = "#000000",
+    -- },
+  },
   {
     "propet/toggle-fullscreen.nvim",
     keys = {
@@ -341,7 +325,7 @@ return {
         function()
           require("toggle-fullscreen"):toggle_fullscreen()
         end,
-        desc = "toggle fullscreen",
+        desc = "Toggle fullscreen",
       },
     },
   },
@@ -360,6 +344,11 @@ return {
         auto_save_enabled = true,
       })
     end,
+  },
+  {
+    "r0nsha/multinput.nvim",
+    event = "BufEnter",
+    opts = {},
   },
   {
     "RRethy/vim-illuminate",
@@ -400,8 +389,8 @@ return {
       })
     end,
     keys = {
-      { "]]", desc = "Next Reference" },
-      { "[[", desc = "Prev Reference" },
+      { "]]", desc = "Next reference" },
+      { "[[", desc = "Prev reference" },
     },
   },
   {
@@ -470,7 +459,7 @@ return {
       "<cmd>lua require('quick-todo').open_todo()<CR>",
       mode = { "n" },
       silent = true,
-      desc = "toggle todo",
+      desc = "Toggle todo",
     },
   },
   config = function()
@@ -498,7 +487,7 @@ return {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
     config = function()
-      local opts = { noremap = true, silent = true, desc = "pick colour" }
+      local opts = { noremap = true, silent = true, desc = "Pick colour" }
       vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
       require("color-picker").setup({
         ["icons"] = { "-", "" },

@@ -7,32 +7,32 @@ return {
     --   "<leader>lf",
     --   ":Format<CR>",
     --   mode = "v",
-    --   desc = "LSP Format Range",
+    --   desc = "Lsp format range",
     -- },
     {
       "<leader>lfd",
       ":FormatDisable<CR>",
       mode = "n",
-      desc = "lsp: disable formatting",
+      desc = "LSP: disable formatting",
     },
     {
       "<leader>lfe",
       ":FormatEnable<CR>",
       mode = "n",
-      desc = "lsp: enable formatting",
+      desc = "LSP: enable formatting",
     },
   },
   init = function()
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       vim.g.disable_autoformat = true
     end, {
-      desc = "disable autoformat-on-save",
+      desc = "Disable autoformat-on-save",
     })
 
     vim.api.nvim_create_user_command("FormatEnable", function()
       vim.g.disable_autoformat = false
     end, {
-      desc = "re-enable autoformat-on-save",
+      desc = "Re-enable autoformat-on-save",
     })
 
     ---Selects the first available formatter.

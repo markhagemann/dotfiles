@@ -89,10 +89,10 @@ return {
     })
   end,
   keys = {
-    { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "ai: actions" },
-    { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "ai: chat" },
-    { "<leader>a+", "<cmd>CodeCompanionChat Add<cr>", desc = "ai: add file to chat", mode = { "v" } },
-    { "<leader>as", select_model, desc = "ai: select model" },
+    { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "AI: actions" },
+    { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "AI: chat" },
+    { "<leader>a+", "<cmd>CodeCompanionChat Add<cr>", desc = "AI: add file to chat", mode = { "v" } },
+    { "<leader>as", select_model, desc = "AI: select model" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

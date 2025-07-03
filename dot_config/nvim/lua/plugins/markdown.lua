@@ -46,7 +46,7 @@ return {
           action = function()
             return require("obsidian").util.toggle_checkbox()
           end,
-          desc = "toggle checkbox",
+          desc = "Toggle checkbox",
           opts = { buffer = true },
         },
         -- Smart action depending on context, either follow link or toggle checkbox.

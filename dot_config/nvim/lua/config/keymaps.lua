@@ -22,7 +22,7 @@ keymap.set({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   -- LazyVim.cmp.actions.snippet_stop()
   return "<esc>"
-end, { expr = true, desc = "escape and clear hlsearch" })
+end, { expr = true, desc = "Escape and clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
@@ -30,16 +30,16 @@ keymap.set(
   "n",
   "<leader>ure",
   "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "redraw / clear hlsearch / diff Update" }
+  { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "next search result" })
-keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "next search result" })
-keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "next search result" })
-keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "prev search result" })
-keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "prev search result" })
-keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "prev search result" })
+keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
+keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
+keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 -- Add undo break-points
 keymap.set("i", ",", ",<c-g>u")
@@ -47,17 +47,17 @@ keymap.set("i", ".", ".<c-g>u")
 keymap.set("i", ";", ";<c-g>u")
 
 -- Save file
-keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "save file" })
+keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- Commenting
-keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "add comment below" })
-keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "add comment above" })
+keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment below" })
+keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment above" })
 
 -- System clipboard
-keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "copy to system clipboard" })
-keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "copy to system clipboard" })
-keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "paste from system clipboard" })
-keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "paste from system clipboard" })
+keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "Copy to system clipboard" })
+keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
 
 -- Better up/down
 keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -70,28 +70,28 @@ keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 
 -- Resize window using <ctrl> arrow keys
-keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "increase window height" })
-keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "decrease window height" })
-keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "decrease window width" })
-keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "increase window width" })
+keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Window management
-keymap.set("n", "|", "<C-w>v", { desc = "vertical split" }) -- split window vertically
-keymap.set("n", "-", "<C-w>s", { desc = "horizontal split" }) -- split window horizontally
-keymap.set("n", "=", "<C-w>=", { desc = "equalize splits" }) -- make split windows equal width & height
-keymap.set("n", "<leader>wx", ":close<CR>", { desc = "close split" }) -- close current split window
+keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" }) -- split window vertically
+keymap.set("n", "-", "<C-w>s", { desc = "Horizontal split" }) -- split window horizontally
+keymap.set("n", "=", "<C-w>=", { desc = "Equalize splits" }) -- make split windows equal width & height
+keymap.set("n", "<leader>wx", ":close<CR>", { desc = "Close split" }) -- close current split window
 
-keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "open new tab" })
-keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "close current tab" })
-keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "go to next tab" })
-keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "go to previous tab" })
+keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open new tab" })
+keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab" })
+keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab" })
+keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab" })
 
 -- Replace word under cursor across entire buffer
 keymap.set(
   "n",
   "<leader>rw",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "replace word under cursor" }
+  { desc = "Replace word under cursor" }
 )
 
 -- Save and load session
