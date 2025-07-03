@@ -9,6 +9,7 @@ return {
   version = "*",
   dependencies = {
     "rafamadriz/friendly-snippets",
+    "onsails/lspkind.nvim",
     {
       "saghen/blink.compat",
       optional = true,
@@ -19,6 +20,11 @@ return {
   opts = function()
     local providers = {}
     local default = { "lsp", "path", "snippets", "buffer" }
+
+    providers.buffer = {
+      min_keyword_length = 5,
+      max_items = 5,
+    }
 
     -- Always included
     providers.thesaurus = {
@@ -66,15 +72,6 @@ return {
       table.insert(default, "codecompanion")
     end
 
-    if pcall(require, "blink-cmp-copilot") then
-      providers.copilot = {
-        name = "Copilot",
-        module = "blink-cmp-copilot",
-        score_offset = 50,
-      }
-      table.insert(default, "copilot")
-    end
-
     -- Final sources table
     local sources = {
       compat = {},
@@ -102,9 +99,43 @@ return {
         },
         menu = {
           border = "rounded",
-          winblend = 0,
+          -- winblend = 0,
           scrollbar = true,
+          cmdline_position = function()
+            if vim.g.ui_cmdline_pos ~= nil then
+              local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
+              return { pos[1] - 1, pos[2] }
+            end
+            local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
+            return { vim.o.lines - height, 0 }
+          end,
+
           draw = {
+            columns = {
+              { "kind_icon", "label", gap = 1 },
+              { "kind" },
+            },
+            components = {
+              kind = {
+                text = function(item)
+                  return item.kind
+                end,
+                highlight = "CmpItemKind",
+              },
+              kind_icon = {
+                text = function(item)
+                  local kind = require("lspkind").symbol_map[item.kind] or ""
+                  return kind .. " "
+                end,
+                highlight = "CmpItemKind",
+              },
+              label = {
+                text = function(item)
+                  return item.label
+                end,
+                highlight = "CmpItemAbbr",
+              },
+            },
             treesitter = { "lsp" },
           },
         },
@@ -113,7 +144,7 @@ return {
           auto_show_delay_ms = 200,
           window = {
             border = "rounded",
-            winblend = 0,
+            -- winblend = 0,
             scrollbar = true,
           },
           treesitter_highlighting = true,
@@ -123,42 +154,14 @@ return {
         enabled = true,
         window = {
           border = "rounded",
-          winblend = 0,
+          -- winblend = 0,
           scrollbar = false,
         },
       },
       sources = sources,
       appearance = {
-        use_nvim_cmp_as_default = true,
+        use_nvim_cmp_as_default = false,
         nerd_font_variant = "mono",
-        kind_icons = {
-          Copilot = "",
-          Text = "󰉿",
-          Method = "󰊕",
-          Function = "󰊕",
-          Constructor = "󰒓",
-          Field = "󰜢",
-          Variable = "󰆦",
-          Property = "󰖷",
-          Class = "󱡠",
-          Interface = "󱡠",
-          Struct = "󱡠",
-          Module = "󰅩",
-          Unit = "󰪚",
-          Value = "󰦨",
-          Enum = "󰦨",
-          EnumMember = "󰦨",
-          Keyword = "󰻾",
-          Constant = "󰏿",
-          Snippet = "󱄽",
-          Color = "󰏘",
-          File = "󰈔",
-          Reference = "󰬲",
-          Folder = "󰉋",
-          Event = "󱐋",
-          Operator = "󰪚",
-          TypeParameter = "󰬛",
-        },
       },
       keymap = {
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
