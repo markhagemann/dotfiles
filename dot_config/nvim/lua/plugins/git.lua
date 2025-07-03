@@ -1,5 +1,6 @@
 return {
   {
+    -- enable = false, -- disable if it causes issues gitlab-official
     "harrisoncramer/gitlab.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -30,13 +31,6 @@ return {
           virt_text_priority = 100,
         },
       })
-    end,
-  },
-  {
-    "ThePrimeagen/git-worktree.nvim",
-    event = "BufEnter",
-    config = function()
-      require("git-worktree").setup()
     end,
   },
 }

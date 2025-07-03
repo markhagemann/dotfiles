@@ -335,7 +335,7 @@ local LspAttached = {
     lsp_attached = false,
     show_lsps = {
       copilot = false,
-      efm = false,
+      -- efm = false,
     },
   },
   init = function(self)
