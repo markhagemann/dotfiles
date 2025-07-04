@@ -189,6 +189,11 @@ return {
     },
     picker = {
       enabled = true,
+      formatters = {
+        file = {
+          truncate = 60, -- truncate the file path to (roughly) this length
+        },
+      },
       matcher = {
         fuzzy = true, -- use fuzzy matching
         smartcase = true, -- use smartcase
@@ -211,7 +216,7 @@ return {
       },
       sources = {
         files = { hidden = true },
-        buffers = { hidden = true, layout = { preset = "ivy_split" } },
+        buffers = { hidden = true, layout = { preset = "vscode" } },
         grep = { hidden = true },
         explorer = {
           enabled = true,
