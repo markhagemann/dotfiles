@@ -13,8 +13,8 @@ end
 
 return {
   "olimorris/codecompanion.nvim",
-  enabled = vim.env.ENABLE_AI_PLUGINS == "true",
-  -- enabled = false,
+  -- enabled = vim.env.ENABLE_AI_PLUGINS == "true",
+  enabled = false,
   config = function()
     require("codecompanion").setup({
       strategies = {

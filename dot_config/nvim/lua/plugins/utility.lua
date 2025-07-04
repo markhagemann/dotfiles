@@ -226,6 +226,7 @@ return {
         "aerial",
         "alpha",
         "checkhealth",
+        "copilot-chat",
         "codecompanion",
         "dapui*",
         "dbui",
