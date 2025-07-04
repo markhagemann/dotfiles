@@ -26,6 +26,7 @@ return {
         "toml",
         "typescript",
         "vim",
+        "vue",
         "yaml",
       },
       highlight = { enable = true },

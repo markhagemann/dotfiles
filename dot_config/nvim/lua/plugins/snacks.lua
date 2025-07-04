@@ -189,6 +189,20 @@ return {
     },
     picker = {
       enabled = true,
+      win = {
+        input = {
+          keys = {
+            ["<C-y>"] = { "list_scroll_up_1", mode = { "n" } },
+            ["<C-e>"] = { "list_scroll_down_1", mode = { "n" } },
+          },
+        },
+        list = {
+          keys = {
+            ["<C-y>"] = { "list_scroll_up_1", mode = { "n" } },
+            ["<C-e>"] = { "list_scroll_down_1", mode = { "n" } },
+          },
+        },
+      },
       formatters = {
         file = {
           truncate = 60, -- truncate the file path to (roughly) this length
@@ -216,7 +230,10 @@ return {
       },
       sources = {
         files = { hidden = true },
-        buffers = { hidden = true, layout = { preset = "vscode" } },
+        buffers = {
+          hidden = true,
+          layout = { preset = "vscode" },
+        },
         grep = { hidden = true },
         explorer = {
           enabled = true,
@@ -666,6 +683,13 @@ return {
     --   mode = { "n", "t" },
     --   desc = "Toggle terminal",
     -- },
+    {
+      "<leader>cl",
+      function()
+        Snacks.picker.lsp_config()
+      end,
+      desc = "LSP Information",
+    },
     { "<c-h>", [[<C-\><C-n><C-W>h]], mode = "t", desc = "Window movement: move left" },
     { "<c-j>", [[<C-\><C-n><C-W>j]], mode = "t", desc = "Window movement: move down" },
     { "<c-k>", [[<C-\><C-n><C-W>k]], mode = "t", desc = "Window movement: move up" },

@@ -10,16 +10,16 @@ return {
     --   desc = "Lsp format range",
     -- },
     {
-      "<leader>lfd",
+      "<leader>cfd",
       ":FormatDisable<CR>",
       mode = "n",
-      desc = "LSP: disable formatting",
+      desc = "disable formatting",
     },
     {
-      "<leader>lfe",
+      "<leader>cfe",
       ":FormatEnable<CR>",
       mode = "n",
-      desc = "LSP: enable formatting",
+      desc = "enable formatting",
     },
   },
   init = function()
@@ -60,8 +60,7 @@ return {
     end
 
     local function use_web_formatters(bufnr)
-      return { "eslint", select_prettier(bufnr) }
-      -- return { "eslint_d", select_prettier(bufnr) }
+      return { "eslint_d", select_prettier(bufnr) }
     end
 
     -- local sh_formatters = {
