@@ -41,11 +41,6 @@ keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev s
 keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
--- Add undo break-points
-keymap.set("i", ",", ",<c-g>u")
-keymap.set("i", ".", ".<c-g>u")
-keymap.set("i", ";", ";<c-g>u")
-
 -- Save file
 keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 

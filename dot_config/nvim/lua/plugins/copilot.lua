@@ -44,6 +44,7 @@ return {
       { "<leader>ao", "<cmd>CopilotChatOptimize<cr>", mode = "v", desc = "AI: Optimize Code" },
       { "<leader>agd", "<cmd>CopilotChatOptimize<cr>", mode = "v", desc = "AI: Generate Docs" },
       { "<leader>agt", "<cmd>CopilotChatOptimize<cr>", mode = "v", desc = "AI: Generate Tests" },
+      { "<leader>apr", ":CopilotPrReview<cr>", "AI: PR review" },
     },
   },
 }
