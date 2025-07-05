@@ -1,0 +1,17 @@
+[
+  "alexdauenhauer.catppuccin-noctis-icons@0.3.0",
+  "asvetliakov.vscode-neovim@1.18.22",
+  "bierner.markdown-preview-github-styles@0.1.6",
+  "bradlc.vscode-tailwindcss@0.14.24",
+  "brandonkirbyson.vscode-animations@2.0.1",
+  "dbaeumer.vscode-eslint@3.0.10",
+  "drcika.apc-extension@0.4.1",
+  "enkia.tokyo-night@1.1.2",
+  "esbenp.prettier-vscode@11.0.0",
+  "golang.go@0.48.0",
+  "ms-azuretools.vscode-containers@2.0.3",
+  "ms-azuretools.vscode-docker@2.0.0",
+  "vspacecode.whichkey@0.11.4",
+  "vue.volar@3.0.1",
+  "yoavbls.pretty-ts-errors@0.5.3"
+]
