@@ -323,11 +323,11 @@ return {
     "propet/toggle-fullscreen.nvim",
     keys = {
       {
-        "<leader>tf",
+        "<leader>wf",
         function()
           require("toggle-fullscreen"):toggle_fullscreen()
         end,
-        desc = "Toggle fullscreen",
+        desc = "Toggle window fullscreen",
       },
     },
   },
