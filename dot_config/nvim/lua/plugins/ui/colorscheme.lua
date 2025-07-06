@@ -75,15 +75,15 @@ return {
       transparent = true,
       on_highlights = function(hl, colors)
         hl.Visual = { bg = theme_colors.bpurple }
-        hl.FloatBorder = { fg = theme_colors.bmagenta }
+        hl.FloatBorder = { fg = theme_colors.black }
         hl.WinSeparator = { fg = theme_colors.bpurple }
         hl.SnacksDashboardKey = { fg = theme_colors.bmagenta }
         hl.SnacksIndent = { fg = theme_colors.bpurple }
         hl.SnacksPickerAuEvent = { fg = theme_colors.bmagenta }
-        hl.SnacksPickerBoxTitle = { fg = theme_colors.magenta }
-        hl.SnacksPickerInputBorder = { fg = theme_colors.bmagenta }
-        hl.SnacksPickerInputTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerInputBorder = { fg = theme_colors.bpurple }
+        hl.SnacksPickerInputTitle = { fg = theme_colors.red }
         hl.SnacksPickerListTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerPrompt = { fg = theme_colors.black }
         hl.SnacksPickerPreviewTitle = { fg = theme_colors.magenta }
         hl.SnacksPickerTitle = { fg = theme_colors.magenta }
         hl.NoiceCmdlineIcon = { fg = theme_colors.magenta }

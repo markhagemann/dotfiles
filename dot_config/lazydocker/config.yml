@@ -6,7 +6,7 @@ gui:
       - "bold"
     inactiveBorderColor:
       # - "#589ed7"
-      - "#7f63c5"
+      - "#414868"
     searchingActiveBorderColor:
       - "#ff966c"
       - "bold"

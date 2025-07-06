@@ -13,8 +13,8 @@ return {
         highlight = {
           groups = {
             -- InclineNormal = { guifg = "#bb9af7", guibg = "#2d2a45" },
-            InclineNormal = { guifg = colors.yellow, guibg = "none" },
-            InclineNormalNC = { guifg = colors.blue, guibg = "none" },
+            InclineNormal = { guifg = colors.magenta, guibg = "none" },
+            InclineNormalNC = { guifg = colors.bred, guibg = "none" },
           },
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
@@ -25,7 +25,7 @@ return {
           local mini_icons = require("mini.icons")
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
           local icon, color = mini_icons.get("file", filename)
-          return { { icon, guifg = color }, { " " }, { filename, gui = "bold" } }
+          return { { icon, guifg = color }, { " " }, { filename } }
         end,
       })
     end,
