@@ -81,7 +81,6 @@ return {
         text = { "dictionary" },
         markdown = { "thesaurus" },
         codecompanion = providers.codecompanion and { "codecompanion" } or nil,
-        ["*"] = providers.copilot and { "copilot" } or nil,
       },
     }
 

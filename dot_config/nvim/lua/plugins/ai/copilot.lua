@@ -32,7 +32,7 @@ return {
     opts = {
       mappings = {
         complete = {
-          insert = "<C-j>",
+          insert = "<CR>",
         },
       },
     },

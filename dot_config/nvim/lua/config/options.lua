@@ -34,7 +34,7 @@ opt.autowrite = true -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,popup" -- Completion options
 opt.conceallevel = 0 -- Don't conceal anything
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line

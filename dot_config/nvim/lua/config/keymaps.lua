@@ -41,6 +41,11 @@ keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev s
 keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
+-- Completion
+-- Remap Tab and Shift+Tab for LSP completion navigation
+vim.api.nvim_set_keymap("i", "<Tab>", 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<S-Tab>", 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, noremap = true })
+
 -- Save file
 keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
