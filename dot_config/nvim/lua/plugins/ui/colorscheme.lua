@@ -1,3 +1,5 @@
+local theme_colors = require("utils.colors").theme
+
 return {
   {
     "folke/tokyonight.nvim",
@@ -71,6 +73,30 @@ return {
         floats = "transparent",
       },
       transparent = true,
+      on_highlights = function(hl, colors)
+        hl.Visual = { bg = theme_colors.bpurple }
+        hl.FloatBorder = { fg = theme_colors.bmagenta }
+        hl.WinSeparator = { fg = theme_colors.bpurple }
+        hl.SnacksDashboardKey = { fg = theme_colors.bmagenta }
+        hl.SnacksIndent = { fg = theme_colors.bpurple }
+        hl.SnacksPickerAuEvent = { fg = theme_colors.bmagenta }
+        hl.SnacksPickerBoxTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerInputBorder = { fg = theme_colors.bmagenta }
+        hl.SnacksPickerInputTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerListTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerPreviewTitle = { fg = theme_colors.magenta }
+        hl.SnacksPickerTitle = { fg = theme_colors.magenta }
+        hl.NoiceCmdlineIcon = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupBorder = { fg = theme_colors.bmagenta }
+        hl.NoiceCmdlinePopupTitle = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupTitleCalculator = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupTitleCmdline = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupTitleHelp = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupTitleFilter = { fg = theme_colors.magenta }
+        hl.NoiceCmdlinePopupTitleSearch = { fg = theme_colors.magenta }
+        hl.NoicePopupBorder = { fg = theme_colors.bmagenta }
+        hl.NoicePopupTitle = { fg = theme_colors.magenta }
+      end,
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)

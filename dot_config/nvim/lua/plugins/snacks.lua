@@ -237,6 +237,7 @@ return {
         grep = { hidden = true },
         explorer = {
           enabled = true,
+          ignored = true,
           hidden = true,
           auto_close = false,
           win = {

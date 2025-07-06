@@ -14,7 +14,7 @@ return {
           groups = {
             -- InclineNormal = { guifg = "#bb9af7", guibg = "#2d2a45" },
             InclineNormal = { guifg = colors.yellow, guibg = "none" },
-            InclineNormalNC = { guifg = colors.teal, guibg = "none" },
+            InclineNormalNC = { guifg = colors.blue, guibg = "none" },
           },
         },
         window = { margin = { vertical = 0, horizontal = 1 } },

@@ -18,6 +18,7 @@ return {
     bcyan = "#6eb1f0",
     bgreen = "#41a6b5",
     bmagenta = "#7f63c5",
+    bpurple = "#2d2b42",
     bred = "#ff9e64",
     bwhite = "#787c99",
     byellow = "#e0af68",

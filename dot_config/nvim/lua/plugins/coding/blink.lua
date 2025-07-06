@@ -98,6 +98,7 @@ return {
         },
         menu = {
           border = "rounded",
+          winhighlight = "Normal:BlinkCmpDoc,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
           -- winblend = 0,
           scrollbar = true,
           cmdline_position = function()

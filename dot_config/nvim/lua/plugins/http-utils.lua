@@ -21,6 +21,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    keys = {
+      { "<leader>hcs", "<cmd>CurlOpen<cr>", desc = "Open curl scratchpad" },
+      { "<leader>hcc", "<cmd>CurlClose<cr>", desc = "Close curl scratchpad" },
+    },
     config = true,
   },
 }
