@@ -1,24 +1,17 @@
 return {
   {
-    "devkvlt/go-tags.nvim",
+    "romus204/go-tagger.nvim",
     ft = "go",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      commands = {
-        ["GoTagsAddJSON"] = { "-add-tags", "json" },
-        ["GoTagsRemoveJSON"] = { "-remove-tags", "json" },
-      },
-    },
     keys = {
       {
         "<leader>gta",
-        "<ESC><CMD>GoTagsAddJSON<CR>",
+        "<ESC><CMD>AddGoTags<CR>",
         mode = { "n" },
         desc = "Go tags add json",
       },
       {
         "<leader>gtr",
-        "<ESC><CMD>GoTagsRemoveJSON<CR>",
+        "<ESC><CMD>RemoveGoTags<CR>",
         mode = { "n" },
         desc = "Go tags remove json",
       },
