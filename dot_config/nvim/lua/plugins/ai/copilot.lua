@@ -37,7 +37,7 @@ return {
       },
     },
     keys = {
-      { "<leader>ac", "<cmd>CopilotChat<cr>", mode = "n", desc = "AI: Copilot Chat" },
+      { "<leader>at", "<cmd>CopilotChatToggle<cr>", mode = "n", desc = "AI: Copilot Chat Toggle" },
       { "<leader>ae", "<cmd>CopilotChatExplain<cr>", mode = "v", desc = "AI: Copilot Explain" },
       { "<leader>ar", "<cmd>CopilotChatReview<cr>", mode = "v", desc = "AI: Copilot Review" },
       { "<leader>af", "<cmd>CopilotChatFix<cr>", mode = "v", desc = "AI: Fix Code" },
