@@ -21,6 +21,7 @@ return {
         "markdown",
         "markdown_inline",
         "regex",
+        "scss",
         "sql",
         "tmux",
         "toml",
