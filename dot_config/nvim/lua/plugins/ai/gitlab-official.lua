@@ -9,8 +9,14 @@ return {
   config = function()
     -- Setup the plugin with the provided options
     require("gitlab").setup({
+      minimal_message_level = vim.log.levels.WARN,
       statusline = {
-        enabled = false, -- Disable GitLab's built-in statusline
+        enabled = false,
+      },
+      token = vim.env.GITLAB_TOKEN,
+      base_url = "https://gitlab.com",
+      telemetry = {
+        enabled = false,
       },
       code_suggestions = {
         enabled = true,
