@@ -1,6 +1,16 @@
 // Place your key bindings in this file to override the defaults
 [
     {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateBack",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "workbench.action.navigateForward",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
         "key": "ctrl+h",
         "command": "workbench.action.focusPreviousGroup",
         "when": "editorTextFocus"
@@ -132,21 +142,49 @@
     {
         "key": "space",
         "command": "whichkey.show",
-        "when": "neovim.mode == 'normal' && !inSearch && !inQuickOpen && !suggestWidgetVisible"
-    },
-    {
-        "key": "ctrl+r",
-        "command": "redo",
-        "when": "editorTextFocus && neovim.mode != 'insert'"
+        "when": "neovim.mode == 'normal' && !inSearch && !inQuickOpen && !suggestWidgetVisible && !findInputFocussed && !replaceInputFocussed && !findWidgetVisible && !replaceActive && !searchViewletFocus && !searchInputBoxFocus && !replaceInputBoxFocus"
     },
     {
         "key": "ctrl+j",
         "command": "editor.action.acceptCursorTabSuggestion",
-        "when": "cpp.shouldAcceptTab"
+        "when": "suggestWidgetVisible && cpp.shouldAcceptTab"
     },
     {
         "key": "tab",
         "command": "-editor.action.acceptCursorTabSuggestion",
         "when": "cpp.shouldAcceptTab"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFileFolder",
+        "when": "isMacNative && openFolderWorkspaceSupport"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFile",
+        "when": "true"
+    },
+    {
+        "key": "ctrl+k ctrl+o",
+        "command": "-workbench.action.files.openFolder",
+        "when": "openFolderWorkspaceSupport"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFolderViaWorkspace",
+        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+    },
+    {
+        "key": "ctrl+k ctrl+o",
+        "command": "-workbench.action.files.openLocalFolder",
+        "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openLocalFile",
+        "when": "remoteFileDialogVisible"
     }
 ]
+
+
+
