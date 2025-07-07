@@ -1,12 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "j k",
-        "command": "vscode-neovim.escape",
-        "when": "editorTextFocus && neovim.mode == insert",
-        "args": "jk"
-    },
-    {
         "key": "ctrl+h",
         "command": "workbench.action.focusPreviousGroup",
         "when": "editorTextFocus"

@@ -1105,6 +1105,19 @@
             ]
         },
         {
+            "key": "a",
+            "name": "AI...",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "t",
+                    "name": "Toggle AI Chat",
+                    "type": "command",
+                    "command": "aichat.newchataction"
+                },
+            ],
+        },
+        {
             "key": "z",
             "name": "Toggle zen mode",
             "type": "command",

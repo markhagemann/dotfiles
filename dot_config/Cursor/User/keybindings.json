@@ -1,12 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "j k",
-        "command": "vscode-neovim.escape",
-        "when": "editorTextFocus && neovim.mode == insert",
-        "args": "jk"
-    },
-    {
         "key": "ctrl+h",
         "command": "workbench.action.focusPreviousGroup",
         "when": "editorTextFocus"
@@ -139,5 +133,20 @@
         "key": "space",
         "command": "whichkey.show",
         "when": "neovim.mode == 'normal' && !inSearch && !inQuickOpen && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "redo",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.acceptCursorTabSuggestion",
+        "when": "cpp.shouldAcceptTab"
+    },
+    {
+        "key": "tab",
+        "command": "-editor.action.acceptCursorTabSuggestion",
+        "when": "cpp.shouldAcceptTab"
     }
 ]
