@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile", "BufEnter" },
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
     -- "saghen/blink.cmp",
     "williamboman/mason.nvim",

@@ -1,22 +1,21 @@
 return {
-  {
-    enabled = false, -- disable if it causes issues gitlab-official
-    "harrisoncramer/gitlab.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "stevearc/dressing.nvim",
-      "echasnovski/mini.icons",
-    },
-    build = function()
-      require("gitlab.server").build(true)
-    end, -- Builds the Go binary
-    config = function()
-      require("gitlab").setup()
-    end,
-  },
+  -- {
+  --   "harrisoncramer/gitlab.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "sindrets/diffview.nvim",
+  --     "stevearc/dressing.nvim",
+  --     "echasnovski/mini.icons",
+  --   },
+  --   build = function()
+  --     require("gitlab.server").build(true)
+  --   end, -- Builds the Go binary
+  --   config = function()
+  --     require("gitlab").setup()
+  --   end,
+  -- },
   {
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",
