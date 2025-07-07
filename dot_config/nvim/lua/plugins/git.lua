@@ -1,6 +1,6 @@
 return {
   {
-    -- enable = false, -- disable if it causes issues gitlab-official
+    enabled = false, -- disable if it causes issues gitlab-official
     "harrisoncramer/gitlab.nvim",
     event = "VeryLazy",
     dependencies = {
