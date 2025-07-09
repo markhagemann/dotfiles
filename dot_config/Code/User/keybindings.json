@@ -183,6 +183,16 @@
         "key": "ctrl+o",
         "command": "-workbench.action.files.openLocalFile",
         "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "cursorPageUp",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "cursorPageDown",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
     }
 ]
 

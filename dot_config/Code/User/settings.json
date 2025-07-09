@@ -51,7 +51,7 @@
     "editor.lineHeight": 2.5,
     "editor.lineNumbers": "relative",
     "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.vertical": "auto",
     "editor.scrollBeyondLastLine": false,
     "editor.showFoldingControls": "always",
     "editor.overviewRulerBorder": false,
@@ -78,6 +78,7 @@
     "workbench.editor.showTabs": "multiple",
     "workbench.iconTheme": "catppuccin noctis icons",
     "workbench.layoutControl.enabled": false,
+    "workbench.remoteIndicator.showExtensionRecommendations": false,
     "workbench.startupEditor": "none",
     "workbench.tips.enabled": true,
     "workbench.tree.indent": 16,
@@ -140,6 +141,10 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+
+    "gitlab.duoCodeSuggestions.additionalLanguages": [
+        "jsonc"
+    ],
     "totalTypeScript.hideAllTips": false,
     "totalTypeScript.hideBasicTips": true,
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/nvim/vscode-init.lua",
@@ -1120,7 +1125,5 @@
             "command": "workbench.action.toggleZenMode"
         }
     ],
-    "gitlab.duoCodeSuggestions.additionalLanguages": [
-        "jsonc"
-    ],
+    "yaml.extension.recommendations": false,
 }

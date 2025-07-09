@@ -49,7 +49,7 @@
     "editor.lineHeight": 2.5,
     "editor.lineNumbers": "relative",
     "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.vertical": "auto",
     "editor.scrollBeyondLastLine": false,
     "editor.showFoldingControls": "always",
     "editor.overviewRulerBorder": false,
@@ -74,6 +74,7 @@
     "workbench.colorTheme": "Tokyo Night Storm",
     "workbench.editor.showTabs": "multiple",
     "workbench.iconTheme": "catppuccin noctis icons",
+    "workbench.remoteIndicator.showExtensionRecommendations": false,
     "workbench.startupEditor": "none",
     "workbench.tips.enabled": true,
     "workbench.tree.indent": 16,
@@ -1123,5 +1124,6 @@
             "type": "command",
             "command": "workbench.action.toggleZenMode"
         }
-    ]
+    ],
+    "yaml.extension.recommendations": false
 }

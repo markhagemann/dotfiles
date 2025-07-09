@@ -6,7 +6,17 @@
         "when": "editorTextFocus && neovim.mode != 'insert'"
     },
     {
+        "key": "cmd+o",
+        "command": "workbench.action.navigateBack",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
         "key": "ctrl+i",
+        "command": "workbench.action.navigateForward",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "cmd+i",
         "command": "workbench.action.navigateForward",
         "when": "editorTextFocus && neovim.mode != 'insert'"
     },
@@ -183,6 +193,31 @@
         "key": "ctrl+o",
         "command": "-workbench.action.files.openLocalFile",
         "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "cmd+o",
+        "command": "-workbench.action.files.openFolderViaWorkspace",
+        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+    },
+    {
+        "key": "cmd+o",
+        "command": "-workbench.action.files.openFileFolder",
+        "when": "isMacNative && openFolderWorkspaceSupport"
+    },
+    {
+        "key": "cmd+o",
+        "command": "-workbench.action.files.openFile",
+        "when": "false"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "cursorPageUp",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "cursorPageDown",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
     }
 ]
 
