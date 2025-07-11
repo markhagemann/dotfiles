@@ -157,7 +157,7 @@
     {
         "key": "ctrl+j",
         "command": "editor.action.acceptCursorTabSuggestion",
-        "when": "suggestWidgetVisible && cpp.shouldAcceptTab"
+        "when": "cpp.shouldAcceptTab && neovim.mode == 'insert'"
     },
     {
         "key": "tab",

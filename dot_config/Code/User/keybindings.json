@@ -145,16 +145,6 @@
         "when": "neovim.mode == 'normal' && !inSearch && !inQuickOpen && !suggestWidgetVisible && !findInputFocussed && !replaceInputFocussed && !findWidgetVisible && !replaceActive && !searchViewletFocus && !searchInputBoxFocus && !replaceInputBoxFocus"
     },
     {
-        "key": "ctrl+j",
-        "command": "editor.action.acceptCursorTabSuggestion",
-        "when": "suggestWidgetVisible && cpp.shouldAcceptTab"
-    },
-    {
-        "key": "tab",
-        "command": "-editor.action.acceptCursorTabSuggestion",
-        "when": "cpp.shouldAcceptTab"
-    },
-    {
         "key": "ctrl+o",
         "command": "-workbench.action.files.openFileFolder",
         "when": "isMacNative && openFolderWorkspaceSupport"
@@ -193,6 +183,26 @@
         "key": "ctrl+d",
         "command": "cursorPageDown",
         "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.inlineSuggest.commit",
+        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "tab",
+        "command": "-editor.action.inlineSuggest.commit",
+        "when": "inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.inlineSuggest.commit",
+        "when": "inInlineEditsPreviewEditor"
+    },
+    {
+        "key": "tab",
+        "command": "-editor.action.inlineSuggest.commit",
+        "when": "inInlineEditsPreviewEditor"
     }
 ]
 
