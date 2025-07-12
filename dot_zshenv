@@ -1,4 +1,6 @@
 # Critical environment variables for all shells
+export ATAC_KEY_BINDINGS=~/.config/atac/vim_key_bindings.toml
+export ATAC_THEME=~/.config/atac/themes/catppuccin_mocha.toml
 export EDITOR=nvim
 export BROWSER=firefox
 export TERM=xterm-kitty
@@ -7,7 +9,6 @@ export RAINFROG_CONFIG="$XDG_CONFIG_HOME/rainfrog"
 export LANG=en_US.UTF-8
 export MANPAGER="nvim +Man!"
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/usr/local/opt/awscli@1/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
