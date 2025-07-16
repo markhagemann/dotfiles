@@ -26,15 +26,18 @@ return {
 
       -- see below for full list of optional dependencies 👇
     },
+    keys = {
+      {
+        "<leader>tc",
+        function()
+          require("obsidian").util.toggle_checkbox()
+        end,
+        desc = "toggle checkbox",
+      },
+      { "<leader>obt", ":ObsidianToday<CR>", desc = "Obsidian: View Today's Notes" },
+    },
     opts = {
       mappings = {
-        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-        ["gf"] = {
-          action = function()
-            return require("obsidian").util.gf_passthrough()
-          end,
-          opts = { noremap = false, expr = true, buffer = true },
-        },
         -- Toggle check-boxes.
         ["<leader>tc"] = {
           action = function()
@@ -50,6 +53,9 @@ return {
           end,
           opts = { buffer = true, expr = true },
         },
+      },
+      daily_notes = {
+        folder = "Notes/Daily",
       },
       workspaces = {
         {
