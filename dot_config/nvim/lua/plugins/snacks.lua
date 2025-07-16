@@ -328,6 +328,7 @@ return {
     },
     profiler = { enabled = true },
     quickfile = { enabled = true },
+    scratch = { enabled = true },
     statuscolumn = {
       enabled = true,
       left = { "mark", "sign" }, -- priority of signs on the left (high to low)
@@ -357,6 +358,20 @@ return {
     zen = { enabled = false },
   },
   keys = {
+    {
+      "<leader>tsb",
+      function()
+        Snacks.scratch()
+      end,
+      desc = "Toggle Scratch Buffer",
+    },
+    {
+      "<leader>tss",
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = "Select Scratch Buffer",
+    },
     {
       '<leader>"',
       function()
