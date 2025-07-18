@@ -34,7 +34,7 @@ disabled = false
 
 [os.symbols]
 Windows = ' '
-CachyOS = '󰣇'
+# CachyOS = '󰣇'
 Arch = '󰣇'
 Linux = '󰣇'
 Ubuntu = ''
@@ -74,9 +74,8 @@ format = '[|](fg:#414868) [󱃾 $context :: $namespace](#7aa2f7) '
 disabled = false
 
 # ---
-
-[vagrant]
-disabled = true
+[aws]
+symbol = "  "
 
 [docker_context]
 disabled = true
@@ -85,14 +84,20 @@ disabled = true
 disabled = true
 
 [golang]
-format =  '[$symbol($version )]($style)'
+format =  '[|](fg:#414868) [$symbol($version )]($style)'
+symbol = " "
 disabled = false
 
+[lua]
+symbol = " "
+
 [python]
+symbol = " "
 disabled = true
 
 [nodejs]
-format =  '[$symbol($version )]($style)'
+symbol = " "
+format =  '[|](fg:#414868) [$symbol($version )]($style)'
 disabled = false
 
 [ruby]
@@ -100,6 +105,10 @@ disabled = true
 
 [terraform]
 disabled = true
+
+[vagrant]
+disabled = true
+
 
 # Shows the username
 [username]
