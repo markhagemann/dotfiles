@@ -1,23 +1,25 @@
+---@module "vim.lsp.client"
+---@class vim.lsp.ClientConfig
 return {
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-  },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   settings = {
     vtsls = {
       tsserver = {
         globalPlugins = {
           {
-            languages = { "vue" },
+            name = "@vue/typescript-plugin",
             location = vim.fn.stdpath("data")
               .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
-            name = "@vue/typescript-plugin",
+            languages = { "vue" },
+            configNamespace = "typescript",
           },
         },
       },
     },
   },
+  on_attach = function(client, bufnr)
+    if vim.bo[bufnr].filetype == "vue" then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  end,
 }
