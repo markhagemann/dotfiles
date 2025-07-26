@@ -53,12 +53,6 @@ keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save fi
 keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment below" })
 keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment above" })
 
--- System clipboard
-keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
-keymap.set({ "n", "x" }, "<leader>Y", '"+yg_', { desc = "Copy to system clipboard" })
-keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
-
 -- Better up/down
 keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
