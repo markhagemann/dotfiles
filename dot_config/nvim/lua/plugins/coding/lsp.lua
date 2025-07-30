@@ -79,28 +79,64 @@ return {
       end,
     },
     {
-      "simrat39/symbols-outline.nvim",
-      keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols outline" } },
+      "stevearc/aerial.nvim",
+      keys = {
+        { "<leader>ta", "<cmd>AerialToggle<cr>", desc = "Toggle Aerial" },
+      },
       opts = {
-        keymaps = {
-          close = { "<Esc>", "q" },
-          goto_location = "<Cr>",
-          focus_location = "f",
-          hover_symbol = "<C-space>",
-          toggle_preview = "K",
-          rename_symbol = "r",
-          code_actions = "a",
-          fold = "c",
-          unfold = "o",
-          fold_all = "C",
-          unfold_all = "O",
-          fold_reset = "R",
+        close_automatic_events = {
+          "unfocus",
+          "switch_buffer",
         },
+        guides = {
+          nested_top = " │ ",
+          mid_item = " ├─",
+          last_item = " └─",
+          whitespace = "   ",
+        },
+        layout = {
+          placement = "window",
+          close_on_select = false,
+          max_width = 30,
+          min_width = 30,
+        },
+        ignore = {
+          buftypes = {},
+        },
+        show_guides = true,
+        open_automatic = false,
+        -- open_automatic = function()
+        --   local aerial = require("aerial")
+        --   return vim.api.nvim_win_get_width(0) > 80 and not aerial.was_closed()
+        -- end,
       },
       config = function(_, opts)
-        require("symbols-outline").setup(opts)
+        require("aerial").setup(opts)
       end,
     },
+    -- {
+    --   "simrat39/symbols-outline.nvim",
+    --   keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols outline" } },
+    --   opts = {
+    --     keymaps = {
+    --       close = { "<Esc>", "q" },
+    --       goto_location = "<Cr>",
+    --       focus_location = "f",
+    --       hover_symbol = "<C-space>",
+    --       toggle_preview = "K",
+    --       rename_symbol = "r",
+    --       code_actions = "a",
+    --       fold = "c",
+    --       unfold = "o",
+    --       fold_all = "C",
+    --       unfold_all = "O",
+    --       fold_reset = "R",
+    --     },
+    --   },
+    --   config = function(_, opts)
+    --     require("symbols-outline").setup(opts)
+    --   end,
+    -- },
     {
       "soulis-1256/eagle.nvim",
       config = function()

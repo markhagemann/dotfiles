@@ -1,3 +1,4 @@
+-- Taken from https://github.com/olimorris/dotfiles
 return {
   "rebelot/heirline.nvim",
   event = "BufEnter",

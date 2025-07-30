@@ -1,3 +1,4 @@
+-- Taken from https://github.com/olimorris/dotfiles
 local utils = require("heirline.utils")
 local conditions = require("heirline.conditions")
 local colors = require("utils.colors").theme -- Load theme colors
@@ -118,12 +119,6 @@ local GitBranch = {
       provider = function(self)
         return "  " .. (self.status_dict.head == "" and "main" or self.status_dict.head) .. " "
       end,
-      on_click = {
-        callback = function()
-          om.ListBranches()
-        end,
-        name = "sl_git_click",
-      },
       hl = { fg = colors.black, bg = colors.bblack },
     },
     {
@@ -151,14 +146,6 @@ local GitBranch = {
         hl = function()
           return { fg = _G.GitStatus.behind == 0 and colors.black or colors.red, bg = colors.bblack }
         end,
-        on_click = {
-          callback = function()
-            if _G.GitStatus.behind > 0 then
-              om.GitPull()
-            end
-          end,
-          name = "sl_gitpull_click",
-        },
       },
       {
         provider = function()
@@ -167,14 +154,6 @@ local GitBranch = {
         hl = function()
           return { fg = _G.GitStatus.ahead == 0 and colors.black or colors.green, bg = colors.bblack }
         end,
-        on_click = {
-          callback = function()
-            if _G.GitStatus.ahead > 0 then
-              om.GitPush()
-            end
-          end,
-          name = "sl_gitpush_click",
-        },
       },
     },
     LeftSlantEnd,
@@ -200,12 +179,6 @@ local FileName = {
     end
     return " " .. filename .. " "
   end,
-  on_click = {
-    callback = function()
-      require("snacks").picker.files()
-    end,
-    name = "sl_filename_click",
-  },
   hl = { fg = colors.black, bg = colors.bblack },
 }
 
@@ -235,12 +208,6 @@ local LspDiagnostics = {
     self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
   end,
-  on_click = {
-    callback = function()
-      require("snacks").picker.diagnostics()
-    end,
-    name = "sl_diagnostics_click",
-  },
   update = { "DiagnosticChanged", "BufEnter" },
   -- Errors
   {
@@ -254,7 +221,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return icons.diagnostics.error .. self.errors
+          return " " .. icons.diagnostics.error .. self.errors .. " "
         end,
         hl = { bg = colors.bblack, fg = colors.red },
       },
@@ -276,7 +243,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return icons.diagnostics.warn .. self.warnings
+          return " " .. icons.diagnostics.warn .. self.warnings .. " "
         end,
         hl = { bg = colors.bblack, fg = colors.yellow },
       },
@@ -298,7 +265,7 @@ local LspDiagnostics = {
       },
       {
         provider = function(self)
-          return icons.diagnostics.hint .. self.hints
+          return " " .. icons.diagnostics.hint .. self.hints .. " "
         end,
         hl = { bg = colors.bblack, fg = colors.green },
       },
@@ -317,7 +284,7 @@ local LspDiagnostics = {
     {
       {
         provider = function(self)
-          return icons.diagnostics.info .. self.info
+          return " " .. icons.diagnostics.info .. self.info .. " "
         end,
         hl = { bg = colors.bblack, fg = colors.blue },
       },
@@ -347,21 +314,13 @@ local LspAttached = {
     end
   end,
   update = { "LspAttach", "LspDetach" },
-  on_click = {
-    callback = function()
-      vim.defer_fn(function()
-        vim.cmd("LspInfo")
-      end, 100)
-    end,
-    name = "sl_lsp_click",
-  },
   {
     condition = function(self)
       return self.lsp_attached
     end,
     LeftSlantStart,
     {
-      provider = "  ",
+      provider = "   ",
       hl = { fg = colors.black, bg = colors.bblack },
     },
     LeftSlantEnd,
@@ -384,19 +343,6 @@ local Ruler = {
     -- %P = percentage through file of displayed window
     provider = " %P% /%2L ",
     hl = { fg = colors.background, bg = colors.black },
-    on_click = {
-      callback = function()
-        local line = vim.api.nvim_win_get_cursor(0)[1]
-        local total_lines = vim.api.nvim_buf_line_count(0)
-
-        if math.floor((line / total_lines)) > 0.5 then
-          vim.cmd("normal! gg")
-        else
-          vim.cmd("normal! G")
-        end
-      end,
-      name = "sl_ruler_click",
-    },
   },
 }
 
@@ -482,12 +428,6 @@ local Session = {
       callback = vim.schedule_wrap(function()
         vim.cmd("redrawstatus")
       end),
-    },
-    on_click = {
-      callback = function()
-        vim.cmd("SessionToggle")
-      end,
-      name = "sl_session_click",
     },
   },
   RightSlantEnd,
@@ -585,12 +525,6 @@ local Overseer = {
   OverseerTasksForStatus("RUNNING"),
   OverseerTasksForStatus("SUCCESS"),
   OverseerTasksForStatus("FAILURE"),
-  on_click = {
-    callback = function()
-      require("neotest").run.run_last()
-    end,
-    name = "sl_overseer_click",
-  },
 }
 
 local Dap = {
@@ -601,12 +535,6 @@ local Dap = {
   provider = function()
     return "  "
   end,
-  on_click = {
-    callback = function()
-      require("dap").continue()
-    end,
-    name = "sl_dap_click",
-  },
   hl = { fg = colors.red },
 }
 
@@ -627,12 +555,6 @@ local Lazy = {
   provider = function()
     return " 󰚰 " .. require("lazy.status").updates() .. " "
   end,
-  on_click = {
-    callback = function()
-      require("lazy").update()
-    end,
-    name = "sl_plugins_click",
-  },
   hl = { fg = colors.black },
 }
 
@@ -646,12 +568,6 @@ local FileIcon = {
   provider = function(self)
     return self.icon and (" " .. self.icon .. " ")
   end,
-  on_click = {
-    callback = function()
-      om.ChangeFiletype()
-    end,
-    name = "sl_fileicon_click",
-  },
   hl = { fg = colors.black, bg = colors.bblack },
 }
 
@@ -659,12 +575,6 @@ local FileType = {
   provider = function()
     return string.lower(vim.bo.filetype) .. " "
   end,
-  on_click = {
-    callback = function()
-      om.ChangeFiletype()
-    end,
-    name = "sl_filetype_click",
-  },
   hl = { fg = colors.black, bg = colors.bblack },
 }
 
