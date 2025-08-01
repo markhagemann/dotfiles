@@ -1,6 +1,7 @@
 return {
   {
-    enabled = vim.env.ENABLE_GITHUB_COPILOT == "true",
+    -- enabled = vim.env.ENABLE_GITHUB_COPILOT == "true",
+    enabled = false,
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       {
