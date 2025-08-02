@@ -315,6 +315,13 @@ return {
       debounce_hours = 5, -- at least 5 hours between attempts to install/update
     })
 
+    vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+      config = config or {}
+      config.border = "rounded"
+
+      vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
+    end
+
     vim.diagnostic.config({
       virtual_text = false,
       severity_sort = true,

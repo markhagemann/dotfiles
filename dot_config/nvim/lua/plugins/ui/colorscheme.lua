@@ -75,7 +75,7 @@ return {
       transparent = true,
       on_highlights = function(hl, colors)
         hl.Visual = { bg = theme_colors.bpurple }
-        hl.FloatBorder = { fg = theme_colors.black }
+        hl.FloatBorder = { fg = theme_colors.bpurple }
         hl.WinSeparator = { fg = theme_colors.bpurple }
         hl.SnacksDashboardKey = { fg = theme_colors.bmagenta }
         hl.SnacksIndent = { fg = theme_colors.bpurple }
@@ -94,7 +94,7 @@ return {
         hl.NoiceCmdlinePopupTitleHelp = { fg = theme_colors.magenta }
         hl.NoiceCmdlinePopupTitleFilter = { fg = theme_colors.magenta }
         hl.NoiceCmdlinePopupTitleSearch = { fg = theme_colors.magenta }
-        hl.NoicePopupBorder = { fg = theme_colors.bmagenta }
+        hl.NoicePopupBorder = { fg = theme_colors.bpurple }
         hl.NoicePopupTitle = { fg = theme_colors.magenta }
       end,
     },

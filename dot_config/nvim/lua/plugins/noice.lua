@@ -2,9 +2,6 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
-    notify = {
-      enabled = false,
-    },
     lsp = {
       hover = {
         silent = true,
@@ -12,6 +9,12 @@ return {
       signature = {
         enabled = false,
       },
+    },
+    notify = {
+      enabled = false,
+    },
+    presets = {
+      lsp_doc_border = true, -- adds a border to hover docs and signature help
     },
   },
   dependencies = {
