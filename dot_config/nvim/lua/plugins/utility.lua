@@ -125,6 +125,13 @@ return {
     opts = {},
   },
   {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      -- add any custom options here
+    },
+  },
+  {
     "kburdett/vim-nuuid",
     keys = {
       { "<leader>uu", "<Plug>Nuuid", desc = "Generate uuid" },
@@ -241,22 +248,6 @@ return {
         desc = "Toggle window fullscreen",
       },
     },
-  },
-  {
-    "rmagatti/auto-session", -- auto save session
-    event = "VeryLazy",
-    config = function()
-      require("auto-session").setup({
-        log_level = "error",
-        auto_session_suppress_dirs = {
-          "~/",
-          "~/Downloads",
-          "~/Documents",
-        },
-        auto_session_use_git_branch = true,
-        auto_save_enabled = true,
-      })
-    end,
   },
   {
     "r0nsha/multinput.nvim",
