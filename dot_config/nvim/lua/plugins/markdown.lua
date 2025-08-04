@@ -55,7 +55,7 @@ return {
         },
       },
       daily_notes = {
-        folder = "Notes/Daily",
+        folder = "Daily",
       },
       workspaces = {
         {
