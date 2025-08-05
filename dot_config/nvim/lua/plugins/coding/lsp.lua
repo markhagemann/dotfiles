@@ -307,35 +307,40 @@ return {
       registries = { "github:crashdummyy/mason-registry", "github:mason-org/mason-registry" },
     })
 
-    require("mason-tool-installer").setup({
-      ensure_installed = {
-        { "bash-language-server" },
-        { "css-lsp" },
-        { "emmet-ls" },
-        { "eslint_d" },
-        { "eslint-lsp" },
-        { "gitlab-ci-ls" },
-        { "gopls" },
-        { "goimports" },
-        { "gomodifytags" },
-        { "gotests" },
-        { "html-lsp" },
-        { "lua-language-server" },
-        { "prettierd" },
-        { "staticcheck" },
-        { "stylua" },
-        { "tailwindcss-language-server" },
-        -- { "typescript-language-server" },
-        { "vtsls" },
-        { "vue-language-server" },
-      },
+    require("mason").setup()
 
-      auto_update = true,
-      run_on_start = true,
-      start_delay = 3000, -- 3 second delay
-      debounce_hours = 5, -- at least 5 hours between attempts to install/update
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "bashls",
+        "cssls",
+        "emmet_ls",
+        "eslint",
+        "gitlab_ci_ls",
+        "gopls",
+        "html",
+        "lua_ls",
+        "tailwindcss",
+        "vtsls",
+        "vue_ls",
+      },
     })
 
-    require("mason-lspconfig").setup()
+    require("mason-tool-installer").setup({
+      ensure_installed = {
+        "eslint_d",
+        "delve",
+        "goimports",
+        "gomodifytags",
+        "gotests",
+        "js-debug-adapter",
+        "prettierd",
+        "staticcheck",
+        "stylua",
+      },
+      auto_update = true,
+      run_on_start = true,
+      start_delay = 1000, -- 1 second delay
+      debounce_hours = 0, -- Disable debouncing
+    })
   end,
 }

@@ -389,9 +389,11 @@ local SearchResults = {
     end,
   },
   {
+    condition = function(self)
+      return self.search and self.search.current and self.search.total and self.search.maxcount
+    end,
     provider = function(self)
       local search = self.search
-
       return string.format(" %d/%d ", search.current, math.min(search.total, search.maxcount))
     end,
     hl = function()
