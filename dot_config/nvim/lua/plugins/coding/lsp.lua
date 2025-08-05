@@ -2,9 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
-    -- "saghen/blink.cmp",
-    "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "williamboman/mason.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
       "askfiy/lsp_extra_dim",
@@ -285,7 +284,29 @@ return {
       end,
     })
 
-    require("mason").setup()
+    vim.diagnostic.config({
+      virtual_text = false,
+      severity_sort = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "󰅚 ",
+          [vim.diagnostic.severity.WARN] = "󰀪 ",
+          [vim.diagnostic.severity.HINT] = "󰌶 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
+      float = {
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
+    })
+
+    require("mason").setup({
+      registries = { "github:crashdummyy/mason-registry", "github:mason-org/mason-registry" },
+    })
+
     require("mason-tool-installer").setup({
       ensure_installed = {
         { "bash-language-server" },
@@ -315,132 +336,6 @@ return {
       debounce_hours = 5, -- at least 5 hours between attempts to install/update
     })
 
-    vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
-      config = config or {}
-      config.border = "rounded"
-
-      vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
-    end
-
-    vim.diagnostic.config({
-      virtual_text = false,
-      severity_sort = true,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = "󰅚 ",
-          [vim.diagnostic.severity.WARN] = "󰀪 ",
-          [vim.diagnostic.severity.HINT] = "󰌶 ",
-          [vim.diagnostic.severity.INFO] = " ",
-        },
-      },
-      float = {
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-      },
-    })
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
-
-    -- Trying out after/lsp/vtsls.lua to resolve this instead
-    -- local vue_language_server_path = vim.fn.expand("$MASON/packages")
-    --   .. "/vue-language-server"
-    --   .. "/node_modules/@vue/language-server"
-    -- local vue_plugin = {
-    --   name = "@vue/typescript-plugin",
-    --   location = vue_language_server_path,
-    --   languages = { "vue" },
-    --   configNamespace = "typescript",
-    -- }
-    -- local vtsls_config = {
-    --   settings = {
-    --     vtsls = {
-    --       tsserver = {
-    --         globalPlugins = {
-    --           vue_plugin,
-    --         },
-    --       },
-    --     },
-    --   },
-    --   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-    -- }
-    --
-    -- local vue_ls_config = {
-    --   on_init = function(client)
-    --     client.handlers["tsserver/request"] = function(_, result, context)
-    --       local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-    --       if #clients == 0 then
-    --         vim.notify("Could not find `vtsls` lsp client, `vue_ls` would not work without it.", vim.log.levels.ERROR)
-    --         return
-    --       end
-    --       local ts_client = clients[1]
-    --
-    --       local param = unpack(result)
-    --       local id, command, payload = unpack(param)
-    --       ts_client:exec_cmd({
-    --         title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
-    --         command = "typescript.tsserverRequest",
-    --         arguments = {
-    --           command,
-    --           payload,
-    --         },
-    --       }, { bufnr = context.bufnr }, function(_, r)
-    --         local response_data = { { id, r.body } }
-    --         ---@diagnostic disable-next-line: param-type-mismatch
-    --         client:notify("tsserver/response", response_data)
-    --       end)
-    --     end
-    --   end,
-    -- }
-    -- vim.lsp.config("vtsls", vtsls_config)
-    -- vim.lsp.config("vue_ls", vue_ls_config)
-    -- vim.lsp.enable({ "vtsls", "vue_ls" })
-
-    local servers = {
-      -- pyright = {},
-      gopls = {
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
-          },
-        },
-      },
-      rust_analyzer = {},
-      yaml = {
-        schemas = {
-          kubernetes = "k8s-*.yaml",
-          ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-          ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-          ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
-          ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-          ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-          ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-          ["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
-          ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
-            "ci/**/*.yml",
-            ".gitlab-ci.yml",
-          },
-        },
-      },
-    }
-
-    require("mason-lspconfig").setup({
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
-    })
+    require("mason-lspconfig").setup()
   end,
 }
