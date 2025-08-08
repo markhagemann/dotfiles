@@ -318,6 +318,7 @@ return {
         "gitlab_ci_ls",
         "gopls",
         "html",
+        "jsonls",
         "lua_ls",
         "tailwindcss",
         "vtsls",
