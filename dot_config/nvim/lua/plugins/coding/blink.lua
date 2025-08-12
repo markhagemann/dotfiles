@@ -78,8 +78,8 @@ return {
       default = default,
       providers = providers,
       per_filetype = {
-        text = { "dictionary" },
-        markdown = { "thesaurus" },
+        markdown = { "thesaurus", "dictionary" },
+        text = { "thesaurus", "dictionary" },
         codecompanion = providers.codecompanion and { "codecompanion" } or nil,
       },
     }
