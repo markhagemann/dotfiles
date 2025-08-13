@@ -314,7 +314,7 @@ return {
         "bashls",
         "cssls",
         "emmet_ls",
-        "eslint",
+        -- "eslint",
         "gitlab_ci_ls",
         "gopls",
         "html",
