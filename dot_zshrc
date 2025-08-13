@@ -15,8 +15,9 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
-zinit pack for fzf
 zinit pack for pyenv
+zi ice from"gh-r" as"program"
+zi light junegunn/fzf
 zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 
@@ -64,19 +65,20 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Keybindings
 zinit ice depth=1
 
-
 TMUX_DIR="~/.config/tmux"
-if [ -z "$TMUX" ]; then
-  if tmux has-session 2>/dev/null; then
-    # Attach to provided session name if given, otherwise first available
-    if [ -n "$1" ]; then
-      tmux attach -t "$1"
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  if [ -z "$TMUX" ]; then
+    if tmux has-session 2>/dev/null; then
+      # Attach to provided session name if given, otherwise first available
+      if [ -n "$1" ]; then
+        tmux attach -t "$1"
+      else
+        tmux attach
+      fi
     else
-      tmux attach
+      # No sessions exist, create a new one
+      tmux new
     fi
-  else
-    # No sessions exist, create a new one
-    tmux new
   fi
 fi
 
@@ -135,9 +137,11 @@ alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /de
 alias la=tree
 alias lzd="lazydocker"
 alias lzg="lazygit"
+alias lzj="lazyjournal"
 alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
 alias listlogfilesize="du -h /home/drache/.cache/nvim | sort -rh | head -5"
 alias ls='ls --color'
+alias oc="opencode"
 alias removenvimlog="rm /home/drache/.cache/nvim/log"
 alias sudonvim='sudo env "PATH=$PATH" nvim'
 alias synctime="sudo hwclock -s"
