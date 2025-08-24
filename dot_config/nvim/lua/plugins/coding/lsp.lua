@@ -19,6 +19,49 @@ return {
       end,
     },
     {
+      "piersolenski/wtf.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-telescope/telescope.nvim", -- Optional: For WtfGrepHistory
+      },
+      opts = {},
+      keys = {
+        -- {
+        --   "<leader>wd",
+        --   mode = { "n", "x" },
+        --   function()
+        --     require("wtf").diagnose()
+        --   end,
+        --   desc = "Debug diagnostic with AI",
+        -- },
+        -- {
+        --   "<leader>wf",
+        --   mode = { "n", "x" },
+        --   function()
+        --     require("wtf").fix()
+        --   end,
+        --   desc = "Fix diagnostic with AI",
+        -- },
+        {
+          mode = { "n" },
+          "<leader>ws",
+          function()
+            require("wtf").search()
+          end,
+          desc = "Search diagnostic with Google",
+        },
+        -- {
+        --   mode = { "n" },
+        --   "<leader>wp",
+        --   function()
+        --     require("wtf").pick_provider()
+        --   end,
+        --   desc = "Pick provider",
+        -- },
+      },
+    },
+    {
       "Fildo7525/pretty_hover",
       opts = {},
     },
@@ -181,18 +224,6 @@ return {
         map("<leader>gtd", function()
           Snacks.picker.lsp_type_definitions()
         end, "type definition")
-
-        -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        map("<leader>ds", function()
-          Snacks.picker.lsp_document_symbols()
-        end, "document symbols")
-
-        -- Fuzzy find all the symbols in your current workspace.
-        --  Similar to document symbols, except searches over your entire project.
-        map("<leader>ws", function()
-          Snacks.picker.lsp_dynamic_workspace_symbols()
-        end, "workspace symbols")
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
