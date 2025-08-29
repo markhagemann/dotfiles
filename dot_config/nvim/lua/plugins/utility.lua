@@ -273,26 +273,28 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
-  "SyedAsimShah1/quick-todo.nvim",
-  keys = {
-    {
-      "<leader>tt",
-      "<cmd>lua require('quick-todo').open_todo()<CR>",
-      mode = { "n" },
-      silent = true,
-      desc = "Toggle todo",
-    },
-  },
-  config = function()
-    require("quick-todo").setup({
-      window = {
-        height = 0.5,
-        width = 0.5,
-        winblend = 0,
-        border = "rounded",
+  {
+    "SyedAsimShah1/quick-todo.nvim",
+    keys = {
+      {
+        "<leader>tt",
+        "<cmd>lua require('quick-todo').open_todo()<CR>",
+        mode = { "n" },
+        silent = true,
+        desc = "Toggle todo",
       },
-    })
-  end,
+    },
+    config = function()
+      require("quick-todo").setup({
+        window = {
+          height = 0.5,
+          width = 0.5,
+          winblend = 0,
+          border = "rounded",
+        },
+      })
+    end,
+  },
   -- Sets yaml indentation wrong - guess indent fixes
   {
     "tpope/vim-sleuth",

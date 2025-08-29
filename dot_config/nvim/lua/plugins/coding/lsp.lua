@@ -62,6 +62,32 @@ return {
       },
     },
     {
+      "piersolenski/import.nvim",
+      dependencies = {
+        "folke/snacks.nvim",
+      },
+      opts = {
+        picker = "snacks",
+      },
+      keys = {
+        {
+          "<leader>i",
+          function()
+            require("import").pick()
+          end,
+          desc = "Import Picker",
+        },
+      },
+    },
+    -- {
+    --   "oribarilan/lensline.nvim",
+    --   branch = "release/1.x",
+    --   event = "LspAttach",
+    --   config = function()
+    --     require("lensline").setup()
+    --   end,
+    -- },
+    {
       "Fildo7525/pretty_hover",
       opts = {},
     },

@@ -60,7 +60,7 @@ return {
         function()
           require("obsidian").util.toggle_checkbox()
         end,
-        desc = "toggle checkbox",
+        desc = "Toggle checkbox",
       },
       { "<leader>obt", ":ObsidianToday<CR>", desc = "Obsidian: View Today's Notes" },
     },
@@ -83,7 +83,7 @@ return {
         },
       },
       daily_notes = {
-        folder = "Daily",
+        folder = "Daily/Notes",
       },
       workspaces = {
         {
