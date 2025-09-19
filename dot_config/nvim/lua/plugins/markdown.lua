@@ -83,7 +83,7 @@ return {
         },
       },
       daily_notes = {
-        folder = vim.env.DAILY_NOTES_PATH and vim.env.DAILY_NOTES_PATH or "Daily/Notes",
+        folder = vim.env.DAILY_NOTES_PATH and vim.env.DAILY_NOTES_PATH or "Notes/Daily",
       },
       workspaces = {
         {
