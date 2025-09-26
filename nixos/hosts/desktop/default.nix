@@ -2,16 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/desktop/fonts.nix
-      ../../modules/desktop/kde.nix
-      ../../modules/desktop/wayland.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../hardware/radeon
+    ../../modules/desktop/fonts.nix
+    ../../modules/desktop/kde.nix
+    ../../modules/desktop/wayland.nix
+  ];
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -21,53 +23,52 @@
 
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
-     atuin
-     betterdiscordctl
-     bitwarden
-     btop
-     cargo
-     chezmoi
-     clang
-     cmake
-     curl
-     delta
-     deluge-gtk
-     discord
-     ffmpeg
-     gcc
-     git
-     kitty
-     libreoffice-qt
-     libffi
-     lutris
-     # mako
-     neovim
-     opencode
-     openssl
-     pkg-config
-     python312
-     rustc
-     steam
-     # swaylock-effects
-     # swayidle
-     # st
-     tmux
-     vim
-     # waybar
-     wget
-     wineWowPackages.stable
-     winetricks
-     # wofi
-     wl-clipboard
-     zlib
+    atuin
+    betterdiscordctl
+    bitwarden
+    btop
+    cargo
+    chezmoi
+    clang
+    cmake
+    curl
+    delta
+    deluge-gtk
+    discord
+    ffmpeg
+    gcc
+    git
+    kitty
+    lact
+    libreoffice-qt
+    libffi.dev
+    lutris
+    # mako
+    neovim
+    opencode
+    openssl
+    openssl.dev
+    pkg-config
+    python312
+    rustc
+    steam
+    # swaylock-effects
+    # swayidle
+    # st
+    tmux
+    vim
+    # waybar
+    wget
+    wineWowPackages.stable
+    winetricks
+    # wofi
+    wl-clipboard
+    zlib.dev
   ];
-  environment.variables = {
-    PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
-  };
-
+  environment.variables.PKG_CONFIG_PATH =
+    lib.makeSearchPath "lib/pkgconfig" [ pkgs.openssl.dev pkgs.zlib.dev ];
 
   hardware.bluetooth.enable = true;
-
 
   i18n.defaultLocale = "en_AU.UTF-8";
   i18n.extraLocaleSettings = {
@@ -130,16 +131,11 @@
 
   # security.pam.services.swaylock = {};
 
-
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-  };
+  services.xserver.xkb = { layout = "us"; };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-
 
   services.printing.enable = true;
   services.pulseaudio.enable = false;
@@ -171,9 +167,10 @@
     description = "Mark";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
+    packages = with pkgs;
+      [
+        kdePackages.kate
+        #  thunderbird
+      ];
   };
 }
