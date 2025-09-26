@@ -1,23 +1,16 @@
-
 { config, lib, pkgs, ... }:
 
 with lib;
 
 {
-  options.modules.rofi = {
-    enable = mkEnableOption "enable rofi";
-  };
+  options.modules.rofi = { enable = mkEnableOption "enable rofi"; };
 
   config = mkIf config.modules.desktop.hyprland.rofi.enable {
     programs.rofi = {
       enable = true;
       package = pkgs.rofi;
 
-      plugins = with pkgs; [
-        rofi-calc
-        rofi-emoji
-        rofi-games
-      ];
+      plugins = with pkgs; [ rofi-calc rofi-emoji rofi-games ];
 
       extraConfig = {
         modi = "drun,run,calc,emoji,games";

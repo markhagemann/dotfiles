@@ -6,10 +6,7 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = [
-        "root"
-        "mark"
-      ];
+      trusted-users = [ "root" "mark" ];
     };
     gc = {
       automatic = true;
@@ -19,7 +16,5 @@
   };
 
   # Define shared packages (Neovim and Git) to be installed on all hosts
-  environment.systemPackages = with pkgs; [
-    git
-  ];
+  environment.systemPackages = with pkgs; [ git ];
 }

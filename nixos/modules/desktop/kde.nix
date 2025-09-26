@@ -2,11 +2,11 @@
 
 with lib;
 
-let
-  cfg = config.modules.desktop.kde;
+let cfg = config.modules.desktop.kde;
 in {
 
-  options.modules.desktop.kde.enable = lib.mkEnableOption "Enable the kde module";
+  options.modules.desktop.kde.enable =
+    lib.mkEnableOption "Enable the kde module";
 
   config = mkIf cfg.enable {
     services.xserver = {

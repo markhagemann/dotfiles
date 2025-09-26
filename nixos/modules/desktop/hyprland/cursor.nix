@@ -4,8 +4,7 @@ let
   cursorPkg = pkgs.catppuccin-cursors.mochaDark;
   cursorName = "catppuccin-mocha-dark-cursors";
   cursorSize = 24;
-in
-{
+in {
   options.modules.desktop.hyprland.cursor = {
     enable = lib.mkEnableOption "Custom cursor theme";
   };
