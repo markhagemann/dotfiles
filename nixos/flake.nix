@@ -8,12 +8,13 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
     lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
     lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
+    textfox.url = "github:adriankarlen/textfox";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, chaotic, nur, lsfg-vk-flake, nixos-hardware
-    , home-manager, ... }:
+    , textfox, home-manager, ... }:
     let pkgsFor = system: import nixpkgs { inherit system; };
     in {
       nixosConfigurations = {
@@ -23,6 +24,7 @@
             ./hosts/desktop
             home-manager.nixosModules.home-manager
             {
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.mark = import ./hosts/desktop/home.nix;

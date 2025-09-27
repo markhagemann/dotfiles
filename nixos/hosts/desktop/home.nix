@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   imports = [
@@ -6,13 +6,10 @@
     ../../modules/desktop/browsers/firefox.nix
     ../../modules/desktop/programs/spotify.nix
     ../../modules/shell/mise.nix
+    inputs.textfox.homeManagerModules.default
   ];
 
-  home.username = "mark";
   home.homeDirectory = "/home/mark";
-
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
   home.packages = with pkgs; [
     # Fonts
     adwaita-icon-theme
@@ -40,7 +37,6 @@
     # Productivity / general apps
     anki-bin
     obsidian
-    qutebrowser
     calibre
     mpv
 
@@ -50,16 +46,6 @@
     # Gaming
     mangohud
   ];
-
-  modules.desktop.programs.spotify.enable = true;
-  # modules.desktop.hyprland.cursor.enable = true;
-  # modules.desktop.hyprland.rofi.enable = true;
-  modules.shell.mise.enable = true;
-
-  programs.mangohud.enable = true;
-
-  xdg = { userDirs = { enable = false; }; };
-
   home.sessionVariables = {
     EDITOR = "nvim";
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -76,4 +62,25 @@
 
     backupFileExtension = "backup";
   };
+  home.username = "mark";
+  home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  modules.desktop.programs.spotify.enable = true;
+  # modules.desktop.hyprland.cursor.enable = true;
+  # modules.desktop.hyprland.rofi.enable = true;
+  modules.shell.mise.enable = true;
+
+  programs.mangohud.enable = true;
+
+  # TODO: Need to configure this properly... the sidebery defaults aren't nice for pinned tabs
+  # textfox = {
+  #   enable = true;
+  #   profile = "default";
+  #   config = {
+  #     font = { family = "Poppins"; };
+  #     sidebery = { margin = "0.2rem"; };
+  #   };
+  # };
+
+  xdg = { userDirs = { enable = false; }; };
 }
