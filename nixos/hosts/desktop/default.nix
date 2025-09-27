@@ -63,6 +63,8 @@
     # waybar
     wget
     wineWowPackages.stable
+    wineWowPackages.staging
+    wineWowPackages.waylandFull
     winetricks
     # wofi
     wl-clipboard
@@ -137,14 +139,6 @@
   };
   programs.tmux.enable = true;
   programs.zsh.enable = true;
-  # Wayland session
-  #services.greetd = {
-  #  enable = true;
-  #  settings.default_session = {
-  #    command = "${pkgs.hyprland}/bin/Hyprland";
-  #    user = "mark";
-  #  };
-  # };
 
   services.lsfg-vk = {
     enable = true;

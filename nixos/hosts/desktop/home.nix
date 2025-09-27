@@ -2,11 +2,7 @@
 
 {
   imports = [
-    #    ../../modules/desktop/hyprland/hyprland.nix
-    #    ../../modules/desktop/hyprland/waybar.nix
-    #    ../../modules/desktop/programs/spotify.nix
-    #    ../../modules/desktop/hyprland/cursor.nix
-    #    ../../modules/desktop/hyprland/rofi.nix
+    # ../../modules/desktop/hyprland/default.nix
     ../../modules/desktop/browsers/firefox.nix
     ../../modules/desktop/programs/spotify.nix
     ../../modules/shell/mise.nix
