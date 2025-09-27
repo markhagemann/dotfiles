@@ -39,14 +39,13 @@
     gamescope
     gcc
     git
-    goverlay
+    gpu-screen-recorder-gtk
     kitty
     lact
     libreoffice-qt
     libffi.dev
     lutris
     # mako
-    mangohud
     neovim
     opencode
     openssl
@@ -69,8 +68,12 @@
     wl-clipboard
     zlib.dev
   ];
-  environment.variables.PKG_CONFIG_PATH =
-    lib.makeSearchPath "lib/pkgconfig" [ pkgs.openssl.dev pkgs.zlib.dev ];
+  environment.variables = {
+    MANGOHUD = "1";
+    MANGOHUD_DLSYM = "1";
+    PKG_CONFIG_PATH =
+      lib.makeSearchPath "lib/pkgconfig" [ pkgs.openssl.dev pkgs.zlib.dev ];
+  };
 
   fileSystems."/storage/4tb-ssd" = {
     device = "/dev/disk/by-uuid/a2074226-f644-49cb-b94b-b657f786c836";
@@ -122,6 +125,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.firefox.enable = true;
+  programs.gamemode.enable = true;
+  programs.gpu-screen-recorder.enable = true;
   programs.neovim = {
     enable = true;
     defaultEditor = true;

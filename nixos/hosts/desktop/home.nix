@@ -50,12 +50,17 @@
 
     # Network/Download tools
     dig
+
+    # Gaming
+    mangohud
   ];
 
   modules.desktop.programs.spotify.enable = true;
   # modules.desktop.hyprland.cursor.enable = true;
   # modules.desktop.hyprland.rofi.enable = true;
   modules.shell.mise.enable = true;
+
+  programs.mangohud.enable = true;
 
   xdg = { userDirs = { enable = false; }; };
 
