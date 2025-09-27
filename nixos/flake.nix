@@ -6,12 +6,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
+    lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
+    lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, chaotic, nur, nixos-hardware, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, chaotic, nur, lsfg-vk-flake, nixos-hardware
+    , home-manager, ... }:
     let pkgsFor = system: import nixpkgs { inherit system; };
     in {
       nixosConfigurations = {
@@ -27,6 +29,7 @@
             }
             chaotic.nixosModules.default # IMPORTANT
             nur.modules.nixos.default
+            lsfg-vk-flake.nixosModules.default
           ];
           specialArgs = { inherit home-manager nur; };
         };

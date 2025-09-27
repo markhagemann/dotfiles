@@ -36,19 +36,23 @@
     deluge-gtk
     discord
     ffmpeg
+    gamescope
     gcc
     git
+    goverlay
     kitty
     lact
     libreoffice-qt
     libffi.dev
     lutris
     # mako
+    mangohud
     neovim
     opencode
     openssl
     openssl.dev
     pkg-config
+    protonup-qt
     python312
     rustc
     steam
@@ -67,6 +71,12 @@
   ];
   environment.variables.PKG_CONFIG_PATH =
     lib.makeSearchPath "lib/pkgconfig" [ pkgs.openssl.dev pkgs.zlib.dev ];
+
+  fileSystems."/storage/4tb-ssd" = {
+    device = "/dev/disk/by-uuid/a2074226-f644-49cb-b94b-b657f786c836";
+    fsType = "btrfs";
+    options = [ "compress=zstd" "noatime" ];
+  };
 
   hardware.bluetooth.enable = true;
 
@@ -116,10 +126,12 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+  };
   programs.tmux.enable = true;
   programs.zsh.enable = true;
-
   # Wayland session
   #services.greetd = {
   #  enable = true;
@@ -128,6 +140,11 @@
   #    user = "mark";
   #  };
   # };
+
+  services.lsfg-vk = {
+    enable = true;
+    ui.enable = true;
+  };
 
   # security.pam.services.swaylock = {};
 

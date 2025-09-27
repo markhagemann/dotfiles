@@ -7,6 +7,7 @@ in {
 
   config = mkIf cfg.enable {
     fonts.enableDefaultPackages = true;
+    fonts.fontDir.enable = true;
     fonts.packages = with pkgs; [
       # General fonts
       corefonts
