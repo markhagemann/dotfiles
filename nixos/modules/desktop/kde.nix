@@ -9,12 +9,11 @@ in {
     lib.mkEnableOption "Enable the kde module";
 
   config = mkIf cfg.enable {
-    services.xserver = {
-      enable = !config.modules.desktop.wayland.enable;
 
-      autoRepeatDelay = 50;
-      autoRepeatInterval = 25;
-    };
+    environment.systemPackages = with pkgs; [
+      kde-rounded-corners
+      kdePackages.wallpaper-engine-plugin
+    ];
 
     services.displayManager.sddm = {
       enable = true;
@@ -23,6 +22,8 @@ in {
     };
 
     services.desktopManager.plasma6.enable = true;
+
+    services.xserver = { enable = !config.modules.desktop.wayland.enable; };
   };
 }
 
