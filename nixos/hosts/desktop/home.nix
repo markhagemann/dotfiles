@@ -2,10 +2,10 @@
 
 {
   imports = [
-    # ../../modules/desktop/hyprland/default.nix
-    ../../modules/desktop/browsers/firefox.nix
-    ../../modules/desktop/programs/spotify.nix
-    ../../modules/shell/mise.nix
+    # ../../modules/home-manager/desktop/hyprland/default.nix
+    ../../modules/home-manager/desktop/browsers/firefox.nix
+    ../../modules/home-manager/desktop/programs/spotify.nix
+    ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
   ];
 

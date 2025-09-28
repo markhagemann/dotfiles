@@ -8,9 +8,9 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../hardware/radeon
-    ../../modules/desktop/fonts.nix
-    ../../modules/desktop/kde.nix
-    ../../modules/desktop/wayland.nix
+    ../../modules/nixos/desktop/fonts.nix
+    ../../modules/nixos/desktop/kde.nix
+    ../../modules/nixos/desktop/wayland.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -26,6 +26,7 @@
     atuin
     betterdiscordctl
     bitwarden
+    boxflat
     btop
     cargo
     chezmoi
@@ -45,7 +46,6 @@
     libreoffice-qt
     libffi.dev
     lutris
-    # mako
     neovim
     opencode
     openssl
@@ -55,18 +55,14 @@
     python312
     rustc
     steam
-    # swaylock-effects
-    # swayidle
-    # st
     tmux
     vim
-    # waybar
     wget
     wineWowPackages.stable
     wineWowPackages.staging
     wineWowPackages.waylandFull
     winetricks
-    # wofi
+    wireguard-tools
     wl-clipboard
     zlib.dev
   ];
@@ -133,6 +129,7 @@
     enable = true;
     defaultEditor = true;
   };
+  programs.nix-ld.enable = true; # used for windscribe so far
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
@@ -140,19 +137,14 @@
   programs.tmux.enable = true;
   programs.zsh.enable = true;
 
+  # security.pam.services.swaylock = {};
   services.lsfg-vk = {
     enable = true;
     ui.enable = true;
   };
 
-  # security.pam.services.swaylock = {};
-
-  # Configure keymap in X11
-  services.xserver.xkb = { layout = "us"; };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
   services.printing.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -163,8 +155,13 @@
     pulse.enable = true;
   };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # Configure keymap in X11
+  services.xserver.xkb = { layout = "us"; };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+  services.udev.packages = [ pkgs.boxflat ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -175,6 +172,12 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   services.timesyncd.enable = true;
+  services.windscribe = {
+    enable = true;
+    autoStart =
+      true; # Optional: set to false if you don't want it to start automatically
+  };
+
   time.hardwareClockInLocalTime = false;
   time.timeZone = "Australia/Brisbane";
 
@@ -182,7 +185,7 @@
     isNormalUser = true;
     description = "Mark";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "windscribe" ];
     packages = with pkgs;
       [
         kdePackages.kate
