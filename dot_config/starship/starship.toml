@@ -43,7 +43,7 @@ Unknown = '󰠥'
 
 [os]
 format = '[$symbol](#414868) '
-disabled = false
+disabled = true
 
 # Shows current directory
 [directory]
