@@ -12,6 +12,7 @@
     ../../modules/nixos/desktop/kde.nix
     ../../modules/nixos/desktop/wayland.nix
     ../../modules/nixos/utility/display-switch
+    # ../../modules/nixos/utility/wireguard
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -31,6 +32,7 @@
     btop
     cargo
     chezmoi
+    chromium
     clang
     cmake
     curl
@@ -38,6 +40,7 @@
     deluge-gtk
     ddcutil
     discord
+    docker-compose
     ffmpeg
     gamescope
     gcc
@@ -114,11 +117,13 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   networking.networkmanager.enable = true; # Enable networking
+  networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -132,7 +137,8 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.nix-ld.enable = true; # used for windscribe so far
+  # programs.nix-ld.enable = true; # used for windscribe so far
+  # programs.openvpn3.enable = true;
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
@@ -175,11 +181,11 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   services.timesyncd.enable = true;
-  services.windscribe = {
-    enable = true;
-    autoStart =
-      true; # Optional: set to false if you don't want it to start automatically
-  };
+  # services.windscribe = {
+  #   enable = true;
+  #   autoStart =
+  #     true; # Optional: set to false if you don't want it to start automatically
+  # };
 
   time.hardwareClockInLocalTime = false;
   time.timeZone = "Australia/Brisbane";
@@ -188,11 +194,13 @@
     isNormalUser = true;
     description = "Mark";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "windscribe" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "windscribe" ];
     packages = with pkgs;
       [
         kdePackages.kate
         #  thunderbird
       ];
   };
+
+  virtualisation.docker.enable = true;
 }

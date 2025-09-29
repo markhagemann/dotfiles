@@ -32,12 +32,12 @@
             chaotic.nixosModules.default # IMPORTANT
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
-            {
-              # Import the Windscribe module directly
-              imports = [ ./modules/nixos/desktop/programs/windscribe ];
-              # Enable nixpkgs config
-              nixpkgs.config.allowUnfree = true;
-            }
+            # {
+            #   # Import the Windscribe module directly
+            #   imports = [ ./modules/nixos/desktop/programs/windscribe ];
+            #   # Enable nixpkgs config
+            #   nixpkgs.config.allowUnfree = true;
+            # }
           ];
           specialArgs = { inherit home-manager nur; };
         };
