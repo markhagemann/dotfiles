@@ -88,6 +88,7 @@
         firefox-color
         sidebery
         sponsorblock
+        stylus
         tabliss
         ublock-origin
         ublacklist

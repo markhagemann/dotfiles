@@ -11,6 +11,7 @@
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
     ../../modules/nixos/desktop/wayland.nix
+    ../../modules/nixos/utility/display-switch
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -35,6 +36,7 @@
     curl
     delta
     deluge-gtk
+    ddcutil
     discord
     ffmpeg
     gamescope
@@ -119,8 +121,9 @@
   networking.networkmanager.enable = true; # Enable networking
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages
+  nixpkgs.overlays = [ (import ../../overlays/pkgs.nix) ];
 
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
