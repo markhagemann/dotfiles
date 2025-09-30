@@ -21,8 +21,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  chaotic.mesa-git.enable = true;
-
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     atuin
@@ -41,17 +39,18 @@
     ddcutil
     discord
     docker-compose
+    easyeffects
     ffmpeg
+    flatpak
     gamescope
     gcc
     git
     gpu-screen-recorder-gtk
     kitty
-    lact
-    libreoffice-qt
     libffi.dev
+    libreoffice-qt
+    librewolf
     lutris
-    neovim
     opencode
     openssl
     openssl.dev
@@ -68,7 +67,9 @@
     wineWowPackages.waylandFull
     winetricks
     wireguard-tools
+    wowup-cf
     wl-clipboard
+    usbutils
     zlib.dev
   ];
   environment.variables = {
@@ -133,10 +134,6 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   programs.gpu-screen-recorder.enable = true;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
   # programs.nix-ld.enable = true; # used for windscribe so far
   # programs.openvpn3.enable = true;
   programs.steam = {
@@ -145,6 +142,8 @@
   };
   programs.tmux.enable = true;
   programs.zsh.enable = true;
+
+  services.flatpak.enable = true;
 
   # security.pam.services.swaylock = {};
   services.lsfg-vk = {

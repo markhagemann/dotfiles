@@ -1,10 +1,13 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   imports = [
     # ../../modules/home-manager/desktop/hyprland/default.nix
+    # ../../modules/home-manager/desktop/kde.nix
     ../../modules/home-manager/desktop/browsers/firefox.nix
+    # ../../modules/home-manager/desktop/programs/albert.nix
     ../../modules/home-manager/desktop/programs/spotify.nix
+    ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
   ];
@@ -48,17 +51,17 @@
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_DESKTOP_DIR = "$HOME";
-    XDG_DOWNLOAD_DIR = "$HOME/downloads";
-    XDG_TEMPLATES_DIR = "$HOME";
-    XDG_PUBLICSHARE_DIR = "$HOME";
-    XDG_DOCUMENTS_DIR = "$HOME/documents";
-    XDG_MUSIC_DIR = "$HOME";
-    XDG_PICTURES_DIR = "$HOME/pictures";
-    XDG_VIDEOS_DIR = "$HOME";
+    XDG_CONFIG_HOME = lib.mkForce "$HOME/.config";
+    XDG_DATA_HOME = lib.mkForce "$HOME/.local/share";
+    XDG_CACHE_HOME = lib.mkForce "$HOME/.cache";
+    XDG_DESKTOP_DIR = lib.mkForce "$HOME";
+    XDG_DOWNLOAD_DIR = lib.mkForce "$HOME/downloads";
+    XDG_TEMPLATES_DIR = lib.mkForce "$HOME";
+    XDG_PUBLICSHARE_DIR = lib.mkForce "$HOME";
+    XDG_DOCUMENTS_DIR = lib.mkForce "$HOME/documents";
+    XDG_MUSIC_DIR = lib.mkForce "$HOME";
+    XDG_PICTURES_DIR = lib.mkForce "$HOME/pictures";
+    XDG_VIDEOS_DIR = lib.mkForce "$HOME";
 
     backupFileExtension = "backup";
   };
@@ -71,6 +74,14 @@
   modules.shell.mise.enable = true;
 
   programs.mangohud.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    extraLuaPackages = ps: [ ps.lua ps.luarocks-nix ps.magick ];
+    extraPackages = with pkgs; [ xclip imagemagick ];
+  };
 
   # TODO: Need to configure this properly... the sidebery defaults aren't nice for pinned tabs
   # textfox = {

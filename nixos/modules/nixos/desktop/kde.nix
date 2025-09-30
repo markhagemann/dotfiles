@@ -10,14 +10,22 @@ in {
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs;
-      [
-        kde-rounded-corners
-        # kdePackages.wallpaper-engine-plugin # TODO: Crashes plasmashell and sometimes ends up immutable
-      ];
+    environment.systemPackages = with pkgs; [ yaru-theme ];
+
+    # Excluding some KDE applications from the default install
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [
+      baloo-widgets
+      elisa
+      ffmpegthumbs
+      konsole
+      krdp
+      plasma-browser-integration
+      xwaylandvideobridge
+    ];
 
     services.displayManager.sddm = {
       enable = true;
+      settings.Theme.CursorTheme = "Yaru";
       wayland.enable = config.modules.desktop.wayland.enable;
       wayland.compositor = "kwin";
     };
