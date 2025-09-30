@@ -1,9 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ lact ];
-  hardware.amdgpu.overdrive.enable = true;
+  chaotic.mesa-git.enable = true;
+  environment.systemPackages = with pkgs; [ glxinfo lact ];
 
+  hardware.amdgpu.overdrive.enable = true;
   hardware.graphics.extraPackages = with pkgs; [ mesa ];
 
   systemd.services.lact = {
