@@ -6,20 +6,16 @@
 
 {
   imports = [ # Include the results of the hardware scan.
+    ./boot.nix
     ./hardware-configuration.nix
+    ../../hardware/bluetooth
+    ../../hardware/cpu
     ../../hardware/radeon
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
     ../../modules/nixos/desktop/wayland.nix
     ../../modules/nixos/utility/display-switch
-    # ../../modules/nixos/utility/wireguard
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
@@ -85,8 +81,6 @@
     options = [ "compress=zstd" "noatime" ];
   };
 
-  hardware.bluetooth.enable = true;
-
   i18n.defaultLocale = "en_AU.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_AU.UTF-8";
@@ -127,7 +121,6 @@
   networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true; # Allow unfree packages
   nixpkgs.overlays = [ (import ../../overlays/pkgs.nix) ];
 

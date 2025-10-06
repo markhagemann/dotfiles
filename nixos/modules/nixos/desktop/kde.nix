@@ -10,8 +10,6 @@ in {
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [ yaru-theme ];
-
     # Excluding some KDE applications from the default install
     environment.plasma6.excludePackages = with pkgs.kdePackages; [
       baloo-widgets

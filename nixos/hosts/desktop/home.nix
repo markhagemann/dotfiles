@@ -3,10 +3,10 @@
 {
   imports = [
     # ../../modules/home-manager/desktop/hyprland/default.nix
-    # ../../modules/home-manager/desktop/kde.nix
+    ../../modules/home-manager/desktop/kde.nix
     ../../modules/home-manager/desktop/browsers/firefox.nix
-    # ../../modules/home-manager/desktop/programs/albert.nix
-    ../../modules/home-manager/desktop/programs/spotify.nix
+    ../../modules/home-manager/desktop/programs/spotify/default.nix
+    ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
     ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
@@ -29,6 +29,7 @@
     lazydocker
     libnotify
     mise
+    neofetch
     nix-zsh-completions
     ripgrep
     starship

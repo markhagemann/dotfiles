@@ -5,7 +5,11 @@
   environment.systemPackages = with pkgs; [ glxinfo lact ];
 
   hardware.amdgpu.overdrive.enable = true;
-  hardware.graphics.extraPackages = with pkgs; [ mesa ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [ mesa ];
+  };
 
   systemd.services.lact = {
     description = "AMDGPU Control Daemon";
