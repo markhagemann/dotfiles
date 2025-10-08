@@ -4,7 +4,7 @@
   boot = {
     # kernelPackages = pkgs.linuxPackages_cachyos;
     kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelParams = [ "quiet" "nowatchdog" "threadirqs" ];
+    # kernelParams = [ "quiet" "nowatchdog" "threadirqs" ];
 
     # 🧩 Sysctl tuning for gaming / desktop latency
     kernel.sysctl = {

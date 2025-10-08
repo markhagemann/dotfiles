@@ -143,7 +143,7 @@
         command = "kitty";
       };
       launch-krunner = {
-        name = "Launch kruner";
+        name = "Launch KRunner";
         key = "Meta+Space";
         command = "krunner";
       };
@@ -271,7 +271,7 @@
         "Switch to Desktop 5" = "Meta+5";
         "Switch to Desktop 6" = "Meta+6";
         "Switch to Desktop 7" = "Meta+7";
-        "Window Fullscreen" = "Meta+M";
+        "Window Fullscreen" = "Alt+Return";
         "Window Move Center" = "Ctrl+Alt+C";
       };
 
