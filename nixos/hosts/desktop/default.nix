@@ -13,6 +13,7 @@
     ../../hardware/radeon
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
+    ../../modules/nixos/desktop/niri.nix
     ../../modules/nixos/desktop/wayland.nix
     ../../modules/nixos/utility/display-switch
   ];
@@ -47,6 +48,7 @@
     libreoffice-qt
     librewolf
     lutris
+    ntfs3g
     opencode
     openssl
     openssl.dev
@@ -64,7 +66,6 @@
     winetricks
     wireguard-tools
     wowup-cf
-    wl-clipboard
     usbutils
     zlib.dev
   ];
@@ -97,6 +98,7 @@
   modules = {
     desktop = {
       kde.enable = true;
+      niri.enable = false;
       fonts.enable = true;
       wayland.enable = true;
 
@@ -127,14 +129,18 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   programs.gpu-screen-recorder.enable = true;
-  # programs.nix-ld.enable = true; # used for windscribe so far
-  # programs.openvpn3.enable = true;
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
   programs.tmux.enable = true;
   programs.zsh.enable = true;
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   services.flatpak.enable = true;
 
@@ -156,13 +162,14 @@
     pulse.enable = true;
   };
 
+  services.timesyncd.enable = true;
+  services.udev.packages = [ pkgs.boxflat ];
+
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  services.udev.packages = [ pkgs.boxflat ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -172,13 +179,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  services.timesyncd.enable = true;
-  # services.windscribe = {
-  #   enable = true;
-  #   autoStart =
-  #     true; # Optional: set to false if you don't want it to start automatically
-  # };
-
   time.hardwareClockInLocalTime = false;
   time.timeZone = "Australia/Brisbane";
 
@@ -186,7 +186,7 @@
     isNormalUser = true;
     description = "Mark";
     shell = pkgs.zsh;
-    extraGroups = [ "docker" "networkmanager" "wheel" "windscribe" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs;
       [
         kdePackages.kate

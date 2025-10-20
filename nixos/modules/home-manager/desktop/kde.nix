@@ -9,7 +9,7 @@
     kde-rounded-corners
     kdePackages.kcalc
     kdePackages.krohnkite
-    # kdePackages.wallpaper-engine-plugin # TODO: Crashes plasmashell and sometimes ends up immutable
+    kdePackages.wallpaper-engine-plugin # TODO: Crashes plasmashell and sometimes ends up immutable
   ];
 
   programs.plasma = {
@@ -21,7 +21,7 @@
       kdeglobals = {
         General = { BrowserApplication = "firefox.desktop"; };
         Icons = { Theme = "Vivid-Dark-Icons"; };
-        KDE = { AnimationDurationFactor = 0; };
+        KDE = { AnimationDurationFactor = 0.25; };
       };
       klaunchrc.FeedbackStyle.BusyCursor = false;
       klipperrc.General.MaxClipItems = 1000;
@@ -40,17 +40,25 @@
           TornOffMenus = 99;
         };
         "Round-Corners" = {
-          ActiveOutlineAlpha = 150;
           ActiveOutlinePalette = 14;
+          ActiveShadowAlpha = 255;
+          ActiveShadowUseCustom = true;
           DisableOutlineTile = false;
           DisableRoundTile = false;
           InactiveCornerRadius = 8;
-          InactiveOutlineAlpha = 0;
+          InactiveOutlineAlpha = 123;
+          InactiveOutlineColor = "67,80,125";
           InactiveSecondOutlineThickness = 0;
-          OutlineColor = "133,182,255";
-          OutlineThickness = 2;
+          InactiveShadowAlpha = 255;
+          InactiveShadowColor = "67,80,125";
+          InactiveShadowSize = 25;
+          OutlineColor = "67,80,125";
+          OutlineThickness = 1.75;
           SecondOutlineThickness = 0;
+          ShadowColor = "67,80,125";
+          ShadowSize = 25;
           Size = 8;
+          UseNativeDecorationShadows = false;
         };
         "Script-krohnkite" = {
           floatingClass =
@@ -139,7 +147,7 @@
       };
       launch-kitty = {
         name = "Launch Kitty";
-        key = "Meta+Shift+Return";
+        key = "Meta+Shift+T";
         command = "kitty";
       };
       launch-krunner = {
@@ -151,31 +159,6 @@
         name = "Launch Spotify Music";
         key = "Meta+Shift+M";
         command = "spotify";
-      };
-      move-window-and-focus-to-desktop-1 = {
-        name = "Move Window and Focus to Desktop 1";
-        key = "Meta+!";
-        command = "kde_mv_window 1";
-      };
-      move-window-and-focus-to-desktop-2 = {
-        name = "Move Window and Focus to Desktop 2";
-        key = "Meta+@";
-        command = "kde_mv_window 2";
-      };
-      move-window-and-focus-to-desktop-3 = {
-        name = "Move Window and Focus to Desktop 3";
-        key = "Meta+#";
-        command = "kde_mv_window 3";
-      };
-      move-window-and-focus-to-desktop-4 = {
-        name = "Move Window and Focus to Desktop 4";
-        key = "Meta+$";
-        command = "kde_mv_window 4";
-      };
-      move-window-and-focus-to-desktop-5 = {
-        name = "Move Window and Focus to Desktop 5";
-        key = "Meta+%";
-        command = "kde_mv_window 5";
       };
       screenshot-region = {
         name = "Capture a rectangular region of the screen";
@@ -264,6 +247,7 @@
 
       kwin = {
         "KrohnkiteMonocleLayout" = [ ];
+        "Overview" = "Meta+`";
         "Switch to Desktop 1" = "Meta+1";
         "Switch to Desktop 2" = "Meta+2";
         "Switch to Desktop 3" = "Meta+3";
@@ -271,6 +255,11 @@
         "Switch to Desktop 5" = "Meta+5";
         "Switch to Desktop 6" = "Meta+6";
         "Switch to Desktop 7" = "Meta+7";
+        "Window to Desktop 1" = "Meta+!";
+        "Window to Desktop 2" = "Meta+@";
+        "Window to Desktop 3" = "Meta+#";
+        "Window to Desktop 4" = "Meta+$";
+        "Window to Desktop 5" = "Meta+%";
         "Window Fullscreen" = "Alt+Return";
         "Window Move Center" = "Ctrl+Alt+C";
       };

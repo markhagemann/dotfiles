@@ -2,8 +2,8 @@
 
 {
   imports = [
-    # ../../modules/home-manager/desktop/hyprland/default.nix
     ../../modules/home-manager/desktop/kde.nix
+    # ../../modules/home-manager/desktop/niri
     ../../modules/home-manager/desktop/browsers/firefox.nix
     ../../modules/home-manager/desktop/programs/spotify/default.nix
     ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
