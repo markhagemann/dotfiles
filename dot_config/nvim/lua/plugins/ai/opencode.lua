@@ -5,6 +5,7 @@ return {
     "folke/snacks.nvim",
     {
       "zbirenbaum/copilot.lua",
+      enabled = vim.env.ENABLE_COPILOT == "true",
       cmd = "Copilot",
       build = ":Copilot auth",
       event = "BufReadPost",
