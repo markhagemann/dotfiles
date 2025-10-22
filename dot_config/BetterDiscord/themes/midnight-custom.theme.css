@@ -49,8 +49,8 @@
 	/* background and dark colors */
 	--bg-1: hsl(220, 15%, 20%); /* dark buttons when clicked */
 	--bg-2: hsl(220, 15%, 16%); /* dark buttons */
-	--bg-3: hsl(229, 27%, 15%); /* spacing, secondary elements */
-	--bg-4: hsl(220, 36%, 12%); /* main background color */
+	--bg-3: hsl(229, 27%, 16%); /* spacing, secondary elements */
+	--bg-4: hsl(229, 27%, 17%); /* main background color */
 	--bg-overlay-chat: hsl(231, 23%, 17%); /* messages background color */
 	--hover: hsla(230, 20%, 40%, 0.1); /* channels and buttons when hovered */
 	--active: hsla(220, 20%, 40%, 0.2); /* channels and buttons when clicked or selected */
