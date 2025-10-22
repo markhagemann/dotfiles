@@ -13,6 +13,7 @@ export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 export PATH=$PATH:$HOME/bin
 export PATH=~/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
@@ -21,3 +22,8 @@ export PATH="$PATH:$GOPATH/bin"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+if [ -n "$TMUX" ]; then
+  export XDG_SESSION_TYPE=$(tmux show-environment -g XDG_SESSION_TYPE 2>/dev/null | cut -d= -f2-)
+  export WAYLAND_DISPLAY=$(tmux show-environment -g WAYLAND_DISPLAY 2>/dev/null | cut -d= -f2-)
+fi
