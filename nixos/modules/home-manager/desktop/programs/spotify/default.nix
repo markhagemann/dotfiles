@@ -8,6 +8,5 @@ in {
     enable = mkEnableOption "Spotify client with playerctl support";
   };
 
-  config =
-    mkIf cfg.enable { home.packages = with pkgs; [ playerctl ]; };
+  config = mkIf cfg.enable { home.packages = with pkgs; [ playerctl ]; };
 }

@@ -7,6 +7,7 @@
     ../../modules/home-manager/desktop/browsers/firefox.nix
     ../../modules/home-manager/desktop/programs/spotify/default.nix
     ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
+    ../../modules/home-manager/desktop/programs/mpv
     ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
@@ -42,7 +43,6 @@
     anki-bin
     obsidian
     calibre
-    mpv
 
     # Network/Download tools
     dig
