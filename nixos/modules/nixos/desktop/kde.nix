@@ -21,14 +21,26 @@ in {
       xwaylandvideobridge
     ];
 
-    services.displayManager.sddm = {
-      enable = true;
-      settings.Theme.CursorTheme = "Yaru";
-      wayland.enable = config.modules.desktop.wayland.enable;
-      wayland.compositor = "kwin";
-    };
+    environment.systemPackages = with pkgs; [
+      inputs.kwin-effects-forceblur.packages.${pkgs.system}.default # Wayland
+      sddm-astronaut
+    ];
 
     services.desktopManager.plasma6.enable = true;
+
+    services.displayManager.sddm = {
+      enable = true;
+      theme = "sddm-astronaut-theme";
+      settings.Theme.CursorTheme = "Bibata-Modern-Ice";
+      wayland.enable = config.modules.desktop.wayland.enable;
+      wayland.compositor = "kwin";
+      # These are meant to be propagated by the package?
+      # extraPackages = with pkgs; [
+      #   kdePackages.qtmultimedia
+      #   kdePackages.qtsvg
+      #   kdePackages.qtvirtualkeyboard
+      # ];
+    };
 
     services.xserver = { enable = !config.modules.desktop.wayland.enable; };
   };

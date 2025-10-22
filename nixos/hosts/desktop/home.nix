@@ -39,6 +39,10 @@
     unzip
     zoxide
 
+    # Language Servers / Linters that Mason can't run on NixOS
+    stylua
+    lua-language-server
+
     # Productivity / general apps
     anki-bin
     obsidian

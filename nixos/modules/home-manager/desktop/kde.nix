@@ -9,6 +9,7 @@
     kde-rounded-corners
     kdePackages.kcalc
     kdePackages.krohnkite
+    # kdePackages.qtstyleplugin-kvantum
     kdePackages.wallpaper-engine-plugin # TODO: Crashes plasmashell and sometimes ends up immutable
   ];
 

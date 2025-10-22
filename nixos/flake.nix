@@ -36,26 +36,17 @@
         "git+https://git.outfoxxed.me/quickshell/quickshell?rev=6eb12551baf924f8fdecdd04113863a754259c34";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    sddm-sugar-candy-nix = {
-      url = "github:Zhaith-Izaliel/sddm-sugar-candy-nix";
-      # Optional, by default this flake follows the latest nixpkgs-stable.
-      # ---
-      # Note that setting this will make it follow your version of nixpkgs, which
-      # can lead to issue if you lock it to nixpkgs-unstable. If you don't add this
-      # line, the derivation will be bigger, but will work Out Of the Box.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     textfox.url = "github:adriankarlen/textfox";
   };
 
   outputs = inputs@{ self, nixpkgs, chaotic, nur, lsfg-vk-flake, nixos-hardware
-    , textfox, home-manager, sddm-sugar-candy-nix, ... }:
+    , textfox, home-manager, ... }:
     let
       system = "x86_64-linux"; # Define your system once here
       pkgsFor = sys: import nixpkgs { inherit sys; };
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
-        sddm-sugar-candy-nix.overlays.default
+
       ];
     in {
       nixosConfigurations = {
@@ -75,7 +66,6 @@
             chaotic.nixosModules.default # IMPORTANT
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
-            sddm-sugar-candy-nix.nixosModules.default
 
             # Enable quickshell-git
             ({ ... }: {
