@@ -3,14 +3,13 @@
 
   # TODO: Setup panels and widgets - see https://github.com/nix-community/plasma-manager/blob/trunk/examples/homeManager/home.nix
   # TODO: Investigate default window rules for "Keep below others"
-  # TODO: Try fix wallpaper-engine-plugin otherwise set window slideshow and poitn to backgrounds folder
 
   home.packages = with pkgs; [
     kde-rounded-corners
     kdePackages.kcalc
     kdePackages.krohnkite
     # kdePackages.qtstyleplugin-kvantum
-    kdePackages.wallpaper-engine-plugin # TODO: Crashes plasmashell and sometimes ends up immutable
+    kdePackages.wallpaper-engine-plugin # Only use 2.6 - 2.7 causes KDE crashes
   ];
 
   programs.plasma = {
@@ -65,11 +64,11 @@
           floatingClass =
             "org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
           ignoreScreen = "DP-2";
-          screenGapBetween = 6;
-          screenGapBottom = 6;
-          screenGapLeft = 6;
-          screenGapRight = 6;
-          screenGapTop = 6;
+          screenGapBetween = 10;
+          screenGapBottom = 10;
+          screenGapLeft = 10;
+          screenGapRight = 10;
+          screenGapTop = 10;
         };
         Windows = {
           DelayFocusInterval = 0;
@@ -199,10 +198,11 @@
 
     kwin = {
       effects = {
-        blur = {
-          enable = true;
-          strength = 2;
-        };
+        # Using betterblur
+        # blur = {
+        #   enable = true;
+        #   strength = 2;
+        # };
         cube.enable = false;
         desktopSwitching.animation = "off";
         dimAdminMode.enable = false;
@@ -213,7 +213,7 @@
         shakeCursor.enable = false;
         slideBack.enable = false;
         snapHelper.enable = false;
-        translucency.enable = true;
+        translucency.enable = false;
         windowOpenClose.animation = "off";
         wobblyWindows.enable = false;
       };

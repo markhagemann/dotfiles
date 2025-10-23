@@ -97,8 +97,8 @@
 
   modules = {
     desktop = {
-      kde.enable = true;
       niri.enable = false;
+      kde.enable = true;
       fonts.enable = true;
       wayland.enable = true;
 

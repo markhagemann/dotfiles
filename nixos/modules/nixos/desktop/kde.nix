@@ -35,11 +35,11 @@ in {
       wayland.enable = config.modules.desktop.wayland.enable;
       wayland.compositor = "kwin";
       # These are meant to be propagated by the package?
-      # extraPackages = with pkgs; [
-      #   kdePackages.qtmultimedia
-      #   kdePackages.qtsvg
-      #   kdePackages.qtvirtualkeyboard
-      # ];
+      extraPackages = with pkgs; [
+        kdePackages.qtmultimedia
+        kdePackages.qtsvg
+        kdePackages.qtvirtualkeyboard
+      ];
     };
 
     services.xserver = { enable = !config.modules.desktop.wayland.enable; };
