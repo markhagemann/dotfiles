@@ -4,6 +4,7 @@
   imports = [
     ../../modules/home-manager/desktop/kde.nix
     # ../../modules/home-manager/desktop/niri
+    # ../../modules/home-manager/desktop/noctalia.nix
     ../../modules/home-manager/desktop/browsers/firefox.nix
     ../../modules/home-manager/desktop/programs/spotify/default.nix
     ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
@@ -74,8 +75,6 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   modules.desktop.programs.spotify.enable = true;
-  # modules.desktop.hyprland.cursor.enable = true;
-  # modules.desktop.hyprland.rofi.enable = true;
   modules.shell.mise.enable = true;
 
   programs.mangohud.enable = true;

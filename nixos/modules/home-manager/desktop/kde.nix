@@ -5,11 +5,11 @@
   # TODO: Investigate default window rules for "Keep below others"
 
   home.packages = with pkgs; [
-    kde-rounded-corners
+    # kde-rounded-corners
     kdePackages.kcalc
     kdePackages.krohnkite
     # kdePackages.qtstyleplugin-kvantum
-    kdePackages.wallpaper-engine-plugin # Only use 2.6 - 2.7 causes KDE crashes
+    # kdePackages.wallpaper-engine-plugin # Only use 2.6 - 2.7 causes KDE crashes
   ];
 
   programs.plasma = {
@@ -135,19 +135,24 @@
     };
 
     hotkeys.commands = {
-      launch-brave = {
-        name = "Launch Browser";
-        key = "Meta+Shift+B";
-        command = "firefox";
+      launch-dolphin = {
+        name = "Launch Dolphin";
+        key = "Meta+Alt+D";
+        command = "dolphin";
       };
       launch-discord = {
         name = "Launch Discord";
         key = "Meta+Shift+D";
         command = "discord";
       };
+      launch-firefox = {
+        name = "Launch Firefox";
+        key = "Meta+B";
+        command = "firefox";
+      };
       launch-kitty = {
         name = "Launch Kitty";
-        key = "Meta+Shift+T";
+        key = "Meta+T";
         command = "kitty";
       };
       launch-krunner = {
@@ -157,7 +162,7 @@
       };
       launch-spotify = {
         name = "Launch Spotify Music";
-        key = "Meta+Shift+M";
+        key = "Meta+M";
         command = "spotify";
       };
       screenshot-region = {
@@ -261,6 +266,7 @@
         "Window to Desktop 3" = "Meta+#";
         "Window to Desktop 4" = "Meta+$";
         "Window to Desktop 5" = "Meta+%";
+        "Window Close" = "Alt+F4";
         "Window Fullscreen" = "Alt+Return";
         "Window Move Center" = "Ctrl+Alt+C";
       };

@@ -13,6 +13,7 @@
     ../../hardware/radeon
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
+    ../../modules/nixos/desktop/quickshell.nix
     ../../modules/nixos/desktop/niri.nix
     ../../modules/nixos/desktop/wayland.nix
     ../../modules/nixos/utility/display-switch
@@ -23,7 +24,7 @@
     atuin
     betterdiscordctl
     bitwarden
-    boxflat
+    # boxflat
     btop
     cargo
     chezmoi
@@ -98,6 +99,7 @@
   modules = {
     desktop = {
       niri.enable = false;
+      quickshell.enable = false;
       kde.enable = true;
       fonts.enable = true;
       wayland.enable = true;
@@ -125,6 +127,11 @@
 
   nixpkgs.config.allowUnfree = true; # Allow unfree packages
   nixpkgs.overlays = [ (import ../../overlays/pkgs.nix) ];
+
+  nix.settings = {
+    max-jobs = 6;
+    cores = 6;
+  };
 
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
@@ -163,7 +170,13 @@
   };
 
   services.timesyncd.enable = true;
-  services.udev.packages = [ pkgs.boxflat ];
+  # services.udev.packages = [ pkgs.boxflat ];
+
+  systemd.services.nix-daemon.serviceConfig = {
+    MemoryAccounting = true;
+    MemoryMax = "90%";
+    OOMScoreAdjust = 500;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = { layout = "us"; };

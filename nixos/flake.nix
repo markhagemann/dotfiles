@@ -27,13 +27,16 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    };
     nur.url = "github:nix-community/NUR";
     plasma-manager.url = "github:AlexNabokikh/plasma-manager";
-    quickshell-git = {
-      # known-good commit that includes IdleMonitor
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
-      url =
-        "git+https://git.outfoxxed.me/quickshell/quickshell?rev=6eb12551baf924f8fdecdd04113863a754259c34";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
@@ -42,47 +45,50 @@
   outputs = inputs@{ self, nixpkgs, chaotic, nur, lsfg-vk-flake, nixos-hardware
     , textfox, home-manager, ... }:
     let
-      system = "x86_64-linux"; # Define your system once here
+      system = "x86_64-linux";
       pkgsFor = sys: import nixpkgs { inherit sys; };
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
-
+        (import ./overlays/pkgs.nix)
       ];
-    in {
-      nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+      # Helper function to create a host configuration
+      mkHost = { hostname, profile, username }:
+        nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit inputs system;
+            host = hostname;
+            inherit profile;
+            inherit username;
+            # zen-browser = inputs.zen-browser.packages.${system}.default;
+          };
           modules = [
             ./hosts/default.nix
-            ./hosts/desktop
+            ./hosts/${profile}
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = overlays;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                host = hostname;
+              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.mark = import ./hosts/desktop/home.nix;
+              home-manager.users.${username} =
+                import ./hosts/${profile}/home.nix;
             }
-            chaotic.nixosModules.default # IMPORTANT
+            chaotic.nixosModules.default
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
-
-            # Enable quickshell-git
-            ({ ... }: {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  quickshell =
-                    inputs.quickshell-git.packages.${final.system}.default;
-                })
-              ];
-            })
-
-            # Enable DMS
-            inputs.home-manager.nixosModules.home-manager
-            ./modules/home-manager/desktop/dms.nix
+            inputs.noctalia.nixosModules.default
           ];
-          # specialArgs = { inherit home-manager nur; };
-          specialArgs = { inherit self inputs pkgsFor system; };
+        };
+    in {
+      nixosConfigurations = {
+        desktop = mkHost {
+          hostname = "desktop";
+          profile = "desktop";
+          username = "mark";
         };
       };
     };

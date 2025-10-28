@@ -18,7 +18,7 @@ in {
       konsole
       krdp
       plasma-browser-integration
-      xwaylandvideobridge
+      # xwaylandvideobridge # does not appear to be on unstable anymore
     ];
 
     environment.systemPackages = with pkgs; [
