@@ -184,7 +184,7 @@ return {
     },
     notifier = {
       enabled = true,
-      timeout = 3000,
+      timeout = 1500,
       top_down = false,
     },
     picker = {
