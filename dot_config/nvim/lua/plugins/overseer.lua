@@ -1,5 +1,7 @@
 return {
   "stevearc/overseer.nvim",
+  branch = "master",
+  commit = "c77c78b35d0b4d244e1cd77c25ec93a16fbbfc94",
   opts = {},
   config = function()
     require("overseer").setup({

@@ -179,6 +179,7 @@ return {
         "undotree",
       },
       max_count = 6,
+      timeout = 500,
     },
   },
   {
