@@ -19,49 +19,6 @@ return {
       end,
     },
     {
-      "piersolenski/wtf.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        "nvim-telescope/telescope.nvim", -- Optional: For WtfGrepHistory
-      },
-      opts = {},
-      keys = {
-        -- {
-        --   "<leader>wd",
-        --   mode = { "n", "x" },
-        --   function()
-        --     require("wtf").diagnose()
-        --   end,
-        --   desc = "Debug diagnostic with AI",
-        -- },
-        -- {
-        --   "<leader>wf",
-        --   mode = { "n", "x" },
-        --   function()
-        --     require("wtf").fix()
-        --   end,
-        --   desc = "Fix diagnostic with AI",
-        -- },
-        {
-          mode = { "n" },
-          "<leader>ws",
-          function()
-            require("wtf").search()
-          end,
-          desc = "Search diagnostic with Google",
-        },
-        -- {
-        --   mode = { "n" },
-        --   "<leader>wp",
-        --   function()
-        --     require("wtf").pick_provider()
-        --   end,
-        --   desc = "Pick provider",
-        -- },
-      },
-    },
-    {
       "piersolenski/import.nvim",
       dependencies = {
         "folke/snacks.nvim",
@@ -79,14 +36,6 @@ return {
         },
       },
     },
-    -- {
-    --   "oribarilan/lensline.nvim",
-    --   branch = "release/1.x",
-    --   event = "LspAttach",
-    --   config = function()
-    --     require("lensline").setup()
-    --   end,
-    -- },
     {
       "Fildo7525/pretty_hover",
       opts = {},
@@ -146,42 +95,42 @@ return {
         })
       end,
     },
-    {
-      "stevearc/aerial.nvim",
-      keys = {
-        { "<leader>ta", "<cmd>AerialToggle<cr>", desc = "Toggle Aerial" },
-      },
-      opts = {
-        close_automatic_events = {
-          "unfocus",
-          "switch_buffer",
-        },
-        guides = {
-          nested_top = " │ ",
-          mid_item = " ├─",
-          last_item = " └─",
-          whitespace = "   ",
-        },
-        layout = {
-          placement = "window",
-          close_on_select = false,
-          max_width = 30,
-          min_width = 30,
-        },
-        ignore = {
-          buftypes = {},
-        },
-        show_guides = true,
-        open_automatic = false,
-        -- open_automatic = function()
-        --   local aerial = require("aerial")
-        --   return vim.api.nvim_win_get_width(0) > 80 and not aerial.was_closed()
-        -- end,
-      },
-      config = function(_, opts)
-        require("aerial").setup(opts)
-      end,
-    },
+    -- {
+    --   "stevearc/aerial.nvim",
+    --   keys = {
+    --     { "<leader>ta", "<cmd>AerialToggle<cr>", desc = "Toggle Aerial" },
+    --   },
+    --   opts = {
+    --     close_automatic_events = {
+    --       "unfocus",
+    --       "switch_buffer",
+    --     },
+    --     guides = {
+    --       nested_top = " │ ",
+    --       mid_item = " ├─",
+    --       last_item = " └─",
+    --       whitespace = "   ",
+    --     },
+    --     layout = {
+    --       placement = "window",
+    --       close_on_select = false,
+    --       max_width = 30,
+    --       min_width = 30,
+    --     },
+    --     ignore = {
+    --       buftypes = {},
+    --     },
+    --     show_guides = true,
+    --     open_automatic = false,
+    --     -- open_automatic = function()
+    --     --   local aerial = require("aerial")
+    --     --   return vim.api.nvim_win_get_width(0) > 80 and not aerial.was_closed()
+    --     -- end,
+    --   },
+    --   config = function(_, opts)
+    --     require("aerial").setup(opts)
+    --   end,
+    -- },
     -- {
     --   "simrat39/symbols-outline.nvim",
     --   keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols outline" } },
