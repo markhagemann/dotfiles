@@ -352,7 +352,7 @@ return {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
-    terminal = { enabled = false },
+    terminal = { enabled = true, win = { border = "single", width = 0.6, height = 0.6 } },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
@@ -681,6 +681,7 @@ return {
           file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
           width = 0.6,
           height = 0.6,
+          border = "single",
           wo = {
             spell = false,
             wrap = false,
@@ -691,14 +692,14 @@ return {
         })
       end,
     },
-    -- {
-    --   "`",
-    --   function()
-    --     Snacks.terminal.toggle()
-    --   end,
-    --   mode = { "n", "t" },
-    --   desc = "Toggle terminal",
-    -- },
+    {
+      "`",
+      function()
+        Snacks.terminal.toggle("zsh", { cwd = nil })
+      end,
+      mode = { "n", "t" },
+      desc = "Toggle terminal",
+    },
     {
       "<leader>cl",
       function()
