@@ -173,7 +173,7 @@ return {
     image = { enabled = true },
     -- input = { enabled = true },
     lazygit = {
-      enabled = false,
+      enabled = true,
       configure = true,
       config = {
         os = {
@@ -344,15 +344,11 @@ return {
       refresh = 50, -- refresh at most every 50ms
     },
     styles = {
-      lazygit = {
-        width = 0,
-        height = 0,
-      },
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
-    terminal = { enabled = true, win = { border = "single", width = 0.6, height = 0.6 } },
+    terminal = { enabled = true, win = { border = "single" } },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
@@ -695,7 +691,7 @@ return {
     {
       "`",
       function()
-        Snacks.terminal.toggle("zsh", { cwd = nil })
+        Snacks.terminal.toggle("zsh", { cwd = nil, win = { width = 0.7, height = 0.7 } })
       end,
       mode = { "n", "t" },
       desc = "Toggle terminal",
