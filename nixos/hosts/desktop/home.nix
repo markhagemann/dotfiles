@@ -56,6 +56,8 @@
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+
     XDG_CONFIG_HOME = lib.mkForce "$HOME/.config";
     XDG_DATA_HOME = lib.mkForce "$HOME/.local/share";
     XDG_CACHE_HOME = lib.mkForce "$HOME/.cache";

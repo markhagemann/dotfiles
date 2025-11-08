@@ -48,12 +48,13 @@
           InactiveCornerRadius = 8;
           InactiveOutlineAlpha = 123;
           InactiveOutlineColor = "67,80,125";
+          InactiveOutlineThickness = 3.0;
           InactiveSecondOutlineThickness = 0;
           InactiveShadowAlpha = 255;
           InactiveShadowColor = "67,80,125";
           InactiveShadowSize = 25;
           OutlineColor = "67,80,125";
-          OutlineThickness = 1.75;
+          OutlineThickness = 3.0;
           SecondOutlineThickness = 0;
           ShadowColor = "67,80,125";
           ShadowSize = 25;
@@ -63,7 +64,7 @@
         "Script-krohnkite" = {
           floatingClass =
             "org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
-          ignoreScreen = "DP-2";
+          ignoreScreen = "DP-1";
           screenGapBetween = 10;
           screenGapBottom = 10;
           screenGapLeft = 10;
@@ -135,19 +136,19 @@
     };
 
     hotkeys.commands = {
-      launch-brave = {
-        name = "Launch Browser";
-        key = "Meta+Shift+B";
-        command = "firefox";
-      };
       launch-discord = {
         name = "Launch Discord";
         key = "Meta+Shift+D";
         command = "discord";
       };
+      launch-dolphin = {
+        name = "Launch Dolphin";
+        key = "Meta+E";
+        command = "dolphin";
+      };
       launch-kitty = {
         name = "Launch Kitty";
-        key = "Meta+Shift+T";
+        key = "Meta+T";
         command = "kitty";
       };
       launch-krunner = {
@@ -155,9 +156,14 @@
         key = "Meta+Space";
         command = "krunner";
       };
+      launch-firefox = {
+        name = "Launch Firefox";
+        key = "Meta+B";
+        command = "firefox";
+      };
       launch-spotify = {
         name = "Launch Spotify Music";
-        key = "Meta+Shift+M";
+        key = "Meta+M";
         command = "spotify";
       };
       screenshot-region = {

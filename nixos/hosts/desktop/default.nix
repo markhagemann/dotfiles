@@ -22,7 +22,7 @@
   environment.systemPackages = with pkgs; [
     atuin
     betterdiscordctl
-    bitwarden
+    bitwarden-desktop
     boxflat
     btop
     cargo

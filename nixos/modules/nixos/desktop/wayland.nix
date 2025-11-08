@@ -7,6 +7,10 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ wl-clipboard ];
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_WEBRENDER = "1";
+    };
   };
 }
