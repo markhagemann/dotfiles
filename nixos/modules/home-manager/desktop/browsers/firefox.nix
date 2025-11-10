@@ -90,7 +90,7 @@
         sponsorblock
         stylus
         tabliss
-        ublock-origin
+        # ublock-origin # commented to use latest version manually
         ublacklist
       ];
     };
