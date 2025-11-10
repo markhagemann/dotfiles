@@ -12,6 +12,7 @@ return {
       end,
     },
     { "Bilal2453/luvit-meta", lazy = true },
+    { "chrisgrieser/nvim-rulebook" },
     {
       "dmmulroy/ts-error-translator.nvim",
       config = function()
@@ -325,7 +326,7 @@ return {
         "gopls",
         "html",
         "jsonls",
-        "lua_ls",
+        -- "lua_ls", -- Not compatible with NixOS via Mason
         "tailwindcss",
         "vtsls",
         "vue_ls",
@@ -342,7 +343,7 @@ return {
         "js-debug-adapter",
         "prettierd",
         "staticcheck",
-        "stylua",
+        -- "stylua", -- Not compatible with NixOS via Mason
       },
       auto_update = true,
       run_on_start = true,

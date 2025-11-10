@@ -99,6 +99,16 @@ return {
     },
   },
   {
+    "duqcyxwd/stringbreaker.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = { "BreakString", "PreviewString", "SaveString", "SyncString" },
+    config = function()
+      require("string-breaker").setup()
+    end,
+  },
+  {
     "FabijanZulj/blame.nvim",
     config = function()
       require("blame").setup()
@@ -222,12 +232,12 @@ return {
       })
     end,
   },
-  {
-    "mbbill/undotree",
-    keys = {
-      { "<leader>ut", ":UndotreeToggle<cr>", desc = "Toggle undo tree" },
-    },
-  },
+  -- {
+  --   "mbbill/undotree",
+  --   keys = {
+  --     { "<leader>ut", ":UndotreeToggle<cr>", desc = "Toggle undo tree" },
+  --   },
+  -- },
   {
     "nmac427/guess-indent.nvim",
     event = "BufEnter",
@@ -260,22 +270,6 @@ return {
       },
     },
   },
-  {
-    "r0nsha/multinput.nvim",
-    event = "BufEnter",
-    opts = {},
-  },
-  -- {
-  --   "sphamba/smear-cursor.nvim",
-  --   tag = "v0.4.1",
-  --   event = "BufEnter",
-  --   opts = {
-  --     cursor_color = "#5f87cd",
-  --     stiffness = 0.9,
-  --     trailing_stiffness = 0.6,
-  --     gamma = 0.25,
-  --   },
-  -- },
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     "stevearc/quicker.nvim",
@@ -317,6 +311,17 @@ return {
   --   opts = {},
   -- },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  {
+    "XXiaoA/atone.nvim",
+    opts = {},
+    keys = {
+      {
+        "<leader>ut",
+        "<cmd>Atone<cr>",
+        desc = "Toggle Undo Tree",
+      },
+    },
+  },
   {
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
