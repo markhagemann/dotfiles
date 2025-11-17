@@ -142,7 +142,10 @@
     openFirewall = true;
   };
 
-  services.flatpak.enable = true;
+  services.flatpak = {
+    enable = true;
+    # packages = [ "com.dec05eba.gpu_screen_recorder" ];
+  };
 
   # security.pam.services.swaylock = {};
   services.lsfg-vk = {
