@@ -351,7 +351,7 @@ return {
     terminal = { enabled = true, win = { border = "single" } },
     toggle = { enabled = true },
     words = { enabled = true },
-    zen = { enabled = false },
+    zen = { enabled = true },
   },
   keys = {
     {
@@ -695,6 +695,13 @@ return {
       end,
       mode = { "n", "t" },
       desc = "Toggle terminal",
+    },
+    {
+      "<leader>z",
+      function()
+        Snacks.zen()
+      end,
+      desc = "Toggle Zen Mode",
     },
     {
       "<leader>cl",
