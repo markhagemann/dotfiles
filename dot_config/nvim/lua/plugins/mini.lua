@@ -1,5 +1,6 @@
 return {
   {
+    -- Collection of minimal, fast, and configurable Neovim plugins (ai, comment, diff, files, git, hipatterns, icons, move, pairs, surround)
     "echasnovski/mini.nvim",
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",

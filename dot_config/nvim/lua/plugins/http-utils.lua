@@ -1,5 +1,6 @@
 return {
   {
+    -- HTTP client for making requests from Neovim
     "mistweaverco/kulala.nvim",
     enabled = false,
     keys = {
@@ -16,6 +17,7 @@ return {
     },
   },
   {
+    -- Bruno API client integration for Neovim
     "romek-codes/bruno.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -46,6 +48,7 @@ return {
     },
   },
   {
+    -- cURL scratchpad for testing HTTP requests
     "oysandvik94/curl.nvim",
     cmd = { "CurlOpen" },
     dependencies = {
@@ -58,6 +61,7 @@ return {
     config = true,
   },
   {
+    -- Search and navigate API endpoints in your codebase
     "zerochae/endpoint.nvim",
     dependencies = { "folke/snacks.nvim" },
     config = function()

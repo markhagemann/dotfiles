@@ -2,6 +2,7 @@
 
 return {
   {
+    -- Text objects and motions based on tree-sitter queries (functions, classes, parameters, etc.)
     "nvim-treesitter/nvim-treesitter-textobjects",
     opts = {
       textobjects = {

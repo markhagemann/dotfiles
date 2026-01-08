@@ -1,5 +1,6 @@
 return {
   {
+    -- Go struct tag management (add/remove JSON tags)
     "romus204/go-tagger.nvim",
     ft = "go",
     keys = {
@@ -18,6 +19,7 @@ return {
     },
   },
   {
+    -- Find and navigate Go interface implementations
     "fang2hou/go-impl.nvim",
     ft = "go",
     dependencies = {
@@ -41,6 +43,7 @@ return {
     },
   },
   {
+    -- Generate Go test files and test functions
     "yanskun/gotests.nvim",
     ft = "go",
     opts = {},

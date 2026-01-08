@@ -1,4 +1,5 @@
 return {
+  -- Lazydocker terminal UI integration for Docker management
   "crnvl96/lazydocker.nvim",
   opts = {
     window = {

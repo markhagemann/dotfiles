@@ -1,4 +1,5 @@
 return {
+  -- Smooth scrolling animations for better visual experience
   "karb94/neoscroll.nvim",
   event = "BufEnter",
   opts = {},

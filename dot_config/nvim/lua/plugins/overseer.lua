@@ -1,4 +1,5 @@
 return {
+  -- Task runner and job management system for Neovim
   "stevearc/overseer.nvim",
   branch = "master",
   commit = "c77c78b35d0b4d244e1cd77c25ec93a16fbbfc94",

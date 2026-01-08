@@ -1,4 +1,5 @@
 return {
+  -- Testing framework for Neovim with adapter support for various languages
   "nvim-neotest/neotest",
   dependencies = {
     "nvim-neotest/nvim-nio",

@@ -17,6 +17,7 @@ return {
   --   end,
   -- },
   {
+    -- Git integration showing signs, blame, and diff information
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",
     config = function()

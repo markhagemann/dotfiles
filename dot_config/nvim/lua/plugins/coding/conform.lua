@@ -1,4 +1,5 @@
 return {
+  -- Code formatter with auto-format on save and multiple formatter support
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },

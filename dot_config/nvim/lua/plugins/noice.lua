@@ -1,4 +1,5 @@
 return {
+  -- Enhanced UI for messages, cmdline, and notifications
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {

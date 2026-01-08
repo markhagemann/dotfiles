@@ -2,12 +2,14 @@ local filetypes =
   { "go", "javascript", "python", "typescript", "typescriptreact", "vue", "html", "css", "sh", "terraform" }
 
 return {
+  -- Official GitLab Duo AI code suggestions and assistance
   "https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git",
   event = { "BufReadPre", "BufNewFile" },
   ft = filetypes,
   enabled = vim.env.ENABLE_GITLAB_DUO == "true" and vim.env.GITLAB_TOKEN and vim.env.GITLAB_TOKEN ~= "",
   config = function()
     require("gitlab").setup({
+      minimal_message_level = vim.log.levels.ERROR,
       statusline = {
         enabled = false,
       },

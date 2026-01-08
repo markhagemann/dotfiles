@@ -1,5 +1,6 @@
 return {
   {
+    -- Syntax highlighting and code parsing using tree-sitter
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",

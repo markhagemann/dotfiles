@@ -1,4 +1,5 @@
 return {
+  -- Embedded AI coding assistant with inline chat capabilities
   enabled = vim.env.ENABLE_OPENCODE == "true",
   "NickvanDyke/opencode.nvim",
   dependencies = {

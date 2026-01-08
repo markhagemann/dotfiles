@@ -1,5 +1,6 @@
 return {
   {
+    -- Live markdown preview in browser
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -9,6 +10,7 @@ return {
     end,
   },
   {
+    -- Render markdown in Neovim with syntax highlighting and formatting
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
       code = {
@@ -44,6 +46,7 @@ return {
     end,
   },
   {
+    -- Obsidian note-taking integration with markdown support
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     event = "VeryLazy",

@@ -1,5 +1,6 @@
 -- Taken from https://github.com/olimorris/dotfiles
 return {
+  -- Highly customizable statusline and winbar plugin
   "rebelot/heirline.nvim",
   event = "BufEnter",
   config = function()

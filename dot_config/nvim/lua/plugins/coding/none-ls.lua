@@ -1,4 +1,5 @@
 return {
+  -- LSP diagnostics and code actions using external tools (ESLint, etc.)
   "nvimtools/none-ls.nvim",
   event = "LspAttach",
   dependencies = {

@@ -32,9 +32,12 @@ end
 return {
   -- UFO folding
   {
+    -- Advanced code folding with LSP and tree-sitter support
     "kevinhwang91/nvim-ufo",
     dependencies = {
+      -- Async promise library for Neovim
       "kevinhwang91/promise-async",
+      -- Status column configuration for fold indicators
       "luukvbaal/statuscol.nvim",
     },
     event = "BufReadPost",

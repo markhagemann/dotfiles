@@ -12,6 +12,7 @@ local function select_model()
 end
 
 return {
+  -- AI coding assistant with chat and inline editing capabilities via OpenRouter
   "olimorris/codecompanion.nvim",
   -- enabled = vim.env.ENABLE_AI_PLUGINS == "true",
   enabled = false,
@@ -95,11 +96,14 @@ return {
     { "<leader>as", select_model, desc = "AI: select model" },
   },
   dependencies = {
+    -- Utility library for Neovim plugins (async, file operations, etc.)
     "nvim-lua/plenary.nvim",
+    -- Tree-sitter integration for code parsing
     "nvim-treesitter/nvim-treesitter",
+    -- Chat history management for CodeCompanion
     "ravitemer/codecompanion-history.nvim",
     {
-      -- support for image pasting
+      -- Support for image pasting in markdown and chat buffers
       "HakonHarnes/img-clip.nvim",
       event = "VeryLazy",
       opts = {

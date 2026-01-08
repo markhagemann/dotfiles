@@ -5,6 +5,7 @@
 
 return {
   {
+    -- Minimal buffer line showing filename in floating window
     "b0o/incline.nvim",
     event = "BufReadPre",
     config = function()
@@ -31,6 +32,7 @@ return {
     end,
   },
   {
+    -- Highlight color codes (#rrggbb, rgb(), etc.) with their actual colors
     "brenoprata10/nvim-highlight-colors",
     lazy = false,
     event = "BufReadPre",
@@ -39,6 +41,7 @@ return {
     end,
   },
   {
+    -- Subtle cursor line highlighting effect
     "rachartier/tiny-glimmer.nvim",
     event = "VeryLazy",
     -- opts = {
@@ -46,6 +49,7 @@ return {
     -- },
   },
   {
+    -- Highlight all occurrences of word under cursor using LSP
     "RRethy/vim-illuminate",
     event = "BufEnter",
     opts = {
@@ -89,6 +93,7 @@ return {
     },
   },
   {
+    -- Highlight code blocks and chunks using tree-sitter
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()

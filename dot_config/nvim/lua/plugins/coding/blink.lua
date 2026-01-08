@@ -1,5 +1,6 @@
 ---@diagnostic disable: missing-fields
 return {
+  -- Modern completion engine with LSP, snippets, and dictionary/thesaurus support
   "saghen/blink.cmp",
   event = "InsertEnter",
   opts_extend = {
@@ -8,13 +9,17 @@ return {
   },
   version = "*",
   dependencies = {
+    -- Collection of snippets for various languages
     "rafamadriz/friendly-snippets",
+    -- Icons for LSP completion items
     "onsails/lspkind.nvim",
     {
+      -- Compatibility layer for blink.cmp
       "saghen/blink.compat",
       optional = true,
       opts = {},
     },
+    -- Dictionary and thesaurus completion source for blink.cmp
     "archie-judd/blink-cmp-words",
   },
   opts = function()

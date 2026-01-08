@@ -1,4 +1,5 @@
 return {
+  -- Enhanced motion plugin for quick navigation with visual labels
   "folke/flash.nvim",
   event = "VeryLazy",
   opts = {},

@@ -2,10 +2,12 @@ local theme_colors = require("utils.colors").theme
 
 return {
   {
+    -- Tokyo Night color scheme with moon style variant
     "folke/tokyonight.nvim",
     branch = "main",
     dependencies = {
       {
+        -- Mode indicator showing current vim mode with color coding
         "mawkler/modicator.nvim",
         event = "BufEnter",
         after = "tokyonight/nvim",
@@ -38,6 +40,7 @@ return {
         end,
       },
       {
+        -- Make Neovim background transparent
         "xiyaowong/transparent.nvim",
         lazy = false,
         opts = {},

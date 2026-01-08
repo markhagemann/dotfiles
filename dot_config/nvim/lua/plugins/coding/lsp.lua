@@ -1,25 +1,34 @@
 return {
+  -- Core LSP configuration plugin for Neovim language server protocol support
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { -- Automatically install LSPs and related tools to stdpath for Neovim
+    -- Bridge between Mason and nvim-lspconfig for automatic LSP installation
     "williamboman/mason-lspconfig.nvim",
+    -- Package manager for Neovim that installs LSPs, DAPs, linters, and formatters
     "williamboman/mason.nvim",
+    -- Automatically install and update tools managed by Mason
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     {
+      -- Dim inactive code sections using LSP semantic tokens
       "askfiy/lsp_extra_dim",
       config = function()
         require("lsp_extra_dim").setup()
       end,
     },
+    -- Lua/Luvit type definitions for better autocomplete
     { "Bilal2453/luvit-meta", lazy = true },
+    -- LSP rulebook for understanding and configuring LSP behavior
     { "chrisgrieser/nvim-rulebook" },
     {
+      -- Translate TypeScript/JavaScript errors into plain English
       "dmmulroy/ts-error-translator.nvim",
       config = function()
         require("ts-error-translator").setup()
       end,
     },
     {
+      -- Smart import management and organization for various languages
       "piersolenski/import.nvim",
       dependencies = {
         "folke/snacks.nvim",
@@ -38,10 +47,12 @@ return {
       },
     },
     {
+      -- Enhanced LSP hover documentation with better formatting
       "Fildo7525/pretty_hover",
       opts = {},
     },
     {
+      -- Development helper for Neovim plugins with autocomplete and type hints
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
       opts = {
@@ -53,6 +64,7 @@ return {
       },
     },
     {
+      -- Show code action lightbulb icon when LSP code actions are available
       "kosayoda/nvim-lightbulb",
       config = function()
         require("nvim-lightbulb").setup({
@@ -69,6 +81,7 @@ return {
       end,
     },
     {
+      -- Minimal code action picker for LSP code actions
       "rachartier/tiny-code-action.nvim",
       dependencies = {
         { "nvim-lua/plenary.nvim" },
@@ -86,6 +99,7 @@ return {
       opts = {},
     },
     {
+      -- Inline diagnostic messages shown at the end of lines with errors
       "rachartier/tiny-inline-diagnostic.nvim",
       event = "LspAttach",
       priority = 1000, -- needs to be loaded in first
@@ -155,6 +169,7 @@ return {
     --     require("symbols-outline").setup(opts)
     --   end,
     -- },
+    -- Automatic cleanup of unused LSP servers and diagnostics
     { "Zeioth/garbage-day.nvim" },
   },
   config = function()

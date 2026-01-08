@@ -1,4 +1,5 @@
 return {
+  -- Display and manage Neovim tips and tricks
   "saxon1964/neovim-tips",
   dependencies = { "ibhagwan/fzf-lua" },
   opts = {

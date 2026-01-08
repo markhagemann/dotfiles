@@ -1,5 +1,6 @@
 return {
   {
+    -- AI coding assistant with CLI integration and edit suggestions
     enabled = vim.env.ENABLE_SIDEKICK == "true",
     "folke/sidekick.nvim",
     opts = {
@@ -7,6 +8,11 @@ return {
         mux = {
           backend = "tmux",
           enabled = true,
+          create = "split",
+          split = {
+            vertical = true, -- vertical or horizontal split
+            size = 0.35, -- size of the split (0-1 for percentage)
+          },
         },
       },
     },

@@ -18,13 +18,15 @@ end
 
 return {
   {
+    -- Debug Adapter Protocol (DAP) for debugging support in Neovim
     "mfussenegger/nvim-dap",
     recommended = true,
     desc = "Debugging support. requires language specific adapters to be configured. (see lang extras)",
 
     dependencies = {
+      -- User interface for DAP debugging (already described above)
       "rcarriga/nvim-dap-ui",
-      -- virtual text for the debugger
+      -- Virtual text for the debugger showing variable values inline
       {
         "theHamsta/nvim-dap-virtual-text",
         opts = {
@@ -32,7 +34,8 @@ return {
         },
       },
       -- Language-specific debuggers
-      "leoluz/nvim-dap-go", -- Golang
+      -- Go debugger adapter for DAP
+      "leoluz/nvim-dap-go",
     },
 
     -- stylua: ignore
@@ -114,6 +117,7 @@ return {
 
   -- fancy UI for the debugger
   {
+    -- User interface for DAP debugging with visual breakpoints and variable inspection
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore
@@ -155,6 +159,7 @@ return {
 
   -- mason.nvim integration
   {
+    -- Mason integration for automatically installing DAP debug adapters
     "jay-babu/mason-nvim-dap.nvim",
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },

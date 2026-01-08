@@ -1,5 +1,6 @@
 return {
   {
+    -- Seamless navigation between Neovim and tmux panes
     "aserowy/tmux.nvim",
     opts = {
       copy_sync = {
@@ -47,8 +48,10 @@ return {
       },
     },
   },
+  -- Change case of text (camelCase, snake_case, etc.)
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
+    -- Display import/require statement sizes for JavaScript/TypeScript
     "barrett-ruth/import-cost.nvim",
     event = "BufEnter",
     build = "sh install.sh yarn",
@@ -59,6 +62,7 @@ return {
     end,
   },
   {
+    -- Navigate through edit history and jump to previous edits
     "bloznelis/before.nvim",
     event = "BufEnter",
     config = function()
@@ -79,6 +83,7 @@ return {
     end,
   },
   {
+    -- Enhanced word motion (w, e, b) that stops at subword boundaries
     "chrisgrieser/nvim-spider",
     keys = {
       {
@@ -99,6 +104,7 @@ return {
     },
   },
   {
+    -- Break long strings into multiple lines with proper formatting
     "duqcyxwd/stringbreaker.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -109,6 +115,7 @@ return {
     end,
   },
   {
+    -- Git blame information displayed in a floating window
     "FabijanZulj/blame.nvim",
     config = function()
       require("blame").setup()
@@ -124,6 +131,7 @@ return {
     },
   },
   {
+    -- Quickfix list and diagnostics viewer with better UI
     "folke/trouble.nvim",
     cmd = { "TodoTrouble", "TroubleToggle" },
     event = "VimEnter",
@@ -135,6 +143,7 @@ return {
     opts = {},
   },
   {
+    -- Automatic session management for Neovim
     "olimorris/persisted.nvim",
     lazy = false,
     opts = {
@@ -152,17 +161,20 @@ return {
     end,
   },
   {
+    -- Generate UUIDs and insert them at cursor position
     "kburdett/vim-nuuid",
     keys = {
       { "<leader>uu", "<Plug>Nuuid", desc = "Generate uuid" },
     },
   },
   {
+    -- Remove trailing whitespace automatically
     "lewis6991/spaceless.nvim",
     event = { "BufLeave", "InsertEnter" },
     opts = {},
   },
   {
+    -- Training mode that prevents bad vim habits and enforces good practices
     "m4xshen/hardtime.nvim",
     event = "BufEnter",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
@@ -203,6 +215,7 @@ return {
     },
   },
   {
+    -- Find and replace across files with preview
     "MagicDuck/grug-far.nvim",
     config = function()
       require("grug-far").setup({})
@@ -221,6 +234,7 @@ return {
     },
   },
   {
+    -- Better escape from insert mode using jk or kj
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
@@ -239,6 +253,7 @@ return {
   --   },
   -- },
   {
+    -- Automatically detect and set indentation settings for files
     "nmac427/guess-indent.nvim",
     event = "BufEnter",
     config = function()
@@ -250,6 +265,7 @@ return {
     end,
   },
   {
+    -- Create and navigate bookmarks in your code
     "otavioschwanck/arrow.nvim",
     event = "VeryLazy",
     opts = {
@@ -259,6 +275,7 @@ return {
   },
   -- { "preservim/vim-pencil", event = "VeryLazy" },
   {
+    -- Toggle Neovim window fullscreen mode
     "propet/toggle-fullscreen.nvim",
     keys = {
       {
@@ -270,8 +287,10 @@ return {
       },
     },
   },
+  -- Toggle between relative and absolute line numbers
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
+    -- Quickfix list improvements with better navigation
     "stevearc/quicker.nvim",
     event = "FileType qf",
     ---@module "quicker"
@@ -279,6 +298,7 @@ return {
     opts = {},
   },
   {
+    -- Quick todo list management in Neovim
     "SyedAsimShah1/quick-todo.nvim",
     keys = {
       {
@@ -301,6 +321,7 @@ return {
     end,
   },
   -- Sets yaml indentation wrong - guess indent fixes
+  -- Automatically adjust shiftwidth and expandtab based on existing file
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
@@ -310,8 +331,10 @@ return {
   --   lazy = false,
   --   opts = {},
   -- },
+  -- Automatically close and rename HTML/JSX tags
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
+    -- Undo tree visualizer for better undo navigation
     "XXiaoA/atone.nvim",
     opts = {},
     keys = {
@@ -323,6 +346,7 @@ return {
     },
   },
   {
+    -- Color picker for selecting and inserting color codes
     "ziontee113/color-picker.nvim",
     event = "BufEnter",
     config = function()

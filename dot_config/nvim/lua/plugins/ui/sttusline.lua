@@ -1,4 +1,5 @@
 return {
+  -- Alternative statusline plugin (currently disabled, using heirline instead)
   "sontungexpt/sttusline",
   dependencies = {
     "echasnovski/mini.icons",

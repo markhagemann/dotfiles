@@ -1,6 +1,7 @@
 local icons = require("utils.icons")
 
 return {
+  -- Comprehensive plugin suite with picker, explorer, terminal, dashboard, and many utilities
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,

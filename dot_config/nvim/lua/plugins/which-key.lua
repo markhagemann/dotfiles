@@ -1,5 +1,6 @@
 return {
   {
+    -- Keybinding helper showing available keymaps in a popup
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {

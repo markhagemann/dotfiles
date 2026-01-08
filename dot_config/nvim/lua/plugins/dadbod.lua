@@ -1,4 +1,5 @@
 return {
+  -- Database UI for managing database connections and queries
   "kristijanhusak/vim-dadbod-ui",
   dependencies = {
     { "tpope/vim-dadbod", lazy = true },
