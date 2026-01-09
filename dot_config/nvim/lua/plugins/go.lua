@@ -28,7 +28,6 @@ return {
 
       -- Choose one of the following fuzzy finder
       "folke/snacks.nvim",
-      "ibhagwan/fzf-lua",
     },
     opts = {},
     keys = {

@@ -60,18 +60,4 @@ return {
     },
     config = true,
   },
-  {
-    -- Search and navigate API endpoints in your codebase
-    "zerochae/endpoint.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = function()
-      require("endpoint").setup({
-        picker = { type = "snacks" },
-      })
-    end,
-    keys = {
-      { "<leader>see", "<cmd>Endpoint<cr>", desc = "Search Endpoints" },
-      { "<leader>ser", "<cmd>EndpointRefresh<cr>", desc = "Refresh Endpoints" },
-    },
-  },
 }

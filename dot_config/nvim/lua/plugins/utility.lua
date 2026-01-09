@@ -49,6 +49,17 @@ return {
     },
   },
   -- Change case of text (camelCase, snake_case, etc.)
+  -- Keybindings (follow with motion/text object or use in visual mode):
+  --   gsc    - Convert to camelCase
+  --   gs_    - Convert to snake_case
+  --   gs- / gsk - Convert to kebab-case / dash-case
+  --   gsm / gsp - Convert to MixedCase / PascalCase
+  --   gsu / gsU - Convert to UPPER_CASE
+  --   gst    - Convert to Title Case
+  --   gss    - Convert to Sentence case
+  --   gs<space> - Convert to space case
+  --   gsK    - Convert to Title-Dash-Case / Title-Kebab-Case
+  --   gs.    - Convert to dot.case
   { "arthurxavierx/vim-caser", event = "BufEnter" },
   {
     -- Display import/require statement sizes for JavaScript/TypeScript
@@ -246,12 +257,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "mbbill/undotree",
-  --   keys = {
-  --     { "<leader>ut", ":UndotreeToggle<cr>", desc = "Toggle undo tree" },
-  --   },
-  -- },
   {
     -- Automatically detect and set indentation settings for files
     "nmac427/guess-indent.nvim",
@@ -297,29 +302,29 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
-  {
-    -- Quick todo list management in Neovim
-    "SyedAsimShah1/quick-todo.nvim",
-    keys = {
-      {
-        "<leader>tt",
-        "<cmd>lua require('quick-todo').open_todo()<CR>",
-        mode = { "n" },
-        silent = true,
-        desc = "Toggle todo",
-      },
-    },
-    config = function()
-      require("quick-todo").setup({
-        window = {
-          height = 0.5,
-          width = 0.5,
-          winblend = 0,
-          border = "rounded",
-        },
-      })
-    end,
-  },
+  -- {
+  --   -- Quick todo list management in Neovim
+  --   "SyedAsimShah1/quick-todo.nvim",
+  --   keys = {
+  --     {
+  --       "<leader>tt",
+  --       "<cmd>lua require('quick-todo').open_todo()<CR>",
+  --       mode = { "n" },
+  --       silent = true,
+  --       desc = "Toggle todo",
+  --     },
+  --   },
+  --   config = function()
+  --     require("quick-todo").setup({
+  --       window = {
+  --         height = 0.5,
+  --         width = 0.5,
+  --         winblend = 0,
+  --         border = "rounded",
+  --       },
+  --     })
+  --   end,
+  -- },
   -- Sets yaml indentation wrong - guess indent fixes
   -- Automatically adjust shiftwidth and expandtab based on existing file
   {
