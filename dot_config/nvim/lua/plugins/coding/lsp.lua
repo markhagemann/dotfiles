@@ -64,6 +64,11 @@ return {
       },
     },
     {
+      "vhyrro/luarocks.nvim",
+      priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+      config = true,
+    },
+    {
       -- Show code action lightbulb icon when LSP code actions are available
       "kosayoda/nvim-lightbulb",
       config = function()

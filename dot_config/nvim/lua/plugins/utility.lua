@@ -269,15 +269,15 @@ return {
       vim.keymap.set("n", "<Tab>g", vim.cmd.GuessIndent, { desc = "Guessindent (manual)" })
     end,
   },
-  {
-    -- Create and navigate bookmarks in your code
-    "otavioschwanck/arrow.nvim",
-    event = "VeryLazy",
-    opts = {
-      show_icons = true,
-      leader_key = ";", -- Recommended to be a single key
-    },
-  },
+  -- {
+  --   -- Create and navigate bookmarks in your code
+  --   "otavioschwanck/arrow.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     show_icons = true,
+  --     leader_key = ";", -- Recommended to be a single key
+  --   },
+  -- },
   -- { "preservim/vim-pencil", event = "VeryLazy" },
   {
     -- Toggle Neovim window fullscreen mode
