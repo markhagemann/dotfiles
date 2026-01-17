@@ -349,7 +349,7 @@ return {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
-    terminal = { enabled = true, win = { border = "single" } },
+    terminal = { enabled = false, win = { border = "single" } },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = true },
@@ -689,14 +689,14 @@ return {
         })
       end,
     },
-    {
-      "`",
-      function()
-        Snacks.terminal.toggle("zsh", { cwd = nil, win = { width = 0.7, height = 0.7 } })
-      end,
-      mode = { "n", "t" },
-      desc = "Toggle terminal",
-    },
+    -- {
+    --   "`",
+    --   function()
+    --     Snacks.terminal.toggle("zsh", { cwd = nil, win = { width = 0.7, height = 0.7 } })
+    --   end,
+    --   mode = { "n", "t" },
+    --   desc = "Toggle terminal",
+    -- },
     {
       "<leader>z",
       function()
