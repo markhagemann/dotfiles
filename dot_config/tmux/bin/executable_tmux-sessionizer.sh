@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/.config ~/Development ~/Obsidian ~/nixos ~/Packages -mindepth 0 -maxdepth 3 -type d | fzf)
+    selected=$(find ~/.config ~/Development ~/Obsidian ~/nixos ~/Packages -mindepth 0 -maxdepth 3 -type d | fzf --reverse)
 fi
 
 if [[ -z $selected ]]; then
