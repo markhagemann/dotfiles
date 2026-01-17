@@ -34,7 +34,6 @@ return {
   {
     -- Highlight color codes (#rrggbb, rgb(), etc.) with their actual colors
     "brenoprata10/nvim-highlight-colors",
-    lazy = false,
     event = "BufReadPre",
     config = function()
       require("nvim-highlight-colors").setup({})
