@@ -427,6 +427,13 @@ return {
       desc = "Find git files",
     },
     {
+      "<leader>fl",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "Find LSP symbols",
+    },
+    {
       "<leader>fr",
       function()
         Snacks.picker.recent({ filter = { cwd = true } })
