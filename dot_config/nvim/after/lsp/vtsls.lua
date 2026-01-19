@@ -16,6 +16,16 @@ return {
         },
       },
     },
+    typescript = {
+      preferences = {
+        importModuleSpecifier = "relative",
+      },
+    },
+    javascript = {
+      preferences = {
+        importModuleSpecifier = "relative",
+      },
+    },
   },
   -- on_attach = function(client, bufnr)
   --   if vim.bo[bufnr].filetype == "vue" then
