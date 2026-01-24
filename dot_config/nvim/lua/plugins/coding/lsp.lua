@@ -341,6 +341,7 @@ return {
         "gopls",
         "html",
         "jsonls",
+        "marksman",
         -- "lua_ls", -- Not compatible with NixOS via Mason
         "tailwindcss",
         "vtsls",

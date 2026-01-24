@@ -1,8 +1,3 @@
--- require("heirline")
--- require("colorscheme")
--- require("neoscroll")
--- require("neoscroll")
-
 return {
   {
     -- Minimal buffer line showing filename in floating window
@@ -20,7 +15,7 @@ return {
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
         hide = {
-          cursorline = "focused_win",
+          cursorline = "smart",
         },
         render = function(props)
           local mini_icons = require("mini.icons")

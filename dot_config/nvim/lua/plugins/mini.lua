@@ -49,6 +49,7 @@ return {
           ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^%w][^%w]", register = { cr = false } },
         },
       })
+
       require("mini.surround").setup()
 
       files.setup({
