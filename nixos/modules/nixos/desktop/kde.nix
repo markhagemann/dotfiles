@@ -18,7 +18,6 @@ in {
       konsole
       krdp
       plasma-browser-integration
-      xwaylandvideobridge
     ];
 
     environment.systemPackages = with pkgs; [

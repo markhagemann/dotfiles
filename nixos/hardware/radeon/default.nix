@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }:
 
 {
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;
   environment.systemPackages = with pkgs; [ mesa-demos lact ];
 
   hardware.amdgpu.overdrive.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ mesa ];
   };
 
   systemd.services.lact = {

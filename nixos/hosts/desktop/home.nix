@@ -25,6 +25,7 @@
     fd
     fzf
     gnumake
+    imagemagick
     jq
     lazygit
     lazydocker
@@ -41,9 +42,10 @@
     unzip
     zoxide
 
-    # Language Servers / Linters that Mason can't run on NixOS
-    stylua
+    # Language / Servers / Linters that Mason can't run on NixOS
+    lua5_1
     lua-language-server
+    stylua
 
     # Productivity / general apps
     anki-bin
@@ -75,8 +77,6 @@
     XDG_MUSIC_DIR = lib.mkForce "$HOME";
     XDG_PICTURES_DIR = lib.mkForce "$HOME/pictures";
     XDG_VIDEOS_DIR = lib.mkForce "$HOME";
-
-    backupFileExtension = "backup";
   };
   home.username = "mark";
   home.stateVersion = "25.05"; # Please read the comment before changing.
@@ -92,8 +92,6 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    extraLuaPackages = ps: [ ps.lua ps.luarocks-nix ps.magick ];
-    extraPackages = with pkgs; [ xclip imagemagick ];
   };
 
   # TODO: Need to configure this properly... the sidebery defaults aren't nice for pinned tabs
@@ -104,6 +102,155 @@
   #     font = { family = "Poppins"; };
   #     sidebery = { margin = "0.2rem"; };
   #   };
+  # };
+
+  # Doesn't support playlist yet - useless till then
+  # services.linux-wallpaperengine = {
+  #   enable = true;
+  #   assetsPath =
+  #     "${config.home.homeDirectory}/.local/share/Steam/steamapps/common/wallpaper_engine/assets";
+  #
+  #   wallpapers = [
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "2048819426";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3156173237";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3249337639";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3248789055";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3015692932";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3250483470";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3251349487";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "2376341991";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "1945149029";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3174492446";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3451450351";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3203241401";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3428926953";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3340426790";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "3384222744";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "2609314607";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "2614505463";
+  #       fps = 45;
+  #       audio = { processing = false; silent = true; };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "2797293393";
+  #       fps = 45;
+  #       audio = {
+  #         processing = false;
+  #         silent = true;
+  #       };
+  #       scaling = "fill";
+  #     }
+  #     {
+  #       monitor = "DP-1";
+  #       wallpaperId = "1214148605";
+  #       fps = 45;
+  #       audio = {
+  #         processing = false;
+  #         silent = true;
+  #       };
+  #       scaling = "fill";
+  #     }
+  #   ];
   # };
 
   xdg = { userDirs = { enable = false; }; };

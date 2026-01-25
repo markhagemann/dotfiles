@@ -22,7 +22,6 @@ in {
         tools = {
           node = "24";
           python = "3.14";
-          lua = "5.1";
           go = "1.25";
           golangci-lint = "2.8.0";
         };

@@ -1,7 +1,6 @@
 { lib, inputs, outputs, pkgs, home-manager, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
   # Configure nix settings, including experimental features and garbage collection
   nix = {
     settings = {

@@ -9,7 +9,9 @@
     kdePackages.kcalc
     kdePackages.krohnkite
     # kdePackages.qtstyleplugin-kvantum
-    kdePackages.wallpaper-engine-plugin # Only use 2.6 - 2.7 causes KDE crashes
+
+    # This is also failing now in the UI selection on KDE - plugin isn't being maintained
+    # kdePackages.wallpaper-engine-plugin # Wallpaper Engine 2.7 causes KDE crashes - you can set this via steam
   ];
 
   programs.plasma = {
@@ -297,4 +299,3 @@
     };
   };
 }
-

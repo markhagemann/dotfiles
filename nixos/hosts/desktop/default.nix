@@ -46,8 +46,6 @@
     just
     kitty
     libffi.dev
-    libreoffice-qt
-    librewolf
     lutris
     ntfs3g
     opencode
@@ -124,9 +122,6 @@
   networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages
-  nixpkgs.overlays = [ (import ../../overlays/pkgs.nix) ];
-
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   programs.gpu-screen-recorder.enable = true;
@@ -146,6 +141,8 @@
 
   services.flatpak = {
     enable = true;
+    packages =
+      [ "io.gitlab.librewolf-community" "org.libreoffice.LibreOffice" ];
     # packages = [ "com.dec05eba.gpu_screen_recorder" ];
   };
 
