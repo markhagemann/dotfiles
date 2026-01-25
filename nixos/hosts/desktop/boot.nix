@@ -1,8 +1,10 @@
-{ config, pkgs, inputs, lib, chaotic, nix-gaming, ... }:
+{ config, pkgs, inputs, lib, nix-gaming, ... }:
 
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages =
+      pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     kernelParams = [ "quiet" "nowatchdog" "threadirqs" ];
 
     # 🧩 Sysctl tuning for gaming / desktop latency

@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # chaotic.mesa-git.enable = true;
   environment.systemPackages = with pkgs; [ mesa-demos lact ];
 
   hardware.amdgpu.overdrive.enable = true;

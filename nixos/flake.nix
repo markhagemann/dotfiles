@@ -1,7 +1,6 @@
 {
   description = "Minimal flake for NixOS with Home Manager modules";
   inputs = {
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     dms = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/DankMaterialShell";
@@ -18,6 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:pabloaul/lsfg-vk-flake/main";
     };
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -35,8 +35,8 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
   };
-  outputs = inputs@{ self, nixpkgs, chaotic, nur, lsfg-vk-flake, nixos-hardware
-    , textfox, home-manager, nix-flatpak, ... }:
+  outputs = inputs@{ self, nixpkgs, nur, lsfg-vk-flake, nixos-hardware, textfox
+    , home-manager, nix-flatpak, nix-cachyos-kernel, ... }:
     let
       system = "x86_64-linux";
       overlays = [ (import ./overlays/pkgs.nix) ];
@@ -55,7 +55,6 @@
         desktop = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           modules = [
-            chaotic.nixosModules.default
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
@@ -63,6 +62,7 @@
             ./hosts/desktop
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
