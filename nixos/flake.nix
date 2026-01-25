@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:pabloaul/lsfg-vk-flake/main";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -45,7 +45,7 @@
       system = "x86_64-linux"; # Define your system once here
       pkgsFor = sys: import nixpkgs { inherit sys; };
       overlays = [
-        inputs.neovim-nightly-overlay.overlays.default
+        # inputs.neovim-nightly-overlay.overlays.default
 
       ];
     in {

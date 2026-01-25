@@ -43,6 +43,7 @@
     gcc
     git
     gpu-screen-recorder-gtk
+    just
     kitty
     libffi.dev
     libreoffice-qt
@@ -129,6 +130,7 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   programs.gpu-screen-recorder.enable = true;
+  programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];

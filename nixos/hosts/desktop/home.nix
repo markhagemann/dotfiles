@@ -32,8 +32,10 @@
     mise
     neofetch
     nix-zsh-completions
+    posting
     ripgrep
     starship
+    superfile
     tokei
     tree
     unzip
@@ -46,6 +48,7 @@
     # Productivity / general apps
     anki-bin
     obsidian
+    calcure
     calibre
 
     # Network/Download tools
@@ -53,6 +56,9 @@
 
     # Gaming
     mangohud
+
+    # Media
+    vlc
   ];
   home.sessionVariables = {
     EDITOR = "nvim";

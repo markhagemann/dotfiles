@@ -11,11 +11,23 @@ in {
       enable = true;
       enableZshIntegration = true;
 
-      settings = {
-        experimental = true;
-        verbose = false;
-        auto_install = true;
+      globalConfig = {
+        settings = {
+          all_compile = false;
+          auto_install = true;
+          experimental = true;
+          verbose = false;
+        };
+
+        tools = {
+          node = "24";
+          python = "3.14";
+          lua = "5.1";
+          go = "1.25";
+          golangci-lint = "2.8.0";
+        };
       };
+
     };
 
     home.file.".config/mise/setup.sh".text = ''
