@@ -27,7 +27,7 @@ return {
     require("codecompanion").setup({
       strategies = {
         chat = {
-          adapter = "copilot",
+          adapter = "openrouter",
           slash_commands = {
             -- Files / buffers
             file = default_picker_opts,
@@ -60,20 +60,30 @@ return {
         },
       },
       adapters = {
-        openrouter = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            env = {
-              url = "https://openrouter.ai/api",
-              api_key = "OPENROUTER_API_KEY",
-              chat_url = "/v1/chat/completions",
-            },
-            schema = {
-              model = {
-                default = current_model,
+
+        http = {
+          opts = {
+            show_presets = false,
+            show_model_choices = true,
+          },
+
+          copilot = "copilot",
+
+          openrouter = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              env = {
+                url = "https://openrouter.ai/api",
+                api_key = "OPENROUTER_API_KEY",
+                chat_url = "/v1/chat/completions",
               },
-            },
-          })
-        end,
+              schema = {
+                model = {
+                  default = "mistralai/devstral-2512:free",
+                },
+              },
+            })
+          end,
+        },
       },
       display = {
         action_palette = {
@@ -107,6 +117,7 @@ return {
   keys = {
     { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "AI: actions" },
     { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "AI: chat" },
+    { "<leader>ah", "<cmd>CodeCompanionHistory<cr>", desc = "AI: history" },
     { "<leader>a+", "<cmd>CodeCompanionChat Add<cr>", desc = "AI: add file to chat", mode = { "v" } },
     -- { "<leader>as", select_model, desc = "AI: select model" },
   },
