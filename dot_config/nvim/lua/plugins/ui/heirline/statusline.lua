@@ -89,7 +89,8 @@ local VimMode = {
   },
   {
     provider = function(self)
-      return " %2(" .. self.mode_names[self.mode] .. "%) "
+      local mode_name = self.mode_names[self.mode] or "?"
+      return " %2(" .. mode_name .. "%) "
     end,
     hl = function(self)
       return { fg = colors.background, bg = self.mode_color, bold = true }

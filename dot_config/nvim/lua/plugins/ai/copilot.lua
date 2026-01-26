@@ -1,8 +1,8 @@
 return {
   {
     -- GitHub Copilot chat integration for AI-powered code assistance
-    -- enabled = vim.env.ENABLE_GITHUB_COPILOT == "true",
-    enabled = false,
+    enabled = vim.env.ENABLE_GITHUB_COPILOT == "true",
+    -- enabled = false,
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       {

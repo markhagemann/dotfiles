@@ -1,29 +1,62 @@
-local current_model = vim.env.DEFAULT_MODEL
-local available_models = vim.env.AVAILABLE_MODELS
-local function select_model()
-  vim.ui.select(available_models, {
-    prompt = "Select  Model:",
-  }, function(choice)
-    if choice then
-      current_model = choice
-      vim.notify("Selected model: " .. current_model)
-    end
-  end)
-end
+-- local current_model = vim.env.DEFAULT_MODEL
+-- local available_models = vim.env.AVAILABLE_MODELS
+--
+-- local function select_model()
+--   vim.ui.select(available_models, {
+--     prompt = "Select Model:",
+--   }, function(choice)
+--     if choice then
+--       current_model = choice
+--       vim.notify("Selected model: " .. current_model)
+--     end
+--   end)
+-- end
+
+local default_picker_opts = {
+  opts = {
+    provider = "snacks",
+  },
+}
 
 return {
   -- AI coding assistant with chat and inline editing capabilities via OpenRouter
   "olimorris/codecompanion.nvim",
-  -- enabled = vim.env.ENABLE_AI_PLUGINS == "true",
-  enabled = false,
+  version = "^18",
+  enabled = vim.env.ENABLE_CODECOMPANION == "true",
   config = function()
     require("codecompanion").setup({
       strategies = {
         chat = {
-          adapter = "openrouter",
+          adapter = "copilot",
+          slash_commands = {
+            -- Files / buffers
+            file = default_picker_opts,
+            buffer = default_picker_opts,
+            buffers = default_picker_opts,
+
+            -- Project / filesystem
+            files = default_picker_opts,
+            cwd = default_picker_opts,
+
+            -- Git
+            git_file = default_picker_opts,
+            git_files = default_picker_opts,
+            git_diff = default_picker_opts,
+            git_commit = default_picker_opts,
+
+            -- Diagnostics / symbols
+            diagnostic = default_picker_opts,
+            symbols = default_picker_opts,
+
+            -- Misc
+            help = default_picker_opts,
+            recent = default_picker_opts,
+            time = default_picker_opts,
+            date = default_picker_opts,
+          },
         },
         inline = {
-          adapter = "openrouter",
+          adapter = "copilot",
         },
       },
       adapters = {
@@ -42,49 +75,31 @@ return {
           })
         end,
       },
+      display = {
+        action_palette = {
+          provider = "default",
+        },
+      },
+      interactions = {
+        chat = {
+          icons = {
+            chat_context = "📎️", -- You can also apply an icon to the fold
+          },
+          fold_context = true,
+          fold_reasoning = true,
+          show_reasoning = true,
+          tools = {
+            ["cmd_runner"] = {
+              opts = {
+                require_approval_before = true,
+              },
+            },
+          },
+        },
+      },
       extensions = {
         history = {
           enabled = true,
-          opts = {
-            -- Keymap to open history from chat buffer (default: gh)
-            keymap = "gh",
-            -- Keymap to save the current chat manually (when auto_save is disabled)
-            save_chat_keymap = "sc",
-            -- Save all chats by default (disable to save only manually using 'sc')
-            auto_save = true,
-            -- Number of days after which chats are automatically deleted (0 to disable)
-            expiration_days = 14,
-            -- Picker interface (auto resolved to a valid picker)
-            picker = "snacks", --- ("telescope", "snacks", "fzf-lua", or "default")
-            -- Customize picker keymaps (optional)
-            picker_keymaps = {
-              rename = { n = "r", i = "<M-r>" },
-              delete = { n = "d", i = "<M-d>" },
-              duplicate = { n = "<C-y>", i = "<C-y>" },
-            },
-            ---Automatically generate titles for new chats
-            auto_generate_title = true,
-            title_generation_opts = {
-              ---Adapter for generating titles (defaults to current chat adapter)
-              adapter = nil, -- "copilot"
-              ---Model for generating titles (defaults to current chat model)
-              model = nil, -- "gpt-4o"
-              ---Number of user prompts after which to refresh the title (0 to disable)
-              refresh_every_n_prompts = 0, -- e.g., 3 to refresh after every 3rd user prompt
-              ---Maximum number of times to refresh the title (default: 3)
-              max_refreshes = 3,
-            },
-            ---On exiting and entering neovim, loads the last chat on opening chat
-            continue_last_chat = true,
-            ---When chat is cleared with `gx` delete the chat from history
-            delete_on_clearing_chat = false,
-            ---Directory path to save the chats
-            dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
-            ---Enable detailed logging for history extension
-            enable_logging = false,
-            ---Optional filter function to control which chats are shown when browsing
-            chat_filter = nil, -- function(chat_data) return boolean end
-          },
         },
       },
     })
@@ -93,7 +108,7 @@ return {
     { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "AI: actions" },
     { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "AI: chat" },
     { "<leader>a+", "<cmd>CodeCompanionChat Add<cr>", desc = "AI: add file to chat", mode = { "v" } },
-    { "<leader>as", select_model, desc = "AI: select model" },
+    -- { "<leader>as", select_model, desc = "AI: select model" },
   },
   dependencies = {
     -- Utility library for Neovim plugins (async, file operations, etc.)

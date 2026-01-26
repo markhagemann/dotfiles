@@ -32,7 +32,6 @@ return {
         -- collection_paths = {
         --   { name = "Main", path = "/path/to/folder/containing/collections/Documents/Bruno" },
         -- },
-        -- Which picker to use, "fzf-lua" or "snacks" are also allowed.
         picker = "snacks",
         -- If output should be formatted by default.
         show_formatted_output = true,
