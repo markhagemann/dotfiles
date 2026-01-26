@@ -23,6 +23,7 @@ in {
           node = "24";
           python = "3.14";
           go = "1.25";
+          gh = "latest";
           golangci-lint = "2.8.0";
         };
       };
