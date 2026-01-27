@@ -4,7 +4,7 @@
 add_newline = true
 command_timeout = 2000
 
-format = """$env_var$os$directory$git_branch$git_status$kubernetes$nodejs$golang$fill$cmd_duration$time
+format = """$env_var$os$directory$git_branch$git_status$docker_context$kubernetes$nodejs$golang$fill$cmd_duration$time
 $character
 """
 
@@ -43,7 +43,7 @@ Unknown = '󰠥'
 
 [os]
 format = '[$symbol](#414868) '
-disabled = true
+disabled = false
 
 # Shows current directory
 [directory]
@@ -78,7 +78,8 @@ disabled = false
 symbol = "  "
 
 [docker_context]
-disabled = true
+format = '[|](fg:#414868) [🐋 $context](blue bold) '
+disabled = false
 
 [helm]
 disabled = true
