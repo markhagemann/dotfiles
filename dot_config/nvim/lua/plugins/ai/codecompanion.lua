@@ -4,6 +4,15 @@ local default_picker_opts = {
   },
 }
 
+-- Get the mise global node bin path dynamically
+local function get_mise_global_node_bin()
+  local version = vim.fn.system("mise global node 2>/dev/null"):gsub("%s+", "")
+  if version and version ~= "" then
+    return vim.fn.expand("~/.local/share/mise/installs/node/" .. version .. "/bin")
+  end
+  return nil
+end
+
 return {
   -- AI coding assistant with chat and inline editing capabilities via OpenRouter
   "olimorris/codecompanion.nvim",
@@ -51,11 +60,16 @@ return {
             show_presets = false,
           },
           -- cursor-acp adapter (only available if ENABLE_CURSOR=true)
+          -- Uses @blowmage/cursor-agent-acp for better security controls
+          -- Absolute path to avoid mise Node version switching issues
           cursor = vim.env.ENABLE_CURSOR == "true" and function()
+            local mise_bin = get_mise_global_node_bin()
+            local cmd = mise_bin and (mise_bin .. "/cursor-agent-acp") or "cursor-agent-acp"
             return require("codecompanion.adapters.acp").extend("claude_code", {
               name = "cursor",
+              formatted_name = "Cursor",
               commands = {
-                default = { "cursor-acp" },
+                default = { cmd },
               },
             })
           end or nil,
