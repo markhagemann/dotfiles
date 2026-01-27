@@ -380,8 +380,10 @@ local SearchResults = {
   end,
   init = function(self)
     local ok, search = pcall(vim.fn.searchcount)
-    if ok and search.total then
+    if ok and search and search.total and search.current then
       self.search = search
+    else
+      self.search = nil
     end
   end,
   {
@@ -395,8 +397,11 @@ local SearchResults = {
   {
     provider = function(self)
       local search = self.search
+      if not search or not search.current or not search.total then
+        return ""
+      end
 
-      return string.format(" %d/%d ", search.current, math.min(search.total, search.maxcount))
+      return string.format(" %d/%d ", search.current, math.min(search.total, search.maxcount or search.total))
     end,
     hl = function()
       return { bg = utils.get_highlight("Substitute").bg, fg = colors.background }
