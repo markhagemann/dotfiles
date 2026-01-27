@@ -1,17 +1,3 @@
--- local current_model = vim.env.DEFAULT_MODEL
--- local available_models = vim.env.AVAILABLE_MODELS
---
--- local function select_model()
---   vim.ui.select(available_models, {
---     prompt = "Select Model:",
---   }, function(choice)
---     if choice then
---       current_model = choice
---       vim.notify("Selected model: " .. current_model)
---     end
---   end)
--- end
-
 local default_picker_opts = {
   opts = {
     provider = "snacks",
@@ -27,7 +13,7 @@ return {
     require("codecompanion").setup({
       strategies = {
         chat = {
-          adapter = "openrouter",
+          adapter = vim.env.ENABLE_CURSOR == "true" and "cursor" or "copilot",
           slash_commands = {
             -- Files / buffers
             file = default_picker_opts,
@@ -56,25 +42,37 @@ return {
           },
         },
         inline = {
-          adapter = "copilot",
+          adapter = vim.env.ENABLE_COPILOT and "copilot",
         },
       },
       adapters = {
-
+        acp = {
+          opts = {
+            show_presets = false,
+          },
+          -- cursor-acp adapter (only available if ENABLE_CURSOR=true)
+          cursor = vim.env.ENABLE_CURSOR == "true" and function()
+            return require("codecompanion.adapters.acp").extend("claude_code", {
+              name = "cursor",
+              commands = {
+                default = { "cursor-acp" },
+              },
+            })
+          end or nil,
+        },
         http = {
           opts = {
             show_presets = false,
             show_model_choices = true,
           },
-
-          copilot = "copilot",
-
-          openrouter = function()
+          copilot = vim.env.ENABLE_COPILOT == "true" and "copilot" or nil,
+          openrouter = vim.env.OPENROUTER_API_KEY and function()
             return require("codecompanion.adapters").extend("openai_compatible", {
               env = {
                 url = "https://openrouter.ai/api",
                 api_key = "OPENROUTER_API_KEY",
                 chat_url = "/v1/chat/completions",
+                models_endpoint = "/models",
               },
               schema = {
                 model = {
@@ -82,7 +80,7 @@ return {
                 },
               },
             })
-          end,
+          end or nil,
         },
       },
       display = {
@@ -91,6 +89,17 @@ return {
         },
       },
       interactions = {
+        -- Background interactions (title generation, etc.) require HTTP adapter
+        background = {
+          adapter = vim.env.ENABLE_COPILOT == "true" and "copilot"
+            or (vim.env.OPENROUTER_API_KEY and "openrouter" or nil),
+          chat = {
+            opts = {
+              -- Only enable background interactions if an HTTP adapter is available
+              enabled = (vim.env.ENABLE_COPILOT == "true" or vim.env.OPENROUTER_API_KEY) and true or false,
+            },
+          },
+        },
         chat = {
           icons = {
             chat_context = "📎️", -- You can also apply an icon to the fold
@@ -110,6 +119,11 @@ return {
       extensions = {
         history = {
           enabled = true,
+          opts = {
+            -- Disable auto title generation when using ACP adapters (cursor)
+            -- Title generation requires an HTTP adapter (copilot/openrouter)
+            auto_generate_title = false,
+          },
         },
       },
     })
