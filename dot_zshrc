@@ -1,125 +1,9 @@
 # Enable zprof profiling to measure startup time
 # zmodload zsh/zprof
 
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
-
-# Add in zsh plugins
-zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
-zinit pack for pyenv
-zi ice from"gh-r" as"program"
-zi light junegunn/fzf
-zinit light Aloxaf/fzf-tab
-zinit light jeffreytse/zsh-vi-mode
-
-zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
-
-# Add in snippets
-zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
-
-# Load completions (only call compinit once, after plugins)
-autoload -Uz compinit && compinit -C  # Use -C to speed up by using cache
-
-zinit cdreplay -q
-
-# History
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-
-# Keybindings
-zinit ice depth=1
-
-TMUX_DIR="~/.config/tmux"
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
-  if [ -z "$TMUX" ]; then
-    if tmux has-session 2>/dev/null; then
-      # Attach to provided session name if given, otherwise first available
-      if [ -n "$1" ]; then
-        tmux attach -t "$1"
-      else
-        tmux attach
-      fi
-    else
-      # No sessions exist, create a new one
-      tmux new
-    fi
-  fi
-fi
-
-# Enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Import private exports that shouldn't be committed
-PRIVEXPORTFILE=~/.zshrcpriv
-source $PRIVEXPORTFILE
-
-. "$HOME/.atuin/bin/env"
-
-# Shell integrations
-eval "$(zoxide init zsh)"
-eval "$(atuin init zsh)"
-eval "$(~/.local/bin/mise activate zsh)"
-# Use oh-my-posh
-# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
-eval "$(starship init zsh)"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init - --path --no-rehash zsh)"
-fi
-
-# zsh-vi-mode
-ZVM_VI_ESCAPE_BINDKEY=jk
-ZVM_VI_INSERT_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
-ZVM_VI_VISUAL_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
-ZVM_VI_OPPEND_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
-
-function zvm_after_lazy_keybindings() {
-  # Remap to go to the beginning of the line
-  zvm_bindkey vicmd 'gh' beginning-of-line
-  # Remap to go to the end of the line
-  zvm_bindkey vicmd 'gl' end-of-line
-}
-
 # Aliases
 # alias cat=bat
+alias clear='clear && tmux clear-history'
 alias cl='clear'
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias gdate="date"
@@ -219,6 +103,22 @@ alias kcunset="kubectl config unset current-context"
 alias podname=''
 alias spac="sudo pacman"
 
+# zmv
+autoload -Uz zmv
+alias zcp='zmv -C' # Copy with patterns
+alias zlp='zmv -L' # Link with patterns
+
+# Suffix Aliases
+alias -s json=jless
+alias -s md=bat
+alias -s go='$EDITOR'
+alias -s txt=bat
+alias -s log=bat
+alias -s py='$EDITOR'
+alias -s js='$EDITOR'
+alias -s ts='$EDITOR'
+alias -s html=open
+
 # Lazy-load gvm
 gvm_lazy_init() {
   # Remove this function and the alias
@@ -229,6 +129,146 @@ gvm_lazy_init() {
 }
 
 alias gvm=gvm_lazy_init
+
+# Keybindings
+# Open the current command in your $EDITOR
+# Press Ctrl+X followed by Ctrl+E to trigger
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+# Map Ctrl+U to undo rather than kill-whole-line
+bindkey '^U' undo
+
+# Expands history expressions like !! or !$ when you press space
+bindkey ' ' magic-space
+
+# Insert git branch creation from another branch (Ctrl+X,gcb)
+bindkey -s "^Xgb" 'git checkout -b '
+bindkey -s "^Xgl" 'git log --oneline -n 10\n'
+
+# For applying and adding to chezmoi dotfiles
+bindkey -s "^XDa" 'dot apply '
+bindkey -s "^XDd" 'dot add '
+
+# Launch neovim
+bindkey -s '^X^N' 'nvim \n'
+
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
+zinit pack for pyenv
+zi ice from"gh-r" as"program"
+zi light junegunn/fzf
+zinit light Aloxaf/fzf-tab
+zinit light jeffreytse/zsh-vi-mode
+
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+# Add in snippets
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+
+# Load completions (only call compinit once, after plugins)
+autoload -Uz compinit && compinit -C  # Use -C to speed up by using cache
+
+zinit cdreplay -q
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+zinit ice depth=1
+
+TMUX_DIR="~/.config/tmux"
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  if [ -z "$TMUX" ]; then
+    if tmux has-session 2>/dev/null; then
+      # Attach to provided session name if given, otherwise first available
+      if [ -n "$1" ]; then
+        tmux attach -t "$1"
+      else
+        tmux attach
+      fi
+    else
+      # No sessions exist, create a new one
+      tmux new
+    fi
+  fi
+fi
+
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Import private exports that shouldn't be committed
+PRIVEXPORTFILE=~/.zshrcpriv
+source $PRIVEXPORTFILE
+
+. "$HOME/.atuin/bin/env"
+
+# Shell integrations
+eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
+# Use oh-my-posh
+# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
+eval "$(starship init zsh)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init - --path --no-rehash zsh)"
+fi
+
+# zsh-vi-mode
+ZVM_VI_ESCAPE_BINDKEY=jk
+ZVM_VI_INSERT_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+ZVM_VI_VISUAL_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+ZVM_VI_OPPEND_ESCAPE_BINDKEY=$ZVM_VI_ESCAPE_BINDKEY
+
+function zvm_after_lazy_keybindings() {
+  # Remap to go to the beginning of the line
+  zvm_bindkey vicmd 'gh' beginning-of-line
+  # Remap to go to the end of the line
+  zvm_bindkey vicmd 'gl' end-of-line
+}
 
 # Print zprof profiling results at the end
 # zprof
