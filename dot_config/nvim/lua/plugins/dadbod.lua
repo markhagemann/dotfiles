@@ -1,6 +1,7 @@
 return {
   -- Database UI for managing database connections and queries
   "kristijanhusak/vim-dadbod-ui",
+  enabled = false,
   dependencies = {
     { "tpope/vim-dadbod", lazy = true },
     { "kristijanhusak/vim-dadbod-completion", ft = { "psql", "plsql" }, lazy = true }, -- Optional
