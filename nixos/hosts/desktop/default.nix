@@ -42,7 +42,6 @@
     gamescope
     gcc
     git
-    gpu-screen-recorder-gtk
     just
     kitty
     libffi.dev
@@ -51,6 +50,7 @@
     opencode
     openssl
     openssl.dev
+    pgcli
     pkg-config
     protonup-qt
     python312
@@ -124,7 +124,8 @@
 
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
-  programs.gpu-screen-recorder.enable = true;
+  # Download via Discover for the moment - need gpu-screen-recorder-ui merge to be approved
+  # programs.gpu-screen-recorder.enable = true;
   programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;
