@@ -1,0 +1,17 @@
+pager:
+  diff: diffnav --unified
+colors:
+  text:
+    primary: "#c0caf6"
+    secondary: "#a9b1d6"
+    inverted: "#282a37"
+    faint: "#787c99"
+    warning: "#f7768e"
+    success: "#73daca"
+    actor: "#bb9af7"
+  background:
+    selected: "#414868"
+  border:
+    primary: "#7aa2f7"
+    secondary: "#668cbe"
+    faint: "#2A2F41"
