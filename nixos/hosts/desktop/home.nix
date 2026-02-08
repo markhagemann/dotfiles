@@ -40,6 +40,7 @@
     tokei
     tree
     unzip
+    yq
     zoxide
 
     # Language / Servers / Linters that Mason can't run on NixOS
