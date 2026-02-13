@@ -4,6 +4,7 @@ return {
   {
     -- Text objects and motions based on tree-sitter queries (functions, classes, parameters, etc.)
     "nvim-treesitter/nvim-treesitter-textobjects",
+    enabled = false, -- seems to need an update
     opts = {
       textobjects = {
         select = {
@@ -97,7 +98,7 @@ return {
       },
     },
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter.config").setup(opts)
 
       local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 

@@ -28,25 +28,6 @@ return {
       end,
     },
     {
-      -- Smart import management and organization for various languages
-      "piersolenski/import.nvim",
-      dependencies = {
-        "folke/snacks.nvim",
-      },
-      opts = {
-        picker = "snacks",
-      },
-      keys = {
-        {
-          "<leader>i",
-          function()
-            require("import").pick()
-          end,
-          desc = "Import Picker",
-        },
-      },
-    },
-    {
       -- Enhanced LSP hover documentation with better formatting
       "Fildo7525/pretty_hover",
       opts = {},
@@ -215,7 +196,7 @@ return {
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>rn", vim.lsp.buf.rename, "rename")
+        map("<F2>", vim.lsp.buf.rename, "rename")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.

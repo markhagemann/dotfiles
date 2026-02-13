@@ -1,5 +1,5 @@
 local filetypes =
-  { "go", "javascript", "python", "typescript", "typescriptreact", "vue", "html", "css", "sh", "terraform" }
+  { "go", "javascript", "python", "typescript", "typescriptreact", "vue", "html", "css", "sh", "terraform", "lua" }
 
 return {
   -- Official GitLab Duo AI code suggestions and assistance

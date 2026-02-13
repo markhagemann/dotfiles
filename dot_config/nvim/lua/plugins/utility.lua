@@ -69,7 +69,9 @@ return {
     -- if on windows
     -- build = 'pwsh install.ps1 yarn',
     config = function()
-      require("import-cost").setup({})
+      vim.g.import_cost = {
+        package_manager = "yarn",
+      }
     end,
   },
   {
@@ -113,17 +115,6 @@ return {
         mode = { "n", "o", "x" },
       },
     },
-  },
-  {
-    -- Break long strings into multiple lines with proper formatting
-    "duqcyxwd/stringbreaker.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    cmd = { "BreakString", "PreviewString", "SaveString", "SyncString" },
-    config = function()
-      require("string-breaker").setup()
-    end,
   },
   {
     -- Git blame information displayed in a floating window
@@ -257,6 +248,12 @@ return {
       })
     end,
   },
+  -- Intercepts p / P / gp / gP so linewise pasted code lands at the right indent level automatically.
+  {
+    "nemanjamalesija/smart-paste.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
   {
     -- Automatically detect and set indentation settings for files
     "nmac427/guess-indent.nvim",
@@ -292,7 +289,7 @@ return {
       },
     },
   },
-  -- Toggle between relative and absolute line numbers
+  -- Automatically between relative and absolute line numbers depending on mode
   { "sitiom/nvim-numbertoggle", event = "BufEnter" },
   {
     -- Quickfix list improvements with better navigation
