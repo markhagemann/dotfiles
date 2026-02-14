@@ -21,6 +21,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

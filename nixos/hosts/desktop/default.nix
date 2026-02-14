@@ -2,10 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./boot.nix
     ./hardware-configuration.nix
     ../../hardware/bluetooth
@@ -59,9 +65,9 @@
     tmux
     vim
     wget
-    wineWowPackages.stable
-    wineWowPackages.staging
-    wineWowPackages.waylandFull
+    wineWow64Packages.stable
+    wineWow64Packages.staging
+    wineWow64Packages.waylandFull
     winetricks
     wireguard-tools
     wowup-cf
@@ -71,14 +77,19 @@
   environment.variables = {
     MANGOHUD = "1";
     MANGOHUD_DLSYM = "1";
-    PKG_CONFIG_PATH =
-      lib.makeSearchPath "lib/pkgconfig" [ pkgs.openssl.dev pkgs.zlib.dev ];
+    PKG_CONFIG_PATH = lib.makeSearchPath "lib/pkgconfig" [
+      pkgs.openssl.dev
+      pkgs.zlib.dev
+    ];
   };
 
   fileSystems."/storage/4tb-ssd" = {
     device = "/dev/disk/by-uuid/a2074226-f644-49cb-b94b-b657f786c836";
     fsType = "btrfs";
-    options = [ "compress=zstd" "noatime" ];
+    options = [
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   i18n.defaultLocale = "en_AU.UTF-8";
@@ -142,8 +153,10 @@
 
   services.flatpak = {
     enable = true;
-    packages =
-      [ "io.gitlab.librewolf-community" "org.libreoffice.LibreOffice" ];
+    packages = [
+      "io.gitlab.librewolf-community"
+      "org.libreoffice.LibreOffice"
+    ];
     # packages = [ "com.dec05eba.gpu_screen_recorder" ];
   };
 
@@ -169,7 +182,9 @@
   services.udev.packages = [ pkgs.boxflat ];
 
   # Configure keymap in X11
-  services.xserver.xkb = { layout = "us"; };
+  services.xserver.xkb = {
+    layout = "us";
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -189,12 +204,15 @@
     isNormalUser = true;
     description = "Mark";
     shell = pkgs.zsh;
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
-    packages = with pkgs;
-      [
-        kdePackages.kate
-        #  thunderbird
-      ];
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [
+      kdePackages.kate
+      #  thunderbird
+    ];
   };
 
   virtualisation.docker.enable = true;
