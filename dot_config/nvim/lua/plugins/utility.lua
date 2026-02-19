@@ -187,6 +187,7 @@ return {
         "checkhealth",
         "copilot-chat",
         "codecompanion",
+        "codediff-explorer",
         "dapui*",
         "dbui",
         "Diffview*",
