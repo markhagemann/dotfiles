@@ -210,6 +210,8 @@ return {
           truncate = 60, -- truncate the file path to (roughly) this length
         },
       },
+      -- Preview highlighting uses tree-sitter then vim's syntax (not bat).
+      -- If previews have no highlighting: install parsers with :TSInstall <lang> (e.g. :TSInstall lua) or add them to treesitter's ensure_installed.
       matcher = {
         fuzzy = true, -- use fuzzy matching
         smartcase = true, -- use smartcase
