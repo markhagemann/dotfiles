@@ -1,0 +1,43 @@
+# Ghostty config modeled from ~/.config/kitty
+# Load optional OS-specific overrides (e.g. macOS font/window)
+config-file = ?os-specific.conf
+
+# Clear default keybindings so our tmux Ctrl+A binding takes effect (Ghostty defaults to select_all).
+# After 'clear', we re-add only the bindings we want.
+keybind = clear
+
+# --- Tmux: pass Ctrl+A and Ctrl+U through to shell/tmux ---
+# Ctrl+A = 0x01 (tmux prefix); Ctrl+U = 0x15 (backward-kill-line in readline/bash).
+keybind = unconsumed:ctrl+a=text:\x01
+keybind = unconsumed:ctrl+u=text:\x15
+
+# --- Keymaps (Kitty used ctrl+shift as modifier) ---
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+# Ghostty has no set_background_opacity keybind action; use background-opacity in config or command palette
+# keybind = super+u=set_background_opacity:1
+# keybind = super+shift+u=set_background_opacity:default
+# keybind = super+shift+i=set_background_opacity:0.95
+keybind = alt+enter=toggle_fullscreen
+
+# --- Misc ---
+confirm-close-surface = false
+background-opacity = 0.98
+shell-integration = none
+
+# --- Cursor ---
+cursor-style = block
+cursor-style-blink = true
+# cursor trail equivalent: not in Ghostty; leave default
+
+# --- Window (width/height in grid cells, not pixels) ---
+window-width = 160
+window-height = 45
+window-padding-x = 10
+window-padding-y = 10
+
+# --- Theme (Tokyo Night Moon, ported from kitty) ---
+config-file = themes/tokyonight_moon.conf
+
+# When using tmux inside Ghostty, ensure TERM is set appropriately (e.g. in your shell
+# or tmux: default-terminal "xterm-256color" if Ghostty doesn't set xterm-kitty).
