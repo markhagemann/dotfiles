@@ -26,53 +26,20 @@
 
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
-    atuin
-    betterdiscordctl
-    bitwarden-desktop
     boxflat
-    btop
-    cargo
-    chezmoi
-    chromium
-    clang
-    cmake
-    curl
-    delta
     deluge-gtk
     ddcutil
-    discord
-    docker-compose
     easyeffects
-    ffmpeg
-    flatpak
     # gamescope-wsi
-    gcc
-    git
-    just
-    kitty
-    libffi.dev
     lutris
-    ntfs3g
-    opencode
-    openssl
-    openssl.dev
-    pgcli
-    pkg-config
     protonup-qt
-    python312
-    rustc
     steam
-    tmux
-    vim
-    wget
     wineWow64Packages.stable
     wineWow64Packages.staging
     wineWow64Packages.waylandFull
     winetricks
     wireguard-tools
     wowup-cf
-    usbutils
-    zlib.dev
   ];
   environment.variables = {
     MANGOHUD = "1";
@@ -177,6 +144,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  services.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
   };
 
   services.timesyncd.enable = true;

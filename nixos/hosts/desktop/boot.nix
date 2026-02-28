@@ -17,27 +17,18 @@
       "nowatchdog"
       "threadirqs"
       "prempt=full"
+      "sched_ext.enabled=1"
     ];
-
-    # 🧩 Sysctl tuning for gaming / desktop latency
-    kernel.sysctl = {
-      # 🧠 Reduce swapping — keep game assets in RAM
-      "vm.swappiness" = 10;
-
-      # 🚫 Disable autogroup (let Bore handle tasks directly)
-      "kernel.sched_autogroup_enabled" = 0;
-
-      # ⚙️ Reduce disk writeback delay (snappier I/O)
-      "vm.dirty_ratio" = 10;
-      "vm.dirty_background_ratio" = 5;
-
-      # Optional — helps responsiveness for large page cache workloads
-      "vm.vfs_cache_pressure" = 50;
-    };
 
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+
   };
+
+  # Reduce SIGTERM time to 30s from default of 90s
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
 }
