@@ -236,7 +236,8 @@ return {
         files = { hidden = true },
         buffers = {
           hidden = true,
-          layout = { preset = "vscode" },
+          layout = { preset = "select" },
+          focus = "list",
         },
         grep = { hidden = true },
         explorer = {

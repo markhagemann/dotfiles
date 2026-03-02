@@ -209,6 +209,7 @@ return {
         "oil",
         "prompt",
         "qf",
+        "snacks*",
         "TelescopePrompt",
         "Trouble",
         "undotree",
