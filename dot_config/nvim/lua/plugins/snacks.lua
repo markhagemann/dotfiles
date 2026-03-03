@@ -235,7 +235,6 @@ return {
       sources = {
         files = { hidden = true },
         buffers = {
-          hidden = true,
           layout = { preset = "select" },
           focus = "list",
         },
