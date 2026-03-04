@@ -65,4 +65,30 @@ return {
       },
     },
   },
+  {
+    "fredrikaverpil/godoc.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = { "GoDoc" },
+    ft = "godoc",
+    opts = {
+      adapters = {
+        {
+          name = "go",
+          opts = {
+            get_syntax_info = function()
+              return {
+                filetype = "godoc",
+                language = "godoc", -- Enable tree-sitter godoc parser
+              }
+            end,
+          },
+        },
+      },
+      picker = { type = "snacks" },
+      window = { type = "vsplit" },
+    },
+  },
 }

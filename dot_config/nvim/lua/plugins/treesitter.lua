@@ -6,6 +6,23 @@ return {
     build = ":TSUpdate",
     lazy = false,
     init = function()
+      -- godoc custom parser for :GoDoc syntax highlighting (used by godoc.nvim)
+      -- Manual install required on each machine (requires tree-sitter CLI):
+      --   cd /tmp
+      --   git clone --depth 1 https://github.com/fredrikaverpil/tree-sitter-godoc.git
+      --   cd tree-sitter-godoc
+      --   tree-sitter build -o parser.so
+      --   cp parser.so ~/.local/share/nvim/site/parser/godoc.so
+      --   rm -rf /tmp/tree-sitter-godoc
+      require("nvim-treesitter.parsers").godoc = {
+        install_info = {
+          url = "https://github.com/fredrikaverpil/tree-sitter-godoc",
+          revision = "d12a20fe9f9b4e9c604937d3e66193c33587b4fd",
+        },
+        filetype = "godoc",
+      }
+      vim.treesitter.language.register("godoc", "godoc")
+
       local ensure_installed = {
         "c",
         "lua",
@@ -51,8 +68,12 @@ return {
           table.insert(filetypes, ft)
         end
       end
+      table.insert(filetypes, "godoc")
       local ts_start = function(ev)
-        vim.treesitter.start(ev.buf)
+        local ok, err = pcall(vim.treesitter.start, ev.buf)
+        if not ok and not err:match("Parser could not be created") then
+          vim.notify(err, vim.log.levels.WARN)
+        end
       end
 
       -- WARN: Do not use "*" here - snacks.nvim is buggy and vim.notify triggers FileType events internally causing infinite callback loops
