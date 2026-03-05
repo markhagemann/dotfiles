@@ -1,31 +1,41 @@
 return {
-  -- Testing framework for Neovim with adapter support for various languages
-  "nvim-neotest/neotest",
-  dependencies = {
-    "nvim-neotest/nvim-nio",
-    "nvim-neotest/neotest-go",
-    "nvim-lua/plenary.nvim",
-    "antoinemadec/FixCursorHold.nvim",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  opts = {
-    adapters = {
-      ["neotest-go"] = {
-        -- Here we can set options for neotest-go, e.g.
-        -- args = { "-tags=integration" }
-        recursive_run = true,
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      { "nvim-treesitter/nvim-treesitter", branch = "main" },
+      "marilari88/neotest-vitest",
+      {
+        "fredrikaverpil/neotest-golang",
+        version = "*",
+        dependencies = {
+          "andythigpen/nvim-coverage", -- Added dependency
+        },
       },
     },
-    log_level = vim.log.levels.DEBUG,
-  },
-  keys = {
-    -- Run nearest tests
-    vim.keymap.set("n", "<leader>rn", function()
-      require("neotest").run.run()
-    end, { desc = "Run nearest tests" }),
-    -- Run tests in file
-    vim.keymap.set("n", "<leader>rf", function()
-      require("neotest").run.run(vim.fn.expand("%"))
-    end, { desc = "Run tests in file" }),
+    config = function()
+      local neotest_golang_opts = { -- Specify configuration
+        runner = "go",
+        go_test_args = {
+          "-v",
+          "-race",
+          "-count=1",
+          "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+        },
+      }
+      require("neotest").setup({
+        adapters = {
+          require("neotest-golang")(neotest_golang_opts), -- Registration
+          require("neotest-vitest"),
+        },
+      })
+    end,
+    keys = {
+      { "<leader>ntr", "<cmd>Neotest run<cr>", desc = "Neotest Run" },
+      { "<leader>nto", "<cmd>Neotest output<cr>", desc = "Neotest Output" },
+      { "<leader>nts", "<cmd>Neotest summary<cr>", desc = "Neotest Summary" },
+    },
   },
 }
