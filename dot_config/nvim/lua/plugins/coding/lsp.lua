@@ -307,8 +307,6 @@ return {
       registries = { "github:crashdummyy/mason-registry", "github:mason-org/mason-registry" },
     })
 
-    require("mason").setup()
-
     require("mason-lspconfig").setup({
       ensure_installed = {
         "bashls",
