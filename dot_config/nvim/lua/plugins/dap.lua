@@ -16,10 +16,15 @@ local function find_go_main_dirs(root)
     end
     local ok, first_decl = pcall(function()
       local fp = io.open(f, "r")
-      if not fp then return nil end
+      if not fp then
+        return nil
+      end
       for _ = 1, 20 do
         local line = fp:read("*l")
-        if not line then fp:close(); return nil end
+        if not line then
+          fp:close()
+          return nil
+        end
         line = line:match("^%s*(.-)%s*$")
         if line ~= "" and not line:match("^//") and not line:match("^%*") then
           fp:close()
@@ -38,7 +43,9 @@ local function find_go_main_dirs(root)
   table.sort(dirs, function(a, b)
     local a_cmd = a:find("/cmd/") and 1 or 0
     local b_cmd = b:find("/cmd/") and 1 or 0
-    if a_cmd ~= b_cmd then return a_cmd > b_cmd end
+    if a_cmd ~= b_cmd then
+      return a_cmd > b_cmd
+    end
     return a < b
   end)
   return dirs
@@ -109,8 +116,8 @@ return {
     desc = "Debugging support. requires language specific adapters to be configured. (see lang extras)",
 
     dependencies = {
-      -- User interface for DAP debugging (already described above)
-      "rcarriga/nvim-dap-ui",
+      -- Debugging view (replaces nvim-dap-ui)
+      "igorlfs/nvim-dap-view",
       -- Virtual text for the debugger showing variable values inline
       {
         "theHamsta/nvim-dap-virtual-text",
@@ -130,7 +137,7 @@ return {
       { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('breakpoint condition: ')) end, desc = "Breakpoint condition" },
       { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to cursor" },
       { "<leader>dc", function() require("dap").continue() end, desc = "Run/continue" },
-      { "<leader>de", function() require("dapui").eval() end, desc = "Evaluate" },
+      { "<leader>de", function() require("dap.ui.widgets").hover() end, desc = "Evaluate" },
       { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
       { "<leader>di", function() require("dap").step_into() end, desc = "Step into" },
       { "<leader>dj", function() require("dap").down() end, desc = "Down" },
@@ -142,7 +149,7 @@ return {
       { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle repl" },
       { "<leader>ds", function() require("dap").session() end, desc = "Session" },
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle dapui" },
+      { "<leader>du", "<cmd>DapViewToggle<cr>", desc = "Toggle debug view" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
       -- Set DAP log level to TRACE and open log files (do this *before* starting a debug session to capture trace)
       { "<leader>dL", function()
@@ -227,46 +234,19 @@ return {
     end,
   },
 
-  -- fancy UI for the debugger
+  -- Debug view (replaces nvim-dap-ui)
   {
-    -- User interface for DAP debugging with visual breakpoints and variable inspection
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "nvim-neotest/nvim-nio" },
-    -- stylua: ignore
+    "igorlfs/nvim-dap-view",
     keys = {
-      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "(debug): toggle" },
-      { "<leader>de", function() require("dapui").eval() end, desc = "(debug): eval", mode = {"n", "v"} },
+      { "<leader>du", "<cmd>DapViewToggle<cr>", desc = "Toggle debug view" },
     },
     opts = {
-      icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
-      controls = {
-        icons = {
-          pause = "⏸",
-          play = "▶",
-          step_into = "⏎",
-          step_over = "⏭",
-          step_out = "⏮",
-          step_back = "b",
-          run_last = "▶▶",
-          terminate = "⏹",
-          disconnect = "⏏",
-        },
+      auto_toggle = true,
+      winbar = { controls = { enabled = true } },
+      windows = {
+        size = 0.45,
       },
     },
-    config = function(_, opts)
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup(opts)
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({})
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close({})
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close({})
-      end
-    end,
   },
 
   -- mason.nvim integration
