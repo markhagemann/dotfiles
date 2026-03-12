@@ -1,4 +1,11 @@
-{ config, inputs, lib, pkgs, ... }: {
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
   # TODO: Setup panels and widgets - see https://github.com/nix-community/plasma-manager/blob/trunk/examples/homeManager/home.nix
@@ -21,9 +28,15 @@
       baloofilerc."Basic Settings"."Indexing-Enabled" = false;
       gwenviewrc.ThumbnailView.AutoplayVideos = true;
       kdeglobals = {
-        General = { BrowserApplication = "firefox.desktop"; };
-        Icons = { Theme = "Vivid-Dark-Icons"; };
-        KDE = { AnimationDurationFactor = 0.25; };
+        General = {
+          BrowserApplication = "firefox.desktop";
+        };
+        Icons = {
+          Theme = "Vivid-Dark-Icons";
+        };
+        KDE = {
+          AnimationDurationFactor = 0.25;
+        };
       };
       klaunchrc.FeedbackStyle.BusyCursor = false;
       klipperrc.General.MaxClipItems = 1000;
@@ -64,8 +77,7 @@
           UseNativeDecorationShadows = false;
         };
         "Script-krohnkite" = {
-          floatingClass =
-            "org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
+          floatingClass = "org.kde.kcalc,org.freedesktop.impl.portal.desktop.kde";
           ignoreScreen = "DP-1";
           screenGapBetween = 10;
           screenGapBottom = 10;
@@ -106,8 +118,7 @@
 
     dataFile = {
       "dolphin/view_properties/global/.directory"."Dolphin"."ViewMode" = 1;
-      "dolphin/view_properties/global/.directory"."Settings"."HiddenFilesShown" =
-        true;
+      "dolphin/view_properties/global/.directory"."Settings"."HiddenFilesShown" = true;
     };
 
     fonts = {
@@ -250,7 +261,10 @@
 
     shortcuts = {
       ksmserver = {
-        "Lock Session" = [ "Screensaver" "Ctrl+Alt+L" ];
+        "Lock Session" = [
+          "Screensaver"
+          "Ctrl+Alt+L"
+        ];
         "LogOut" = [ "Ctrl+Alt+Q" ];
       };
 
@@ -273,7 +287,9 @@
         "Window Move Center" = "Ctrl+Alt+C";
       };
 
-      plasmashell = { "show-on-mouse-pos" = ""; };
+      plasmashell = {
+        "show-on-mouse-pos" = "";
+      };
 
       "services/org.kde.dolphin.desktop"."_launch" = "Meta+Shift+F";
     };

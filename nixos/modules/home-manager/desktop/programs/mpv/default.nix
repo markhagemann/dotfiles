@@ -59,7 +59,7 @@
     scripts = with pkgs.mpvScripts; [
       mpris
       autoload
-      mpv-cheatsheet
+      mpv-cheatsheet-ng
       youtube-upnext
       memo
       reload

@@ -1,12 +1,20 @@
-{ options, config, lib, pkgs, inputs, ... }:
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 with lib;
 
-let cfg = config.modules.desktop.kde;
-in {
+let
+  cfg = config.modules.desktop.kde;
+in
+{
 
-  options.modules.desktop.kde.enable =
-    lib.mkEnableOption "Enable the kde module";
+  options.modules.desktop.kde.enable = lib.mkEnableOption "Enable the kde module";
 
   config = mkIf cfg.enable {
 
@@ -21,27 +29,42 @@ in {
     ];
 
     environment.systemPackages = with pkgs; [
-      inputs.kwin-effects-forceblur.packages.${pkgs.system}.default # Wayland
-      sddm-astronaut
+      inputs.kwin-effects-glass.packages.${pkgs.system}.default
+      # sddm-astronaut
+      # (sddm-astronaut.override { embeddedTheme = "purple_leaves"; })
     ];
 
     services.desktopManager.plasma6.enable = true;
 
-    services.displayManager.sddm = {
+    services.displayManager.plasma-login-manager = {
       enable = true;
-      theme = "sddm-astronaut-theme";
-      settings.Theme.CursorTheme = "Bibata-Modern-Ice";
-      wayland.enable = config.modules.desktop.wayland.enable;
-      wayland.compositor = "kwin";
-      # These are meant to be propagated by the package?
-      extraPackages = with pkgs; [
-        kdePackages.qtmultimedia
-        kdePackages.qtsvg
-        kdePackages.qtvirtualkeyboard
-      ];
+      # Runs on wayland by default - would need an inverse to set it to below when wayland disabled
+      # services.displayManager.defaultSession = "plasmax11";
     };
 
-    services.xserver = { enable = !config.modules.desktop.wayland.enable; };
+    # services.displayManager.sddm = {
+    #   enable = true;
+    #   theme = "sddm-astronaut-theme";
+    #   settings.Theme.CursorTheme = "Bibata-Modern-Ice";
+    #   wayland.enable = config.modules.desktop.wayland.enable;
+    #   wayland.compositor = "kwin";
+    #   # These are meant to be propagated by the package?
+    #   extraPackages = with pkgs; [
+    #     kdePackages.qtsvg
+    #     kdePackages.qtmultimedia
+    #     kdePackages.qtvirtualkeyboard
+    #     kdePackages.qtdeclarative
+    #     gst_all_1.gstreamer
+    #     gst_all_1.gst-plugins-base
+    #     gst_all_1.gst-plugins-good
+    #     gst_all_1.gst-plugins-bad
+    #     gst_all_1.gst-libav
+    #     sddm-astronaut
+    #   ];
+    # };
+
+    services.xserver = {
+      enable = !config.modules.desktop.wayland.enable;
+    };
   };
 }
-

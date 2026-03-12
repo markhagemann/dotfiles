@@ -1,4 +1,10 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -22,6 +28,7 @@
     # Terminals / shell tools
     bat
     eza
+    fastfetch
     fd
     fzf
     gnumake
@@ -31,7 +38,6 @@
     lazydocker
     libnotify
     mise
-    neofetch
     nix-zsh-completions
     posting
     ripgrep
@@ -39,6 +45,7 @@
     superfile
     tokei
     tree
+    tree-sitter
     unzip
     yq
     zoxide
@@ -254,5 +261,9 @@
   #   ];
   # };
 
-  xdg = { userDirs = { enable = false; }; };
+  xdg = {
+    userDirs = {
+      enable = false;
+    };
+  };
 }

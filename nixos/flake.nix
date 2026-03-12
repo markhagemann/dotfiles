@@ -9,9 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager/master";
     };
-    kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur";
+    kwin-effects-glass = {
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:4v3ngR/kwin-effects-glass";
     };
     lsfg-vk-flake = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,28 +30,48 @@
     plasma-manager.url = "github:AlexNabokikh/plasma-manager";
     quickshell-git = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url =
-        "git+https://git.outfoxxed.me/quickshell/quickshell?rev=6eb12551baf924f8fdecdd04113863a754259c34";
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell?rev=6eb12551baf924f8fdecdd04113863a754259c34";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
   };
-  outputs = inputs@{ self, nixpkgs, nur, lsfg-vk-flake, nixos-hardware, textfox
-    , home-manager, nix-flatpak, nix-cachyos-kernel, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nur,
+      lsfg-vk-flake,
+      nixos-hardware,
+      textfox,
+      home-manager,
+      nix-flatpak,
+      nix-cachyos-kernel,
+      ...
+    }:
     let
       system = "x86_64-linux";
       overlays = [ (import ./overlays/pkgs.nix) ];
       # Create a properly configured pkgs instance
       pkgs = import nixpkgs {
         inherit system;
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
         overlays = overlays ++ [
           (final: prev: {
             quickshell = inputs.quickshell-git.packages.${final.system}.default;
+            pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+              (pyFinal: pyPrev: {
+                picosvg = pyPrev.picosvg.overrideAttrs (_: {
+                  doCheck = false;
+                });
+              })
+            ];
           })
         ];
       };
-    in {
+    in
+    {
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
@@ -76,4 +96,3 @@
       };
     };
 }
-

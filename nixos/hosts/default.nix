@@ -54,7 +54,7 @@
     openssl.dev
     pgcli
     pkg-config
-    python312
+    python313
     unrar
     rustc
     tmux
