@@ -1,3 +1,88 @@
+--- Discover directories under root that contain a Go main package (package main).
+---@param root string directory path to search
+---@return string[] list of directory paths (unique)
+local function find_go_main_dirs(root)
+  root = vim.fn.fnamemodify(root, ":p")
+  if vim.fn.isdirectory(root) ~= 1 then
+    return {}
+  end
+  local dirs = {}
+  local seen = {}
+  local go_files = vim.fn.glob(root .. "/**/*.go", true, true) or {}
+  for _, f in ipairs(go_files) do
+    local dir = vim.fn.fnamemodify(f, ":h")
+    if seen[dir] then
+      goto continue
+    end
+    local ok, first_decl = pcall(function()
+      local fp = io.open(f, "r")
+      if not fp then return nil end
+      for _ = 1, 20 do
+        local line = fp:read("*l")
+        if not line then fp:close(); return nil end
+        line = line:match("^%s*(.-)%s*$")
+        if line ~= "" and not line:match("^//") and not line:match("^%*") then
+          fp:close()
+          return line
+        end
+      end
+      fp:close()
+      return nil
+    end)
+    if ok and first_decl and first_decl:match("^package%s+main%s*$") then
+      seen[dir] = true
+      dirs[#dirs + 1] = dir
+    end
+    ::continue::
+  end
+  table.sort(dirs, function(a, b)
+    local a_cmd = a:find("/cmd/") and 1 or 0
+    local b_cmd = b:find("/cmd/") and 1 or 0
+    if a_cmd ~= b_cmd then return a_cmd > b_cmd end
+    return a < b
+  end)
+  return dirs
+end
+
+--- If program is workspace root with no Go main, set program to a discovered main package dir.
+---@param config dap.Configuration
+---@return dap.Configuration
+local function ensure_go_program_in_workspace(config)
+  local t = config.type
+  if t ~= "go" and t ~= "delve" then
+    return config
+  end
+  if config.request == "attach" or config.mode == "test" then
+    return config
+  end
+  local program = config.program
+  if type(program) ~= "string" then
+    return config
+  end
+  program = program:gsub("%${workspaceFolder}", vim.fn.getcwd())
+  program = vim.fn.fnamemodify(program, ":p")
+  if vim.fn.isdirectory(program) ~= 1 then
+    return config
+  end
+  local main_dirs = find_go_main_dirs(program)
+  if #main_dirs == 0 then
+    return config
+  end
+  local root_has_main = false
+  for _, d in ipairs(main_dirs) do
+    if d == program then
+      root_has_main = true
+      break
+    end
+  end
+  if root_has_main then
+    return config
+  end
+  config = vim.deepcopy(config)
+  config.program = main_dirs[1]
+  return config
+end
+
 ---@param config {type?:string, args?:string[]|fun():string[]?}
 local function get_args(config)
   local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
@@ -59,13 +144,35 @@ return {
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
       { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle dapui" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+      -- Set DAP log level to TRACE and open log files (do this *before* starting a debug session to capture trace)
+      { "<leader>dL", function()
+        require("dap").set_log_level("TRACE")
+        require("dap._cmds").show_logs()
+        vim.notify("DAP log level set to TRACE; logs opened. Start debugging to capture trace.", vim.log.levels.INFO, { title = "DAP" })
+      end, desc = "DAP: set TRACE and show logs" },
     },
 
     config = function()
+      -- Resolve delve path once; Mason's bin often isn't in PATH when Neovim starts.
+      local mason_delve = vim.fn.stdpath("data") .. "/mason/bin/dlv"
+      local delve_path = (vim.fn.executable(mason_delve) == 1) and mason_delve
+        or (vim.fn.exepath("dlv") ~= "" and vim.fn.exepath("dlv") or "dlv")
+
       -- load mason-nvim-dap here, after all adapters have been setup
       local mason_nvim_dap = require("lazy.core.config").spec.plugins["mason-nvim-dap.nvim"]
       local Plugin = require("lazy.core.plugin")
       local mason_nvim_dap_opts = Plugin.values(mason_nvim_dap, "opts", false)
+      mason_nvim_dap_opts.handlers = mason_nvim_dap_opts.handlers or {}
+      mason_nvim_dap_opts.handlers.delve = function(config)
+        if config.adapters and config.adapters.executable then
+          config.adapters.executable.command = delve_path
+        end
+        -- Delve can be slow to build/start on large Go projects; default 4s is too short
+        config.adapters.options = vim.tbl_extend("force", config.adapters.options or {}, {
+          initialize_timeout_sec = 30,
+        })
+        require("mason-nvim-dap").default_setup(config)
+      end
       require("mason-nvim-dap").setup(mason_nvim_dap_opts)
 
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
@@ -87,30 +194,35 @@ return {
         })
       end
 
-      -- setup dap config by VsCode launch.json file
-      local vscode = require("dap.ext.vscode")
-      local json = require("plenary.json")
-      vscode.json_decode = function(str)
-        return vim.json.decode(json.json_strip_comments(str))
-      end
+      -- Map VS Code launch.json type names to nvim-dap filetype configurations
+      require("dap.ext.vscode").type_to_filetypes = { go = { "go" } }
 
       require("dap-go").setup({
         delve = {
-          -- Use Mason's delve installation with fallback to system delve
-          path = function()
-            local mason_delve = vim.fn.stdpath("data") .. "/mason/bin/dlv"
-            if vim.fn.executable(mason_delve) == 1 then
-              return mason_delve
-            end
-            -- Fallback to system delve
-            return vim.fn.exepath("dlv") ~= "" and vim.fn.exepath("dlv") or "dlv"
-          end,
-
+          path = delve_path,
           -- On Windows delve must be run attached or it crashes.
           -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
           -- detached = vim.fn.has 'win32' == 0,
         },
       })
+
+      -- Override the go adapter to support remote attach (connect to existing Delve server)
+      local original_adapter = require("dap").adapters.go
+      require("dap").adapters.go = function(callback, client_config)
+        if client_config.mode == "remote" then
+          callback({
+            type = "server",
+            host = client_config.host or "127.0.0.1",
+            port = client_config.port,
+          })
+        else
+          original_adapter(callback, client_config)
+        end
+      end
+
+      -- When program is workspace root with no Go files, discover main packages in subdirs (so launch.json or default config works from any folder).
+      require("dap").listeners.on_config["go_discover_main"] = ensure_go_program_in_workspace
+
       require("overseer").enable_dap()
     end,
   },
