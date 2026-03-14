@@ -41,6 +41,7 @@
     delta
     docker-compose
     discord
+    extra-cmake-modules
     gcc
     libffi.dev
     ffmpeg
