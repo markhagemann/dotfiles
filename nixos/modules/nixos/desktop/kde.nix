@@ -29,6 +29,8 @@ in
     ];
 
     environment.systemPackages = with pkgs; [
+      kara
+      bibata-cursors
       inputs.kwin-effects-glass.packages.${pkgs.system}.default
       # sddm-astronaut
       # (sddm-astronaut.override { embeddedTheme = "purple_leaves"; })
