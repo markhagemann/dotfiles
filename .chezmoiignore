@@ -1,0 +1,4 @@
+.config/nvim/.claude/
+.config/tmux/plugins/
+
+**/*/.DS_Store
