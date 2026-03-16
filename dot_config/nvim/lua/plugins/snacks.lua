@@ -27,7 +27,7 @@ return {
         keys = {
           -- { icon = " ", key = "e", desc = "Explore directory", action = "<leader>e" },
           { icon = " ", key = "n", desc = "New file", action = ":ene | startinsert" },
-          -- { icon = " ", key = "g", desc = "Find text", action = ":lua snacks.dashboard.pick('live_grep')" },
+          -- { icon = " ", key = "g", desc = "Find text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           {
             icon = " ",
             key = "r",

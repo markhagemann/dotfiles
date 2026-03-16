@@ -6,37 +6,40 @@ return {
     "folke/tokyonight.nvim",
     branch = "main",
     dependencies = {
+      -- Mode-colored CursorLineNr (replaces modicator.nvim which breaks snacks picker on nvim 0.12)
+      -- Defined as a dependency so it loads after the colorscheme
       {
-        -- Mode indicator showing current vim mode with color coding
-        "mawkler/modicator.nvim",
-        event = "BufEnter",
-        after = "tokyonight/nvim",
+        dir = "",
+        name = "mode-cursorlinenr",
+        virtual = true,
+        lazy = false,
         config = function()
-          local colors = require("utils.colors")
-          local modes = {
-            "Normal",
-            "Insert",
-            "Visual",
-            "Command",
-            "Replace",
-            "Select",
-            "Terminal",
-            "TerminalNormal",
+          local colors = require("utils.colors").vi_mode_colors
+          local mode_map = {
+            ["n"] = colors.normal,
+            ["i"] = colors.insert,
+            ["v"] = colors.visual,
+            ["V"] = colors.visual,
+            ["\22"] = colors.visual,
+            ["c"] = colors.command,
+            ["R"] = colors.command,
+            ["t"] = colors.terminal,
           }
 
-          for _, mode in pairs(modes) do
-            local fg_color = colors.vi_mode_colors[mode:lower()]
-            vim.api.nvim_set_hl(0, mode .. "Mode", { fg = fg_color })
+          local function update_cursorlinenr()
+            if vim.bo.buftype == "nofile" then
+              return
+            end
+            local mode = vim.api.nvim_get_mode().mode:sub(1, 1)
+            local fg = mode_map[mode] or colors.normal
+            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg, bold = false })
           end
 
-          require("modicator").setup({
-            show_warnings = false,
-            highlights = {
-              defaults = {
-                bold = false,
-              },
-            },
+          vim.api.nvim_create_autocmd("ModeChanged", {
+            callback = update_cursorlinenr,
           })
+
+          update_cursorlinenr()
         end,
       },
       {
