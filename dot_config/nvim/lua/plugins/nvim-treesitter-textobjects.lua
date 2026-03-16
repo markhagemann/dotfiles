@@ -4,7 +4,6 @@ return {
   {
     -- Text objects and motions based on tree-sitter queries (functions, classes, parameters, etc.)
     "nvim-treesitter/nvim-treesitter-textobjects",
-    enabled = false, -- seems to need an update
     opts = {
       textobjects = {
         select = {

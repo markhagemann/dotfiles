@@ -23,6 +23,17 @@ return {
       }
       vim.treesitter.language.register("godoc", "godoc")
 
+      -- Bruno API client (.bru files)
+      -- Manual install required on each machine (requires tree-sitter CLI):
+      --   cd /tmp
+      --   git clone --depth 1 https://github.com/Scalamando/tree-sitter-bruno.git
+      --   cd tree-sitter-bruno
+      --   tree-sitter build -o parser.so
+      --   cp parser.so ~/.local/share/nvim/site/parser/bruno.so
+      --   rm -rf /tmp/tree-sitter-bruno
+      vim.filetype.add({ extension = { bru = "bruno" } })
+      vim.treesitter.language.register("bruno", "bruno")
+
       local ensure_installed = {
         "c",
         "lua",
@@ -69,6 +80,7 @@ return {
         end
       end
       table.insert(filetypes, "godoc")
+      table.insert(filetypes, "bruno")
       local ts_start = function(ev)
         local ok, err = pcall(vim.treesitter.start, ev.buf)
         if not ok and not err:match("Parser could not be created") then

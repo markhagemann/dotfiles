@@ -49,9 +49,10 @@ return {
     -- Obsidian note-taking integration with markdown support
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
-    event = "VeryLazy",
-    -- ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    event = {
+      "BufReadPre " .. vim.fn.expand("~") .. "/Obsidian/**.md",
+      "BufNewFile " .. vim.fn.expand("~") .. "/Obsidian/**.md",
+    },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
