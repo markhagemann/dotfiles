@@ -37,8 +37,8 @@ return {
     dependencies = {
       -- Async promise library for Neovim
       "kevinhwang91/promise-async",
-      -- Status column configuration for fold indicators
-      "luukvbaal/statuscol.nvim",
+      -- statuscol.nvim disabled — snacks.statuscolumn handles this
+      -- "luukvbaal/statuscol.nvim",
     },
     event = "BufReadPost",
     config = function()

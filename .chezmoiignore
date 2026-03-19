@@ -1,3 +1,4 @@
+.config/nvim/.cursor/
 .config/nvim/.claude/
 .config/tmux/plugins/
 
