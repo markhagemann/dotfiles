@@ -659,6 +659,14 @@ return {
       mode = { "n" },
     },
     {
+      "<leader>f-",
+      function()
+        Snacks.explorer.reveal()
+      end,
+      desc = "Explorer (reveal current file)",
+      mode = { "n" },
+    },
+    {
       "<leader>nd",
       function()
         Snacks.notifier.hide()

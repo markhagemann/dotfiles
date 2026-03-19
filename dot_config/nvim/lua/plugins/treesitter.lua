@@ -58,6 +58,7 @@ return {
         "python",
         "html",
         "css",
+        "scss",
         "javascript",
         "typescript",
         "json",
