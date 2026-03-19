@@ -237,7 +237,6 @@ return {
         files = { hidden = true },
         buffers = {
           layout = { preset = "select" },
-          focus = "list",
         },
         grep = { hidden = true },
         explorer = {
