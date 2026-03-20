@@ -65,9 +65,6 @@ return {
     -- Display import/require statement sizes for JavaScript/TypeScript
     "barrett-ruth/import-cost.nvim",
     event = "BufEnter",
-    build = "sh install.sh yarn",
-    -- if on windows
-    -- build = 'pwsh install.ps1 yarn',
     config = function()
       vim.g.import_cost = {
         package_manager = "yarn",
