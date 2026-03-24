@@ -172,7 +172,7 @@ return {
       -- },
     },
     image = { enabled = true },
-    -- input = { enabled = true },
+    input = { enabled = true, win = { style = "above_cursor" } },
     lazygit = {
       enabled = true,
       configure = true,
@@ -350,6 +350,25 @@ return {
     styles = {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
+      },
+      above_cursor = {
+        backdrop = false,
+        position = "float",
+        border = "rounded",
+        title_pos = "left",
+        height = 1,
+        noautocmd = true,
+        relative = "cursor",
+        row = -3,
+        col = 0,
+        wo = { cursorline = false },
+        bo = { filetype = "snacks_input", buftype = "prompt" },
+        b = { completion = true },
+        keys = {
+          n_esc = { "<esc>", { "cancel" }, mode = "n", expr = true },
+          i_esc = { "<esc>", { "stopinsert" }, mode = "i", expr = true },
+          i_cr = { "<cr>", { "confirm" }, mode = "i", expr = true },
+        },
       },
     },
     terminal = { enabled = false, win = { border = "single" } },

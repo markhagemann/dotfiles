@@ -61,20 +61,11 @@ return {
       table.insert(default, "lazydev")
     end
 
-    if pcall(require, "vim_dadbod_completion.blink") then
-      providers.dadbod = {
-        name = "Dadbod",
-        module = "vim_dadbod_completion.blink",
-      }
-      table.insert(default, "dadbod")
-    end
-
-    if pcall(require, "codecompanion.blink") then
+    if pcall(require, "codecompanion") then
       providers.codecompanion = {
         name = "CodeCompanion",
-        module = "codecompanion.blink",
+        module = "codecompanion.providers.completion.blink",
       }
-      table.insert(default, "codecompanion")
     end
 
     -- Final sources table
@@ -85,7 +76,9 @@ return {
       per_filetype = {
         markdown = { "thesaurus", "dictionary" },
         text = { "thesaurus", "dictionary" },
-        codecompanion = providers.codecompanion and { "codecompanion" } or nil,
+        codecompanion = providers.codecompanion
+          and vim.list_extend({ "codecompanion" }, default)
+          or nil,
       },
     }
 
