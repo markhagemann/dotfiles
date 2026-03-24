@@ -222,16 +222,6 @@ return {
       vim.keymap.set("n", "<Tab>g", vim.cmd.GuessIndent, { desc = "Guessindent (manual)" })
     end,
   },
-  -- {
-  --   -- Create and navigate bookmarks in your code
-  --   "otavioschwanck/arrow.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     show_icons = true,
-  --     leader_key = ";", -- Recommended to be a single key
-  --   },
-  -- },
-  -- { "preservim/vim-pencil", event = "VeryLazy" },
   {
     -- Toggle Neovim window fullscreen mode
     "propet/toggle-fullscreen.nvim",
@@ -255,40 +245,12 @@ return {
     ---@type quicker.SetupOptions
     opts = {},
   },
-  -- {
-  --   -- Quick todo list management in Neovim
-  --   "SyedAsimShah1/quick-todo.nvim",
-  --   keys = {
-  --     {
-  --       "<leader>tt",
-  --       "<cmd>lua require('quick-todo').open_todo()<CR>",
-  --       mode = { "n" },
-  --       silent = true,
-  --       desc = "Toggle todo",
-  --     },
-  --   },
-  --   config = function()
-  --     require("quick-todo").setup({
-  --       window = {
-  --         height = 0.5,
-  --         width = 0.5,
-  --         winblend = 0,
-  --         border = "rounded",
-  --       },
-  --     })
-  --   end,
-  -- },
   -- Sets yaml indentation wrong - guess indent fixes
   -- Automatically adjust shiftwidth and expandtab based on existing file
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "volskaya/windovigation.nvim",
-  --   lazy = false,
-  --   opts = {},
-  -- },
   -- Automatically close and rename HTML/JSX tags
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
@@ -298,7 +260,7 @@ return {
     keys = {
       {
         "<leader>ut",
-        "<cmd>Atone<cr>",
+        "<cmd>Atone toggle<cr>",
         desc = "Toggle Undo Tree",
       },
     },

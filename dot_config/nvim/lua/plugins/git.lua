@@ -4,23 +4,6 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
   },
-  -- {
-  --   "harrisoncramer/gitlab.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "sindrets/diffview.nvim",
-  --     "stevearc/dressing.nvim",
-  --     "echasnovski/mini.icons",
-  --   },
-  --   build = function()
-  --     require("gitlab.server").build(true)
-  --   end, -- Builds the Go binary
-  --   config = function()
-  --     require("gitlab").setup()
-  --   end,
-  -- },
   {
     -- Git integration showing signs, blame, and diff information
     "lewis6991/gitsigns.nvim",

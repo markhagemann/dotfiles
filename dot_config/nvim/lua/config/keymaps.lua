@@ -58,16 +58,10 @@ keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", exp
 keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 
--- Resize window using <ctrl> arrow keys
-keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
-
 -- Window management
-keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" }) -- split window vertically
-keymap.set("n", "-", "<C-w>s", { desc = "Horizontal split" }) -- split window horizontally
-keymap.set("n", "=", "<C-w>=", { desc = "Equalize splits" }) -- make split windows equal width & height
+keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" }) -- split window vertically
+keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Horizontal split" }) -- split window horizontally
+keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equalize splits" }) -- make split windows equal width & height
 keymap.set("n", "<leader>wx", ":close<CR>", { desc = "Close split" }) -- close current split window
 
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open new tab" })

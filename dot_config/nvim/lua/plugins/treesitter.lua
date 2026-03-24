@@ -63,6 +63,7 @@ return {
         "typescript",
         "json",
         "vue",
+        "http",
       }
 
       local isnt_installed = function(lang)
