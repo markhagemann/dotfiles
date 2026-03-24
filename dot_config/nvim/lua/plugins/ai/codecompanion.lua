@@ -4,76 +4,18 @@ local default_picker_opts = {
   },
 }
 
--- Get the mise global node bin path dynamically
-local function get_mise_global_node_bin()
-  local version = vim.fn.system("mise global node 2>/dev/null"):gsub("%s+", "")
-  if version and version ~= "" then
-    return vim.fn.expand("~/.local/share/mise/installs/node/" .. version .. "/bin")
-  end
-  return nil
-end
+local default_adapter = (vim.env.ENABLE_COPILOT == "true" and "copilot")
+  or (vim.env.OPENROUTER_API_KEY and "openrouter")
+  or nil
 
 return {
   -- AI coding assistant with chat and inline editing capabilities via OpenRouter
   "olimorris/codecompanion.nvim",
-  version = "^18",
+  version = "^19",
   enabled = vim.env.ENABLE_CODECOMPANION == "true",
   config = function()
     require("codecompanion").setup({
-      strategies = {
-        chat = {
-          adapter = vim.env.ENABLE_CURSOR == "true" and "cursor" or "copilot",
-          slash_commands = {
-            -- Files / buffers
-            file = default_picker_opts,
-            buffer = default_picker_opts,
-            buffers = default_picker_opts,
-
-            -- Project / filesystem
-            files = default_picker_opts,
-            cwd = default_picker_opts,
-
-            -- Git
-            git_file = default_picker_opts,
-            git_files = default_picker_opts,
-            git_diff = default_picker_opts,
-            git_commit = default_picker_opts,
-
-            -- Diagnostics / symbols
-            diagnostic = default_picker_opts,
-            symbols = default_picker_opts,
-
-            -- Misc
-            help = default_picker_opts,
-            recent = default_picker_opts,
-            time = default_picker_opts,
-            date = default_picker_opts,
-          },
-        },
-        inline = {
-          adapter = vim.env.ENABLE_COPILOT and "copilot",
-        },
-      },
       adapters = {
-        acp = {
-          opts = {
-            show_presets = false,
-          },
-          -- cursor-acp adapter (only available if ENABLE_CURSOR=true)
-          -- Uses @blowmage/cursor-agent-acp for better security controls
-          -- Absolute path to avoid mise Node version switching issues
-          cursor = vim.env.ENABLE_CURSOR == "true" and function()
-            local mise_bin = get_mise_global_node_bin()
-            local cmd = mise_bin and (mise_bin .. "/cursor-agent-acp") or "cursor-agent-acp"
-            return require("codecompanion.adapters.acp").extend("claude_code", {
-              name = "cursor",
-              formatted_name = "Cursor",
-              commands = {
-                default = { cmd },
-              },
-            })
-          end or nil,
-        },
         http = {
           opts = {
             show_presets = false,
@@ -101,22 +43,44 @@ return {
         action_palette = {
           provider = "default",
         },
+        cli = vim.env.CODECOMPANION_AGENT and {
+          window = {
+            layout = "vertical",
+            width = 0.4,
+          },
+        } or nil,
       },
       interactions = {
-        -- Background interactions (title generation, etc.) require HTTP adapter
-        background = {
-          adapter = vim.env.ENABLE_COPILOT == "true" and "copilot"
-            or (vim.env.OPENROUTER_API_KEY and "openrouter" or nil),
-          chat = {
-            opts = {
-              -- Only enable background interactions if an HTTP adapter is available
-              enabled = (vim.env.ENABLE_COPILOT == "true" or vim.env.OPENROUTER_API_KEY) and true or false,
-            },
-          },
-        },
         chat = {
+          adapter = default_adapter,
           icons = {
-            chat_context = "📎️", -- You can also apply an icon to the fold
+            chat_context = "📎️",
+          },
+          slash_commands = {
+            -- Files / buffers
+            file = default_picker_opts,
+            buffer = default_picker_opts,
+            buffers = default_picker_opts,
+
+            -- Project / filesystem
+            files = default_picker_opts,
+            cwd = default_picker_opts,
+
+            -- Git
+            git_file = default_picker_opts,
+            git_files = default_picker_opts,
+            git_diff = default_picker_opts,
+            git_commit = default_picker_opts,
+
+            -- Diagnostics / symbols
+            diagnostic = default_picker_opts,
+            symbols = default_picker_opts,
+
+            -- Misc
+            help = default_picker_opts,
+            recent = default_picker_opts,
+            time = default_picker_opts,
+            date = default_picker_opts,
           },
           fold_context = true,
           fold_reasoning = true,
@@ -129,25 +93,45 @@ return {
             },
           },
         },
+        inline = {
+          adapter = default_adapter,
+        },
+        cli = vim.env.CODECOMPANION_AGENT and {
+          agent = vim.env.CODECOMPANION_AGENT,
+          agents = {
+            [vim.env.CODECOMPANION_AGENT] = {
+              cmd = vim.env.CODECOMPANION_AGENT == "claude_code" and "claude" or vim.env.CODECOMPANION_AGENT,
+              args = {},
+            },
+          },
+        } or nil,
+        background = {
+          adapter = default_adapter,
+          chat = {
+            opts = {
+              enabled = default_adapter ~= nil,
+            },
+          },
+        },
       },
       extensions = {
         history = {
           enabled = true,
           opts = {
-            -- Disable auto title generation when using ACP adapters (cursor)
-            -- Title generation requires an HTTP adapter (copilot/openrouter)
             auto_generate_title = false,
           },
         },
       },
     })
   end,
-  keys = {
+  keys = vim.env.CODECOMPANION_AGENT and {
+    { "<leader>at", "<cmd>CodeCompanionCLI<cr>", desc = "AI: chat (CLI)" },
+    { "<leader>ap", "<cmd>CodeCompanionCLI Ask<cr>", desc = "AI: prompt (CLI)" },
+  } or {
     { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "AI: actions" },
     { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "AI: chat" },
     { "<leader>ah", "<cmd>CodeCompanionHistory<cr>", desc = "AI: history" },
     { "<leader>a+", "<cmd>CodeCompanionChat Add<cr>", desc = "AI: add file to chat", mode = { "v" } },
-    -- { "<leader>as", select_model, desc = "AI: select model" },
   },
   dependencies = {
     -- Utility library for Neovim plugins (async, file operations, etc.)
