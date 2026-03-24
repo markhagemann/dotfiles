@@ -1,6 +1,5 @@
 return {
   "afewyards/codereview.nvim",
-  -- enabled = vim.env.ANTHROPIC_API_KEY,
   dependencies = { "nvim-lua/plenary.nvim" },
   cmd = {
     "CodeReview",
@@ -16,9 +15,8 @@ return {
   },
   opts = {
     ai = {
-      enabled = false,
-      provider = "anthropic",
-      anthropic = { api_key = vim.env.ANTHROPIC_API_KEY },
+      enabled = vim.env.CODEREVIEW_AI_PROVIDER ~= nil,
+      provider = vim.env.CODEREVIEW_AI_PROVIDER,
     },
   },
 }
