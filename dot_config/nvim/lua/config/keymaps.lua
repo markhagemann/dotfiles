@@ -14,6 +14,10 @@ keymap.set("i", "jk", "<ESC>")
 -- Use alt + ` to exit insert mode (habit from 60% keyboards)
 keymap.set("i", "<M-`>", "<ESC>")
 
+-- Better paste: when pasting in visual mode, keep the cursor position and do not yank the replaced text
+keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
+
 -- Clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 

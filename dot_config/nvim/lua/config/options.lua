@@ -30,7 +30,10 @@ opt.softtabstop = 2 -- Number of spaces tabs count for
 opt.tabstop = 2 -- Number of spaces in a tab
 
 -- Vim options
+opt.autochdir = false -- Do not autochange directories
 opt.autowrite = true -- Enable auto write
+opt.backspace = "indent,eol,start" -- better backspace behaviour
+opt.errorbells = false -- Disable error bells
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
@@ -54,19 +57,25 @@ opt.foldlevelstart = 99 -- Show all folds when opening a file
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m" -- Format for grep results
 opt.grepprg = "rg --vimgrep" -- Use ripgrep for grep
+opt.guicursor =
+  "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175" -- cursor blinking and settings
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
+opt.iskeyword:append("-") -- Include '-' in words
 opt.jumpoptions = "view" -- Keep cursor position when jumping
 opt.laststatus = 3 -- global statusline
 opt.linebreak = true -- Wrap lines at convenient points
 opt.list = true -- Show some invisible characters (tabs...
+opt.maxmempattern = 20000 -- Increase max memory
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
 opt.numberwidth = 2 -- Set number column width
 opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
+opt.redrawtime = 10000 -- Increase neovim redraw tolerance
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 4 -- Lines of context
+opt.selection = "inclusive" -- Include last char in selection
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
 opt.shortmess = {
