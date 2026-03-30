@@ -1,5 +1,21 @@
 return {
   {
+    "coder/claudecode.nvim",
+    enabled = vim.env.IS_USING_CLAUDE == "true",
+    event = "VeryLazy",
+    dependencies = { "folke/snacks.nvim" },
+    opts = {
+      terminal = {
+        provider = "none",
+      },
+      diff_opts = {
+        layout = "vertical", -- "vertical" or "horizontal"
+        open_in_new_tab = true,
+        keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
+      },
+    },
+  },
+  {
     -- AI coding assistant with CLI integration and edit suggestions
     enabled = vim.env.ENABLE_SIDEKICK == "true",
     "folke/sidekick.nvim",

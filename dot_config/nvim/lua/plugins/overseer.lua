@@ -6,6 +6,7 @@ return {
   opts = {},
   config = function()
     require("overseer").setup({
+      dap = false,
       templates = { "register-shell-scripts", "builtin" },
     })
   end,
