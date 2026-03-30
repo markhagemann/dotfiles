@@ -174,7 +174,7 @@ return {
           "bashls",
           "cssls",
           "emmet_ls",
-          -- "eslint",
+          "eslint",
           "gitlab_ci_ls",
           "gopls",
           "html",
@@ -185,6 +185,14 @@ return {
           "vtsls",
           "vue_ls",
         },
+      })
+
+      -- Configure ESLint LSP to not format, as conform handles that
+      require("lspconfig").eslint.setup({
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
       })
 
       require("mason-tool-installer").setup({
