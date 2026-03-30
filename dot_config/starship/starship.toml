@@ -39,6 +39,7 @@ Arch = '󰣇'
 Linux = '󰣇'
 Ubuntu = ''
 Macos = '󰀵'
+NixOS = " "
 Unknown = '󰠥'
 
 [os]
