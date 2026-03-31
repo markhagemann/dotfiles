@@ -50,7 +50,6 @@ return {
         },
       })
 
-      require("mini.trailspace").setup({})
       require("mini.surround").setup()
 
       -- files.setup({
