@@ -39,6 +39,10 @@ return {
             callback = update_cursorlinenr,
           })
 
+          vim.api.nvim_create_autocmd("ColorScheme", {
+            callback = update_cursorlinenr,
+          })
+
           update_cursorlinenr()
         end,
       },
