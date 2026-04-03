@@ -38,6 +38,8 @@ in
 
     services.desktopManager.plasma6.enable = true;
 
+    # At this stage you will have to run "Apply Plasma Settings"
+    # You will also need to run `cp -rf ~/.local/share/icons/* /usr/share/icons`
     services.displayManager.plasma-login-manager = {
       enable = true;
       # Runs on wayland by default - would need an inverse to set it to below when wayland disabled

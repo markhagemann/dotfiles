@@ -30,6 +30,7 @@
     deluge-gtk
     ddcutil
     easyeffects
+    faugus-launcher
     # gamescope-wsi
     lutris
     protonup-qt

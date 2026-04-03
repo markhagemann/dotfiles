@@ -31,6 +31,7 @@
     atuin
     betterdiscordctl
     bitwarden-desktop
+    bob-nvim
     btop
     cargo
     chezmoi
@@ -41,6 +42,7 @@
     delta
     docker-compose
     discord
+    dmidecode
     extra-cmake-modules
     gcc
     libffi.dev
