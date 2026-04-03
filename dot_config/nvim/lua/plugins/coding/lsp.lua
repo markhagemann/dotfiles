@@ -148,6 +148,7 @@ return {
       })
 
       vim.diagnostic.config({
+        update_in_insert = true,
         virtual_text = false,
         severity_sort = true,
         signs = {
@@ -188,9 +189,12 @@ return {
         },
       })
 
-      -- Configure ESLint LSP to not format, as conform handles that
+      -- Configure ESLint LSP for code actions only
       vim.lsp.config("eslint", {
         on_attach = function(client, bufnr)
+          -- Disable diagnostics from the LSP (nvim-lint handles this)
+          client.server_capabilities.diagnosticProvider = false
+          -- Disable formatting (conform handles this)
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end,
