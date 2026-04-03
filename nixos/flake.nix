@@ -3,7 +3,7 @@
   inputs = {
     dms = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
     };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,7 +59,6 @@
         };
         overlays = overlays ++ [
           (final: prev: {
-            quickshell = inputs.quickshell-git.packages.${final.system}.default;
             pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
               (pyFinal: pyPrev: {
                 picosvg = pyPrev.picosvg.overrideAttrs (_: {
@@ -79,6 +78,7 @@
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
+            inputs.dms.nixosModules.default
             ./hosts/default.nix
             ./hosts/desktop
             home-manager.nixosModules.home-manager

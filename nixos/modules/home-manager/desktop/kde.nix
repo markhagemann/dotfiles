@@ -5,8 +5,18 @@
   pkgs,
   ...
 }:
+
+with lib;
+
+let
+  cfg = config.modules.desktop.kde;
+in
 {
+  options.modules.desktop.kde.enable = lib.mkEnableOption "Enable KDE Plasma";
+
   imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
+
+  config = mkIf cfg.enable {
 
   # TODO: Setup panels and widgets - see https://github.com/nix-community/plasma-manager/blob/trunk/examples/homeManager/home.nix
   # TODO: Investigate default window rules for "Keep below others"
@@ -119,6 +129,10 @@
     dataFile = {
       "dolphin/view_properties/global/.directory"."Dolphin"."ViewMode" = 1;
       "dolphin/view_properties/global/.directory"."Settings"."HiddenFilesShown" = true;
+      "dolphinrc".General = {
+        "Theme" = "dark";
+        "TransparentDolphinView" = false;
+      };
     };
 
     fonts = {
@@ -314,4 +328,5 @@
       tooltipDelay = 1;
     };
   };
+};
 }

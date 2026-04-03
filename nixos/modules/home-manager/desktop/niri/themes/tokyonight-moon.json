@@ -1,0 +1,22 @@
+{
+  "name": "Tokyo Night Moon",
+  "primary": "#c099ff",
+  "primaryText": "#222436",
+  "primaryContainer": "#363b54",
+  "secondary": "#82aaff",
+  "surface": "#282c44",
+  "surfaceText": "#c8d3f5",
+  "surfaceVariant": "#242838",
+  "surfaceVariantText": "#565f89",
+  "surfaceTint": "#82aaff",
+  "background": "#1a1c29",
+  "backgroundText": "#c8d3f5",
+  "outline": "#414868",
+  "surfaceContainer": "#242838",
+  "surfaceContainerHigh": "#2f334d",
+  "surfaceContainerHighest": "#363b54",
+  "error": "#ff757f",
+  "warning": "#ffc777",
+  "info": "#86e1fc",
+  "matugen_type": "scheme-tonal-spot"
+}

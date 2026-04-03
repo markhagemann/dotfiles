@@ -75,8 +75,8 @@
 
   modules = {
     desktop = {
-      niri.enable = false;
-      kde.enable = true;
+      niri.enable = true;
+      kde.enable = false;
       fonts.enable = true;
       wayland.enable = true;
 
@@ -180,6 +180,7 @@
     shell = pkgs.zsh;
     extraGroups = [
       "docker"
+      "greeter"
       "networkmanager"
       "wheel"
     ];
