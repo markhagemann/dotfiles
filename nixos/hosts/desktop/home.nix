@@ -29,8 +29,9 @@
       name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
       mode = "2560x1440@239.970";
       position = "x=0 y=0";
-      barScreen = "DP-2";
-      barModel = "Dell AW2721D";
+      identifier = "DP-2";
+      model = "Dell AW2721D";
+      bar = true;
     }
     {
       name = "Dell Inc. AW2725DF 8755ZZ3";
@@ -38,9 +39,10 @@
       position = "x=2560 y=0";
       vrrOnDemand = true;
       videoWallpaper = true;
-      barScreen = "DP-1";
+      identifier = "DP-1";
     }
   ];
+
   # modules.desktop.kde.enable = true;
 
   home.homeDirectory = "/home/mark";

@@ -438,12 +438,7 @@
       enabled = true;
       position = 3;
       showOnLastDisplay = false;
-      screenPreferences = [
-        {
-          model = "Dell AW2721D";
-          name = "DP-2";
-        }
-      ];
+      screenPreferences = [ ];
       transparency = 1;
       widgetTransparency = 0.45;
       leftWidgets = [
@@ -456,40 +451,14 @@
         "weather"
       ];
       rightWidgets = [
-        {
-          id = "systemTray";
-          enabled = true;
-        }
-        {
-          id = "cpuTemp";
-          enabled = true;
-        }
-        {
-          id = "gpuTemp";
-          enabled = true;
-          selectedGpuIndex = 0;
-          pciId = "1002:7550";
-        }
-        {
-          id = "network_speed_monitor";
-          enabled = true;
-        }
-        {
-          id = "clipboard";
-          enabled = true;
-        }
-        {
-          id = "notificationButton";
-          enabled = true;
-        }
-        {
-          id = "controlCenterButton";
-          enabled = true;
-        }
-        {
-          id = "powerMenuButton";
-          enabled = true;
-        }
+        { id = "systemTray"; enabled = true; }
+        { id = "cpuTemp"; enabled = true; }
+        { id = "gpuTemp"; enabled = true; selectedGpuIndex = 0; pciId = "1002:7550"; }
+        { id = "network_speed_monitor"; enabled = true; }
+        { id = "clipboard"; enabled = true; }
+        { id = "notificationButton"; enabled = true; }
+        { id = "controlCenterButton"; enabled = true; }
+        { id = "powerMenuButton"; enabled = true; }
       ];
       autoHide = false;
     }

@@ -79,11 +79,13 @@
       niri.outputs = [
         {
           name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
+          identifier = "DP-2";
           mode = "2560x1440@239.970";
           position = "x=0 y=0";
         }
         {
           name = "Dell Inc. AW2725DF 8755ZZ3";
+          identifier = "DP-1";
           mode = "2560x1440@359.979";
           position = "x=2560 y=0";
           vrrOnDemand = true;

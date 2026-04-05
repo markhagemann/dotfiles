@@ -12,46 +12,51 @@ let
   settingsBase = import ./settings-base.nix;
 
   # Create niriOutputSettings from cfg.outputs
-  niriOutputSettings = builtins.listToAttrs (
-    map (o: {
-      name = o.name;
-      value = {
-        hotCorners = {
-          off = true;
+  niriOutputSettings =
+    builtins.listToAttrs (
+      map (o: {
+        name = o.name;
+        value = {
+          hotCorners = {
+            off = true;
+          };
+          layout = {
+            alwaysCenterSingleColumn = true;
+          };
+        }
+        // (lib.optionalAttrs (o.vrrOnDemand or false) { vrrOnDemand = true; });
+      }) cfg.outputs
+    )
+    # Map VRR to the identifier (e.g. "DP-1") if specified
+    // builtins.listToAttrs (
+      map (o: {
+        name = o.identifier;
+        value = {
+          vrrOnDemand = true;
         };
-        layout = {
-          alwaysCenterSingleColumn = true;
-        };
-      } // (lib.optionalAttrs (o.vrrOnDemand or false) { vrrOnDemand = true; });
-    }) cfg.outputs
-  )
-  # Map VRR to the barScreen name (e.g. "DP-1") if specified
-  // builtins.listToAttrs (
-    map (o: {
-      name = o.barScreen;
-      value = { vrrOnDemand = true; };
-    }) (filter (o: (o.vrrOnDemand or false) && (o ? barScreen)) cfg.outputs)
+      }) (filter (o: (o.vrrOnDemand or false) && (o ? identifier)) cfg.outputs)
+    );
+
+  # Final settings merge - preserve full barConfig from base, only override screenPreferences
+  dmsSettings = lib.recursiveUpdate settingsBase (
+    {
+      inherit niriOutputSettings;
+      barConfigs = [
+        (
+          (builtins.head settingsBase.barConfigs)
+          // {
+            screenPreferences = map (o: {
+              model = o.name;
+              name = o.identifier;
+            }) (filter (o: o.bar or false) cfg.outputs);
+          }
+        )
+      ];
+    }
+    // (lib.optionalAttrs (cfg.customThemeFile != "") { inherit (cfg) customThemeFile; })
   );
 
-  # Final settings merge
-  dmsSettings = lib.recursiveUpdate settingsBase ({
-    inherit niriOutputSettings;
-  } // (lib.optionalAttrs (cfg.customThemeFile != "") { inherit (cfg) customThemeFile; }));
-
   jsonFormat = pkgs.formats.json { };
-
-  barOutput = builtins.head (filter (o: o ? barScreen) cfg.outputs);
-
-  barScreenData =
-    if barOutput != null then
-      [
-        {
-          "name" = barOutput.barScreen;
-          "model" = barOutput.barModel or "";
-        }
-      ]
-    else
-      [ ];
 in
 {
   options.modules.desktop.niri = {
@@ -100,24 +105,22 @@ in
           source = jsonFormat.generate "settings.json" dmsSettings;
           force = true;
         };
-        ".config/DankMaterialShell/barScreen.json" = {
-          source = jsonFormat.generate "barScreen.json" barScreenData;
-          force = true;
-        };
         ".config/niri/dms/outputs.kdl" = {
           text =
             lib.concatStringsSep "\n" (
               map (o: ''
-                output "${o.barScreen or o.name}" {
+                output "${o.identifier or o.name}" {
                     mode "${o.mode}"
                     scale 1
                     position ${o.position}
                     variable-refresh-rate on-demand=true
                 }
               '') (filter (o: o.vrrOnDemand or false) cfg.outputs)
-            ) + "\n" + lib.concatStringsSep "\n" (
+            )
+            + "\n"
+            + lib.concatStringsSep "\n" (
               map (o: ''
-                output "${o.barScreen or o.name}" {
+                output "${o.identifier or o.name}" {
                     mode "${o.mode}"
                     scale 1
                     position ${o.position}
@@ -129,7 +132,7 @@ in
         ".config/niri/config.kdl".text =
           let
             primaryOutput = findFirst (o: o.vrrOnDemand or false) (head cfg.outputs) cfg.outputs;
-            primaryName = primaryOutput.barScreen or primaryOutput.name;
+            primaryName = primaryOutput.identifier or primaryOutput.name;
           in
           ''
 
@@ -166,6 +169,7 @@ in
 
             layout {
                 gaps 16
+                background-color "#000000"
             }
 
             prefer-no-csd

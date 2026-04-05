@@ -21,6 +21,7 @@ in
         lib.types.submodule {
           options = {
             name = lib.mkOption { type = lib.types.str; };
+            identifier = lib.mkOption { type = lib.types.str; };
             mode = lib.mkOption { type = lib.types.str; };
             position = lib.mkOption { type = lib.types.str; };
             vrrOnDemand = lib.mkOption {
@@ -69,6 +70,29 @@ in
     services.displayManager.dms-greeter = {
       enable = true;
       compositor.name = "niri";
+      compositor.customConfig = ''
+        ${lib.concatMapStrings (
+          out:
+          let
+            screenName = out.identifier or out.name;
+          in
+          ''
+            output "${screenName}" {
+              mode "${out.mode}"
+              position ${out.position}
+            }
+          ''
+        ) cfg.outputs}
+
+
+        hotkey-overlay {
+          skip-at-startup
+        }
+
+        layout {
+          background-color "#000000"
+        }
+      '';
       configHome = "/home/mark";
       configFiles = [
         "/home/mark/.config/DankMaterialShell/settings.json"
@@ -76,59 +100,13 @@ in
         "/home/mark/.cache/quickshell/dankshell/dms-colors.json"
       ];
       package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      compositor.customConfig = "${pkgs.writeText "niri-greeter.kdl" ''
-        hotkey-overlay { skip-at-startup }
-        environment { DMS_RUN_GREETER "1" }
-        layout { background-color "#000000" }
-        gestures {
-          hot-corners {
-            off
-          }
-        }
-        ${lib.concatMapStrings (out: ''
-          output "${out.name}" {
-            mode "${out.mode}"
-            position ${out.position}
-          }
-        '') cfg.outputs}
-      ''}";
       logs = {
         save = true;
         path = "/tmp/dms-greeter.log";
       };
     };
 
-    # Custom Niri configuration for the greeter (redundant but kept for reference if needed)
-    environment.etc."greetd/niri.kdl".text = ''
-      hotkey-overlay { skip-at-startup }
-      environment { DMS_RUN_GREETER "1" }
-      layout { background-color "#000000" }
-      gestures {
-        hot-corners {
-          off
-        }
-      }
-      ${lib.concatMapStrings (out: ''
-          output "${out.name}" {
-            mode "${out.mode}"
-            position ${out.position}
-          }
-
-      '') cfg.outputs}
-    '';
-
     users.groups.greeter = { };
-
-    systemd.tmpfiles.rules = [
-      "A+ /home/mark - - - - u:greeter:x"
-      "A+ /home/mark/.config - - - - u:greeter:x"
-      "A+ /home/mark/.config/DankMaterialShell - - - - u:greeter:rx"
-      "A+ /home/mark/.local - - - - u:greeter:x"
-      "A+ /home/mark/.local/state - - - - u:greeter:x"
-      "A+ /home/mark/.local/state/DankMaterialShell - - - - u:greeter:rx"
-      "A+ /home/mark/.cache - - - - u:greeter:x"
-      "A+ /home/mark/.cache/quickshell - - - - u:greeter:rx"
-    ];
 
     services.xserver.enable = true;
   };
