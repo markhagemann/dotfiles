@@ -23,6 +23,7 @@
 
   # Toggle between KDE and Niri:
   modules.desktop.niri.enable = true;
+  modules.desktop.niri.customThemeFile = "${config.home.homeDirectory}/.config/DankMaterialShell/themes/tokyonight-moon.json";
   modules.desktop.niri.outputs = [
     {
       name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";

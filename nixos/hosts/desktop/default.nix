@@ -76,6 +76,19 @@
   modules = {
     desktop = {
       niri.enable = true;
+      niri.outputs = [
+        {
+          name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
+          mode = "2560x1440@239.970";
+          position = "x=0 y=0";
+        }
+        {
+          name = "Dell Inc. AW2725DF 8755ZZ3";
+          mode = "2560x1440@359.979";
+          position = "x=2560 y=0";
+          vrrOnDemand = true;
+        }
+      ];
       kde.enable = false;
       fonts.enable = true;
       wayland.enable = true;

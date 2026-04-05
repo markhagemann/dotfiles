@@ -9,32 +9,49 @@ with lib;
 
 let
   cfg = config.modules.desktop.niri;
-  dmsOutputSettingsJson = builtins.toJSON (
-    builtins.listToAttrs (
-      map (o: {
-        name = o.name;
-        value = {
-          hotCorners = {
-            off = true;
-          };
-          layout = {
-            alwaysCenterSingleColumn = true;
-          };
+  settingsBase = import ./settings-base.nix;
+
+  # Create niriOutputSettings from cfg.outputs
+  niriOutputSettings = builtins.listToAttrs (
+    map (o: {
+      name = o.name;
+      value = {
+        hotCorners = {
+          off = true;
         };
-      }) cfg.outputs
-    )
+        layout = {
+          alwaysCenterSingleColumn = true;
+        };
+      } // (lib.optionalAttrs (o.vrrOnDemand or false) { vrrOnDemand = true; });
+    }) cfg.outputs
+  )
+  # Map VRR to the barScreen name (e.g. "DP-1") if specified
+  // builtins.listToAttrs (
+    map (o: {
+      name = o.barScreen;
+      value = { vrrOnDemand = true; };
+    }) (filter (o: (o.vrrOnDemand or false) && (o ? barScreen)) cfg.outputs)
   );
+
+  # Final settings merge
+  dmsSettings = lib.recursiveUpdate settingsBase ({
+    inherit niriOutputSettings;
+  } // (lib.optionalAttrs (cfg.customThemeFile != "") { inherit (cfg) customThemeFile; }));
+
+  jsonFormat = pkgs.formats.json { };
+
   barOutput = builtins.head (filter (o: o ? barScreen) cfg.outputs);
-  barScreenJson =
+
+  barScreenData =
     if barOutput != null then
-      builtins.toJSON [
+      [
         {
           "name" = barOutput.barScreen;
           "model" = barOutput.barModel or "";
         }
       ]
     else
-      "[]";
+      [ ];
 in
 {
   options.modules.desktop.niri = {
@@ -56,6 +73,11 @@ in
       ];
       description = "List of output configurations for niri";
     };
+    customThemeFile = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Path to the custom theme file for DankMaterialShell";
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -74,34 +96,57 @@ in
       ];
 
       home.file = {
-        ".config/niri/config.kdl".text =
-          let
-            outputStr = lib.concatStringsSep "\n" (
+        ".config/DankMaterialShell/settings.json" = {
+          source = jsonFormat.generate "settings.json" dmsSettings;
+          force = true;
+        };
+        ".config/DankMaterialShell/barScreen.json" = {
+          source = jsonFormat.generate "barScreen.json" barScreenData;
+          force = true;
+        };
+        ".config/niri/dms/outputs.kdl" = {
+          text =
+            lib.concatStringsSep "\n" (
               map (o: ''
-                output "${o.name}" {
+                output "${o.barScreen or o.name}" {
+                    mode "${o.mode}"
+                    scale 1
+                    position ${o.position}
+                    variable-refresh-rate on-demand=true
+                }
+              '') (filter (o: o.vrrOnDemand or false) cfg.outputs)
+            ) + "\n" + lib.concatStringsSep "\n" (
+              map (o: ''
+                output "${o.barScreen or o.name}" {
                     mode "${o.mode}"
                     scale 1
                     position ${o.position}
                 }
-              '') cfg.outputs
+              '') (filter (o: !(o.vrrOnDemand or false)) cfg.outputs)
             );
+          force = true;
+        };
+        ".config/niri/config.kdl".text =
+          let
+            primaryOutput = findFirst (o: o.vrrOnDemand or false) (head cfg.outputs) cfg.outputs;
+            primaryName = primaryOutput.barScreen or primaryOutput.name;
           in
           ''
 
             workspace "terminal" {
-                open-on-output "Dell Inc. AW2725DF"
+                open-on-output "${primaryName}"
             }
             workspace "gaming" {
-                open-on-output "Dell Inc. AW2725DF"
+                open-on-output "${primaryName}"
             }
             workspace "browser" {
-                open-on-output "Dell Inc. AW2725DF"
+                open-on-output "${primaryName}"
             }
             workspace "discord" {
-                open-on-output "Dell Inc. AW2725DF"
+                open-on-output "${primaryName}"
             }
             workspace "spotify" {
-                open-on-output "Dell Inc. AW2725DF"
+                open-on-output "${primaryName}"
             }
 
             input {
@@ -251,8 +296,7 @@ in
                 XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
             }
 
-            ${outputStr}
-
+            include "dms/outputs.kdl"
             include "dms/colors.kdl"
             include "dms/layout.kdl"
             include "dms/alttab.kdl"

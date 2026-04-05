@@ -22,9 +22,47 @@
 
     "tokyonight-moon.json".source = ./niri/themes/tokyonight-moon.json;
     ".local/share/dms/avatar.jpg".source = ./niri/avatar.jpg;
-    ".config/dms/tokyonight-moon.json".source = ./niri/themes/tokyonight-moon.json;
+    ".config/DankMaterialShell/themes/tokyonight-moon.json".source = ./niri/themes/tokyonight-moon.json;
 
     ".config/niri/dms/windowrules.kdl".text = ''
+
+      window-rule {
+          match app-id=r#".*"#
+          open-floating true
+      }
+
+      window-rule {
+          match app-id=r#"^faugus.*$"#
+          open-on-workspace "gaming"
+      }
+
+      window-rule {
+           match title="Diablo II"
+           variable-refresh-rate true
+      }
+
+      window-rule {
+          match app-id="dolphin"
+          opacity 0.97
+      }
+
+      window-rule {
+          match app-id="kitty"
+          opacity 0.97
+          open-on-workspace "terminal"
+      }
+
+      window-rule {
+          match app-id="steam"
+          open-on-workspace "gaming"
+      }
+
+      window-rule {
+          match app-id="firefox"
+          open-floating false
+          open-on-workspace "browser"
+      }
+
       window-rule {
           match app-id="discord"
           opacity 0.97
@@ -39,47 +77,6 @@
           open-on-workspace "spotify"
       }
 
-      window-rule {
-          match app-id="dolphin"
-          opacity 0.97
-          open-floating true
-      }
-
-      window-rule {
-          match app-id="kitty"
-          opacity 0.97
-          open-floating true
-          open-on-workspace "terminal"
-      }
-
-      window-rule {
-          match app-id="firefox"
-          open-floating false
-          open-on-workspace "browser"
-      }
-
-      window-rule {
-          match app-id="steam"
-          open-floating false
-          open-on-workspace "gaming"
-      }
-
-      window-rule {
-          match app-id="faugus-launcher"
-          open-on-workspace "gaming"
-      }
-
-      window-rule {
-          match title=r#"(?i).*diablo.*"#
-          open-floating false
-          variable-refresh-rate true
-          open-on-workspace "gaming"
-      }
-
-      window-rule {
-          match app-id=r#".*"#
-          open-floating true
-      }
     '';
     ".config/niri/dms/windowrules.kdl".force = true;
   };
