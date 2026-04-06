@@ -1,9 +1,15 @@
-{ options, config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.shell.mise;
-in {
-  options.modules.shell.mise.enable =
-    lib.mkEnableOption "Enable the mise module";
+let
+  cfg = config.modules.shell.mise;
+in
+{
+  options.modules.shell.mise.enable = lib.mkEnableOption "Enable the mise module";
 
   config = mkIf cfg.enable {
 

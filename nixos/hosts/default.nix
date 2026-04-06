@@ -1,9 +1,5 @@
 {
-  lib,
-  inputs,
-  outputs,
   pkgs,
-  home-manager,
   ...
 }:
 

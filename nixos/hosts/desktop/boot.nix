@@ -1,9 +1,5 @@
 {
-  config,
   pkgs,
-  inputs,
-  lib,
-  nix-gaming,
   ...
 }:
 

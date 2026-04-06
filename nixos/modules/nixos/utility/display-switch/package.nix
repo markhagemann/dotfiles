@@ -1,5 +1,11 @@
 # Taken from: https://www.monotux.tech/posts/2023/05/nixos-overlay/
-{ lib, stdenv, fetchFromGitHub, rustPlatform, udev, pkg-config }:
+{
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+  udev,
+  pkg-config,
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "display-switch";
@@ -20,8 +26,7 @@ rustPlatform.buildRustPackage rec {
   doCheck = false;
 
   meta = with lib; {
-    description =
-      "Turn a $30 USB switch into a full-featured multi-monitor KVM switch";
+    description = "Turn a $30 USB switch into a full-featured multi-monitor KVM switch";
     homepage = "https://github.com/haimgel/display-switch";
     license = licenses.mit;
     maintainers = with maintainers; [ ];

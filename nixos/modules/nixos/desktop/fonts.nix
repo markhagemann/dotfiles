@@ -1,9 +1,15 @@
-{ options, config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.fonts;
-in {
-  options.modules.desktop.fonts.enable =
-    lib.mkEnableOption "Enable the fonts module";
+let
+  cfg = config.modules.desktop.fonts;
+in
+{
+  options.modules.desktop.fonts.enable = lib.mkEnableOption "Enable the fonts module";
 
   config = mkIf cfg.enable {
     fonts.enableDefaultPackages = true;

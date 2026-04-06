@@ -1,9 +1,15 @@
-{ options, config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.wayland;
-in {
-  options.modules.desktop.wayland.enable =
-    lib.mkEnableOption "Enable the wayland module";
+let
+  cfg = config.modules.desktop.wayland;
+in
+{
+  options.modules.desktop.wayland.enable = lib.mkEnableOption "Enable the wayland module";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ wl-clipboard ];
