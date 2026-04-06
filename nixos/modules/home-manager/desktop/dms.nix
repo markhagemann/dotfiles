@@ -21,7 +21,7 @@
     '';
 
     "tokyonight-moon.json".source = ./niri/themes/tokyonight-moon.json;
-    ".local/share/dms/avatar.jpg".source = ./niri/avatar.jpg;
+    ".local/share/dms/avatar.jpg".source = ../../../assets/avatar.jpg;
     ".config/DankMaterialShell/themes/tokyonight-moon.json".source = ./niri/themes/tokyonight-moon.json;
 
     ".config/niri/dms/windowrules.kdl".text = ''
