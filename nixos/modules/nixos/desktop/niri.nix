@@ -86,6 +86,13 @@ in
         hotkey-overlay {
           skip-at-startup
         }
+
+        cursor {
+            xcursor-theme "Bibata-Modern-Ice"
+            xcursor-size 24
+            hide-when-typing
+            hide-after-inactive-ms 5000
+        }
       '';
       configHome = "/home/mark";
       configFiles = [
