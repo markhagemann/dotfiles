@@ -88,16 +88,19 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = with pkgs; [
-        # swww
-        # mpvpaper
-        xwayland-satellite
-        udiskie
-        xdg-desktop-portal-gtk
+        adw-gtk3
+        kdePackages.ark
         kdePackages.dolphin
         kdePackages.kate
-        adw-gtk3
-        qt6Packages.qt6ct
         kdePackages.qt6ct
+        libappindicator
+        # mpvpaper
+        qt6Packages.qt6ct
+        qimgv
+        # swww
+        udiskie
+        xwayland-satellite
+        xdg-desktop-portal-gtk
       ];
 
       home.file = {
@@ -167,11 +170,6 @@ in
                 }
             }
 
-            layout {
-                gaps 16
-                background-color "#000000"
-            }
-
             prefer-no-csd
 
             gestures {
@@ -197,7 +195,7 @@ in
             }
 
             binds {
-                Mod+Shift+Slash { show-hotkey-overlay; }
+                Super+Shift+Slash { show-hotkey-overlay; }
 
                 Super+V { spawn-sh "dms ipc call clipboard toggle"; }
 
@@ -235,6 +233,19 @@ in
                 Super+4 { focus-workspace "discord"; }
                 Super+5 { focus-workspace "spotify"; }
 
+                Super+Left  { focus-column-left; }
+                Super+Down  { focus-workspace-down; }
+                Super+Up    { focus-workspace-up; }
+                Super+Right { focus-column-right; }
+                Super+H     { focus-column-left; }
+                Super+J     { focus-workspace-down; }
+                Super+K     { focus-workspace-up; }
+                Super+L     { focus-column-right; }
+
+                // Focus other monitor
+                Ctrl+Super+H    { focus-monitor-left; }
+                Ctrl+Super+L    { focus-monitor-right; }
+
                 Super+Shift+1 { move-column-to-workspace "terminal"; }
                 Super+Shift+2 { move-column-to-workspace "gaming"; }
                 Super+Shift+3 { move-column-to-workspace "browser"; }
@@ -251,38 +262,16 @@ in
                 Super+Shift+Ctrl+H     { move-column-to-monitor-left; }
                 Super+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-                Super+Left  { focus-column-left; }
-                Super+Down  { focus-workspace-down; }
-                Super+Up    { focus-workspace-up; }
-                Super+Right { focus-column-right; }
-                Super+H     { focus-column-left; }
-                Super+J     { focus-workspace-down; }
-                Super+K     { focus-workspace-up; }
-                Super+L     { focus-column-right; }
-
-                // Focus other monitor
-                Ctrl+Super+Left  { focus-monitor-left; }
-                Ctrl+Super+Right { focus-monitor-right; }
-                Ctrl+Super+H    { focus-monitor-left; }
-                Ctrl+Super+L    { focus-monitor-right; }
-
-                Mod+Page_Down { focus-workspace-down; }
-                Mod+Page_Up   { focus-workspace-up; }
-
-                Super+Home { focus-column-first; }
-                Super+End  { focus-column-last; }
-
                 Super+BracketLeft  { consume-or-expel-window-left; }
                 Super+BracketRight { consume-or-expel-window-right; }
                 Super+Comma  { consume-window-into-column; }
                 Super+Period { expel-window-from-column; }
 
                 Super+Shift+S { screenshot; }
-                Print { screenshot; }
-                Ctrl+Print { screenshot-screen; }
-                Alt+Print { screenshot-window; }
+                Alt+Shift+S { screenshot-window; }
+                F12 { screenshot-screen; }
 
-                Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+                Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
                 Super+Shift+P { power-off-monitors; }
 

@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.quickshell.enable = true;
@@ -27,7 +27,8 @@
     ".config/niri/dms/windowrules.kdl".text = ''
 
       window-rule {
-          match app-id=r#".*"#
+          match app-id=r#".*$"#
+          variable-refresh-rate false
           open-floating true
       }
 
@@ -37,18 +38,38 @@
       }
 
       window-rule {
-           match title="Diablo II"
-           variable-refresh-rate true
+          match title="Diablo II"
+          open-fullscreen true
+          variable-refresh-rate true
+      }
+
+      window-rule {
+          match title="World of Warcraft"
+          open-fullscreen true
+          variable-refresh-rate true
+      }
+
+      window-rule {
+          match app-id="mpv"
+          match app-id="dolphin"
+          match app-id="steam"
+          match app-id="spotify"
+          match title=r#"^(Battle\.net.*)$"#
+          default-column-width { proportion 0.5; }
+          default-window-height { proportion 0.75; }
       }
 
       window-rule {
           match app-id="dolphin"
+          match app-id="discord"
+          match app-id="spotify"
           opacity 0.97
       }
 
       window-rule {
           match app-id="kitty"
-          opacity 0.97
+          default-column-width { proportion 0.85; }
+          default-window-height { proportion 0.85; }
           open-on-workspace "terminal"
       }
 
@@ -58,25 +79,22 @@
       }
 
       window-rule {
+          match app-id="spotify"
+          open-on-workspace "spotify"
+      }
+
+      // non-floating windows must come last
+      window-rule {
           match app-id="firefox"
-          open-floating false
           open-on-workspace "browser"
+          open-floating false
       }
 
       window-rule {
           match app-id="discord"
-          opacity 0.97
-          open-floating false
           open-on-workspace "discord"
-      }
-
-      window-rule {
-          match app-id="spotify"
-          opacity 0.97
           open-floating false
-          open-on-workspace "spotify"
       }
-
     '';
     ".config/niri/dms/windowrules.kdl".force = true;
   };

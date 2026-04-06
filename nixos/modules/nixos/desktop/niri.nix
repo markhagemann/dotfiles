@@ -86,10 +86,6 @@ in
         hotkey-overlay {
           skip-at-startup
         }
-
-        layout {
-          background-color "#000000"
-        }
       '';
       configHome = "/home/mark";
       configFiles = [
