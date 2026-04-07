@@ -104,6 +104,10 @@ in
       ];
 
       home.file = {
+        ".local/bin/raise-cycle-or-spawn" = {
+          source = ./scripts/raise-cycle-or-spawn.sh;
+          executable = true;
+        };
         ".config/DankMaterialShell/settings.json" = {
           source = jsonFormat.generate "settings.json" dmsSettings;
           force = true;
@@ -202,8 +206,8 @@ in
                 Super+grave repeat=false { toggle-overview; }
                 Alt+F4 repeat=false { close-window; }
 
-                Super+T { spawn "kitty"; }
-                Super+B { spawn "firefox"; }
+                Super+T { spawn-sh "~/.local/bin/raise-cycle-or-spawn kitty"; }
+                Super+B { spawn-sh "~/.local/bin/raise-cycle-or-spawn firefox"; }
                 Super+E { spawn "dolphin"; }
                 Super+Shift+D { spawn "discord"; }
                 Super+Ctrl+S { spawn "steam"; }

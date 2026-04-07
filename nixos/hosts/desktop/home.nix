@@ -15,9 +15,9 @@
     ../../modules/home-manager/desktop/programs/spotify/default.nix
     ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
     ../../modules/home-manager/desktop/programs/mpv
-    # Using linux-wallpaperengine GUI via flatpak instead for now
+    # linux-wallpaperengine GUI is nice but not working properly for playlist
     # https://github.com/jagrat7/linux-wallpaper-engine
-    # ../../modules/home-manager/desktop/wallpaper-engine.nix
+    ../../modules/home-manager/desktop/wallpaper-engine.nix
     ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
@@ -131,7 +131,7 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   modules.desktop.programs.spotify.enable = true;
-  # modules.desktop.wallpaperEngine.enable = false;
+  modules.desktop.wallpaperEngine.enable = true;
   modules.shell.mise.enable = true;
 
   programs.mangohud.enable = true;
