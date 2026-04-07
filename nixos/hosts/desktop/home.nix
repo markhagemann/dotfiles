@@ -131,7 +131,7 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   modules.desktop.programs.spotify.enable = true;
-  modules.desktop.wallpaperEngine.enable = true;
+  modules.desktop.wallpaperEngine.enable = false;
   modules.shell.mise.enable = true;
 
   programs.mangohud.enable = true;

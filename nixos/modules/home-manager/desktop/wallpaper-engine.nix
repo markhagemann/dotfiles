@@ -18,6 +18,7 @@ in
     };
   };
 
+  # Seems to cause CPU lag and a delay when switching - same issue present in --playlist
   config = lib.mkIf cfg.enable (
     let
       commonArgs = "--screen-root DP-1 --fps 45 --scaling fill --silent --no-audio-processing --fullscreen-pause-only-active";
