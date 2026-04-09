@@ -81,6 +81,7 @@
         identifier = "DP-2";
         mode = "2560x1440@239.970";
         position = "x=0 y=0";
+        bar = true;
       }
       {
         name = "Dell Inc. AW2725DF 8755ZZ3";

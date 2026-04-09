@@ -26,6 +26,11 @@ in
               type = lib.types.bool;
               default = false;
             };
+            bar = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "This is the monitor where the DMS bar should appear";
+            };
           };
         }
       );
