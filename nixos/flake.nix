@@ -3,7 +3,7 @@
   inputs = {
     dms = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell";
     };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +24,10 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     niri-flake = {
       url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mango = {
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";

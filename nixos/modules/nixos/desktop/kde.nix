@@ -37,18 +37,15 @@ in
 
     services.desktopManager.plasma6.enable = true;
 
-    # At this stage you will have to run "Apply Plasma Settings"
-    # You will also need to run `cp -rf ~/.local/share/icons/* /usr/share/icons`
+    # Don't enable plasma-login-manager - use DMS greeter instead for unified session selection
     services.displayManager = {
       plasma-login-manager = {
-        enable = true;
-        # Runs on wayland by default - would need an inverse to set it to below when wayland disabled
-        # services.displayManager.defaultSession = "plasmax11";
+        enable = false;
       };
     };
 
     services.xserver = {
-      enable = !config.modules.desktop.wayland.enable;
+      enable = lib.mkDefault (!config.modules.desktop.wayland.enable);
     };
   };
 }

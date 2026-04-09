@@ -19,6 +19,8 @@
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
     ../../modules/nixos/desktop/niri.nix
+    ../../modules/nixos/desktop/mangowc.nix
+    ../../modules/nixos/desktop/dms.nix
     ../../modules/nixos/desktop/wayland.nix
     ../../modules/nixos/utility/display-switch
   ];
@@ -72,25 +74,30 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  modules = {
+  modules = let
+    monitors = [
+      {
+        name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
+        identifier = "DP-2";
+        mode = "2560x1440@239.970";
+        position = "x=0 y=0";
+      }
+      {
+        name = "Dell Inc. AW2725DF 8755ZZ3";
+        identifier = "DP-1";
+        mode = "2560x1440@359.979";
+        position = "x=2560 y=0";
+        vrrOnDemand = true;
+      }
+    ];
+  in {
     desktop = {
       niri.enable = true;
-      niri.outputs = [
-        {
-          name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
-          identifier = "DP-2";
-          mode = "2560x1440@239.970";
-          position = "x=0 y=0";
-        }
-        {
-          name = "Dell Inc. AW2725DF 8755ZZ3";
-          identifier = "DP-1";
-          mode = "2560x1440@359.979";
-          position = "x=2560 y=0";
-          vrrOnDemand = true;
-        }
-      ];
-      kde.enable = false;
+      niri.outputs = monitors;
+      mango.enable = true;
+      mango.outputs = monitors;
+      kde.enable = true;
+      dms.enable = true;
       fonts.enable = true;
       wayland.enable = true;
 

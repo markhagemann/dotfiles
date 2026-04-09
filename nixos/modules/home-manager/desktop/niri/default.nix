@@ -108,10 +108,6 @@ in
           source = ./scripts/raise-cycle-or-spawn.sh;
           executable = true;
         };
-        ".config/DankMaterialShell/settings.json" = {
-          source = jsonFormat.generate "settings.json" dmsSettings;
-          force = true;
-        };
         ".config/niri/dms/outputs.kdl" = {
           text =
             lib.concatStringsSep "\n" (
@@ -136,8 +132,10 @@ in
             );
           force = true;
         };
-        ".config/niri/config.kdl".text =
-          let
+        ".config/niri/config.kdl" = {
+          force = true;
+          text =
+            let
             primaryOutput = findFirst (o: o.vrrOnDemand or false) (head cfg.outputs) cfg.outputs;
             primaryName = primaryOutput.identifier or primaryOutput.name;
           in
@@ -194,6 +192,10 @@ in
                 XDG_CURRENT_DESKTOP "niri"
             }
 
+            debug {
+                force-disable-connectors-on-resume
+            }
+
             hotkey-overlay {
               skip-at-startup
             }
@@ -202,16 +204,19 @@ in
                 Super+Shift+Slash { show-hotkey-overlay; }
 
                 Super+V { spawn-sh "dms ipc call clipboard toggle"; }
+                Ctrl+Alt+Shift+P { power-off-monitors; }
+                Ctrl+Alt+L { spawn-sh "dms ipc call lock lock "; }
+
 
                 Super+grave repeat=false { toggle-overview; }
                 Alt+F4 repeat=false { close-window; }
 
                 Super+T { spawn-sh "~/.local/bin/raise-cycle-or-spawn kitty"; }
                 Super+B { spawn-sh "~/.local/bin/raise-cycle-or-spawn firefox"; }
-                Super+E { spawn "dolphin"; }
-                Super+Shift+D { spawn "discord"; }
-                Super+Ctrl+S { spawn "steam"; }
-                Super+Shift+M { spawn "spotify"; }
+                Super+E { spawn-sh "~/.local/bin/raise-cycle-or-spawn dolphin"; }
+                Super+Shift+D { spawn-sh "~/.local/bin/raise-cycle-or-spawn discord"; }
+                Super+Ctrl+S { spawn-sh "~/.local/bin/raise-cycle-or-spawn steam"; }
+                Super+Shift+M { spawn-sh "~/.local/bin/raise-cycle-or-spawn spotify"; }
 
                 Super+Q { close-window; }
                 Super+F { maximize-column; }
@@ -275,19 +280,23 @@ in
                 Alt+Shift+S { screenshot-window; }
                 F12 { screenshot-screen; }
 
-                Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-                Super+Shift+P { power-off-monitors; }
-
                 XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+                Super+F12            allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
                 XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+                Super+F11            allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
                 XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+                Super+F9             allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
                 XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+                Super+F10            allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
                 XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+                Super+F5             allow-when-locked=true { spawn-sh "playerctl play-pause"; }
                 XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+                Super+F8             allow-when-locked=true { spawn-sh "playerctl stop"; }
                 XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+                Super+F6             allow-when-locked=true { spawn-sh "playerctl previous"; }
                 XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+                Super+F7             allow-when-locked=true { spawn-sh "playerctl next"; }
 
                 XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
                 XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
@@ -301,6 +310,7 @@ in
             include "dms/wpblur.kdl"
             include "dms/windowrules.kdl"
           '';
+        };
       };
     }
   ]);

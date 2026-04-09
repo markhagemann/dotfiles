@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 
@@ -11,42 +12,32 @@
     ../../modules/home-manager/desktop/dms.nix
     ../../modules/home-manager/desktop/kde.nix
     ../../modules/home-manager/desktop/niri
+    ../../modules/home-manager/desktop/mango
     ../../modules/home-manager/desktop/browsers/firefox.nix
     ../../modules/home-manager/desktop/programs/spotify/default.nix
     ../../modules/home-manager/desktop/programs/spotify/spicetify.nix
     ../../modules/home-manager/desktop/programs/mpv
     # linux-wallpaperengine GUI is nice but not working properly for playlist
-    # https://github.com/jagrat7/linux-wallpaper-engine
+    # https://github.com/jagrat7/linux-wallpaperengine
     ../../modules/home-manager/desktop/wallpaper-engine.nix
     ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
     inputs.dms.homeModules.dank-material-shell
+    inputs.mango.hmModules.mango
   ];
 
-  # Toggle between KDE and Niri:
-  modules.desktop.niri.enable = true;
+  # Toggle between Niri, Mango, and KDE based on system config
+  modules.desktop.niri.enable = osConfig.modules.desktop.niri.enable or false;
+  modules.desktop.niri.outputs = osConfig.modules.desktop.niri.outputs or [];
   modules.desktop.niri.customThemeFile = "${config.home.homeDirectory}/.config/DankMaterialShell/themes/tokyonight-moon.json";
-  modules.desktop.niri.outputs = [
-    {
-      name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
-      mode = "2560x1440@239.970";
-      position = "x=0 y=0";
-      identifier = "DP-2";
-      model = "Dell AW2721D";
-      bar = true;
-    }
-    {
-      name = "Dell Inc. AW2725DF 8755ZZ3";
-      mode = "2560x1440@359.979";
-      position = "x=2560 y=0";
-      vrrOnDemand = true;
-      videoWallpaper = true;
-      identifier = "DP-1";
-    }
-  ];
-
-  # modules.desktop.kde.enable = true;
+  
+  modules.desktop.mango.enable = osConfig.modules.desktop.mango.enable or false;
+  
+  modules.desktop.kde.enable = osConfig.modules.desktop.kde.enable or false;
+  
+  modules.desktop.dms.enable = osConfig.modules.desktop.dms.enable or false;
+  modules.desktop.dms.monitors = osConfig.modules.desktop.niri.outputs or (osConfig.modules.desktop.mango.outputs or []);
 
   home.homeDirectory = "/home/mark";
   home.packages = with pkgs; [

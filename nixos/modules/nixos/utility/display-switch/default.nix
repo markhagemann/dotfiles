@@ -20,8 +20,8 @@
               usb_device = "05e3:0610"
               on_usb_connect = "0x0f"
               on_usb_disconnect = "0x13"
-              on_usb_connect_execute = "echo DisplayPort1 activated"
-              on_usb_disconnect_execute = "echo DisplayPort2 activated"
+              on_usb_connect_execute = "sleep 4 && echo DisplayPort1 activated"
+              on_usb_disconnect_execute = "sleep 4 && echo DisplayPort2 activated"
             '';
           }
           ''
