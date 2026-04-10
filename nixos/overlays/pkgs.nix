@@ -10,6 +10,15 @@ final: prev: {
     };
   });
 
+  kara = prev.kara.overrideAttrs (oldAttrs: {
+    src = prev.fetchFromGitHub {
+      owner = "dhruv8sh";
+      repo = "kara";
+      rev = "cde610dbb70cfc5d08ed0405b9ab2b01ce4aad13";
+      sha256 = "sha256-o+vJrOaMQn2tiOiyKsfkRTxFdOKvVkChpptit5v/q+Y=";
+    };
+  });
+
   # # Override Firefox from nixos-unstable
   # firefox-unwrapped = let
   #   unstablePkgs = import (fetchTarball {

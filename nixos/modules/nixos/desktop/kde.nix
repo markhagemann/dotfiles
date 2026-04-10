@@ -35,6 +35,8 @@ in
       # (sddm-astronaut.override { embeddedTheme = "purple_leaves"; })
     ];
 
+    # Seems to be needed now with DMS greeter instead of plasma-login-manager
+    security.pam.services.greetd.enableGnomeKeyring = true;
     services.desktopManager.plasma6.enable = true;
 
     # Don't enable plasma-login-manager - use DMS greeter instead for unified session selection

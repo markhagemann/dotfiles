@@ -37,12 +37,25 @@
 
   modules.desktop.kde.enable = osConfig.modules.desktop.kde.enable or false;
 
-  modules.desktop.dms.enable = osConfig.modules.desktop.dms.enable or false;
+  # Enable dms for niri/mango, not for kde
+  modules.desktop.dms.enable =
+    osConfig.modules.desktop.niri.enable or osConfig.modules.desktop.mango.enable or false;
   modules.desktop.dms.monitors =
     osConfig.modules.desktop.niri.outputs or (osConfig.modules.desktop.mango.outputs or [ ]);
 
   home.homeDirectory = "/home/mark";
   home.packages = with pkgs; [
+    # Shared utilities
+    adw-gtk3
+    kdePackages.ark
+    kdePackages.dolphin
+    kdePackages.kate
+    kdePackages.qt6ct
+    qt6Packages.qt6ct
+    qimgv
+    udiskie
+    xdg-desktop-portal-gtk
+
     # Fonts
     # adwaita-icon-theme
     font-awesome
@@ -108,21 +121,19 @@
   };
 
   home.file = {
+
+    ".config/environment.d/30-desktop-theme.conf".text = ''
+      EDITOR=nvim
+      ELECTRON_OZONE_PLATFORM_HINT=auto
+      MOZ_ENABLE_WAYLAND=1
+      TERMINAL=kitty
+      VISUAL=nvim
+    '';
+
     ".local/bin/raise-cycle-or-spawn" = {
       source = ../../modules/home-manager/desktop/scripts/raise-cycle-or-spawn.sh;
       executable = true;
     };
-
-    ".config/environment.d/30-desktop-theme.conf".text = ''
-      EDITOR=nvim
-      VISUAL=nvim
-      QT_QPA_PLATFORM=wayland
-      QT_QPA_PLATFORMTHEME=qt6ct
-      QS_ICON_THEME=Vivid-Dark-Icons
-      ELECTRON_OZONE_PLATFORM_HINT=wayland
-      MOZ_ENABLE_WAYLAND=1
-      TERMINAL=kitty
-    '';
   };
 
   home.username = "mark";

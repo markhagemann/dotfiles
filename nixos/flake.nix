@@ -36,6 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "git+https://git.outfoxxed.me/quickshell/quickshell?rev=6eb12551baf924f8fdecdd04113863a754259c34";
     };
+    dolphin-overlay = {
+      url = "github:rumboon/dolphin-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
   };
@@ -87,7 +91,10 @@
             ./hosts/desktop
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
+              nixpkgs.overlays = [
+                nix-cachyos-kernel.overlays.pinned
+                inputs.dolphin-overlay.overlays.default
+              ];
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

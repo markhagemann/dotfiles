@@ -7,7 +7,7 @@
   runUserMatugenTemplates = true;
   matugenTargetMonitor = "";
   popupTransparency = 1;
-  dockTransparency = 1;
+  dockTransparency = 0.45;
   widgetBackgroundColor = "sch";
   widgetColorMode = "default";
   controlCenterTileColorMode = "primary";
@@ -124,7 +124,7 @@
   maxWorkspaceIcons = 3;
   workspaceAppIconSizeOffset = 0;
   groupWorkspaceApps = true;
-  workspaceFollowFocus = false;
+  workspaceFollowFocus = true;
   showOccupiedWorkspacesOnly = false;
   reverseScrolling = false;
   dwlShowAllTags = false;
@@ -246,8 +246,8 @@
   launcherLogoSizeOffset = 0;
   fontFamily = "Poppins";
   monoFontFamily = "SpaceMono Nerd Font";
-  fontWeight = 400;
-  fontScale = 1.11;
+  fontWeight = 500;
+  fontScale = 1.15;
   notepadUseMonospace = true;
   notepadFontFamily = "";
   notepadFontSize = 14;
@@ -451,14 +451,40 @@
         "weather"
       ];
       rightWidgets = [
-        { id = "systemTray"; enabled = true; }
-        { id = "cpuTemp"; enabled = true; }
-        { id = "gpuTemp"; enabled = true; selectedGpuIndex = 0; pciId = "1002:7550"; }
-        { id = "network_speed_monitor"; enabled = true; }
-        { id = "clipboard"; enabled = true; }
-        { id = "notificationButton"; enabled = true; }
-        { id = "controlCenterButton"; enabled = true; }
-        { id = "powerMenuButton"; enabled = true; }
+        {
+          id = "systemTray";
+          enabled = true;
+        }
+        {
+          id = "cpuTemp";
+          enabled = true;
+        }
+        {
+          id = "gpuTemp";
+          enabled = true;
+          selectedGpuIndex = 0;
+          pciId = "1002:7550";
+        }
+        {
+          id = "network_speed_monitor";
+          enabled = true;
+        }
+        {
+          id = "clipboard";
+          enabled = true;
+        }
+        {
+          id = "notificationButton";
+          enabled = true;
+        }
+        {
+          id = "controlCenterButton";
+          enabled = true;
+        }
+        {
+          id = "powerMenuButton";
+          enabled = true;
+        }
       ];
       autoHide = false;
     }

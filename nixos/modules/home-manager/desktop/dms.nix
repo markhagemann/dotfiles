@@ -1,17 +1,25 @@
-{ config, lib, pkgs, osConfig ? null, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  osConfig ? null,
+  ...
+}:
 
 let
   cfg = config.modules.desktop.dms;
   jsonFormat = pkgs.formats.json { };
   settingsBase = import ./niri/settings-base.nix;
-  
+
   # Try to get monitors from NixOS config (niri or mango), fallback to empty list
-  monitors = if osConfig != null && osConfig.modules.desktop.niri.outputs != null then
-               osConfig.modules.desktop.niri.outputs
-             else if osConfig != null && osConfig.modules.desktop.mango.outputs != null then
-               osConfig.modules.desktop.mango.outputs
-             else
-               [ ];
+  monitors =
+    if osConfig != null && osConfig.modules.desktop.niri.outputs != null then
+      osConfig.modules.desktop.niri.outputs
+    else if osConfig != null && osConfig.modules.desktop.mango.outputs != null then
+      osConfig.modules.desktop.mango.outputs
+    else
+      [ ];
 
   # Create niriOutputSettings from monitors for settings.json
   niriOutputSettings =
@@ -44,7 +52,6 @@ let
     currentThemeName = "custom";
     currentThemeCategory = "generic";
     customThemeFile = "${config.home.homeDirectory}/.config/DankMaterialShell/themes/tokyonight-moon.json";
-    matugenTemplateMangowc = true;
     barConfigs = [
       (
         (builtins.head settingsBase.barConfigs)
@@ -72,6 +79,27 @@ in
   config = lib.mkIf cfg.enable {
     programs.quickshell.enable = true;
 
+    systemd.user.services.dms = {
+      Unit = {
+        Description = "Dank Material Shell (DMS)";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.Notifications";
+        ExecStartPre = "${pkgs.bash}/bin/bash -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"KDE\" ]; then exit 1; fi; until [ -S \"$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY\" ]; do sleep 0.5; done'";
+        ExecStart = "${
+          inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/bin/dms run --session";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
     home.packages = with pkgs; [
       matugen
       cliphist
@@ -80,7 +108,12 @@ in
       kdePackages.qtmultimedia
     ];
 
-    home.file = {
+    home.file = lib.mkIf cfg.enable {
+      ".local/bin/raise-cycle-or-spawn" = {
+        source = ./scripts/raise-cycle-or-spawn.sh;
+        executable = true;
+      };
+
       ".config/environment.d/20-qt-qml.conf".text = ''
         QML_IMPORT_PATH=${pkgs.kdePackages.qtmultimedia}/lib/qt-6/qml:${pkgs.kdePackages.qtsvg}/lib/qt-6/qml:${pkgs.kdePackages.qtimageformats}/lib/qt-6/qml:${pkgs.kdePackages.qt5compat}/lib/qt-6/qml
         QML2_IMPORT_PATH=${pkgs.kdePackages.qtmultimedia}/lib/qt-6/qml:${pkgs.kdePackages.qtsvg}/lib/qt-6/qml:${pkgs.kdePackages.qtimageformats}/lib/qt-6/qml:${pkgs.kdePackages.qt5compat}/lib/qt-6/qml

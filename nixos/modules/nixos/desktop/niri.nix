@@ -52,6 +52,9 @@ in
       package = inputs.niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
     };
 
+    # Seems to cause problems but I think this is what it is meant to do?
+    # systemd.user.services.niri.wants = [ "dms.service" ];
+
     # DankGreeter using flake package
     services.displayManager.dms-greeter = {
       enable = true;
@@ -96,6 +99,8 @@ in
     };
 
     users.groups.greeter = { };
+
+    security.pam.services.greetd.enableGnomeKeyring = true;
 
     services.xserver.enable = true;
   };

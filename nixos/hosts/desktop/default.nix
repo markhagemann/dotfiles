@@ -74,41 +74,36 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  modules = let
-    monitors = [
-      {
-        name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
-        identifier = "DP-2";
-        mode = "2560x1440@239.970";
-        position = "x=0 y=0";
-        bar = true;
-      }
-      {
-        name = "Dell Inc. AW2725DF 8755ZZ3";
-        identifier = "DP-1";
-        mode = "2560x1440@359.979";
-        position = "x=2560 y=0";
-        vrrOnDemand = true;
-      }
-    ];
-  in {
-    desktop = {
-      niri.enable = true;
-      niri.outputs = monitors;
-      mango.enable = true;
-      mango.outputs = monitors;
-      kde.enable = true;
-      dms.enable = true;
-      fonts.enable = true;
-      wayland.enable = true;
-
-      # browsers = {
-      #   default = "librewolf";
-      #   librewolf.enable = true;
-      #   chromium.enable = true;
-      # };
+  modules =
+    let
+      monitors = [
+        {
+          name = "Dell Inc. Dell AW2721D #GjMYMxgwABQF";
+          identifier = "DP-2";
+          mode = "2560x1440@239.970";
+          position = "x=0 y=0";
+          bar = true;
+        }
+        {
+          name = "Dell Inc. AW2725DF 8755ZZ3";
+          identifier = "DP-1";
+          mode = "2560x1440@359.979";
+          position = "x=2560 y=0";
+          vrrOnDemand = true;
+        }
+      ];
+    in
+    {
+      desktop = {
+        niri.enable = true;
+        niri.outputs = monitors;
+        mango.enable = false;
+        mango.outputs = monitors;
+        kde.enable = true;
+        fonts.enable = true;
+        wayland.enable = true;
+      };
     };
-  };
 
   networking.hostName = "desktop"; # Define your hostname.
   # Open ports in the firewall.
@@ -204,6 +199,7 @@
       "docker"
       "greeter"
       "networkmanager"
+      "video"
       "wheel"
     ];
     packages = with pkgs; [

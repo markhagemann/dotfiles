@@ -6,57 +6,8 @@
 }:
 
 with lib;
-
 let
   cfg = config.modules.desktop.niri;
-  settingsBase = import ./settings-base.nix;
-
-  # Create niriOutputSettings from cfg.outputs
-  niriOutputSettings =
-    builtins.listToAttrs (
-      map (o: {
-        name = o.name;
-        value = {
-          hotCorners = {
-            off = true;
-          };
-          layout = {
-            alwaysCenterSingleColumn = true;
-          };
-        }
-        // (lib.optionalAttrs (o.vrrOnDemand or false) { vrrOnDemand = true; });
-      }) cfg.outputs
-    )
-    # Map VRR to the identifier (e.g. "DP-1") if specified
-    // builtins.listToAttrs (
-      map (o: {
-        name = o.identifier;
-        value = {
-          vrrOnDemand = true;
-        };
-      }) (filter (o: (o.vrrOnDemand or false) && (o ? identifier)) cfg.outputs)
-    );
-
-  # Final settings merge - preserve full barConfig from base, only override screenPreferences
-  dmsSettings = lib.recursiveUpdate settingsBase (
-    {
-      inherit niriOutputSettings;
-      barConfigs = [
-        (
-          (builtins.head settingsBase.barConfigs)
-          // {
-            screenPreferences = map (o: {
-              model = o.name;
-              name = o.identifier;
-            }) (filter (o: o.bar or false) cfg.outputs);
-          }
-        )
-      ];
-    }
-    // (lib.optionalAttrs (cfg.customThemeFile != "") { inherit (cfg) customThemeFile; })
-  );
-
-  jsonFormat = pkgs.formats.json { };
 in
 {
   options.modules.desktop.niri = {
@@ -88,19 +39,10 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = with pkgs; [
-        adw-gtk3
-        kdePackages.ark
-        kdePackages.dolphin
-        kdePackages.kate
-        kdePackages.qt6ct
-        libappindicator
+        # libappindicator
         # mpvpaper
-        qt6Packages.qt6ct
-        qimgv
         # swww
-        udiskie
         xwayland-satellite
-        xdg-desktop-portal-gtk
       ];
 
       home.file = {
@@ -258,6 +200,8 @@ in
               }
 
               environment {
+                  QT_QPA_PLATFORM "wayland"
+                  QT_QPA_PLATFORMTHEME "qt6ct"
                   XDG_CURRENT_DESKTOP "niri"
               }
 
