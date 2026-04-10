@@ -29,15 +29,17 @@
 
   # Toggle between Niri, Mango, and KDE based on system config
   modules.desktop.niri.enable = osConfig.modules.desktop.niri.enable or false;
-  modules.desktop.niri.outputs = osConfig.modules.desktop.niri.outputs or [];
+  modules.desktop.niri.outputs = osConfig.modules.desktop.niri.outputs or [ ];
   modules.desktop.niri.customThemeFile = "${config.home.homeDirectory}/.config/DankMaterialShell/themes/tokyonight-moon.json";
-  
+
   modules.desktop.mango.enable = osConfig.modules.desktop.mango.enable or false;
-  
+  modules.desktop.mango.outputs = osConfig.modules.desktop.mango.outputs or [ ];
+
   modules.desktop.kde.enable = osConfig.modules.desktop.kde.enable or false;
-  
+
   modules.desktop.dms.enable = osConfig.modules.desktop.dms.enable or false;
-  modules.desktop.dms.monitors = osConfig.modules.desktop.niri.outputs or (osConfig.modules.desktop.mango.outputs or []);
+  modules.desktop.dms.monitors =
+    osConfig.modules.desktop.niri.outputs or (osConfig.modules.desktop.mango.outputs or [ ]);
 
   home.homeDirectory = "/home/mark";
   home.packages = with pkgs; [
@@ -106,6 +108,11 @@
   };
 
   home.file = {
+    ".local/bin/raise-cycle-or-spawn" = {
+      source = ../../modules/home-manager/desktop/scripts/raise-cycle-or-spawn.sh;
+      executable = true;
+    };
+
     ".config/environment.d/30-desktop-theme.conf".text = ''
       EDITOR=nvim
       VISUAL=nvim
