@@ -106,6 +106,7 @@ in
       brightnessctl
       gammastep
       kdePackages.qtmultimedia
+      inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     home.file = lib.mkIf cfg.enable {

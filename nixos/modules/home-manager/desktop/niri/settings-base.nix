@@ -1,9 +1,9 @@
 {
   currentThemeName = "custom";
   currentThemeCategory = "generic";
-  customThemeFile = "";
   registryThemeVariants = { };
   matugenScheme = "scheme-tonal-spot";
+  matugenContrast = 0;
   runUserMatugenTemplates = true;
   matugenTargetMonitor = "";
   popupTransparency = 1;
@@ -22,6 +22,8 @@
   mangoLayoutGapsOverride = -1;
   mangoLayoutRadiusOverride = -1;
   mangoLayoutBorderSize = -1;
+  firstDayOfWeek = -1;
+  showWeekNumber = false;
   use24HourClock = true;
   showSeconds = false;
   padHours12Hour = false;
@@ -36,6 +38,19 @@
   modalAnimationSpeed = 1;
   modalCustomAnimationDuration = 150;
   enableRippleEffects = true;
+  m3ElevationEnabled = true;
+  m3ElevationIntensity = 12;
+  m3ElevationOpacity = 30;
+  m3ElevationColorMode = "default";
+  m3ElevationLightDirection = "top";
+  m3ElevationCustomColor = "#000000";
+  modalElevationEnabled = true;
+  popoutElevationEnabled = true;
+  barElevationEnabled = true;
+  blurEnabled = false;
+  blurBorderColor = "outline";
+  blurBorderCustomColor = "#ffffff";
+  blurBorderOpacity = 1;
   wallpaperFillMode = "Fill";
   blurredWallpaperLayer = false;
   blurWallpaperOnOverview = false;
@@ -75,43 +90,43 @@
   privacyShowScreenShareIcon = false;
   controlCenterWidgets = [
     {
+      enabled = true;
       id = "volumeSlider";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "brightnessSlider";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "wifi";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "bluetooth";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "audioOutput";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "audioInput";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "nightMode";
-      enabled = true;
       width = 50;
     }
     {
-      id = "darkMode";
       enabled = true;
+      id = "darkMode";
       width = 50;
     }
   ];
@@ -128,9 +143,10 @@
   showOccupiedWorkspacesOnly = false;
   reverseScrolling = false;
   dwlShowAllTags = false;
+  workspaceActiveAppHighlightEnabled = false;
   workspaceColorMode = "default";
   workspaceOccupiedColorMode = "none";
-  workspaceUnfocusedColorMode = "default";
+  workspaceUnfocusedColorMode = "sch";
   workspaceUrgentColorMode = "default";
   workspaceFocusedBorderEnabled = false;
   workspaceFocusedBorderColor = "primary";
@@ -138,6 +154,7 @@
   workspaceNameIcons = { };
   waveProgressEnabled = true;
   scrollTitleEnabled = true;
+  mediaAdaptiveWidthEnabled = true;
   audioVisualizerEnabled = true;
   audioScrollMode = "volume";
   audioWheelScrollAmount = 5;
@@ -208,6 +225,7 @@
   sortAppsAlphabetically = false;
   appLauncherGridColumns = 4;
   spotlightCloseNiriOverview = true;
+  rememberLastQuery = false;
   spotlightSectionViewModes = { };
   appDrawerSectionViewModes = { };
   niriOverviewOverlayEnabled = true;
@@ -222,31 +240,31 @@
   networkPreference = "auto";
   iconTheme = "Vivid-Dark-Icons";
   cursorSettings = {
-    theme = "System Default";
-    size = 24;
-    niri = {
-      hideWhenTyping = false;
-      hideAfterInactiveMs = 0;
+    dwl = {
+      cursorHideTimeout = 0;
     };
     hyprland = {
       hideOnKeyPress = false;
       hideOnTouch = false;
       inactiveTimeout = 0;
     };
-    dwl = {
-      cursorHideTimeout = 0;
+    niri = {
+      hideAfterInactiveMs = 0;
+      hideWhenTyping = false;
     };
+    size = 24;
+    theme = "System Default";
   };
   launcherLogoMode = "os";
   launcherLogoCustomPath = "";
-  launcherLogoColorOverride = "#03a9f4";
+  launcherLogoColorOverride = "#7aa2f7";
   launcherLogoColorInvertOnMode = false;
   launcherLogoBrightness = 0.5;
   launcherLogoContrast = 1;
-  launcherLogoSizeOffset = 0.5;
+  launcherLogoSizeOffset = 0;
   fontFamily = "Poppins";
   monoFontFamily = "SpaceMono Nerd Font";
-  fontWeight = 500;
+  fontWeight = 600;
   fontScale = 1.15;
   notepadUseMonospace = true;
   notepadFontFamily = "";
@@ -256,6 +274,7 @@
   notepadLastCustomTransparency = 0.7;
   soundsEnabled = true;
   useSystemSoundTheme = false;
+  soundLogin = false;
   soundNewNotification = true;
   soundVolumeChanged = true;
   soundPluggedIn = true;
@@ -286,6 +305,10 @@
   qtThemingEnabled = false;
   syncModeWithPortal = true;
   terminalsAlwaysDark = false;
+  muxType = "tmux";
+  muxUseCustomCommand = false;
+  muxCustomCommand = "";
+  muxSessionFilter = "";
   runDmsMatugenTemplates = true;
   matugenTemplateGtk = true;
   matugenTemplateNiri = true;
@@ -309,10 +332,22 @@
   matugenTemplateVscode = true;
   matugenTemplateEmacs = true;
   matugenTemplateZed = true;
+  matugenTemplateNeovimSettings = {
+    dark = {
+      baseTheme = "github_dark";
+      harmony = 0.5;
+    };
+    light = {
+      baseTheme = "github_light";
+      harmony = 0.5;
+    };
+  };
+  matugenTemplateNeovimSetBackground = true;
   showDock = true;
   dockAutoHide = true;
   dockSmartAutoHide = false;
   dockGroupByApp = false;
+  dockRestoreSpecialWorkspaceOnClick = false;
   dockOpenOnOverview = false;
   dockPosition = 1;
   dockSpacing = 7;
@@ -355,6 +390,9 @@
   lockScreenActiveMonitor = "all";
   lockScreenInactiveColor = "#000000";
   lockScreenNotificationMode = 0;
+  lockScreenVideoEnabled = false;
+  lockScreenVideoPath = "";
+  lockScreenVideoCycling = false;
   hideBrightnessSlider = false;
   notificationTimeoutLow = 5000;
   notificationTimeoutNormal = 5000;
@@ -370,6 +408,7 @@
   notificationHistorySaveNormal = true;
   notificationHistorySaveCritical = true;
   notificationRules = [ ];
+  notificationFocusedMonitor = false;
   osdAlwaysShowValue = false;
   osdPosition = 5;
   osdVolumeEnabled = true;
@@ -407,6 +446,9 @@
   screenPreferences = { };
   showOnLastDisplay = { };
   niriOutputSettings = {
+    "DP-1" = {
+      vrrOnDemand = true;
+    };
     "Dell Inc. AW2725DF 8755ZZ3" = {
       hotCorners = {
         off = true;
@@ -433,61 +475,72 @@
   displaySnapToEdge = true;
   barConfigs = [
     {
-      id = "default";
-      name = "Main Bar";
-      enabled = true;
-      position = 3;
-      showOnLastDisplay = false;
-      screenPreferences = [ ];
-      transparency = 1;
-      iconScale = 1.3;
-      widgetTransparency = 0.45;
-      leftWidgets = [
-        "launcherButton"
-        "workspaceSwitcher"
-      ];
+      autoHide = false;
       centerWidgets = [
         "music"
         "clock"
         "weather"
       ];
+      enabled = true;
+      iconScale = 1.3;
+      id = "default";
+      leftWidgets = [
+        "launcherButton"
+        "workspaceSwitcher"
+      ];
+      name = "Main Bar";
+      position = 3;
       rightWidgets = [
         {
+          enabled = true;
           id = "systemTray";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "cpuTemp";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "gpuTemp";
-          enabled = true;
-          selectedGpuIndex = 0;
           pciId = "1002:7550";
+          selectedGpuIndex = 0;
         }
         {
+          enabled = true;
           id = "network_speed_monitor";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "clipboard";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "notificationButton";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "controlCenterButton";
-          enabled = true;
         }
         {
-          id = "powerMenuButton";
           enabled = true;
+          id = "powerMenuButton";
         }
       ];
-      autoHide = false;
+      showOnLastDisplay = false;
+      transparency = 1;
+      widgetTransparency = 0.0;
+      widgetOutlineEnabled = false;
+      widgetOutlineOpacity = 0.71;
+      widgetOutlineThickness = 3;
+      widgetOutlineColor = "primary";
+      borderEnabled = true;
+      borderColor = "primary";
+      borderThickness = 1;
+      borderOpacity = 0.3;
+      spacing = 4;
+      widgetPadding = 2;
+      bottomGap = 0;
+      innerPadding = 0;
     }
   ];
   desktopClockEnabled = false;

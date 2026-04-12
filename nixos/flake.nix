@@ -42,6 +42,8 @@
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
+    dgop.url = "github:AvengeMedia/dgop";
+    dgop.inputs.nixpkgs.follows = "nixpkgs";
     niri-release-binds = {
       url = "github:JustinSpedding/niri/up-down-keybinds";
       inputs.nixpkgs.follows = "nixpkgs";

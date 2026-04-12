@@ -54,7 +54,6 @@
     qt6Packages.qt6ct
     qimgv
     udiskie
-    xdg-desktop-portal-gtk
 
     # Fonts
     # adwaita-icon-theme

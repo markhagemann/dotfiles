@@ -133,6 +133,13 @@ in
             }
 
             window-rule {
+                match title="Project Diablo 2 Launcher"
+                open-floating true
+                default-column-width { proportion 0.35; }
+                default-window-height { proportion 0.45; }
+            }
+
+            window-rule {
                 match title="Diablo II"
                 open-fullscreen true
             }
@@ -206,16 +213,13 @@ in
                   XDG_CURRENT_DESKTOP "niri"
               }
 
-              debug {
-                  force-disable-connectors-on-resume
-              }
-
               hotkey-overlay {
                 skip-at-startup
               }
 
               binds {
                   Super+Shift+Slash { show-hotkey-overlay; }
+                  Super+Shift+F5 { quit skip-confirmation=true; }
 
                   Super+V { spawn-sh "dms ipc call clipboard toggle"; }
                   Ctrl+Alt+Shift+P { power-off-monitors; }
@@ -331,16 +335,15 @@ in
         };
       };
 
+      # https://github.com/niri-wm/niri/issues/3700
+      # Recent issue seems to have broken gnome screencasting
       xdg.portal = {
         enable = true;
-        xdgOpenUsePortal = true;
-        extraPortals = [
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal-gnome
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
         ];
-        config = {
-          common.default = [ "gnome" ];
-        };
+        config.common.default = "gnome";
       };
     }
   ]);
