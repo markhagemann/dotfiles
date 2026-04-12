@@ -10,6 +10,7 @@ with lib;
 
 let
   cfg = config.modules.desktop.niri;
+  userName = config.users.users.mark.name;
 in
 {
   options.modules.desktop.niri = {
@@ -49,11 +50,8 @@ in
 
     programs.niri = {
       enable = true;
-      package = inputs.niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+      package = inputs.niri-release-binds.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
-
-    # Seems to cause problems but I think this is what it is meant to do?
-    # systemd.user.services.niri.wants = [ "dms.service" ];
 
     # DankGreeter using flake package
     services.displayManager.dms-greeter = {

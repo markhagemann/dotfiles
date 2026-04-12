@@ -109,6 +109,27 @@ in
     ];
 
     home.file = lib.mkIf cfg.enable {
+      ".local/bin/mic-ptt" = {
+        text = ''
+          #!/usr/bin/env bash
+          STATE_FILE="$HOME/.mic-ptt-state"
+
+          case "$1" in
+              press)
+                  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+                  echo "unmuted" > "$STATE_FILE"
+                  ;;
+              release)
+                  if [[ -f "$STATE_FILE" ]]; then
+                      wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+                      rm -f "$STATE_FILE"
+                  fi
+                  ;;
+          esac
+        '';
+        executable = true;
+      };
+
       ".local/bin/raise-cycle-or-spawn" = {
         source = ./scripts/raise-cycle-or-spawn.sh;
         executable = true;

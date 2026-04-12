@@ -300,6 +300,28 @@
         "type": "github"
       }
     },
+    "niri-release-binds": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1774837917,
+        "narHash": "sha256-KcPl0i/qlYXXwrQJbgB8JbxQalZ9mJUG9+TaZwdJopc=",
+        "owner": "JustinSpedding",
+        "repo": "niri",
+        "rev": "fea31ad370de3cd579b196805b0b7f305da8443c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JustinSpedding",
+        "ref": "up-down-keybinds",
+        "repo": "niri",
+        "type": "github"
+      }
+    },
     "niri-stable": {
       "flake": false,
       "locked": {
@@ -632,6 +654,7 @@
         "lsfg-vk-flake": "lsfg-vk-flake",
         "mango": "mango",
         "niri-flake": "niri-flake",
+        "niri-release-binds": "niri-release-binds",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-flatpak": "nix-flatpak",
         "nixos-hardware": "nixos-hardware",
@@ -642,6 +665,27 @@
         "quickshell-git": "quickshell-git",
         "spicetify-nix": "spicetify-nix",
         "textfox": "textfox"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "niri-release-binds",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757989933,
+        "narHash": "sha256-9cpKYWWPCFhgwQTww8S94rTXgg8Q8ydFv9fXM6I8xQM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "8249aa3442fb9b45e615a35f39eca2fe5510d7c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "scenefx": {

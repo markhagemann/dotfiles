@@ -143,6 +143,7 @@ in
             }
           '';
         };
+
         ".config/niri/config.kdl" = {
           force = true;
           text =
@@ -301,6 +302,10 @@ in
                   Super+F9             allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
                   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
                   Super+F10            allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+                  Alt+MouseBack allow-invalidation=false {
+                      press { spawn-sh "mic-ptt press"; }
+                      release { spawn-sh "mic-ptt release"; }
+                  }
 
                   XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
                   Super+F5             allow-when-locked=true { spawn-sh "playerctl play-pause"; }
@@ -323,6 +328,18 @@ in
               include "dms/wpblur.kdl"
               include "dms/windowrules.kdl"
             '';
+        };
+      };
+
+      xdg.portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-gnome
+        ];
+        config = {
+          common.default = [ "gnome" ];
         };
       };
     }

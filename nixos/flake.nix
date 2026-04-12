@@ -42,6 +42,10 @@
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
+    niri-release-binds = {
+      url = "github:JustinSpedding/niri/up-down-keybinds";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
