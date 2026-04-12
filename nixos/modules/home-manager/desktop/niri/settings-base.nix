@@ -237,13 +237,13 @@
       cursorHideTimeout = 0;
     };
   };
-  launcherLogoMode = "apps";
+  launcherLogoMode = "os";
   launcherLogoCustomPath = "";
-  launcherLogoColorOverride = "";
+  launcherLogoColorOverride = "#03a9f4";
   launcherLogoColorInvertOnMode = false;
   launcherLogoBrightness = 0.5;
   launcherLogoContrast = 1;
-  launcherLogoSizeOffset = 0;
+  launcherLogoSizeOffset = 0.5;
   fontFamily = "Poppins";
   monoFontFamily = "SpaceMono Nerd Font";
   fontWeight = 500;
@@ -440,6 +440,7 @@
       showOnLastDisplay = false;
       screenPreferences = [ ];
       transparency = 1;
+      iconScale = 1.3;
       widgetTransparency = 0.45;
       leftWidgets = [
         "launcherButton"
