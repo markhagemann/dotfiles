@@ -33,7 +33,7 @@ gui:
 keybinding:
   universal:
     # add vim-like bindings for jump to bottom/top;
-    gotoBottom: G
-    gotoTop: g
+    gotoBottom: '<c-G>'
+    gotoTop: '<c-g>'
     gotoBottom-alt: '<c-d>'
     gotoTop-alt: '<c-u>'
