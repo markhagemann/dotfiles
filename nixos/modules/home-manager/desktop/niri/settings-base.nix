@@ -289,7 +289,7 @@
   batterySuspendBehavior = 0;
   batteryProfileName = "";
   batteryChargeLimit = 100;
-  lockBeforeSuspend = false;
+  lockBeforeSuspend = true;
   loginctlLockIntegration = true;
   fadeToLockEnabled = true;
   fadeToLockGracePeriod = 5;
@@ -418,7 +418,7 @@
   osdIdleInhibitorEnabled = true;
   osdMicMuteEnabled = true;
   osdCapsLockEnabled = true;
-  osdPowerProfileEnabled = false;
+  osdPowerProfileEnabled = true;
   osdAudioOutputEnabled = true;
   powerActionConfirm = true;
   powerActionHoldDuration = 0.5;

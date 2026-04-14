@@ -151,6 +151,30 @@ in
           '';
         };
 
+        ".config/niri/niri-portals.conf" = {
+          force = true;
+          text = ''
+            [preferred]
+            default=gnome;gtk;
+            org.freedesktop.impl.portal.Access=gtk;
+            org.freedesktop.impl.portal.Notification=gtk;
+            org.freedesktop.impl.portal.FileChooser=gtk;
+            org.freedesktop.impl.portal.Secret=gnome-keyring;
+            org.freedesktop.impl.portal.Screencast=gnome;
+          '';
+        };
+
+        ".config/xdg-desktop-portal/portals.conf" = {
+          force = true;
+          text = ''
+            [preferred]
+            default=gtk
+
+            [sender]
+            org.freedesktop.impl.portal.FileChooser=gtk
+          '';
+        };
+
         ".config/niri/config.kdl" = {
           force = true;
           text =
@@ -306,7 +330,7 @@ in
                   Super+F9             allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
                   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
                   Super+F10            allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-                  Alt+MouseBack allow-invalidation=false {
+                  MouseBack allow-invalidation=true {
                       press { spawn-sh "mic-ptt press"; }
                       release { spawn-sh "mic-ptt release"; }
                   }
@@ -343,7 +367,6 @@ in
           xdg-desktop-portal-gtk
           xdg-desktop-portal-gnome
         ];
-        config.common.default = "gnome";
       };
     }
   ]);
