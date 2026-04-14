@@ -96,7 +96,7 @@ in
 
             window-rule {
                 match app-id="dolphin"
-                match app-id="discord"
+                match app-id="vesktop"
                 match app-id="spotify"
                 opacity 0.97
             }
@@ -127,7 +127,7 @@ in
             }
 
             window-rule {
-                match app-id="discord"
+                match app-id="vesktop"
                 open-on-workspace "discord"
                 open-floating false
             }
@@ -148,30 +148,6 @@ in
                 match title="World of Warcraft"
                 open-fullscreen true
             }
-          '';
-        };
-
-        ".config/niri/niri-portals.conf" = {
-          force = true;
-          text = ''
-            [preferred]
-            default=gnome;gtk;
-            org.freedesktop.impl.portal.Access=gtk;
-            org.freedesktop.impl.portal.Notification=gtk;
-            org.freedesktop.impl.portal.FileChooser=gtk;
-            org.freedesktop.impl.portal.Secret=gnome-keyring;
-            org.freedesktop.impl.portal.Screencast=gnome;
-          '';
-        };
-
-        ".config/xdg-desktop-portal/portals.conf" = {
-          force = true;
-          text = ''
-            [preferred]
-            default=gtk
-
-            [sender]
-            org.freedesktop.impl.portal.FileChooser=gtk
           '';
         };
 
@@ -256,7 +232,7 @@ in
                   Super+T { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri kitty"; }
                   Super+B { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri firefox"; }
                   Super+E { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri dolphin"; }
-                  Super+Shift+D { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri discord"; }
+                  Super+Shift+D { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri vesktop"; }
                   Super+Ctrl+S { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri steam"; }
                   Super+Shift+M { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri spotify"; }
 
@@ -363,6 +339,13 @@ in
       # Recent issue seems to have broken gnome screencasting
       xdg.portal = {
         enable = true;
+        config.common.default = [ "gtk" ];
+        config.niri = {
+          default = [
+            "gtk"
+            "gnome"
+          ];
+        };
         extraPortals = with pkgs; [
           xdg-desktop-portal-gtk
           xdg-desktop-portal-gnome
