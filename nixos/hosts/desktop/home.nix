@@ -160,6 +160,25 @@
   #   };
   # };
 
+  programs.vesktop = {
+    enable = true;
+    settings = {
+      appBadge = false;
+      arRPC = true;
+      checkUpdates = false;
+      customTitleBar = false;
+      disableMinSize = true;
+      minimizeToTray = true;
+      tray = false;
+      splashBackground = "#282a37";
+      splashColor = "#bb9af7";
+      splashTheming = true;
+      staticTitle = true;
+      hardwareAcceleration = false;
+      discordBranch = "stable";
+    };
+  };
+
   xdg = {
     userDirs = {
       enable = false;

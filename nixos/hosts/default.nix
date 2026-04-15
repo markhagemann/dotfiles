@@ -37,7 +37,6 @@
     curl
     delta
     docker-compose
-    vesktop
     dmidecode
     extra-cmake-modules
     gcc

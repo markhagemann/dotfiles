@@ -129,7 +129,6 @@
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
   programs.tmux.enable = true;
-  programs.zsh.enable = true;
 
   services.avahi = {
     enable = true;
@@ -193,6 +192,7 @@
 
   users.users.mark = {
     isNormalUser = true;
+    ignoreShellProgramCheck = true;
     description = "Mark";
     shell = pkgs.zsh;
     extraGroups = [

@@ -41,7 +41,7 @@ in
       ${pkgs.mise}/bin/mise settings add idiomatic_version_file_enable_tools "[]"
     '';
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       source ~/.config/mise/setup.sh
     '';
   };
