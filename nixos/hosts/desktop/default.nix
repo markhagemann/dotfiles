@@ -202,10 +202,6 @@
       "video"
       "wheel"
     ];
-    packages = with pkgs; [
-      kdePackages.kate
-      #  thunderbird
-    ];
   };
 
   virtualisation.docker.enable = true;

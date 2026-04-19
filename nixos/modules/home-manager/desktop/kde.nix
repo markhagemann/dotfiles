@@ -164,9 +164,9 @@ in
 
       hotkeys.commands = {
         launch-discord = {
-          name = "Launch Discord (Vesktop)";
+          name = "Launch Discord";
           key = "Meta+Shift+D";
-          command = "vesktop";
+          command = "discord";
         };
         launch-dolphin = {
           name = "Launch Dolphin";

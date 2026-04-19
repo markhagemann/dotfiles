@@ -53,6 +53,18 @@ in
       package = inputs.niri-release-binds.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
 
+    programs.thunar = {
+      enable = true;
+      plugins = with pkgs; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+    # # Dependencies for thunar below
+    programs.xfconf.enable = true;
+    services.gvfs.enable = true;
+    services.tumbler.enable = true; # Thumbnail support
+
     # DankGreeter using flake package
     services.displayManager.dms-greeter = {
       enable = true;

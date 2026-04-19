@@ -36,6 +36,7 @@
     cmake
     curl
     delta
+    discord
     docker-compose
     dmidecode
     extra-cmake-modules

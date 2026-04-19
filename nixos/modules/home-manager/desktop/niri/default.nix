@@ -46,6 +46,25 @@ in
       ];
 
       home.file = {
+        "${config.xdg.configHome}/Thunar/uca.xml" = {
+          text = ''
+            <?xml version="1.0" encoding="UTF-8"?>
+            <actions>
+            <action>
+              <icon>utilities-terminal</icon>
+              <name>Open Terminal Here</name>
+              <submenu></submenu>
+              <unique-id>1776527905746078-1</unique-id>
+              <command>kitty --directory . -e tmux new-session</command>
+              <description>Lauch kitty terminal in current folder</description>
+              <range></range>
+              <patterns>*</patterns>
+              <startup-notify/>
+              <directories/>
+            </action>
+            </actions>
+          '';
+        };
         ".config/niri/dms/outputs.kdl" = {
           text =
             lib.concatStringsSep "\n" (
@@ -86,7 +105,7 @@ in
 
             window-rule {
                 match app-id="mpv"
-                match app-id="dolphin"
+                match app-id="thunar"
                 match app-id="steam"
                 match app-id="spotify"
                 match title=r#"^(Battle\.net.*)$"#
@@ -95,7 +114,7 @@ in
             }
 
             window-rule {
-                match app-id="dolphin"
+                match app-id="thunar"
                 match app-id="vesktop"
                 match app-id="spotify"
                 opacity 0.97
@@ -121,6 +140,12 @@ in
             }
 
             window-rule {
+                match title="Project Diablo 2 Launcher"
+                default-column-width { proportion 0.35; }
+                default-window-height { proportion 0.45; }
+            }
+
+            window-rule {
                 match app-id="firefox"
                 open-on-workspace "browser"
                 open-floating false
@@ -132,22 +157,6 @@ in
                 open-floating false
             }
 
-            window-rule {
-                match title="Project Diablo 2 Launcher"
-                open-floating true
-                default-column-width { proportion 0.35; }
-                default-window-height { proportion 0.45; }
-            }
-
-            window-rule {
-                match title="Diablo II"
-                open-fullscreen true
-            }
-
-            window-rule {
-                match title="World of Warcraft"
-                open-fullscreen true
-            }
           '';
         };
 
@@ -231,7 +240,7 @@ in
 
                   Super+T { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri kitty"; }
                   Super+B { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri firefox"; }
-                  Super+E { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri dolphin"; }
+                  Super+E { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri thunar"; }
                   Super+Shift+D { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri vesktop"; }
                   Super+Ctrl+S { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri steam"; }
                   Super+Shift+M { spawn-sh "~/.local/bin/raise-cycle-or-spawn niri spotify"; }
@@ -306,7 +315,7 @@ in
                   Super+F9             allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
                   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
                   Super+F10            allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-                  MouseBack allow-invalidation=true {
+                  Alt+V  allow-invalidation=true {
                       press { spawn-sh "mic-ptt press"; }
                       release { spawn-sh "mic-ptt release"; }
                   }

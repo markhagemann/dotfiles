@@ -47,10 +47,6 @@
   home.packages = with pkgs; [
     # Shared utilities
     adw-gtk3
-    kdePackages.ark
-    kdePackages.dolphin
-    kdePackages.kate
-    kdePackages.qt6ct
     qt6Packages.qt6ct
     qimgv
     udiskie
@@ -163,18 +159,18 @@
   programs.vesktop = {
     enable = true;
     settings = {
-      appBadge = false;
+      appBadge = true;
       arRPC = true;
       checkUpdates = false;
       customTitleBar = false;
       disableMinSize = true;
       minimizeToTray = true;
-      tray = false;
+      tray = true;
       splashBackground = "#282a37";
       splashColor = "#bb9af7";
       splashTheming = true;
       staticTitle = true;
-      hardwareAcceleration = false;
+      hardwareAcceleration = true;
       discordBranch = "stable";
     };
   };
