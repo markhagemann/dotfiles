@@ -238,7 +238,7 @@
   useAutoLocation = true;
   weatherEnabled = true;
   networkPreference = "auto";
-  iconTheme = "Vivid-Dark-Icons";
+  iconTheme = "candy-icons";
   cursorSettings = {
     dwl = {
       cursorHideTimeout = 0;

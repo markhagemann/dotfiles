@@ -47,6 +47,7 @@
   home.packages = with pkgs; [
     # Shared utilities
     adw-gtk3
+    nwg-look # for customizing adw-gtk3
     qt6Packages.qt6ct
     qimgv
     udiskie

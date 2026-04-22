@@ -43,6 +43,7 @@ in
         # mpvpaper
         # swww
         xwayland-satellite
+        candy-icons
       ];
 
       home.file = {
@@ -219,6 +220,7 @@ in
               environment {
                   QT_QPA_PLATFORM "wayland"
                   QT_QPA_PLATFORMTHEME "qt6ct"
+                  QS_ICON_THEME "candy-icons"
                   XDG_CURRENT_DESKTOP "niri"
               }
 
