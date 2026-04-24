@@ -1,10 +1,5 @@
 return {
   {
-    "esmuellert/codediff.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    cmd = "CodeDiff",
-  },
-  {
     -- Git integration showing signs, blame, and diff information
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",

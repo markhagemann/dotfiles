@@ -52,8 +52,10 @@ opt.fillchars = { -- Fill characters for various elements
 }
 opt.foldenable = true -- Enable folding
 opt.foldcolumn = "1" -- Fold column width
-opt.foldlevel = 99 -- Using ufo.nvim, so set a high default fold level
+opt.foldlevel = 99 -- High default so files open unfolded
 opt.foldlevelstart = 99 -- Show all folds when opening a file
+opt.foldmethod = "expr" -- Use an expression for fold ranges
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Native Treesitter folding
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m" -- Format for grep results
 opt.grepprg = "rg --vimgrep" -- Use ripgrep for grep

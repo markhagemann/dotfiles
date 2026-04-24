@@ -373,7 +373,7 @@ return {
     },
     terminal = { enabled = false, win = { border = "single" } },
     toggle = { enabled = true },
-    words = { enabled = true },
+    words = { enabled = false }, -- Using vim-illuminate
     zen = { enabled = true },
   },
   keys = {

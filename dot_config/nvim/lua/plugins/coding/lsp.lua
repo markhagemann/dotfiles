@@ -238,12 +238,6 @@ return {
     end,
   },
   {
-    -- Enhanced LSP hover documentation with better formatting
-    "Fildo7525/pretty_hover",
-    event = "LspAttach",
-    opts = {},
-  },
-  {
     -- Show code action lightbulb icon when LSP code actions are available
     "kosayoda/nvim-lightbulb",
     event = "LspAttach",
@@ -265,21 +259,6 @@ return {
   { "chrisgrieser/nvim-rulebook", event = "LspAttach" },
   -- Automatic cleanup of unused LSP servers and diagnostics
   { "Zeioth/garbage-day.nvim", event = "LspAttach" },
-  {
-    -- Minimal code action picker for LSP code actions
-    "rachartier/tiny-code-action.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      {
-        "folke/snacks.nvim",
-        opts = {
-          terminal = {},
-        },
-      },
-    },
-    event = "LspAttach",
-    opts = {},
-  },
   {
     -- Inline diagnostic messages shown at the end of lines with errors
     "rachartier/tiny-inline-diagnostic.nvim",

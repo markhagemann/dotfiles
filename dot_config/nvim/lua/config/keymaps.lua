@@ -81,6 +81,10 @@ keymap.set(
   { desc = "Replace word under cursor" }
 )
 
+-- Fold all / unfold all (aliases to native zR/zM so muscle memory from ufo still works)
+keymap.set("n", "zO", "zR", { desc = "Open all folds" })
+keymap.set("n", "zC", "zM", { desc = "Close all folds" })
+
 -- Save and load session
 keymap.set("n", "<leader>SS", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
 keymap.set("n", "<leader>SL", ":source .session.vim<CR>", { noremap = true, silent = false })
