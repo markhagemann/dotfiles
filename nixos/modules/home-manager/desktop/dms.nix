@@ -107,26 +107,23 @@ in
       gammastep
       kdePackages.qtmultimedia
       inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default
+      libnotify
     ];
 
     home.file = lib.mkIf cfg.enable {
-      ".local/bin/mic-ptt" = {
+      ".local/bin/mic-toggle" = {
         text = ''
           #!/usr/bin/env bash
-          STATE_FILE="$HOME/.mic-ptt-state"
-
-          case "$1" in
-              press)
-                  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
-                  echo "unmuted" > "$STATE_FILE"
-                  ;;
-              release)
-                  if [[ -f "$STATE_FILE" ]]; then
-                      wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
-                      rm -f "$STATE_FILE"
-                  fi
-                  ;;
-          esac
+          STATE_FILE="$HOME/.mic-mute-state"
+          if [[ -f "$STATE_FILE" ]]; then
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+            rm -f "$STATE_FILE"
+            notify-send -u low -e -r 69420 "Microphone" "Unmuted" -i microphone
+          else
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+            touch "$STATE_FILE"
+            notify-send -u low -e -r 69420 "Microphone" "Muted" -i microphone-symbolic
+          fi
         '';
         executable = true;
       };
