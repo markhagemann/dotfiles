@@ -325,16 +325,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1776372253,
-        "narHash": "sha256-sZJ6PwUiGESkNESk2cENidMBiIbZ59jBc+QrNwKHc7s=",
-        "owner": "JustinSpedding",
+        "lastModified": 1777115961,
+        "narHash": "sha256-ehSMsSpE+0k8r+2Vseu8kangsYxToZv3vinynsDp9zs=",
+        "owner": "niri-wm",
         "repo": "niri",
-        "rev": "9ed88e26b3d08fbc1096dbeb47c9c6d97dddaf1b",
+        "rev": "8ed0da44d974c32c6877d2f4630c314da0717ecb",
         "type": "github"
       },
       "original": {
-        "owner": "JustinSpedding",
-        "ref": "up-down-keybinds",
+        "owner": "niri-wm",
+        "ref": "v26.04",
         "repo": "niri",
         "type": "github"
       }

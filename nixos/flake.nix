@@ -45,7 +45,7 @@
     dgop.url = "github:AvengeMedia/dgop";
     dgop.inputs.nixpkgs.follows = "nixpkgs";
     niri-release-binds = {
-      url = "github:JustinSpedding/niri/up-down-keybinds";
+      url = "github:niri-wm/niri/v26.04";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
