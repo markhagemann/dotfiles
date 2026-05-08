@@ -1,5 +1,6 @@
 **/*/.cursor/
 **/*/.claude/
 .config/tmux/plugins/
+.config/kitty/os-specific.conf
 
 **/*/.DS_Store
