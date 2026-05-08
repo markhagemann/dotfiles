@@ -9,8 +9,6 @@ local keymap = vim.keymap -- for conciseness
 -- General Keymaps
 ---------------------
 
--- Use jk to exit insert mode
-keymap.set("i", "jk", "<ESC>")
 -- Use alt + ` to exit insert mode (habit from 60% keyboards)
 keymap.set("i", "<M-`>", "<ESC>")
 

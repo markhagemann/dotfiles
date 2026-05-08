@@ -191,19 +191,6 @@ return {
       },
     },
   },
-  {
-    -- Better escape from insert mode using jk or kj
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup({
-        mappings = {
-          t = { j = { false } }, --lazygit navigation fix
-          v = { j = { k = false } }, -- visual select fix
-        },
-      })
-    end,
-  },
   -- Intercepts p / P / gp / gP so linewise pasted code lands at the right indent level automatically.
   {
     "nemanjamalesija/smart-paste.nvim",
