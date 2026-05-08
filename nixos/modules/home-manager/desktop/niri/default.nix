@@ -94,8 +94,27 @@ in
           force = true;
           text = ''
             window-rule {
+                match app-id=r#"^org\.gnome\."#
+                draw-border-with-background false
+                geometry-corner-radius 12
+                clip-to-geometry true
+            }
+
+            window-rule {
                 match app-id=r#".*$"#
                 variable-refresh-rate false
+                open-floating true
+                opacity 0.97
+            }
+
+            window-rule {
+                match is-active=false
+                opacity 0.95
+            }
+
+            // Open DMS windows as floating by default
+            window-rule {
+                match app-id=r#"org.quickshell$"#
                 open-floating true
             }
 
@@ -126,6 +145,13 @@ in
                 default-column-width { proportion 0.85; }
                 default-window-height { proportion 0.85; }
                 open-on-workspace "terminal"
+                draw-border-with-background false
+            }
+
+            window-rule {
+                match app-id="kitty"
+                match is-active=true
+                opacity 1.0
             }
 
             window-rule {
@@ -150,12 +176,18 @@ in
                 match app-id="firefox"
                 open-on-workspace "browser"
                 open-floating false
+                opacity 1.0
             }
 
             window-rule {
                 match app-id="vesktop"
                 open-on-workspace "discord"
                 open-floating false
+            }
+
+            window-rule {
+                match title="Ghost of Tsushima"
+                variable-refresh-rate true
             }
 
           '';
@@ -203,11 +235,39 @@ in
 
               prefer-no-csd
 
+              animations {
+                  workspace-switch {
+                    duration-ms 150
+                    curve "ease-out-expo"
+                  }
+              }
+
               gestures {
                   // ... other gesture settings
                   hot-corners {
                       off
                   }
+
+                  // Disable switching workspaces when dragging a tab to the screen edge
+                  dnd-edge-workspace-switch {
+                      // You can set the height to 0 to effectively disable it
+                      trigger-height 0
+                  }
+              }
+
+              layout {
+                  background-color "transparent"
+              }
+
+              layer-rule {
+                  match namespace="^quickshell$"
+                  place-within-backdrop true
+              }
+
+              // Enable blur on the shell's blur layer
+              layer-rule {
+                  match namespace="dms:blurwallpaper"
+                  place-within-backdrop true
               }
 
               cursor {
@@ -343,21 +403,11 @@ in
         };
       };
 
-      # https://github.com/niri-wm/niri/issues/3700
-      # Recent issue seems to have broken gnome screencasting
       xdg.portal = {
         enable = true;
-        config.common.default = [ "gtk" ];
-        config.niri = {
-          default = [
-            "gtk"
-            "gnome"
-          ];
-        };
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-gnome
-        ];
+        xdgOpenUsePortal = true;
+        config.common.default = "*";
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
     }
   ]);

@@ -33,7 +33,7 @@
     easyeffects
     faugus-launcher
     # gamescope-wsi
-    lutris
+    # lutris - openldb build failing
     protonup-qt
     steam
     wineWow64Packages.stable
@@ -99,7 +99,7 @@
         niri.outputs = monitors;
         mango.enable = false;
         mango.outputs = monitors;
-        kde.enable = true;
+        kde.enable = false;
         fonts.enable = true;
         wayland.enable = true;
       };

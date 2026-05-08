@@ -47,7 +47,7 @@
   modalElevationEnabled = true;
   popoutElevationEnabled = true;
   barElevationEnabled = true;
-  blurEnabled = false;
+  blurEnabled = true;
   blurBorderColor = "outline";
   blurBorderCustomColor = "#ffffff";
   blurBorderOpacity = 1;
@@ -321,17 +321,17 @@
   matugenTemplateZenBrowser = true;
   matugenTemplateVesktop = true;
   matugenTemplateEquibop = true;
-  matugenTemplateGhostty = true;
-  matugenTemplateKitty = true;
+  matugenTemplateGhostty = false;
+  matugenTemplateKitty = false;
   matugenTemplateFoot = true;
-  matugenTemplateAlacritty = true;
-  matugenTemplateNeovim = true;
-  matugenTemplateWezterm = true;
+  matugenTemplateAlacritty = false;
+  matugenTemplateNeovim = false;
+  matugenTemplateWezterm = false;
   matugenTemplateDgop = true;
   matugenTemplateKcolorscheme = true;
-  matugenTemplateVscode = true;
-  matugenTemplateEmacs = true;
-  matugenTemplateZed = true;
+  matugenTemplateVscode = false;
+  matugenTemplateEmacs = false;
+  matugenTemplateZed = false;
   matugenTemplateNeovimSettings = {
     dark = {
       baseTheme = "github_dark";
@@ -527,20 +527,20 @@
         }
       ];
       showOnLastDisplay = false;
-      transparency = 1;
+      transparency = 0.95;
       widgetTransparency = 0.0;
       widgetOutlineEnabled = false;
       widgetOutlineOpacity = 0.71;
-      widgetOutlineThickness = 3;
+      widgetOutlineThickness = 6;
       widgetOutlineColor = "primary";
       borderEnabled = true;
       borderColor = "primary";
-      borderThickness = 1;
+      borderThickness = 2;
       borderOpacity = 0.3;
       spacing = 4;
       widgetPadding = 2;
       bottomGap = 0;
-      innerPadding = 0;
+      innerPadding = 6;
     }
   ];
   desktopClockEnabled = false;

@@ -42,8 +42,8 @@ let
       pos = parsePosition m.position;
       name = m.identifier;
       # Don't want to use VRR until it can be enabled on demand in certain windows
-      # vrr = if (m.vrrOnDemand or false) then "1" else "0";
-      vrr = if (m.vrrOnDemand or false) then "0" else "0";
+      vrr = if (m.vrrOnDemand or false) then "1" else "0";
+      # vrr = if (m.vrrOnDemand or false) then "0" else "0";
     in
     "monitorrule=name:^${name}$,width:${mode.width},height:${mode.height},refresh:${mode.refresh},x:${pos.x},y:${pos.y},vrr:${vrr}"
   ) cfg.outputs;

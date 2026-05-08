@@ -5,6 +5,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/DankMaterialShell";
     };
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager/master";
@@ -44,10 +48,6 @@
     textfox.url = "github:adriankarlen/textfox";
     dgop.url = "github:AvengeMedia/dgop";
     dgop.inputs.nixpkgs.follows = "nixpkgs";
-    niri-release-binds = {
-      url = "github:niri-wm/niri/v26.04";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     inputs@{
@@ -99,6 +99,7 @@
             {
               nixpkgs.overlays = [
                 nix-cachyos-kernel.overlays.pinned
+                inputs.niri-flake.overlays.niri
                 # inputs.dolphin-overlay.overlays.default
               ];
               home-manager.extraSpecialArgs = { inherit inputs; };

@@ -50,7 +50,7 @@ in
 
     programs.niri = {
       enable = true;
-      package = inputs.niri-release-binds.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = pkgs.niri-unstable;
     };
 
     programs.thunar = {

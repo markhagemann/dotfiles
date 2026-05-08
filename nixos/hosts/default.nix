@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 
@@ -39,16 +40,18 @@
     discord
     docker-compose
     dmidecode
+    ec
     extra-cmake-modules
     gcc
     libffi.dev
     ffmpeg
     flatpak
     git
+    # inputs.helium.packages.${system}.default
     just
     kitty
     ntfs3g
-    opencode
+    # opencode
     openssl
     openssl.dev
     pgcli
