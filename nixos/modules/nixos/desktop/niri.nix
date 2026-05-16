@@ -56,6 +56,7 @@ in
     programs.thunar = {
       enable = true;
       plugins = with pkgs; [
+        file-roller
         thunar-archive-plugin
         thunar-volman
       ];

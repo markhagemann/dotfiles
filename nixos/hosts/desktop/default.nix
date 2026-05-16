@@ -121,8 +121,10 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   # programs.gamescope.enable = true;
-  # Download via Discover for the moment - need gpu-screen-recorder-ui merge to be approved
-  # programs.gpu-screen-recorder.enable = true;
+  programs.gpu-screen-recorder = {
+    enable = true;
+    ui.enable = true;
+  };
   programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;

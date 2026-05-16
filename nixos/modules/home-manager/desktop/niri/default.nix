@@ -105,6 +105,7 @@ in
                 variable-refresh-rate false
                 open-floating true
                 opacity 0.97
+                exclude title="gsr notify"
             }
 
             window-rule {
