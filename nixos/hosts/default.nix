@@ -41,7 +41,7 @@
     docker-compose
     dmidecode
     ec
-    extra-cmake-modules
+    kdePackages.extra-cmake-modules
     gcc
     libffi.dev
     ffmpeg
