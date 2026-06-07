@@ -109,6 +109,8 @@ in
       };
     };
 
+    services.dunst.enable = true;
+
     users.groups.greeter = { };
 
     security.pam.services.greetd.enableGnomeKeyring = true;

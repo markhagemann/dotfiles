@@ -115,14 +115,32 @@ in
         text = ''
           #!/usr/bin/env bash
           STATE_FILE="$HOME/.mic-mute-state"
+
+          ID_FILE="/tmp/mic-dunst-id"
+
+          DUNSTIFY="${pkgs.dunst}/bin/dunstify"
+          WPCTL="${pkgs.wireplumber}/bin/wpctl"
+
+          # Fallback to an empty replace identifier if no previous id exists
+          REPLACE_FLAG=""
+          if [[ -f "$ID_FILE" ]]; then
+            LAST_ID=$(cat "$ID_FILE")
+            REPLACE_FLAG="-r $LAST_ID"
+          fi
+
           if [[ -f "$STATE_FILE" ]]; then
-            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+            $WPCTL set-mute @DEFAULT_AUDIO_SOURCE@ 0
             rm -f "$STATE_FILE"
-            notify-send -u low -e -r 69420 "Microphone" "Unmuted" -i microphone
+
+            # -p prints the dynamic tracking ID which we pipe straight into the state file
+            NEW_ID=$($DUNSTIFY $REPLACE_FLAG -p -t 2000 -u low "Microphone" "Unmuted" -i microphone)
+            echo "$NEW_ID" > "$ID_FILE"
           else
-            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+            $WPCTL set-mute @DEFAULT_AUDIO_SOURCE@ 1
             touch "$STATE_FILE"
-            notify-send -u low -e -r 69420 "Microphone" "Muted" -i microphone-symbolic
+
+            NEW_ID=$($DUNSTIFY $REPLACE_FLAG -p -t 2000 -u low "Microphone" "Muted" -i microphone-symbolic)
+            echo "$NEW_ID" > "$ID_FILE"
           fi
         '';
         executable = true;
