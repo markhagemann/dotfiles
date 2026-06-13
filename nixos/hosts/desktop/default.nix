@@ -132,6 +132,13 @@
   };
   programs.tmux.enable = true;
 
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      enkia.tokyo-night
+    ];
+  };
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
