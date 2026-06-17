@@ -213,5 +213,13 @@
     ];
   };
 
+  services.accounts-daemon.enable = true;
+
+  systemd.tmpfiles.rules = [
+    "f /var/lib/AccountsService/icons/mark 0444 root root - ${../../assets/avatar.jpg}"
+    "d /var/lib/AccountsService/users 0755 root root -"
+    "f /var/lib/AccountsService/users/mark 0644 root root - [User]\nIcon=/var/lib/AccountsService/icons/mark\n"
+  ];
+
   virtualisation.docker.enable = true;
 }

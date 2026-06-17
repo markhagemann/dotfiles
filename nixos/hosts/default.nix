@@ -52,7 +52,7 @@
     just
     kitty
     ntfs3g
-    # opencode
+    opencode
     openssl
     openssl.dev
     pgcli
