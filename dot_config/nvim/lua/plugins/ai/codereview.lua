@@ -17,6 +17,7 @@ return {
     ai = {
       enabled = vim.env.CODEREVIEW_AI_PROVIDER ~= nil,
       provider = vim.env.CODEREVIEW_AI_PROVIDER,
+      review_level = "warning",
     },
   },
 }
