@@ -115,14 +115,14 @@ in
         text = ''
           #!/usr/bin/env bash
           STATE_FILE="$HOME/.mic-mute-state"
+          WPCTL="${pkgs.wireplumber}/bin/wpctl"
+
           if [[ -f "$STATE_FILE" ]]; then
-            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+            $WPCTL set-mute @DEFAULT_AUDIO_SOURCE@ 0
             rm -f "$STATE_FILE"
-            notify-send -u low -e -r 69420 "Microphone" "Unmuted" -i microphone
           else
-            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+            $WPCTL set-mute @DEFAULT_AUDIO_SOURCE@ 1
             touch "$STATE_FILE"
-            notify-send -u low -e -r 69420 "Microphone" "Muted" -i microphone-symbolic
           fi
         '';
         executable = true;

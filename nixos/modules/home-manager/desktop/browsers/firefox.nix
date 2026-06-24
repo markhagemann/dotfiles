@@ -92,7 +92,7 @@
         sidebery
         sponsorblock
         stylus
-        tabliss
+        # tabliss
         # ublock-origin # commented to use latest version manually
         ublacklist
       ];

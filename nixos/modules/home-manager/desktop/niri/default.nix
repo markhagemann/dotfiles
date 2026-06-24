@@ -187,10 +187,21 @@ in
             }
 
             window-rule {
+                match title="Battle.net"
+                open-on-workspace "gaming"
+            }
+
+            window-rule {
                 match title="Ghost of Tsushima"
+                open-on-workspace "gaming"
                 variable-refresh-rate true
             }
 
+            window-rule {
+                match title="World of Warcraft"
+                open-on-workspace "gaming"
+                variable-refresh-rate false
+            }
           '';
         };
 
@@ -293,7 +304,7 @@ in
                   Super+Shift+Slash { show-hotkey-overlay; }
                   Super+Shift+F5 { quit skip-confirmation=true; }
 
-                  Super+V { spawn-sh "dms ipc call clipboard toggle"; }
+                  Super+Shift+V { spawn-sh "dms ipc call clipboard toggle"; }
                   Ctrl+Alt+Shift+P { power-off-monitors; }
                   Ctrl+Alt+L { spawn-sh "dms ipc call lock lock "; }
 
@@ -378,7 +389,7 @@ in
                   Super+F9             allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
                   XF86AudioMicMute     allow-when-locked=true { spawn-sh "$HOME/.local/bin/mic-toggle"; }
                   Super+F10            allow-when-locked=true { spawn-sh "$HOME/.local/bin/mic-toggle"; }
-                  Alt+V                allow-when-locked=true { spawn-sh "$HOME/.local/bin/mic-toggle"; }
+                  Super+V              allow-when-locked=true { spawn-sh "$HOME/.local/bin/mic-toggle"; }
 
                   XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
                   Super+F5             allow-when-locked=true { spawn-sh "playerctl play-pause"; }

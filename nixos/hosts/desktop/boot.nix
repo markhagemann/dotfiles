@@ -23,8 +23,7 @@
 
   };
 
-  # Reduce SIGTERM time to 30s from default of 90s
-  systemd.user.extraConfig = ''
-    DefaultTimeoutStopSec=10s
-  '';
+  systemd.user.settings.Manager = {
+    DefaultTimeoutStopSec = "10s";
+  };
 }

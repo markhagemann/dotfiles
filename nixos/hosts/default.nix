@@ -27,7 +27,7 @@
   environment.systemPackages = with pkgs; [
     atuin
     betterdiscordctl
-    bitwarden-desktop
+    # bitwarden-desktop
     bob-nvim
     btop
     cargo
@@ -44,6 +44,7 @@
     kdePackages.extra-cmake-modules
     gcc
     libffi.dev
+    lsof
     ffmpeg
     flatpak
     git
@@ -51,7 +52,7 @@
     just
     kitty
     ntfs3g
-    # opencode
+    opencode
     openssl
     openssl.dev
     pgcli
