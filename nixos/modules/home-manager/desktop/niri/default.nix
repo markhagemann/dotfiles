@@ -150,6 +150,11 @@ in
             }
 
             window-rule {
+                match app-id="mpv"
+                opacity 1.0
+            }
+
+            window-rule {
                 match app-id="kitty"
                 match is-active=true
                 opacity 1.0

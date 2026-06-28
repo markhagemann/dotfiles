@@ -34,7 +34,7 @@
     faugus-launcher
     # gamescope-wsi
     # lutris - openldb build failing
-    protonup-qt
+    protonplus
     steam
     wineWow64Packages.stable
     wineWow64Packages.staging
