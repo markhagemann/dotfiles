@@ -106,12 +106,12 @@
     }
     {
       enabled = true;
-      id = "bluetooth";
+      id = "audioOutput";
       width = 50;
     }
     {
       enabled = true;
-      id = "audioOutput";
+      id = "vpn";
       width = 50;
     }
     {
@@ -126,7 +126,7 @@
     }
     {
       enabled = true;
-      id = "darkMode";
+      id = "bluetooth";
       width = 50;
     }
   ];
