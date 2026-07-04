@@ -111,7 +111,7 @@
     }
     {
       enabled = true;
-      id = "vpn";
+      id = "builtin_vpn";
       width = 50;
     }
     {
