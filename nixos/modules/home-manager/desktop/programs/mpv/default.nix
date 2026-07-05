@@ -24,7 +24,7 @@
       video-sync = "display-resample";
       interpolation = "yes";
       tscale = "oversample";
-      slang = "en,eng";
+      slang = "sv,de,nl,en,eng";
       alang = "ja,jp,jpn,en,eng";
       image-display-duration = "inf";
       # osd-font = "${custom-font.lato}";
@@ -35,26 +35,6 @@
       demuxer-readahead-secs = "60";
       border = "no";
       keepaspect-window = "no";
-    };
-    bindings = {
-      "l" = "seek 5";
-      "h" = "seek -5";
-      "Alt+n" = "playlist-next";
-      "Alt+p" = "playlist-prev";
-      "k" = "seek 60";
-      "j" = "seek -60";
-      "]" = "add speed 0.1";
-      "[" = "add speed -0.1";
-      "CTRL+f" = "script-binding memo-history";
-      "tab" = "script-binding uosc/toggle-ui";
-      "c" = "script-binding uosc/chapters";
-      "r" = "script-binding uosc/stream-quality";
-      "t" = "script-binding uosc/audio";
-      "shift+f" = "script-binding uosc/keybinds";
-      "shift+p" = "script-binding uosc/items";
-      "s" = "script-binding uosc/subtitles";
-      "u" = "script-message-to youtube_upnext menu";
-      "shift+s" = "async screenshot";
     };
     scripts = with pkgs.mpvScripts; [
       mpris
