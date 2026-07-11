@@ -24,8 +24,7 @@
       video-sync = "display-resample";
       interpolation = "yes";
       tscale = "oversample";
-      slang = "sv,de,nl,en,eng";
-      alang = "ja,jp,jpn,en,eng";
+      # slang = "sv,de,nl,en,eng";
       image-display-duration = "inf";
       # osd-font = "${custom-font.lato}";
       cache = "yes";
