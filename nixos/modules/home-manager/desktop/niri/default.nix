@@ -186,6 +186,12 @@ in
             }
 
             window-rule {
+                match app-id="firefox"
+                match title=r#"^Extension: "#
+                open-floating true
+            }
+
+            window-rule {
                 match app-id="vesktop"
                 open-on-workspace "discord"
                 open-floating false
