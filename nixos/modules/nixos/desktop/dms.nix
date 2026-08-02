@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     programs.dms-shell = {
       enable = true;
-      package = mkDefault inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      # package = mkDefault inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
       systemd = {
         enable = true;
         restartIfChanged = true;

@@ -23,7 +23,7 @@
     ../../modules/home-manager/services/flatpak.nix
     ../../modules/home-manager/shell/mise.nix
     inputs.textfox.homeManagerModules.default
-    inputs.dms.homeModules.dank-material-shell
+    # inputs.dms.homeModules.dank-material-shell
     inputs.mango.hmModules.mango
   ];
 

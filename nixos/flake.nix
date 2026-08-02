@@ -1,10 +1,10 @@
 {
   description = "Minimal flake for NixOS with Home Manager modules";
   inputs = {
-    dms = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:AvengeMedia/DankMaterialShell";
-    };
+    # dms = {
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "github:AvengeMedia/DankMaterialShell";
+    # };
     helium = {
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,8 +46,8 @@
     # };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     textfox.url = "github:adriankarlen/textfox";
-    dgop.url = "github:AvengeMedia/dgop";
-    dgop.inputs.nixpkgs.follows = "nixpkgs";
+    # dgop.url = "github:AvengeMedia/dgop";
+    # dgop.inputs.nixpkgs.follows = "nixpkgs";
     gsr-ui-nix = {
       url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -96,7 +96,7 @@
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
-            inputs.dms.nixosModules.default
+            # inputs.dms.nixosModules.default
             inputs.gsr-ui-nix.nixosModules.default
             ./hosts/default.nix
             ./hosts/desktop
