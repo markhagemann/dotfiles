@@ -89,7 +89,9 @@ in
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
         ExecStartPre = "${pkgs.bash}/bin/bash -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"KDE\" ]; then exit 1; fi; until [ -S \"$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY\" ]; do sleep 0.5; done'";
-        ExecStart = "${pkgs.dms-shell}/bin/dms run --session";
+        ExecStart = "${
+          inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/bin/dms run --session";
         Restart = "on-failure";
         RestartSec = 1;
       };
@@ -104,7 +106,7 @@ in
       brightnessctl
       gammastep
       kdePackages.qtmultimedia
-      pkgs.dgop
+      inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default
       libnotify
     ];
 

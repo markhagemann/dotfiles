@@ -66,7 +66,7 @@ in
     services.gvfs.enable = true;
     services.tumbler.enable = true; # Thumbnail support
 
-    # DankGreeter using the native nixpkgs module + pkgs.dms-shell
+    # DankGreeter using flake package
     services.displayManager.dms-greeter = {
       enable = true;
       compositor.name = "niri";
@@ -102,7 +102,7 @@ in
         "/home/mark/.local/state/DankMaterialShell/session.json"
         "/home/mark/.cache/quickshell/dankshell/dms-colors.json"
       ];
-      # package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
       logs = {
         save = true;
         path = "/tmp/dms-greeter.log";
