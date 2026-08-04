@@ -31,6 +31,10 @@ in
       enableAudioWavelength = true;
       enableCalendarEvents = true;
       enableClipboardPaste = true;
+      plugins = {
+        calculator.enable = true;
+        amdGpuMonitor.enable = true;
+      };
     };
 
     users.groups.greeter = { };

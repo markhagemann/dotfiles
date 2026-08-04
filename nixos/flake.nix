@@ -16,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/DankMaterialShell/069df80b22996adaff5d2f1afa96fa8d50d7a1f6";
     };
+    dms-plugin-registry = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AvengeMedia/dms-plugin-registry";
+    };
     helium = {
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -108,6 +112,7 @@
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
             inputs.dms.nixosModules.default
+            inputs.dms-plugin-registry.nixosModules.default
             inputs.gsr-ui-nix.nixosModules.default
             ./hosts/default.nix
             ./hosts/desktop

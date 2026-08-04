@@ -506,6 +506,10 @@
           selectedGpuIndex = 0;
         }
         {
+          id = "amdGpuMonitor";
+          enabled = true;
+        }
+        {
           enabled = true;
           id = "network_speed_monitor";
         }

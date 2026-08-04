@@ -105,6 +105,7 @@ in
       cliphist
       brightnessctl
       gammastep
+      amdgpu_top
       kdePackages.qtmultimedia
       inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default
       libnotify
