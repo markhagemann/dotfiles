@@ -429,8 +429,17 @@ in
       xdg.portal = {
         enable = true;
         xdgOpenUsePortal = true;
-        config.common.default = "*";
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config = {
+          common = { default = "gtk"; };
+          "org.freedesktop.impl.portal.FileChooser" = { default = "gtk"; };
+          "org.freedesktop.impl.portal.Screenshot" = { default = "wlr"; };
+          "org.freedesktop.impl.portal.ScreenCast" = { default = "gnome"; };
+        };
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-gnome
+          pkgs.xdg-desktop-portal-wlr
+        ];
       };
     }
   ]);
