@@ -54,6 +54,7 @@
 
     # Fonts
     # adwaita-icon-theme
+    dune-rise
     font-awesome
 
     # Terminals / shell tools

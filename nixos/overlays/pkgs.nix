@@ -1,6 +1,8 @@
 final: prev: {
   display-switch = prev.callPackage ../modules/nixos/utility/display-switch/package.nix { };
 
+  dune-rise = prev.callPackage ../packages/dune-rise { };
+
   kde-rounded-corners = prev.kde-rounded-corners.overrideAttrs (oldAttrs: {
     src = prev.fetchFromGitHub {
       owner = "matinlotfali";
