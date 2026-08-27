@@ -2,5 +2,13 @@
 **/*/.claude/
 .config/tmux/plugins/
 .config/kitty/os-specific.conf
+.config/herdr/.plugins.lock
+.config/herdr/*.log
+.config/herdr/*.sock
+.config/herdr/plugins.json
+.config/herdr/session.json
+.config/herdr/sessions/
+.config/herdr/plugins/github/**
+.config/herdr/plugins/config/herdr-splits/herdr-splits.conf
 
 **/*/.DS_Store

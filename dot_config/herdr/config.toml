@@ -1,0 +1,209 @@
+# herdr config.toml — migrated from ~/.config/tmux/tmux.conf + theme.conf
+
+[theme]
+name = "tokyo-night"
+
+[theme.custom]
+panel_bg      = "#2d2b42"
+active_row_bg = "#282a37"
+accent        = "#73daca"  # theme.conf's @green (inactive tab pill fill)
+surface0      = "#2d2b42"  # pane border color, theme.conf's @bpurple
+surface1      = "#2d2b42"
+surface_dim   = "#2d2b42"
+green         = "#73daca"  # theme.conf's @green (tmux window-status-current-style fg)
+blue          = "#7aa2f7"  # theme.conf's @blue
+teal          = "#668cbe"  # theme.conf's @teal (tmux pane-border-format inactive dirname color)
+
+# Full accepted theme.custom token list (herdr 0.8.2), for reference:
+# [theme.custom]
+# text          = "#a9b1d6"  # theme.conf's @foreground
+# panel_bg      = "#282a37"  # theme.conf's @background
+# sidebar_bg    = "#2A2F41"  # theme.conf's @bblack
+# active_row_bg = "#2A2F41"  # theme.conf's @bblack
+# selection_bg  = "#2d2b42"  # theme.conf's @bpurple
+# accent        = "#bb9af7"  # theme.conf's @magenta
+# red           = "#f7768e"  # theme.conf's @red
+# green         = "#73daca"  # theme.conf's @green
+# yellow        = "#e0af68"  # theme.conf's @yellow
+# blue          = "#7aa2f7"  # theme.conf's @blue
+# teal          = "#668cbe"  # theme.conf's @teal
+
+[terminal]
+shell_mode = "auto"
+new_cwd = "follow"  # tmux.conf's `-c "#{pane_current_path}"` on every split/new-window bind
+
+[keys]
+prefix = "ctrl+a"                  # tmux.conf: `set -g prefix ^A`
+detach = "prefix+shift+d"          # tmux.conf: `unbind d` + `bind D detach-client`
+
+# herdr's default toggle_sidebar is prefix+b, which collides with the btop
+# popup below — moved sidebar here to free up b/d for the popups.
+toggle_sidebar = "prefix+shift+b"
+
+# herdr's own mnemonics for goto/workspace_picker are the reverse of tmux's
+# w/s (session vs. window picker) — swapped to match tmux muscle memory.
+# workspace_picker also collides with herdr's default settings key, so
+# settings moved to prefix+shift+s.
+goto             = "prefix+w"
+workspace_picker = "prefix+s"
+settings         = "prefix+shift+s"
+
+# rename_tab and reload_config already default to prefix+shift+t / prefix+shift+r
+# (tmux's bind r / bind R) — no override needed.
+
+# focus_pane_left/down/up/right already default to prefix+h/j/k/l — no override needed.
+
+# navigate_pane_* already defaults to vi keys (h/j/k/l); navigate_workspace_up/down
+# don't (they default to up/down), so set explicitly for tmux's `mode-keys vi`.
+navigate_workspace_up   = "k"
+navigate_workspace_down = "j"
+
+# tmux.conf: `bind H/J/K/L resize-pane -L/-D/-U/-R 3`. These collide with
+# herdr's default swap_pane_left/down/up/right (same keys) — resize wins
+# since that's the actual daily muscle memory, not swap.
+resize_pane_left  = "prefix+shift+h"
+resize_pane_down  = "prefix+shift+j"
+resize_pane_up    = "prefix+shift+k"
+resize_pane_right = "prefix+shift+l"
+# Note: each press is a discrete step (no tmux-style hold-to-repeat).
+
+# No exact equivalent to tmux's copy-mode-vi select/yank; closest is
+# edit_scrollback (default prefix+e), left at its default.
+
+split_vertical   = "prefix+|"      # tmux.conf: `bind | split-window -h`
+split_horizontal = "prefix+minus"  # tmux.conf: `bind - split-window`
+# Both are even 50/50 splits via herdr's native split actions.
+
+# All [[keys.command]] blocks must come after every plain `key = value` line
+# above — TOML attaches trailing scalars to the nearest [[array-of-tables]]
+# entry, not back to [keys].
+
+# type = "popup" is a floating, session-modal terminal that doesn't touch the
+# tab layout, closes when the command exits, and can also be closed with
+# close_pane (prefix+x). (type = "pane" instead opens a real split pane.)
+[[keys.command]]
+key = "prefix+b"
+type = "popup"
+command = "btop"
+width = "95%"
+height = "95%"
+description = "btop popup"
+
+[[keys.command]]
+key = "prefix+d"
+type = "popup"
+command = "lazydocker"
+width = "95%"
+height = "95%"
+description = "lazydocker popup"
+
+[[keys.command]]
+key = "prefix+`"
+type = "popup"
+command = "$SHELL"
+width = "80%"
+height = "80%"
+description = "scratch terminal popup"
+
+[ui]
+mouse_capture = true    # tmux.conf: mouse on
+copy_on_select = false  # tmux.conf: drag-to-copy disabled
+
+# No per-pane "cwd basename in border" token exists in herdr 0.8.2 (tmux.conf
+# used pane-border-status + a script for this). Closest equivalent is naming
+# panes manually (rename_pane, prefix+shift+p).
+pane_borders = true
+show_agent_labels_on_pane_borders = false
+
+# Required by herdr-automatic-rename: lets its process-detected names apply
+# instead of prompting for a name on every new tab.
+prompt_new_tab_name = false
+
+[session]
+resume_agents_on_restore = true
+
+[experimental]
+kitty_graphics = true  # tmux.conf: `set -g allow-passthrough on`
+
+# Not configured (confirmed unnecessary, not just skipped):
+# - escape-time 10 (neovim escape-key lag): no equivalent setting exists;
+#   herdr does its own terminal I/O rather than tmux's separate disambiguation layer.
+# - base-index 1: herdr workspaces/tabs are already 1-based by default.
+# - terminal-overrides for RGB/undercurl/Tc: herdr renders its own UI rather
+#   than passing codes through, so there's nothing to override.
+
+# CPU/mem/disk status (tmux-cpu-mem-monitor equivalent): INSTALLED
+# (ezcorp-org/herdr-pc-ram-and-cpu-usage-overlay). Self-installs the $usage
+# row into [ui.sidebar.spaces] below; no [[keys.command]] needed.
+
+# tmux-sessionizer.sh equivalent: INSTALLED (andrewchng/herdr-sessionizer).
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "sessionizer.open"
+description = "open project workspace"
+
+# vim-tmux-navigator equivalent: lmilojevicc/herdr-splits.nvim (also covers
+# resizing, edge-wrap, zoom/sidebar-awareness). Neovim-side lazy.nvim spec
+# lives in ~/.config/nvim/lua/plugins/utility.lua. Bare (non-prefix) chords,
+# matching vim-tmux-navigator's own convention; alt+h/j/k/l needs Kitty's
+# `macos_option_as_alt yes` (already set).
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "herdr-splits.nav-left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "herdr-splits.nav-down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "herdr-splits.nav-up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "herdr-splits.nav-right"
+
+[[keys.command]]
+key = "alt+h"
+type = "plugin_action"
+command = "herdr-splits.resize-left"
+
+[[keys.command]]
+key = "alt+j"
+type = "plugin_action"
+command = "herdr-splits.resize-down"
+
+[[keys.command]]
+key = "alt+k"
+type = "plugin_action"
+command = "herdr-splits.resize-up"
+
+[[keys.command]]
+key = "alt+l"
+type = "plugin_action"
+command = "herdr-splits.resize-right"
+
+# These bare alt+hjkl resize chords overlap in purpose (not keys) with
+# resize_pane_* above: alt+hjkl only resizes cleanly when the plugin can tell
+# Neovim is running in the pane, while prefix+shift+hjkl calls herdr's native
+# resize unconditionally.
+
+# --- added by ez-corp.space-usage (removed by `status-disable`) ---
+[ui.sidebar.spaces]
+rows = [
+  ["state_icon", "workspace"],
+  ["branch", "git_status"],
+  ["$usage"],
+]
+# --- end ez-corp.space-usage ---
+
+[ui.sound]
+enabled = false
+
+[ui.toast]
+delivery = "herdr"
