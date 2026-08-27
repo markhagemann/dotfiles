@@ -1,8 +1,10 @@
 [projects]
 roots = [
+  "~/",
   "~/.config",
   "~/Development",
   "~/Obsidian",
   "~/Packages",
 ]
+depth = 4,
 git_only = false

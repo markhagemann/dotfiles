@@ -1,3 +1,4 @@
+onboarding = false
 # herdr config.toml — migrated from ~/.config/tmux/tmux.conf + theme.conf
 
 [theme]
