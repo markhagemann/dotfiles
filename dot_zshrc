@@ -21,9 +21,9 @@ alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /de
 alias la=tree
 alias lzd="lazydocker"
 alias lzg="lazygit"
-alias lzj="lazyjournal"
-alias listlargesthomefiles="du -h /home/drache | sort -rh | head -5"
-alias listlogfilesize="du -h /home/drache/.cache/nvim | sort -rh | head -5"
+alias lzj="lazyjira"
+alias listlargesthomefiles="du -h ~ | sort -rh | head -5"
+alias listlogfilesize="du -h ~/.cache/nvim | sort -rh | head -5"
 alias ls='ls --color'
 alias oc="opencode"
 alias removenvimlog="rm /home/drache/.cache/nvim/log"
@@ -45,7 +45,7 @@ alias gst="git status"
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 alias gdiff="git diff"
 alias gco="git checkout"
-alias gcf="git checkout -b"
+alias gcb="git checkout -b"
 alias gb='git branch'
 alias gba='git branch -a'
 alias gadd='git add'
@@ -119,16 +119,16 @@ alias -s js='$EDITOR'
 alias -s ts='$EDITOR'
 alias -s html=open
 
-# Lazy-load gvm
-gvm_lazy_init() {
-  # Remove this function and the alias
-  unalias gvm 2>/dev/null
-  unfunction gvm_lazy_init 2>/dev/null
-  source "$HOME/.gvm/scripts/gvm"
-  gvm "$@"
-}
-
-alias gvm=gvm_lazy_init
+# # Lazy-load gvm
+# gvm_lazy_init() {
+#   # Remove this function and the alias
+#   unalias gvm 2>/dev/null
+#   unfunction gvm_lazy_init 2>/dev/null
+#   source "$HOME/.gvm/scripts/gvm"
+#   gvm "$@"
+# }
+#
+# alias gvm=gvm_lazy_init
 
 # Keybindings
 # Open the current command in your $EDITOR
@@ -145,6 +145,7 @@ bindkey ' ' magic-space
 
 # Insert git branch creation from another branch (Ctrl+X,gcb)
 bindkey -s "^Xgb" 'git checkout -b '
+bindkey -s "^Xgc" 'git checkout'
 bindkey -s "^Xgl" 'git log --oneline -n 10\n'
 
 # For applying and adding to chezmoi dotfiles
@@ -217,22 +218,30 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 zinit ice depth=1
 
-TMUX_DIR="~/.config/tmux"
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
-  if [ -z "$TMUX" ]; then
-    if tmux has-session 2>/dev/null; then
-      # Attach to provided session name if given, otherwise first available
-      if [ -n "$1" ]; then
-        tmux attach -t "$1"
-      else
-        tmux attach
-      fi
-    else
-      # No sessions exist, create a new one
-      tmux new
-    fi
-  fi
-fi
+# TMUX_DIR="~/.config/tmux"
+# if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+#   if [ -z "$TMUX" ]; then
+#     if tmux has-session 2>/dev/null; then
+#       # Attach to provided session name if given, otherwise first available
+#       if [ -n "$1" ]; then
+#         tmux attach -t "$1"
+#       else
+#         tmux attach
+#       fi
+#     else
+#       # No sessions exist, create a new one
+#       tmux new
+#     fi
+#   fi
+# fi
+
+# herdr-automatic-rename: live per-command tab auto-naming. No-ops outside a
+# herdr pane (checks $HERDR_PANE_ID itself), so safe to source unconditionally.
+for _herdr_ar_hook in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+  source $_herdr_ar_hook
+  break
+done
+unset _herdr_ar_hook
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -249,7 +258,7 @@ source $PRIVEXPORTFILE
 # Shell integrations
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 # Use oh-my-posh
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/negligible-custom.omp.toml)"
 eval "$(starship init zsh)"
