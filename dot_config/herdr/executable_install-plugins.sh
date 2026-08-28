@@ -8,4 +8,5 @@ set -eu
 herdr plugin install andrewchng/herdr-sessionizer -y
 herdr plugin install lmilojevicc/herdr-splits.nvim -y
 herdr plugin install ezcorp-org/herdr-pc-ram-and-cpu-usage-overlay -y
-herdr plugin install qu8n/herdr-automatic-rename -y
+herdr plugin install rohankewal/herdr-nerd-font-tab-name -y
+herdr plugin install ntindle/herdr-resurrect -y

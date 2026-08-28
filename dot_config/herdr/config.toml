@@ -1,5 +1,7 @@
-onboarding = false
 # herdr config.toml — migrated from ~/.config/tmux/tmux.conf + theme.conf
+
+# Skips the first-run notification-setup prompt on startup.
+onboarding = false
 
 [theme]
 name = "tokyo-night"
@@ -116,8 +118,8 @@ copy_on_select = false  # tmux.conf: drag-to-copy disabled
 pane_borders = true
 show_agent_labels_on_pane_borders = false
 
-# Required by herdr-automatic-rename: lets its process-detected names apply
-# instead of prompting for a name on every new tab.
+# Lets herdr-nerd-font-tab-name's process-detected icon/name apply instead of
+# prompting for a name on every new tab.
 prompt_new_tab_name = false
 
 [session]
@@ -193,6 +195,33 @@ command = "herdr-splits.resize-right"
 # resize_pane_* above: alt+hjkl only resizes cleanly when the plugin can tell
 # Neovim is running in the pane, while prefix+shift+hjkl calls herdr's native
 # resize unconditionally.
+
+# herdr-resurrect: crash/reboot recovery (snapshot + relaunch) and named
+# reusable "spaces". prefix+S from the plugin's own README collides with
+# settings = "prefix+shift+s" above, so save-space moved to prefix+ctrl+shift+s.
+[[keys.command]]
+key = "prefix+ctrl+s"
+type = "plugin_action"
+command = "ntindle.herdr-resurrect.save"
+description = "resurrect: save"
+
+[[keys.command]]
+key = "prefix+ctrl+r"
+type = "plugin_action"
+command = "ntindle.herdr-resurrect.restore"
+description = "resurrect: restore"
+
+[[keys.command]]
+key = "prefix+ctrl+shift+s"
+type = "plugin_action"
+command = "ntindle.herdr-resurrect.save-space"
+description = "resurrect: save this space as…"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "plugin_action"
+command = "ntindle.herdr-resurrect.open-space"
+description = "resurrect: open saved space…"
 
 # --- added by ez-corp.space-usage (removed by `status-disable`) ---
 [ui.sidebar.spaces]
