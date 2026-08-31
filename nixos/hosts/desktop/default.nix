@@ -33,6 +33,7 @@
     easyeffects
     faugus-launcher
     # gamescope-wsi
+    gowall
     # lutris - openldb build failing
     protonplus
     steam

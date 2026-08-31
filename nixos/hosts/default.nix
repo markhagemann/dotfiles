@@ -28,6 +28,7 @@
     betterdiscordctl
     # bitwarden-desktop
     bob-nvim
+    bun
     btop
     cargo
     chezmoi
