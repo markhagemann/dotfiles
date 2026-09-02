@@ -54,6 +54,15 @@ settings         = "prefix+shift+s"
 # rename_tab and reload_config already default to prefix+shift+t / prefix+shift+r
 # (tmux's bind r / bind R) — no override needed.
 
+# Swapped rename_workspace and resize_mode's default keys (prefix+shift+w /
+# prefix+r) so renaming is the shorter chord. A bare "r" was tried first but
+# herdr's config check refuses it outright ("unsafe direct keybinding... would
+# intercept typing") since rename_workspace isn't scoped to a modal like
+# navigate_pane_*/navigate_workspace_* are — it's a global action, so a bare
+# key would hijack the letter in every pane.
+rename_workspace = "prefix+r"
+resize_mode      = "prefix+shift+w"
+
 # focus_pane_left/down/up/right already default to prefix+h/j/k/l — no override needed.
 
 # navigate_pane_* already defaults to vi keys (h/j/k/l); navigate_workspace_up/down
@@ -76,6 +85,11 @@ resize_pane_right = "prefix+shift+l"
 split_vertical   = "prefix+|"      # tmux.conf: `bind | split-window -h`
 split_horizontal = "prefix+minus"  # tmux.conf: `bind - split-window`
 # Both are even 50/50 splits via herdr's native split actions.
+
+# open_worktree is unset by default. Bound here as the unshifted counterpart
+# to new_worktree's prefix+shift+g — shift distinguishes create (new_worktree)
+# from open (this one) for an existing worktree checkout.
+open_worktree = "prefix+g"
 
 # All [[keys.command]] blocks must come after every plain `key = value` line
 # above — TOML attaches trailing scalars to the nearest [[array-of-tables]]
@@ -118,8 +132,6 @@ copy_on_select = false  # tmux.conf: drag-to-copy disabled
 pane_borders = true
 show_agent_labels_on_pane_borders = false
 
-# Lets herdr-nerd-font-tab-name's process-detected icon/name apply instead of
-# prompting for a name on every new tab.
 prompt_new_tab_name = false
 
 [session]
@@ -222,15 +234,6 @@ key = "prefix+shift+o"
 type = "plugin_action"
 command = "ntindle.herdr-resurrect.open-space"
 description = "resurrect: open saved space…"
-
-# --- added by ez-corp.space-usage (removed by `status-disable`) ---
-[ui.sidebar.spaces]
-rows = [
-  ["state_icon", "workspace"],
-  ["branch", "git_status"],
-  ["$usage"],
-]
-# --- end ez-corp.space-usage ---
 
 [ui.sound]
 enabled = false
