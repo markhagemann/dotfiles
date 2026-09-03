@@ -122,10 +122,6 @@
   programs.firefox.enable = true;
   programs.gamemode.enable = true;
   # programs.gamescope.enable = true;
-  programs.gpu-screen-recorder = {
-    enable = true;
-    ui.enable = true;
-  };
   programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;
@@ -179,7 +175,9 @@
   };
 
   services.timesyncd.enable = true;
-  services.udev.packages = [ pkgs.boxflat ];
+  services.udev.packages = with pkgs; [
+    boxflat
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -196,6 +194,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  systemd.timers.nix-optimise.enable = false;
 
   time.hardwareClockInLocalTime = false;
   time.timeZone = "Australia/Brisbane";

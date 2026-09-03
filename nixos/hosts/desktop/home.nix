@@ -101,6 +101,9 @@
 
     # Media
     vlc
+
+    # Idle management
+    swayidle
   ];
 
   home.sessionVariables = {
@@ -174,6 +177,23 @@
       staticTitle = true;
       hardwareAcceleration = true;
       discordBranch = "stable";
+    };
+  };
+
+  systemd.user.services.nix-idle-optimise = {
+    Unit = {
+      Description = "Run nix-store --optimise on idle";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = ''
+        ${pkgs.swayidle}/bin/swayidle -w \
+          timeout 900 '${pkgs.nix}/bin/nix-store --optimise'
+      '';
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 

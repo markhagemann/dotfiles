@@ -48,7 +48,7 @@
     ffmpeg
     flatpak
     git
-    # inputs.helium.packages.${system}.default
+    inputs.helium.packages.${system}.default
     just
     kitty
     ntfs3g

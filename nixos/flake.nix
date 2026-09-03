@@ -63,10 +63,10 @@
     textfox.url = "github:adriankarlen/textfox";
     dgop.url = "github:AvengeMedia/dgop";
     dgop.inputs.nixpkgs.follows = "nixpkgs";
-    gsr-ui-nix = {
-      url = "github:rPlakama/gsr-ui-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # gsr-ui-nix = {
+    #   url = "github:rPlakama/gsr-ui-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
   outputs =
     inputs@{
@@ -111,9 +111,8 @@
             nur.modules.nixos.default
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
-            inputs.dms.nixosModules.default
             inputs.dms-plugin-registry.nixosModules.default
-            inputs.gsr-ui-nix.nixosModules.default
+            # inputs.gsr-ui-nix.nixosModules.default
             ./hosts/default.nix
             ./hosts/desktop
             home-manager.nixosModules.home-manager
