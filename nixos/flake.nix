@@ -1,20 +1,13 @@
 {
   description = "Minimal flake for NixOS with Home Manager modules";
   inputs = {
-    # dms is pinned to 069df80 (2026-07-18) because that was the last rev that still
-    # ships the Greetd module (Modules/Greetd) used by services.displayManager.dms-greeter.
-    # On 2026-07-19 the greeter was migrated to github:AvengeMedia/dank-greeter, so newer
-    # dms revs crash greetd on boot (missing ${pkg}/share/quickshell/dms/Modules/Greetd/...).
-    #
-    # To use a non-pinned (latest) version instead:
-    #   1. Change the url below to: url = "github:AvengeMedia/DankMaterialShell/stable";   (or drop the "/rev" for master/-git)
-    #   2. Update the lockfile:  nix flake lock --update-input dms
-    #   3. If greetd then fails to boot, you'll need to migrate to the dank-greeter flake
-    #      (github:AvengeMedia/dank-greeter) and switch services.displayManager.dms-greeter
-    #      to programs.dms-greeter (import inputs.dank-greeter.nixosModules.default).
     dms = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:AvengeMedia/DankMaterialShell/069df80b22996adaff5d2f1afa96fa8d50d7a1f6";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+    };
+    dank-greeter = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AvengeMedia/dank-greeter";
     };
     dms-plugin-registry = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -112,6 +105,7 @@
             lsfg-vk-flake.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
             inputs.dms-plugin-registry.nixosModules.default
+            inputs.dank-greeter.nixosModules.default
             # inputs.gsr-ui-nix.nixosModules.default
             ./hosts/default.nix
             ./hosts/desktop

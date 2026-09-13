@@ -66,8 +66,8 @@ in
     services.gvfs.enable = true;
     services.tumbler.enable = true; # Thumbnail support
 
-    # DankGreeter using flake package
-    services.displayManager.dms-greeter = {
+    # DankGreeter using dank-greeter flake
+    programs.dms-greeter = {
       enable = true;
       compositor.name = "niri";
       compositor.customConfig = ''
@@ -97,15 +97,9 @@ in
         }
       '';
       configHome = "/home/mark";
-      configFiles = [
-        "/home/mark/.config/DankMaterialShell/settings.json"
-        "/home/mark/.local/state/DankMaterialShell/session.json"
-        "/home/mark/.cache/quickshell/dankshell/dms-colors.json"
-      ];
-      package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
       logs = {
         save = true;
-        path = "/tmp/dms-greeter.log";
+        path = "/var/lib/dms-greeter/dms-greeter.log";
       };
     };
 
