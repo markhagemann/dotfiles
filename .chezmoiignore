@@ -10,5 +10,6 @@
 .config/herdr/sessions/
 .config/herdr/plugins/github/**
 .config/herdr/plugins/config/herdr-splits/herdr-splits.conf
+.config/herdr/release-notes.json
 
 **/*/.DS_Store
