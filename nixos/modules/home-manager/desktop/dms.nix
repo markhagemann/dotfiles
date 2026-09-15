@@ -101,6 +101,7 @@ in
     };
 
     home.packages = with pkgs; [
+      inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
       matugen
       cliphist
       brightnessctl
