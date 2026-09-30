@@ -34,8 +34,9 @@
     faugus-launcher
     # gamescope-wsi
     gowall
-    # lutris - openldb build failing
-    protonplus
+    lutris
+    # protonplus
+    protonup-qt
     steam
     wineWow64Packages.stable
     wineWow64Packages.staging
@@ -120,7 +121,15 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   programs.firefox.enable = true;
-  programs.gamemode.enable = true;
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true; # Grants CAP_SYS_NICE so gamemoded can lower process niceness
+    settings = {
+      general = {
+        renice = 10;
+      };
+    };
+  };
   # programs.gamescope.enable = true;
   programs.gpu-screen-recorder = {
     enable = true;
@@ -215,6 +224,7 @@
       "networkmanager"
       "video"
       "wheel"
+      "gamemode"
     ];
   };
 
