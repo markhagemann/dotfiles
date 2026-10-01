@@ -47,25 +47,25 @@ in
       ];
 
       home.file = {
-        "${config.xdg.configHome}/Thunar/uca.xml" = {
-          text = ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <actions>
-            <action>
-              <icon>utilities-terminal</icon>
-              <name>Open Terminal Here</name>
-              <submenu></submenu>
-              <unique-id>1776527905746078-1</unique-id>
-              <command>kitty --directory . -e tmux new-session</command>
-              <description>Lauch kitty terminal in current folder</description>
-              <range></range>
-              <patterns>*</patterns>
-              <startup-notify/>
-              <directories/>
-            </action>
-            </actions>
-          '';
-        };
+        # "${config.xdg.configHome}/Thunar/uca.xml" = {
+        #   text = ''
+        #     <?xml version="1.0" encoding="UTF-8"?>
+        #     <actions>
+        #     <action>
+        #       <icon>utilities-terminal</icon>
+        #       <name>Open Terminal Here</name>
+        #       <submenu></submenu>
+        #       <unique-id>1776527905746078-1</unique-id>
+        #       <command>kitty --directory . -e tmux new-session</command>
+        #       <description>Lauch kitty terminal in current folder</description>
+        #       <range></range>
+        #       <patterns>*</patterns>
+        #       <startup-notify/>
+        #       <directories/>
+        #     </action>
+        #     </actions>
+        #   '';
+        # };
         ".config/niri/dms/outputs.kdl" = {
           text =
             lib.concatStringsSep "\n" (
@@ -120,7 +120,7 @@ in
             }
 
             window-rule {
-                match app-id=r#"^faugus.*$"#
+                match app-id="faugus"
                 open-on-workspace "gaming"
             }
 
@@ -139,6 +139,12 @@ in
                 match app-id="vesktop"
                 match app-id="spotify"
                 opacity 0.97
+            }
+
+            window-rule {
+                match title="File Operation Progress"
+                default-column-width { proportion 0.1; }
+                default-window-height { proportion 0.1; }
             }
 
             window-rule {
@@ -430,10 +436,18 @@ in
         enable = true;
         xdgOpenUsePortal = true;
         config = {
-          common = { default = "gtk"; };
-          "org.freedesktop.impl.portal.FileChooser" = { default = "gtk"; };
-          "org.freedesktop.impl.portal.Screenshot" = { default = "wlr"; };
-          "org.freedesktop.impl.portal.ScreenCast" = { default = "gnome"; };
+          common = {
+            default = "gtk";
+          };
+          "org.freedesktop.impl.portal.FileChooser" = {
+            default = "gtk";
+          };
+          "org.freedesktop.impl.portal.Screenshot" = {
+            default = "wlr";
+          };
+          "org.freedesktop.impl.portal.ScreenCast" = {
+            default = "gnome";
+          };
         };
         extraPortals = [
           pkgs.xdg-desktop-portal-gtk

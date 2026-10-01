@@ -182,10 +182,10 @@
     pulse.enable = true;
   };
 
-  # services.scx = {
-  #   enable = true;
-  #   scheduler = "scx_lavd";
-  # };
+  services.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
+  };
 
   services.timesyncd.enable = true;
   services.udev.packages = with pkgs; [
@@ -220,11 +220,11 @@
     shell = pkgs.zsh;
     extraGroups = [
       "docker"
+      "gamemode"
       "greeter"
       "networkmanager"
       "video"
       "wheel"
-      "gamemode"
     ];
   };
 
