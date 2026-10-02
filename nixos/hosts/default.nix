@@ -27,7 +27,7 @@
     atuin
     betterdiscordctl
     # bitwarden-desktop
-    bob-nvim
+    # bob-nvim
     bun
     btop
     cargo
@@ -52,6 +52,7 @@
     just
     kitty
     ntfs3g
+    neovim
     opencode
     openssl
     openssl.dev
