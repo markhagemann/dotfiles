@@ -13,9 +13,9 @@ let
   };
 in
 {
-  environment.systemPackages = with pkgs; [
-    mesa-demos
-    lact
+  environment.systemPackages = [
+    pkgsMaster.mesa-demos
+    pkgsMaster.lact
   ];
 
   hardware.amdgpu.overdrive.enable = true;
@@ -31,10 +31,9 @@ in
     after = [ "multi-user.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.lact}/bin/lact daemon";
+      ExecStart = "${pkgsMaster.lact}/bin/lact daemon";
     };
     enable = true;
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
 }

@@ -14,7 +14,7 @@
     ./boot.nix
     ./hardware-configuration.nix
     ../../hardware/bluetooth
-    ../../hardware/cpu
+    # ../../hardware/cpu - don't need ananicy for 9800x3d
     ../../hardware/radeon
     ../../modules/nixos/desktop/fonts.nix
     ../../modules/nixos/desktop/kde.nix
@@ -180,6 +180,15 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+    # Prevent PipeWire from suspending devices when they are idle
+    extraConfig.pipewire."99-disable-suspend" = {
+      "monitor.properties" = {
+        "session.suspend-on-idle" = false;
+      };
+    };
+    # If the above does not work consider the below
+    # hardware.alsa.enablePersistence = true;
   };
 
   services.scx = {

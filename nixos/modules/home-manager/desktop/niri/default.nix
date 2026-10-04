@@ -47,25 +47,25 @@ in
       ];
 
       home.file = {
-        # "${config.xdg.configHome}/Thunar/uca.xml" = {
-        #   text = ''
-        #     <?xml version="1.0" encoding="UTF-8"?>
-        #     <actions>
-        #     <action>
-        #       <icon>utilities-terminal</icon>
-        #       <name>Open Terminal Here</name>
-        #       <submenu></submenu>
-        #       <unique-id>1776527905746078-1</unique-id>
-        #       <command>kitty --directory . -e tmux new-session</command>
-        #       <description>Lauch kitty terminal in current folder</description>
-        #       <range></range>
-        #       <patterns>*</patterns>
-        #       <startup-notify/>
-        #       <directories/>
-        #     </action>
-        #     </actions>
-        #   '';
-        # };
+        "${config.xdg.configHome}/Thunar/uca.xml" = {
+          text = ''
+            <?xml version="1.0" encoding="UTF-8"?>
+            <actions>
+            <action>
+              <icon>utilities-terminal</icon>
+              <name>Open Terminal Here</name>
+              <submenu></submenu>
+              <unique-id>1776527905746078-1</unique-id>
+              <command>kitty --directory .</command>
+              <description>Lauch kitty terminal in current folder</description>
+              <range></range>
+              <patterns>*</patterns>
+              <startup-notify/>
+              <directories/>
+            </action>
+            </actions>
+          '';
+        };
         ".config/niri/dms/outputs.kdl" = {
           text =
             lib.concatStringsSep "\n" (
