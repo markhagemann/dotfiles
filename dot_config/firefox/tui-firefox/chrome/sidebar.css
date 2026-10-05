@@ -27,7 +27,7 @@
   border-radius: var(--tf-rounding) !important;
 }
 
-#sidebar-header {
+#sidebar-panel-header {
   display: none;
 }
 
