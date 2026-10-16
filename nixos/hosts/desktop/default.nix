@@ -28,6 +28,7 @@
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     boxflat
+    curseforge # from the flake
     deluge-gtk
     ddcutil
     easyeffects
@@ -35,15 +36,17 @@
     # gamescope-wsi
     gowall
     lutris
-    # protonplus
-    protonup-qt
+    lsfg-vk
+    lsfg-vk-ui
+    protonplus
+    # protonup-qt
     steam
     wineWow64Packages.stable
     wineWow64Packages.staging
     wineWow64Packages.waylandFull
     winetricks
     wireguard-tools
-    wowup-cf
+    # wowup-cf
   ];
   environment.variables = {
     MANGOHUD = "1";
@@ -165,11 +168,6 @@
   };
 
   # security.pam.services.swaylock = {};
-  services.lsfg-vk = {
-    enable = true;
-    ui.enable = true;
-  };
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   services.printing.enable = true;
