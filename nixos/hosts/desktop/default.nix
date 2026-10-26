@@ -142,6 +142,7 @@
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    protontricks.enable = true;
   };
   programs.tmux.enable = true;
 
@@ -173,20 +174,12 @@
   services.printing.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-    # Prevent PipeWire from suspending devices when they are idle
-    extraConfig.pipewire."99-disable-suspend" = {
-      "monitor.properties" = {
-        "session.suspend-on-idle" = false;
-      };
-    };
-    # If the above does not work consider the below
-    # hardware.alsa.enablePersistence = true;
   };
 
   services.scx = {
