@@ -1,7 +1,7 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never
+      command: delta --dark --paging=never
 gui:
   nerdFontsVersion: "3"
   theme:
@@ -33,7 +33,5 @@ gui:
 keybinding:
   universal:
     # add vim-like bindings for jump to bottom/top;
-    gotoBottom: '<c-G>'
-    gotoTop: '<c-g>'
     gotoBottom-alt: '<c-d>'
     gotoTop-alt: '<c-u>'
