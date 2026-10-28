@@ -122,18 +122,6 @@ width = "80%"
 height = "80%"
 description = "scratch terminal popup"
 
-[ui]
-mouse_capture = true    # tmux.conf: mouse on
-copy_on_select = false  # tmux.conf: drag-to-copy disabled
-
-# No per-pane "cwd basename in border" token exists in herdr 0.8.2 (tmux.conf
-# used pane-border-status + a script for this). Closest equivalent is naming
-# panes manually (rename_pane, prefix+shift+p).
-pane_borders = true
-show_agent_labels_on_pane_borders = false
-
-prompt_new_tab_name = false
-
 [session]
 resume_agents_on_restore = true
 
@@ -235,8 +223,25 @@ type = "plugin_action"
 command = "ntindle.herdr-resurrect.open-space"
 description = "resurrect: open saved space…"
 
+[ui]
+mouse_capture = true    # tmux.conf: mouse on
+copy_on_select = false  # tmux.conf: drag-to-copy disabled
+
+# No per-pane "cwd basename in border" token exists in herdr 0.8.2 (tmux.conf
+# used pane-border-status + a script for this). Closest equivalent is naming
+# panes manually (rename_pane, prefix+shift+p).
+pane_gaps = false
+pane_borders = true
+show_agent_labels_on_pane_borders = false
+
+prompt_new_tab_name = false
+
+
 [ui.sound]
 enabled = false
+
+[ui.sidebar.spaces]
+rows = [["state_icon", "workspace"], ["branch", "git_status"], ["$mr"]]
 
 [ui.toast]
 delivery = "herdr"

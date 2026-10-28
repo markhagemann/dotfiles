@@ -10,3 +10,4 @@ herdr plugin install lmilojevicc/herdr-splits.nvim -y
 herdr plugin install ezcorp-org/herdr-pc-ram-and-cpu-usage-overlay -y
 herdr plugin install rohankewal/herdr-nerd-font-tab-name -y
 herdr plugin install ntindle/herdr-resurrect -y
+herdr plugin install jpwallace22/herdr-glab-status
