@@ -8,7 +8,10 @@
   # Configure nix settings, including experimental features and garbage collection
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       substituters = [ "https://attic.xuyh0120.win/lantian" ];
       trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
       trusted-users = [
@@ -56,6 +59,7 @@
     opencode
     openssl
     openssl.dev
+    p7zip
     pgcli
     pkg-config
     python313
